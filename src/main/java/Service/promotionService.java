@@ -1,6 +1,7 @@
 package Service;
 
 import Model.promotion;
+import Model.user;
 import Util.DBconnection;
 
 import java.sql.*;
@@ -97,6 +98,46 @@ public class promotionService implements IService<promotion> {
             System.out.println(ex.getMessage());
 
         }
+        return tab_promotion;
+    }
+
+    @Override
+    public List<promotion> getByUser_id(user u) {
+        if (u == null) {
+            System.out.println("⚠ getByUser_id: L'utilisateur est NULL !");
+            return new ArrayList<>();
+        }
+
+        String req = "SELECT * FROM promotion WHERE id_user = ?";
+        List<promotion> tab_promotion = new ArrayList<>();
+
+        try (PreparedStatement pstmt = this.conn.prepareStatement(req)) {
+            pstmt.setInt(1, u.getId());
+            System.out.println("🔍 Requête SQL exécutée : " + pstmt.toString());
+
+            ResultSet rs = pstmt.executeQuery();
+            int count = 0;
+
+            while (rs.next()) {
+                promotion p = new promotion();
+                p.setId(rs.getInt("id"));
+                p.setType_promo(rs.getString("type_promo"));
+                p.setRaison(rs.getString("raison"));
+                p.setPoste_promo(rs.getString("poste_promo"));
+                p.setDate_prom(rs.getDate("date_promo"));
+                p.setNouv_sal(rs.getDouble("nouv_sal"));
+                p.setAvs(rs.getString("avantage_supp"));
+                p.setId_user(rs.getInt("id_user"));
+
+                tab_promotion.add(p);
+                count++;
+            }
+
+            System.out.println("✅ getByUser_id: Nombre de promotions trouvées = " + count);
+        } catch (SQLException ex) {
+            System.out.println("❌ getByUser_id: Erreur SQL - " + ex.getMessage());
+        }
+
         return tab_promotion;
     }
 

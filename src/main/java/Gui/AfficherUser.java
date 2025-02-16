@@ -60,6 +60,12 @@ public class AfficherUser {
     @FXML
     private TableColumn<user, Void> Colupdate;
 
+    @FXML
+    private TableColumn<user, Void> Colpromotion;
+
+    @FXML
+    private TableColumn<user, Integer> Colid;
+
 
     @FXML
     void initialize() {
@@ -68,6 +74,7 @@ public class AfficherUser {
             ObservableList<user> observableList = FXCollections.observableList(tab_users);
             tableView.setItems(observableList);
 
+            Colid.setCellValueFactory(new PropertyValueFactory<>("id"));
             Colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             Colprenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
             Colcin.setCellValueFactory(new PropertyValueFactory<>("cin"));
@@ -125,6 +132,29 @@ public class AfficherUser {
                     }
                 }
             });
+
+            Colpromotion.setCellFactory(param -> new TableCell<>() {
+                private final Button promotionButton = new Button("Promotion");
+
+                {
+                    promotionButton.setOnAction(event -> {
+                        user selectedUser = getTableView().getItems().get(getIndex());
+                        openPromotionForm(selectedUser);
+
+                    });
+                }
+
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(promotionButton);
+                    }
+                }
+            });
+
 
 
 
@@ -201,6 +231,22 @@ public class AfficherUser {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void openPromotionForm(user selectedUser) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPromotion.fxml"));
+            Parent root = loader.load();
+
+            AfficherPromotion controller = loader.getController();
+            controller.initData(selectedUser);
+            Stage stage = new Stage();
+            stage.setTitle("Promotion");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

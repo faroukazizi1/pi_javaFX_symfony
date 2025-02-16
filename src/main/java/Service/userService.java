@@ -104,4 +104,12 @@ public class userService implements IService<user> {
     }
 
 
+    //just need it like that because class userService implement interface IService wich this function i need for pormotionService
+    @Override
+    public List<user> getByUser_id(user u){
+        List<user> tab_users = new ArrayList<>();
+        return tab_users;
+    }
+
+
 }
