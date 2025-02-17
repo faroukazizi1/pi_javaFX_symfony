@@ -41,7 +41,7 @@ public class promotionService implements IService<promotion> {
 
     @Override
     public void update(promotion promotion) {
-        String SQL = "UPDATE `promotion` SET `type_promo`=?,`raison`=?,`poste_promo`=?,`date_promo`=?,`nouv_sal`=?,`avantage_supp`=? WHERE id = ?";
+        String SQL = "UPDATE `promotion` SET `type_promo`=?,`raison`=?,`poste_promo`=?,`date_promo`=?,`nouv_sal`=?,`avantage_supp`=?, `id_user`=? WHERE id = ?";
         try{
             PreparedStatement pstmt2 = conn.prepareStatement(SQL);
             pstmt2.setString(1, promotion.getType_promo());
@@ -50,7 +50,8 @@ public class promotionService implements IService<promotion> {
             pstmt2.setDate(4, promotion.getDate_prom());
             pstmt2.setDouble(5, promotion.getNouv_sal());
             pstmt2.setString(6, promotion.getAvs());
-            pstmt2.setInt(7, promotion.getId());
+            pstmt2.setInt(7, promotion.getId_user());
+            pstmt2.setInt(8, promotion.getId());
             pstmt2.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -101,44 +102,5 @@ public class promotionService implements IService<promotion> {
         return tab_promotion;
     }
 
-    @Override
-    public List<promotion> getByUser_id(user u) {
-        if (u == null) {
-            System.out.println("⚠ getByUser_id: L'utilisateur est NULL !");
-            return new ArrayList<>();
-        }
-
-        String req = "SELECT * FROM promotion WHERE id_user = ?";
-        List<promotion> tab_promotion = new ArrayList<>();
-
-        try (PreparedStatement pstmt = this.conn.prepareStatement(req)) {
-            pstmt.setInt(1, u.getId());
-            System.out.println("🔍 Requête SQL exécutée : " + pstmt.toString());
-
-            ResultSet rs = pstmt.executeQuery();
-            int count = 0;
-
-            while (rs.next()) {
-                promotion p = new promotion();
-                p.setId(rs.getInt("id"));
-                p.setType_promo(rs.getString("type_promo"));
-                p.setRaison(rs.getString("raison"));
-                p.setPoste_promo(rs.getString("poste_promo"));
-                p.setDate_prom(rs.getDate("date_promo"));
-                p.setNouv_sal(rs.getDouble("nouv_sal"));
-                p.setAvs(rs.getString("avantage_supp"));
-                p.setId_user(rs.getInt("id_user"));
-
-                tab_promotion.add(p);
-                count++;
-            }
-
-            System.out.println("✅ getByUser_id: Nombre de promotions trouvées = " + count);
-        } catch (SQLException ex) {
-            System.out.println("❌ getByUser_id: Erreur SQL - " + ex.getMessage());
-        }
-
-        return tab_promotion;
-    }
 
 }

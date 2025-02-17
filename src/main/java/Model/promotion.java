@@ -36,6 +36,7 @@ public class promotion {
         this.id_user = id_user;
     }
 
+
     public int getId() {
         return id;
     }
@@ -68,7 +69,7 @@ public class promotion {
         this.poste_promo = poste_promo;
     }
 
-    public java.sql.Date getDate_prom() {
+    public Date getDate_prom() {
         return date_prom;
     }
 

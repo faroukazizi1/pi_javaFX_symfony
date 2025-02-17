@@ -8,5 +8,4 @@ public interface IService<T> {
     void update(T t);
     void delete(T t);
     List<T> getAll();
-    List<T> getByUser_id(user u);
 }

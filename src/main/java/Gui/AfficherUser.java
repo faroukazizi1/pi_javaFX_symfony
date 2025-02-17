@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import Model.user;
 import Service.userService;
@@ -61,11 +60,7 @@ public class AfficherUser {
     private TableColumn<user, Void> Colupdate;
 
     @FXML
-    private TableColumn<user, Void> Colpromotion;
-
-    @FXML
     private TableColumn<user, Integer> Colid;
-
 
     @FXML
     void initialize() {
@@ -73,7 +68,7 @@ public class AfficherUser {
             List<user> tab_users = service.getAll();
             ObservableList<user> observableList = FXCollections.observableList(tab_users);
             tableView.setItems(observableList);
-
+            Colid.setVisible(false);
             Colid.setCellValueFactory(new PropertyValueFactory<>("id"));
             Colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             Colprenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -133,30 +128,6 @@ public class AfficherUser {
                 }
             });
 
-            Colpromotion.setCellFactory(param -> new TableCell<>() {
-                private final Button promotionButton = new Button("Promotion");
-
-                {
-                    promotionButton.setOnAction(event -> {
-                        user selectedUser = getTableView().getItems().get(getIndex());
-                        openPromotionForm(selectedUser);
-
-                    });
-                }
-
-                @Override
-                protected void updateItem(Void item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        setGraphic(promotionButton);
-                    }
-                }
-            });
-
-
-
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -197,21 +168,20 @@ public class AfficherUser {
         }
     }
 
+    //Function to open interface ajouter user
     @FXML
     private void handleAddEmploye(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterUser.fxml")); // Load AddUser.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterUser.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Add Employee");
-            stage.setScene(new Scene(root));
-            //refresh tableView of Emplpyee
-            stage.setOnHiding(e -> refreshTable());
-            stage.show();
+
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.getScene().setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     // Function to open the UpdateUser form and pass the selected user
     private void openUpdateUserForm(user selectedUser) {
@@ -219,34 +189,30 @@ public class AfficherUser {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateUser.fxml"));
             Parent root = loader.load();
 
-            // pass the selected employe in tableview to update fields
             UpdateUser controller = loader.getController();
             controller.initData(selectedUser);
 
-            Stage stage = new Stage();
-            stage.setTitle("Update Employee");
-            stage.setScene(new Scene(root));
-            //refresh tableView of Employee
-            stage.setOnHiding(e -> refreshTable());
-            stage.show();
+            Stage stage = (Stage) tableView.getScene().getWindow();
+            stage.getScene().setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void openPromotionForm(user selectedUser) {
+    //function pour ouvrir l'interface d'affichage de promotion
+    @FXML
+    private void openPromotionForm(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPromotion.fxml"));
             Parent root = loader.load();
 
-            AfficherPromotion controller = loader.getController();
-            controller.initData(selectedUser);
-            Stage stage = new Stage();
-            stage.setTitle("Promotion");
-            stage.setScene(new Scene(root));
-            stage.show();
+            Stage stage = (Stage) tableView.getScene().getWindow();
+            stage.getScene().setRoot(root);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
+
+
+
 }

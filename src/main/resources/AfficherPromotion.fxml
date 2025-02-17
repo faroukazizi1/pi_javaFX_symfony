@@ -7,15 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="655.0" prefWidth="957.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AfficherPromotion">
+<AnchorPane prefHeight="655.0" prefWidth="1121.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AfficherPromotion">
    <children>
-      <Label layoutX="279.0" layoutY="34.0" prefHeight="50.0" prefWidth="359.0" text="PROMOTIONS DE L'EMPLOYE">
+      <Label layoutX="309.0" layoutY="34.0" prefHeight="50.0" prefWidth="359.0" text="PROMOTIONS DE L'EMPLOYE">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="Tableview" layoutX="42.0" layoutY="99.0" prefHeight="504.0" prefWidth="894.0">
+      <Button layoutX="42.0" layoutY="41.0" mnemonicParsing="false" onAction="#openAddPromotionForm" prefHeight="36.0" prefWidth="119.0" text="Ajouter Promotion" />
+      <TableView fx:id="Tableview" layoutY="98.0" prefHeight="504.0" prefWidth="957.0">
         <columns>
           <TableColumn fx:id="Colid" prefWidth="75.0" text="Id " />
           <TableColumn fx:id="Coltype" prefWidth="99.20001220703125" text="Type Promotion" />
@@ -27,8 +27,9 @@
             <TableColumn fx:id="Colid_user" prefWidth="87.99993896484375" text="Id_user" />
             <TableColumn fx:id="Coldelete" prefWidth="75.0" text="Delete" />
             <TableColumn fx:id="Colmodifier" prefWidth="75.0" text="Modifier" />
+            <TableColumn fx:id="Colupdate" prefWidth="75.0" text="Update" />
         </columns>
       </TableView>
-      <Button layoutX="42.0" layoutY="41.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="119.0" text="Ajouter Promotion" />
+      <Button fx:id="Retour" layoutX="806.0" layoutY="37.0" mnemonicParsing="false" onAction="#openEmployeeListView" prefHeight="44.0" prefWidth="129.0" text="Retour List Employe" />
    </children>
 </AnchorPane>
