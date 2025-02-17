@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.geometry.Insets?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.Projects"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../project.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" >
+        <left>
+            <VBox prefHeight="731.0" prefWidth="282.0" styleClass="sidebar" stylesheets="@../project.css">
+                <HBox alignment="TOP_CENTER" prefHeight="147.0" prefWidth="200.0" spacing="100.0">
+                    <ImageView fitHeight="149.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../assets/logo.png" />
+                    </ImageView>
+                </HBox>
+                <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="10.0" prefWidth="10.0" VBox.vgrow="ALWAYS" />
+                <VBox spacing="20.0" VBox.vgrow="ALWAYS">
+                    <Button fx:id="Home_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onHomeButtonClick" prefHeight="48.0" prefWidth="236.0" styleClass="sidebar-link" text="Home" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="19.0" />
+                        </font>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@../assets/icons8-home-24.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="User_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" lineSpacing="15.0" mnemonicParsing="false" onAction="#onUserButtonClick" prefHeight="48.0" prefWidth="237.0" styleClass="sidebar-link" text="Users" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@../assets/AiOutlineUser.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="Reclamation_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onReclamationButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Reclamations" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="19.0" />
+                        </font>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@../assets/AiOutlineReconciliation.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="Document_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onDocumentsButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Documents" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="19.0" />
+                        </font>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@../assets/IoDocumentTextOutline.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="Event_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onEventButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Events" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="19.0" />
+                        </font>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@../assets/MdEventNote.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link-active" text="Projects" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="19.0" />
+                        </font>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@../assets/AiOutlineProject.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="Association_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onAssociationButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Associations" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="19.0" />
+                        </font>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@../assets/IoStorefrontOutline.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </VBox>
+                <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="10.0" prefWidth="10.0" VBox.vgrow="ALWAYS" />
+                <HBox alignment="TOP_CENTER" prefHeight="57.0" prefWidth="279.0">
+                    <Button fx:id="Logout_Btn" alignment="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" prefHeight="48.0" prefWidth="220.0" styleClass="sidebar-logout" text="Logout" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="21.0" />
+                        </font>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@../assets/AiOutlineLogout.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </VBox>
+        </left>
+        <center>
+            <VBox BorderPane.alignment="CENTER">
+                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;">
+                    <padding>
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+                    </padding>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back, User!">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                    </Text>
+                    <Pane minWidth="-Infinity" prefHeight="79.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
+                    <HBox alignment="CENTER" prefHeight="79.0" prefWidth="82.0" spacing="20.0" HBox.hgrow="SOMETIMES">
+                        <ImageView>
+                            <Image url="@../assets/Notif.png" />
+                        </ImageView>
+                        <ImageView fitHeight="44.0" fitWidth="46.0">
+                            <Image url="@../assets/user.png" />
+                        </ImageView>
+                    </HBox>
+                </HBox>
+                <TabPane prefHeight="582.0" prefWidth="918.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                    <Tab text="Acceuil">
+                        <VBox prefHeight="525.0" prefWidth="918.0" spacing="20.0" styleClass="body" VBox.vgrow="ALWAYS">
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                            <padding>
+                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                            </padding>
+                            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                                <VBox prefHeight="110.0" prefWidth="200.0" styleClass="card">
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                    </padding>
+                                    <effect>
+                                        <DropShadow />
+                                    </effect>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of projects">
+                                        <font>
+                                            <Font size="16.0" />
+                                        </font>
+                                    </Text>
+                                    <Text fx:id="numOfProjects" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                        <font>
+                                            <Font name="System Bold" size="36.0" />
+                                        </font>
+                                    </Text>
+                                </VBox>
+                                <VBox prefHeight="110.0" prefWidth="200.0" styleClass="card">
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                    </padding>
+                                    <effect>
+                                        <DropShadow />
+                                    </effect>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of active projects">
+                                        <font>
+                                            <Font size="16.0" />
+                                        </font>
+                                    </Text>
+                                    <Text fx:id="numOfActiveProjects" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                        <font>
+                                            <Font name="System Bold" size="36.0" />
+                                        </font>
+                                    </Text>
+                                </VBox>
+                                <VBox prefHeight="110.0" prefWidth="200.0" styleClass="card">
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                    </padding>
+                                    <effect>
+                                        <DropShadow />
+                                    </effect>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of closed projects">
+                                        <font>
+                                            <Font size="16.0" />
+                                        </font>
+                                    </Text>
+                                    <Text fx:id="numOfInactiveProjects" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                        <font>
+                                            <Font name="System Bold" size="36.0" />
+                                        </font>
+                                    </Text>
+                                </VBox>
+                            </HBox>
+                            <VBox alignment="TOP_RIGHT" prefHeight="342.0" prefWidth="817.0" spacing="20.0">
+                                <HBox prefHeight="20.0" prefWidth="817.0">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="234.0">
+                                        <Text fx:id="statut_txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Statut:" />
+                                        <Pane prefHeight="38.0" prefWidth="36.0" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="statut_btn" mnemonicParsing="false" onAction="#changeStatut" prefHeight="34.0" prefWidth="81.0" styleClass="button-statut" text="Statut" HBox.hgrow="ALWAYS" />
+                                    </HBox>
+                                    <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                    <HBox spacing="5.0">
+                                        <Button fx:id="open_modal_btn" mnemonicParsing="false" onAction="#onOpenAddModal" styleClass="button-add" text="Ajouter Projet" />
+                                        <Button fx:id="open_modal_tache_btn" mnemonicParsing="false" onAction="#onOpenAddTacheModal" styleClass="button-add-inline" text="Ajouter Tache" />
+                                        <Button mnemonicParsing="false" onAction="#openCalendar" styleClass="button-add-inline" text="Calendar" />
+                                    </HBox>
+                                </HBox>
+                                <TableView fx:id="Projects_Table" onMouseClicked="#getProjectRow" prefHeight="217.0" prefWidth="817.0" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="title_col" prefWidth="100.0" text="Title" />
+                                        <TableColumn fx:id="description_col" prefWidth="200.0" text="Description" />
+                                        <TableColumn fx:id="date_debut_col" prefWidth="100.0" text="Start Date" />
+                                        <TableColumn fx:id="date_fin_col" prefWidth="100.0" text="End Date" />
+                                        <TableColumn fx:id="statut_col" prefWidth="100.0" text="Statut" />
+
+                                    </columns>
+                                </TableView>
+                            </VBox>
+                            <HBox alignment="CENTER" prefHeight="29.0" prefWidth="817.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                <Button fx:id="updateProject_Btn" mnemonicParsing="false" onAction="#onUpdateProject" styleClass="button-edit" text="Update">
+                                    <padding>
+                                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+                                    </padding>
+                                </Button>
+                                <Button fx:id="deleteProject_Btn" mnemonicParsing="false" onAction="#onDeleteProject" styleClass="button-delete" text="Delete">
+                                    <padding>
+                                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+                                    </padding>
+                                </Button>
+                            </HBox>
+                        </VBox>
+                    </Tab>
+                    <Tab text="Tache">
+                        <VBox prefHeight="525.0" prefWidth="918.0" spacing="20.0" styleClass="body" VBox.vgrow="ALWAYS">
+                            <HBox>
+                                <padding>
+                                    <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                </padding>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des taches">
+                                    <font>
+                                        <Font name="System Bold" size="32.0" />
+                                    </font>
+                                </Text>
+                                <Pane prefHeight="0.0" prefWidth="482.0" HBox.hgrow="ALWAYS" />
+                                <HBox alignment="CENTER" prefHeight="47.0" prefWidth="392.0" spacing="5.0">
+                                    <MFXComboBox fx:id="user_select" floatingText="Choisir Utilisateur" prefHeight="40.0" prefWidth="166.0" />
+                                    <Button mnemonicParsing="false" onAction="#showTasks" prefHeight="40.0" prefWidth="114.0" styleClass="button-add-inline" text="Lister" />
+                                </HBox>
+                            </HBox>
+                            <HBox spacing="50.0" VBox.vgrow="ALWAYS">
+                                <VBox.margin>
+                                    <Insets left="50.0" right="50.0" />
+                                </VBox.margin>
+                                <VBox spacing="10.0">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Todo Tasks">
+                                        <font>
+                                            <Font name="System Bold" size="14.0" />
+                                        </font>
+                                    </Text>
+                                    <MFXScrollPane fx:id="todo_tasks" hbarPolicy="NEVER" prefHeight="494.0" prefWidth="414.0" VBox.vgrow="ALWAYS">
+                                        <VBox.margin>
+                                            <Insets bottom="50.0" />
+                                        </VBox.margin>
+                                    </MFXScrollPane>
+                                </VBox>
+                                <VBox spacing="10.0">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="In progress Tasks">
+                                        <font>
+                                            <Font name="System Bold" size="14.0" />
+                                        </font>
+                                    </Text>
+                                    <MFXScrollPane fx:id="inprogress_tasks" hbarPolicy="NEVER" prefHeight="494.0" prefWidth="414.0">
+                                        <VBox.margin>
+                                            <Insets bottom="50.0" />
+                                        </VBox.margin>
+                                    </MFXScrollPane>
+                                </VBox>
+                                <VBox spacing="10.0">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Done Tasks">
+                                        <font>
+                                            <Font name="System Bold" size="14.0" />
+                                        </font>
+                                    </Text>
+                                    <MFXScrollPane fx:id="done_tasks" hbarPolicy="NEVER" prefHeight="494.0" prefWidth="414.0">
+                                        <VBox.margin>
+                                            <Insets bottom="50.0" />
+                                        </VBox.margin>
+                                    </MFXScrollPane>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </Tab>
+                </TabPane>
+
+            </VBox>
+        </center>
+    </BorderPane>
+</AnchorPane>

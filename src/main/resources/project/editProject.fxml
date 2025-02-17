@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.EditProjectController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <MFXGenericDialog onClose="#onClose" onMinimize="#onMinimize" stylesheets="@../project.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+        <center>
+            <VBox alignment="TOP_CENTER" prefHeight="518.0" prefWidth="400.0" spacing="20.0" BorderPane.alignment="CENTER">
+                <padding>
+                    <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+                </padding>
+                <Text text="Modifier Projet">
+                    <font>
+                        <Font name="System Bold" size="40.0" />
+                    </font>
+                </Text>
+                <VBox prefHeight="259.0" prefWidth="299.0" spacing="20.0">
+                    <MFXTextField fx:id="nom_projet" floatingText="Nom du Projet" prefHeight="50.0" prefWidth="359.0" />
+                    <MFXTextField fx:id="description_projet" floatingText="Description du Projet" prefHeight="50.0" prefWidth="362.0" />
+                    <MFXDatePicker fx:id="date_debut_projet" floatMode="INLINE" floatingText="Date Debut du Projet" prefHeight="38.0" prefWidth="434.0" />
+                    <MFXDatePicker fx:id="date_fin_projet" floatMode="INLINE" floatingText="Date Fin du Projet" prefHeight="38.0" prefWidth="372.0" />
+                </VBox>
+                <MFXButton fx:id="edit_project_btn" alignment="CENTER" buttonType="RAISED" depthLevel="LEVEL1" onAction="#editProject" rippleAnimateShadow="true" rippleRadius="30.0" style="-fx-background-color: #624DE3; -fx-text-fill: white; -fx-background-radius: 10;" styleClass="button-add" text="Modifier Projet" textFill="WHITE">
+                    <padding>
+                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+                    </padding>
+                </MFXButton>
+            </VBox>
+        </center>
+    </MFXGenericDialog>
+
+</AnchorPane>
