@@ -1,0 +1,38 @@
+/* styles.css */
+.root {
+    -fx-background-color: #f4f4f4;
+    -fx-padding: 20;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 5px;
+}
+
+.text-field, .text-area, .combo-box {
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, #888, 10, 0.5, 0, 1);
+}
+
+.text-field:focused, .text-area:focused, .combo-box:focused {
+    -fx-border-color: #66aaff;
+}
+
+.button {
+    -fx-background-color: #66aaff;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 16px;
+    -fx-border-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #5599e6;
+}

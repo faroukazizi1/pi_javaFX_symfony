@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.AddTask"
+            prefHeight="400.0" prefWidth="600.0">
+
+<MFXGenericDialog onClose="#onClose" onMinimize="#onMinimize" stylesheets="@../project.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" >
+    <center>
+        <VBox alignment="TOP_CENTER" prefHeight="376.0" prefWidth="400.0" spacing="20.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+            </padding>
+            <Text text="Ajouter Tache">
+                <font>
+                    <Font name="System Bold" size="40.0" />
+                </font>
+            </Text>
+            <VBox prefHeight="259.0" prefWidth="299.0" spacing="15.0">
+                <VBox>
+                    <children>
+                        <MFXComboBox fx:id="user_input" floatingText="User" prefHeight="40.0" prefWidth="404.0" />
+                        <Label fx:id="user_error" styleClass="label-error" />
+                    </children>
+                </VBox>
+                <VBox>
+                    <children>
+                        <MFXTextField fx:id="titre_input" floatingText="Titre du tache" prefHeight="50.0" prefWidth="362.0" />
+                        <Label fx:id="titre_error" styleClass="label-error" />
+                    </children>
+                </VBox>
+                <VBox>
+                    <children>
+                        <MFXTextField fx:id="description_input" floatingText="Description du Tache" prefHeight="50.0" prefWidth="362.0" />
+                        <Label fx:id="description_error" styleClass="label-error" />
+                    </children>
+                </VBox>
+                <VBox>
+                    <children>
+                        <MFXDatePicker fx:id="date_input" floatMode="INLINE" floatingText="Date du Tache" prefHeight="38.0" prefWidth="434.0" />
+                        <Label fx:id="date_error" styleClass="label-error" />
+                    </children>
+                </VBox>
+            </VBox>
+            <MFXButton fx:id="add_task_btn" alignment="CENTER" buttonType="RAISED" depthLevel="LEVEL1" onAction="#addTask" rippleAnimateShadow="true" rippleRadius="30.0" style="-fx-background-color: #624DE3; -fx-text-fill: white; -fx-background-radius: 10;" styleClass="button-add" text="Ajouter Tache" textFill="WHITE">
+                <padding>
+                    <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+                </padding>
+            </MFXButton>
+        </VBox>
+    </center>
+</MFXGenericDialog>
+</AnchorPane>
