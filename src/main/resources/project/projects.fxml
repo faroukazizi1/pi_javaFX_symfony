@@ -29,12 +29,12 @@
             fx:controller="controllers.Projects"
             prefHeight="400.0" prefWidth="600.0">
 
-    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../project.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" >
+    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../project.css">
         <left>
             <VBox prefHeight="731.0" prefWidth="282.0" styleClass="sidebar" stylesheets="@../project.css">
                 <HBox alignment="TOP_CENTER" prefHeight="147.0" prefWidth="200.0" spacing="100.0">
                     <ImageView fitHeight="149.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../assets/logo.png" />
+                        <Image url="@../assets/Notre Logo.png" />
                     </ImageView>
                 </HBox>
                 <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="10.0" prefWidth="10.0" VBox.vgrow="ALWAYS" />
@@ -59,7 +59,7 @@
                             </ImageView>
                         </graphic>
                     </Button>
-                    <Button fx:id="Reclamation_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onReclamationButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Reclamations" textFill="WHITE">
+                    <Button fx:id="Reclamation_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onReclamationButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Absence" textFill="WHITE">
                         <font>
                             <Font name="System Bold" size="19.0" />
                         </font>
@@ -69,7 +69,7 @@
                             </ImageView>
                         </graphic>
                     </Button>
-                    <Button fx:id="Document_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onDocumentsButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Documents" textFill="WHITE">
+                    <Button fx:id="Document_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onDocumentsButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Congés" textFill="WHITE">
                         <font>
                             <Font name="System Bold" size="19.0" />
                         </font>
@@ -79,7 +79,7 @@
                             </ImageView>
                         </graphic>
                     </Button>
-                    <Button fx:id="Event_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onEventButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Events" textFill="WHITE">
+                    <Button fx:id="Event_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onEventButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Formations" textFill="WHITE">
                         <font>
                             <Font name="System Bold" size="19.0" />
                         </font>
@@ -96,16 +96,6 @@
                         <graphic>
                             <ImageView>
                                 <Image url="@../assets/AiOutlineProject.png" />
-                            </ImageView>
-                        </graphic>
-                    </Button>
-                    <Button fx:id="Association_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onAssociationButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Associations" textFill="WHITE">
-                        <font>
-                            <Font name="System Bold" size="19.0" />
-                        </font>
-                        <graphic>
-                            <ImageView>
-                                <Image url="@../assets/IoStorefrontOutline.png" />
                             </ImageView>
                         </graphic>
                     </Button>
@@ -141,8 +131,8 @@
                         <ImageView>
                             <Image url="@../assets/Notif.png" />
                         </ImageView>
-                        <ImageView fitHeight="44.0" fitWidth="46.0">
-                            <Image url="@../assets/user.png" />
+                        <ImageView fitHeight="107" fitWidth="106.0">
+                            <Image url="@../assets/PhotoUser.png" />
                         </ImageView>
                     </HBox>
                 </HBox>
