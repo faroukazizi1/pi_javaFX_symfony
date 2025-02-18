@@ -189,6 +189,7 @@ public class Projects  implements TaskUpdateListener {
 
             // Refresh the project list after deletion
             showProjects();
+            selectedProject=null;
         } else {
             // If user cancels, show cancellation message
             Modals.displayInfo("Delete Cancelled", "The project was not deleted.");

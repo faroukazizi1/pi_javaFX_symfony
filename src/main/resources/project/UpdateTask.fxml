@@ -1,31 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.geometry.Insets?>
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.UpdateTaskController"
+            prefHeight="600.0" prefWidth="600.0">
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" styleClass="root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UpdateTaskController">
+    <MFXGenericDialog onClose="#onClose" stylesheets="@../project.css">
+        <center>
+            <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="500.0" spacing="20.0">
+                <padding>
+                    <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+                </padding>
 
-    <Label layoutX="49.0" layoutY="14.0" styleClass="label" text="Task Title:" />
-    <TextField fx:id="titreField" layoutX="50" layoutY="50" promptText="Task Title" styleClass="text-field" />
+                <Text text="Modifier Tâche">
+                    <font>
+                        <Font name="System Bold" size="35.0" />
+                    </font>
+                </Text>
 
-    <Label layoutX="50" layoutY="100" styleClass="label" text="Description:" />
-    <TextArea fx:id="descriptionField" layoutX="50" layoutY="130" prefHeight="86.0" prefWidth="478.0" promptText="Description" styleClass="text-area" />
+                <VBox spacing="15.0">
+                    <MFXTextField fx:id="titreField" floatingText="Titre de la Tâche" prefHeight="50.0" prefWidth="400.0"/>
+                    <Label fx:id="titre_task_error" styleClass="label-error" />
 
-    <Label layoutX="50" layoutY="220" styleClass="label" text="Date:" />
-    <DatePicker fx:id="dateField" layoutX="50" layoutY="250" promptText="Task Date" styleClass="date-picker" />
+                    <MFXTextField fx:id="descriptionField" floatingText="Description" prefHeight="50.0" prefWidth="400.0"/>
+                    <Label fx:id="description_error" styleClass="label-error" />
+
+                    <MFXDatePicker fx:id="dateField" floatingText="Date de la Tâche" floatMode="INLINE" prefHeight="50.0" prefWidth="400.0"/>
+                    <Label fx:id="datefield_error" styleClass="label-error" />
 
 
+                    <MFXComboBox fx:id="projectComboBox" floatingText="Projet" prefHeight="50.0" prefWidth="400.0"/>
 
-    <Label layoutX="50" layoutY="380" styleClass="label" text="Project:" />
-    <ComboBox fx:id="projectComboBox" layoutX="50" layoutY="410" styleClass="combo-box" />
+                    <MFXComboBox fx:id="userComboBox" floatingText="Utilisateur" prefHeight="50.0" prefWidth="400.0"/>
+                </VBox>
 
-    <Label layoutX="50" layoutY="460" styleClass="label" text="User:" />
-    <ComboBox fx:id="userComboBox" layoutX="50" layoutY="490" styleClass="combo-box" />
+                <MFXButton fx:id="updateTaskBtn" text="Mettre à jour la Tâche"
+                           buttonType="RAISED" depthLevel="LEVEL1"
+                           onAction="#onUpdateTask"
+                           rippleAnimateShadow="true" rippleRadius="30.0"
+                           style="-fx-background-color: #624DE3; -fx-text-fill: white; -fx-background-radius: 10;"/>
+            </VBox>
+        </center>
+    </MFXGenericDialog>
 
-    <Button layoutX="50" layoutY="540" onAction="#onUpdateTask" styleClass="button" text="Update Task" />
 </AnchorPane>

@@ -64,7 +64,7 @@
 }
 
 .show-task-button {
-    -fx-background-color: #4CAF50;  /* Green background */
+    -fx-background-color: #2e53a0;  /* Green background */
     -fx-text-fill: white;            /* White text */
     -fx-font-size: 14px;             /* Font size */
     -fx-font-weight: bold;           /* Bold text */
@@ -76,19 +76,21 @@
     -fx-min-width: 150px;            /* Minimum width */
     -fx-min-height: 50px;            /* Minimum height */
     -fx-pref-width: 200px;           /* Preferred width */
-    -fx-pref-height: 60px;           /* Preferred height *//* Margin around the button */
+    -fx-pref-height: 60px;
+    -fx-translate-x: -70px; /* Déplace le bouton vers la gauche */
+    /* Preferred height *//* Margin around the button */
 
 }
 
 /* On hover, change background color */
 .show-task-button:hover {
-    -fx-background-color: #45a049;  /* Darker green when hovered */
+    -fx-background-color: #0864fc;  /* Darker green when hovered */
     -fx-cursor: hand;                /* Change cursor to hand when hovered */
 }
 
 /* On pressed, change background color */
 .show-task-button:pressed {
-    -fx-background-color: #388e3c;  /* Even darker green when pressed */
+    -fx-background-color: #5795f0;  /* Even darker green when pressed */
 }
 
 .button-add-inline{
@@ -143,6 +145,10 @@
 /* Column headers */
 .table-view .column-header-background {
     -fx-background-color: linear-gradient(#2a6ea6, #1a426d);
+}
+
+#user_select {
+    -fx-translate-x: -50px; /* Déplace le ComboBox vers la gauche */
 }
 
 .table-view .column-header-background .label {

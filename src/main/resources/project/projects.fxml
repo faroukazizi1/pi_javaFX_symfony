@@ -267,7 +267,7 @@
                                     <Button mnemonicParsing="false" onAction="#onOpenTask" styleClass="show-task-button" text="Show All tasks" />
 
                                     <MFXComboBox fx:id="user_select" floatingText="Choisir Utilisateur" prefHeight="40.0" prefWidth="166.0" />
-                                    <Button mnemonicParsing="false" onAction="#showTasks" prefHeight="40.0" prefWidth="114.0" styleClass="button-add-inline" text="Lister" />
+                                    <Button mnemonicParsing="false" onAction="#showTasks" prefHeight="70.0" prefWidth="200"  styleClass="button-add-inline" text="Lister" />
                                 </HBox>
                             </HBox>
                             <HBox spacing="50.0" VBox.vgrow="ALWAYS">
