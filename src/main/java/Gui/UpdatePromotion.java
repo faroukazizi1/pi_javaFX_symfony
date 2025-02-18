@@ -125,6 +125,7 @@ public class UpdatePromotion {
             // Recharger l'interface
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPromotion.fxml"));
             Parent root = loader.load();
+
             Stage stage = (Stage) TFposte.getScene().getWindow();
             stage.getScene().setRoot(root);
 
@@ -168,4 +169,6 @@ public class UpdatePromotion {
             }
         }
     }
+
+
 }

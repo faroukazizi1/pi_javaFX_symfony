@@ -1,35 +1,176 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="655.0" prefWidth="1121.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AfficherPromotion">
-   <children>
-      <Label layoutX="309.0" layoutY="34.0" prefHeight="50.0" prefWidth="359.0" text="PROMOTIONS DE L'EMPLOYE">
+<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: #4A5568;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AfficherPromotion">
+
+            <children>
+
+                <!-- Promotion Table -->
+                <TableView fx:id="Tableview" layoutX="349.0" layoutY="90.0" prefHeight="458.0" prefWidth="834.0">
+                    <columns>
+                        <TableColumn fx:id="Colid" prefWidth="75.0" text="Id" />
+                        <TableColumn fx:id="Coltype" prefWidth="150.0" text="Type Promotion" />
+                        <TableColumn fx:id="Colraison" prefWidth="150.0" text="Raison" />
+                        <TableColumn fx:id="Colposte" prefWidth="120.0" text="Poste" />
+                        <TableColumn fx:id="Coldate" prefWidth="150.0" text="Date Promotion" />
+                        <TableColumn fx:id="Colsalaire" prefWidth="120.0" text="Salaire" />
+                        <TableColumn fx:id="Colavantage" prefWidth="150.0" text="Avantage Supp" />
+                        <TableColumn fx:id="Colid_user" prefWidth="120.0" text="Id User" />
+                        <TableColumn fx:id="Coldelete" prefWidth="80.0" text="Supprimer" />
+                        <TableColumn fx:id="Colmodifier" prefWidth="80.0" text="Modifier" />
+                    </columns>
+                </TableView>
+
+                <!-- Action Buttons -->
+                <HBox layoutX="10.0" layoutY="490.0" spacing="15.0" />
+                 <Button layoutX="536.0" layoutY="571.0" mnemonicParsing="false" onAction="#openEmployeeListView" prefHeight="38.0" prefWidth="196.0" style="-fx-background-color: #2ECC71;" text="Liste Employé" textFill="WHITE">
          <font>
-            <Font name="System Bold Italic" size="24.0" />
+            <Font name="Arial Black" size="14.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect></Button>
+                 <Button layoutX="349.0" layoutY="571.0" mnemonicParsing="false" onAction="#openAddPromotionForm" prefHeight="38.0" prefWidth="173.0" style="-fx-background-color: #FFCC00;" text="Ajouter Promotion" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect></Button>
+      <Pane layoutY="-2.0" prefHeight="640.0" prefWidth="331.0" style="-fx-background-color: #001F3F;">
+         <children>
+            <ImageView fitHeight="216.0" fitWidth="210.0" layoutX="61.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/flexihr.png" />
+               </image>
+            </ImageView>
+            <VBox alignment="CENTER" layoutY="163.0" prefHeight="477.0" prefWidth="332.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="USER">
+                     <font>
+                        <Font name="Arial Black" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="DISAPPEAR" />
+                     </cursor>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect></Button>
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="FINANCE">
+                     <font>
+                        <Font name="Arial Black" size="24.0" />
+                     </font>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="PROJECT">
+                     <font>
+                        <Font name="Arial Black" size="24.0" />
+                     </font>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect></Button>
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="ABSENCE">
+                     <font>
+                        <Font name="Arial Black" size="24.0" />
+                     </font>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect></Button>
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="FORMATION">
+                     <font>
+                        <Font name="Arial Black" size="24.0" />
+                     </font>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect></Button>
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="RECLAMATION">
+                     <font>
+                        <Font name="Arial Black" size="24.0" />
+                     </font>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect></Button>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Label layoutX="556.0" layoutY="24.0" prefHeight="54.0" prefWidth="472.0" style="-fx-background-color: wh;" text="AFFICHER PROMOTION" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
-      <Button layoutX="42.0" layoutY="41.0" mnemonicParsing="false" onAction="#openAddPromotionForm" prefHeight="36.0" prefWidth="119.0" text="Ajouter Promotion" />
-      <TableView fx:id="Tableview" layoutY="98.0" prefHeight="504.0" prefWidth="957.0">
-        <columns>
-          <TableColumn fx:id="Colid" prefWidth="75.0" text="Id " />
-          <TableColumn fx:id="Coltype" prefWidth="99.20001220703125" text="Type Promotion" />
-            <TableColumn fx:id="Colraison" prefWidth="96.0" text="Raison" />
-            <TableColumn fx:id="Colposte" prefWidth="80.79998779296875" text="Poste" />
-            <TableColumn fx:id="Coldate" prefWidth="112.79998779296875" text="Date Promotion" />
-            <TableColumn fx:id="Colsalaire" prefWidth="82.39996337890625" text="Salaire" />
-            <TableColumn fx:id="Colavantage" prefWidth="104.79998779296875" text="Avantage_supp" />
-            <TableColumn fx:id="Colid_user" prefWidth="87.99993896484375" text="Id_user" />
-            <TableColumn fx:id="Coldelete" prefWidth="75.0" text="Delete" />
-            <TableColumn fx:id="Colmodifier" prefWidth="75.0" text="Modifier" />
-            <TableColumn fx:id="Colupdate" prefWidth="75.0" text="Update" />
-        </columns>
-      </TableView>
-      <Button fx:id="Retour" layoutX="806.0" layoutY="37.0" mnemonicParsing="false" onAction="#openEmployeeListView" prefHeight="44.0" prefWidth="129.0" text="Retour List Employe" />
-   </children>
-</AnchorPane>
+            </children>
+        </AnchorPane>

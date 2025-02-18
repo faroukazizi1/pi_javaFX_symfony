@@ -1,7 +1,6 @@
 package Gui;
 
 import Model.promotion;
-import Model.user;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -117,7 +116,7 @@ public class AfficherPromotion {
             }
         });
 
-        Colupdate.setCellFactory(new Callback<TableColumn<promotion, Void>, TableCell<promotion, Void>>() {
+        Colmodifier.setCellFactory(new Callback<TableColumn<promotion, Void>, TableCell<promotion, Void>>() {
             @Override
             public TableCell<promotion, Void> call(TableColumn<promotion, Void> param) {
                 return new TableCell<promotion, Void>() {

@@ -27,8 +27,6 @@ public class TestFX extends Application {
             Scene scene = new Scene(root);
             primaryStage.setTitle("Gestion User");
             primaryStage.setScene(scene);
-            primaryStage.setWidth(1000);
-            primaryStage.setHeight(700);
             primaryStage.show();
 
 

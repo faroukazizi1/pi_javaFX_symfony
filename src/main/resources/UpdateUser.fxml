@@ -5,30 +5,62 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="647.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.UpdateUser">
+<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: #001F3F;" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.UpdateUser">
    <children>
-      <Label layoutX="315.0" layoutY="42.0" prefHeight="52.0" prefWidth="226.0" text="UPDATE EMPLOYE">
+      <Pane layoutX="104.0" layoutY="97.0" prefHeight="475.0" prefWidth="992.0" style="-fx-background-color: #4A5568;">
+         <children>
+            <VBox alignment="CENTER" layoutX="60.0" layoutY="15.0" prefHeight="445.0" prefWidth="298.0" spacing="30.0">
+               <children>
+                  <TextField fx:id="TFnom" prefHeight="63.0" prefWidth="211.0" promptText="Nom" />
+                  <TextField fx:id="TFusername" prefHeight="63.0" prefWidth="211.0" promptText="Username" />
+                  <TextField fx:id="TFemail" prefHeight="63.0" prefWidth="211.0" promptText="Email" />
+                  <TextField fx:id="TFadresse" prefHeight="63.0" prefWidth="178.0" promptText="Adresse" />
+                  <TextField fx:id="TFcin" prefHeight="63.0" prefWidth="211.0" promptText="Cin" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="626.0" layoutY="15.0" prefHeight="445.0" prefWidth="298.0" spacing="20.0">
+               <children>
+                  <TextField fx:id="TFprenom" prefHeight="63.0" prefWidth="211.0" promptText="Prenom" />
+                  <HBox prefHeight="66.0" prefWidth="298.0">
+                     <children>
+                        <Label prefHeight="35.0" prefWidth="162.0" text="Password :" />
+                        <Label fx:id="LBancienpassword" prefHeight="35.0" prefWidth="123.0" text="Label" />
+                     </children>
+                  </HBox>
+                  <PasswordField fx:id="TFpassword" prefHeight="63.0" prefWidth="211.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="35.0" prefWidth="113.0" text="ROLE :" />
+                        <Label fx:id="LBancienRole" prefHeight="18.0" prefWidth="78.0" text="Label" />
+                     </children>
+                  </HBox>
+                  <ComboBox fx:id="TFrole" prefHeight="63.0" prefWidth="211.0" />
+                  <TextField fx:id="TFnumero" prefHeight="63.0" prefWidth="211.0" promptText="Numero" />
+               </children>
+            </VBox>
+            <Button layoutX="396.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleUpdateUser" prefHeight="52.0" prefWidth="178.0" text="Update Employe">
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Button>
+         </children>
+      </Pane>
+      <Label layoutX="467.0" layoutY="25.0" prefHeight="54.0" prefWidth="162.0" style="-fx-background-color: wh;" text="UPDATE USER" textFill="WHITE">
          <font>
-            <Font name="System Bold Italic" size="24.0" />
+            <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
-      <TextField fx:id="TFnom" layoutX="79.0" layoutY="142.0" prefHeight="35.0" prefWidth="178.0" promptText="Nom" />
-      <TextField fx:id="TFprenom" layoutX="542.0" layoutY="147.0" prefHeight="35.0" prefWidth="178.0" promptText="Prenom" />
-      <TextField fx:id="TFusername" layoutX="79.0" layoutY="237.0" prefHeight="35.0" prefWidth="178.0" promptText="Username" />
-      <TextField fx:id="TFemail" layoutX="78.0" layoutY="335.0" prefHeight="35.0" prefWidth="178.0" promptText="Email" />
-      <ComboBox fx:id="TFrole" layoutX="542.0" layoutY="335.0" prefHeight="35.0" prefWidth="178.0" />
-      <Label layoutX="541.0" layoutY="300.0" prefHeight="18.0" prefWidth="38.0" text="ROLE :" />
-      <Label fx:id="LBancienRole" layoutX="603.0" layoutY="301.0" prefHeight="18.0" prefWidth="78.0" text="Label" />
-      <Label layoutX="371.0" layoutY="237.0" prefHeight="35.0" prefWidth="62.0" text="Password :" />
-      <Label fx:id="LBancienpassword" layoutX="461.0" layoutY="245.0" prefHeight="18.0" prefWidth="62.0" text="Label" />
-      <PasswordField fx:id="TFpassword" layoutX="541.0" layoutY="242.0" prefHeight="26.0" prefWidth="178.0" />
-      <TextField fx:id="TFadresse" layoutX="78.0" layoutY="427.0" prefHeight="35.0" prefWidth="178.0" promptText="Adresse" />
-      <TextField fx:id="TFnumero" layoutX="542.0" layoutY="427.0" prefHeight="35.0" prefWidth="178.0" promptText="Numero" />
-      <TextField fx:id="TFcin" layoutX="78.0" layoutY="515.0" prefHeight="35.0" prefWidth="178.0" promptText="Cin" />
-      <Button layoutX="490.0" layoutY="550.0" mnemonicParsing="false" onAction="#handleUpdateUser" prefHeight="52.0" prefWidth="178.0" text="Update Employe" />
+      <Button layoutX="104.0" layoutY="32.0" mnemonicParsing="false" onAction="#openEmployeeListView" text="ANNULER">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

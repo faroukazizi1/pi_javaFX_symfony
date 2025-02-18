@@ -6,23 +6,47 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="648.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.UpdatePromotion">
+<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: #001F3F;" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.UpdatePromotion">
    <children>
-      <Label layoutX="312.0" layoutY="47.0" prefHeight="66.0" prefWidth="214.0" text="Update Promotion">
+      <Pane layoutX="104.0" layoutY="114.0" prefHeight="475.0" prefWidth="992.0" style="-fx-background-color: #4A5568;">
+         <children>
+            <Button layoutX="421.0" layoutY="375.0" mnemonicParsing="false" onAction="#handleUpdatePromotion" prefHeight="53.0" prefWidth="158.0" text="Update Promotion">
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Button>
+            <VBox alignment="CENTER_LEFT" layoutX="68.0" layoutY="15.0" prefHeight="445.0" prefWidth="298.0" spacing="20.0">
+               <children>
+                  <ComboBox fx:id="combo_type" prefHeight="63.0" prefWidth="211.0" promptText="Type_Promotion" />
+                  <TextField fx:id="TFposte" prefHeight="63.0" prefWidth="211.0" promptText="Poste" />
+                  <DatePicker fx:id="Datepicker_date" prefHeight="63.0" prefWidth="211.0" promptText="Date_de_pormotion" />
+                  <TextField fx:id="TFsalaire" prefHeight="63.0" prefWidth="211.0" promptText="Salaire" />
+                  <ComboBox fx:id="Combo_user" prefHeight="63.0" prefWidth="211.0" promptText="Users" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="619.0" layoutY="15.0" prefHeight="445.0" prefWidth="298.0" spacing="20.0">
+               <children>
+                  <TextArea fx:id="Textare_raison" prefHeight="200.0" prefWidth="200.0" promptText="Raison de promotion" />
+                  <ComboBox fx:id="Combo_avs" prefHeight="63.0" prefWidth="211.0" promptText="Avatange supplementaire" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <Label layoutX="368.0" layoutY="41.0" prefHeight="54.0" prefWidth="435.0" style="-fx-background-color: wh;" text="UPDATE PROMOTION" textFill="WHITE">
          <font>
-            <Font name="System Bold Italic" size="24.0" />
+            <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
-      <TextArea fx:id="Textare_raison" layoutX="535.0" layoutY="172.0" prefHeight="200.0" prefWidth="200.0" promptText="Raison de promotion" />
-      <TextField fx:id="TFposte" layoutX="113.0" layoutY="266.0" prefHeight="40.0" prefWidth="187.0" promptText="Poste" />
-      <DatePicker fx:id="Datepicker_date" layoutX="114.0" layoutY="352.0" prefHeight="40.0" prefWidth="187.0" promptText="Date_de_pormotion" />
-      <TextField fx:id="TFsalaire" layoutX="114.0" layoutY="445.0" prefHeight="40.0" prefWidth="187.0" promptText="Salaire" />
-      <ComboBox fx:id="combo_type" layoutX="114.0" layoutY="172.0" prefHeight="40.0" prefWidth="187.0" promptText="Type_Promotion" />
-      <ComboBox fx:id="Combo_avs" layoutX="541.0" layoutY="445.0" prefHeight="40.0" prefWidth="187.0" promptText="Avatange supplementaire" />
-      <Button layoutX="468.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleUpdatePromotion" prefHeight="53.0" prefWidth="158.0" text="Update Promotion" />
-      <ComboBox fx:id="Combo_user" layoutX="116.0" layoutY="521.0" prefHeight="40.0" prefWidth="187.0" promptText="Users" />
+      <Button layoutX="104.0" layoutY="48.0" mnemonicParsing="false" onAction="#openPromotionListView" text="ANNULER">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

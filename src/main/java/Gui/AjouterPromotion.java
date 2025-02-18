@@ -12,11 +12,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
@@ -111,6 +111,7 @@ public class AjouterPromotion {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPromotion.fxml"));
             Parent root = loader.load();
+
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);
         } catch (Exception e) {
@@ -156,6 +157,28 @@ public class AjouterPromotion {
             }
         }
     }
+
+    @FXML
+    private void openPromotionListView(ActionEvent event) {
+        try {
+            // Charger la vue des employés
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPromotion.fxml"));  // Assurez-vous que le chemin est correct
+            Parent root = loader.load();
+
+            // Récupérer la scène actuelle et la mettre à jour avec la vue des employés
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));  // Change la scène
+            stage.setTitle("Liste des Promotion");  // Vous pouvez définir un titre approprié
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setTitle("Erreur de chargement");
+            error.setContentText("Échec du chargement de la vue des employés : " + e.getMessage());
+            error.showAndWait();
+        }
+    }
+
 
 
 
