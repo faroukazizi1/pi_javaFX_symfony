@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PretController" stylesheets="@style.css">
+
+    <!-- Onglet Ajouter un Prêt -->
+    <Tab text="Ajouter un Prêt">
+        <AnchorPane>
+            <children>
+                <GridPane layoutX="30" layoutY="30" hgap="10" vgap="10">
+                    <Label text="Montant du Prêt:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="montantPretField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Date du Prêt:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <DatePicker fx:id="datePretPicker" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="TMM:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="tmmField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <Label text="Taux:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="tauxField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                    <Label text="Revenus Bruts:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <TextField fx:id="revenusBrutsField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                    <Label text="Âge Employé:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                    <TextField fx:id="ageEmployeField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                    <Label text="Durée de Remboursement:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                    <TextField fx:id="dureeRemboursementField" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                    <Label text="Catégorie:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="categorieField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                    <HBox spacing="10" GridPane.rowIndex="8" GridPane.columnIndex="1">
+                        <children>
+                            <Button text="Ajouter Prêt" onAction="#handleAddPret"/>
+                            <Button text="Voir Réponse" onAction="#handleGoToReponse"/>
+                        </children>
+                    </HBox>
+
+                </GridPane>
+            </children>
+        </AnchorPane>
+    </Tab>
+
+    <!-- Onglet Modifier un Prêt -->
+    <Tab text="Modifier un Prêt">
+        <AnchorPane>
+            <children>
+                <GridPane layoutX="30" layoutY="30" hgap="10" vgap="10">
+                    <Label text="ID du Prêt:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="idPretFieldModif" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    <Button text="Rechercher" onAction="#handleSearchPret" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+
+                    <Label text="Montant du Prêt:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="montantPretFieldModif" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Date du Prêt:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <DatePicker fx:id="datePretPickerModif" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <Label text="TMM:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="tmmFieldModif" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                    <Label text="Taux:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <TextField fx:id="tauxFieldModif" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                    <Label text="Revenus Bruts:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                    <TextField fx:id="revenusBrutsFieldModif" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                    <Label text="Âge Employé:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                    <TextField fx:id="ageEmployeFieldModif" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                    <Label text="Durée de Remboursement:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                    <TextField fx:id="dureeRemboursementFieldModif" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                    <Label text="Catégorie:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="categorieFieldModif" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+                    <Button text="Modifier Prêt" onAction="#handleEditPret" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+                </GridPane>
+            </children>
+        </AnchorPane>
+    </Tab>
+
+    <!-- Onglet Supprimer un Prêt -->
+    <Tab text="Supprimer un Prêt">
+        <AnchorPane>
+            <children>
+                <GridPane layoutX="30" layoutY="30" hgap="10" vgap="10">
+                    <Label text="ID du Prêt:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="idPretFieldSupprimer" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Button text="Supprimer Prêt" onAction="#handleDeletePret" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                </GridPane>
+            </children>
+        </AnchorPane>
+    </Tab>
+
+    <Tab text="Voir les Prêts">
+        <AnchorPane>
+            <children>
+                <TableView fx:id="pretTableView" AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="50"
+                           AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+                    <columns>
+                        <TableColumn text="Montant" fx:id="colMontant"/>
+                        <TableColumn text="Date" fx:id="colDate"/>
+                        <TableColumn text="TMM" fx:id="colTmm"/>
+                        <TableColumn text="Taux" fx:id="colTaux"/>
+                        <TableColumn text="Revenus Bruts" fx:id="colRevenus"/>
+                        <TableColumn text="Âge" fx:id="colAge"/>
+                        <TableColumn text="Durée" fx:id="colDuree"/>
+                        <TableColumn text="Catégorie" fx:id="colCategorie"/>
+                    </columns>
+                </TableView>
+
+                <!-- Button positioned below the table -->
+                <Button fx:id="btnActualiser" text="Actualiser"
+                        onAction="#handleViewPrets"
+                        AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50"/>
+            </children>
+        </AnchorPane>
+    </Tab>
+
+
+</TabPane>

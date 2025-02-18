@@ -1,0 +1,82 @@
+/* General Styling */
+.root {
+    -fx-font-family: "Arial";
+    -fx-background-color: #e3f2fd; /* Light blue background */
+}
+
+/* TabPane Styling */
+.tab-pane {
+    -fx-tab-min-width: 120px;
+    -fx-tab-min-height: 40px;
+    -fx-background-color: #2196F3; /* Blue */
+}
+
+.tab-header-background {
+    -fx-background-color: #1E88E5; /* Slightly darker blue */
+}
+
+.tab {
+    -fx-background-color: #64B5F6; /* Lighter blue */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected {
+    -fx-background-color: #1565C0; /* Darker blue */
+    -fx-text-fill: white;
+}
+
+/* GridPane Styling */
+.grid-pane {
+    -fx-padding: 20px;
+    -fx-background-color: #ffffff; /* White background */
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 5);
+}
+
+/* Label Styling */
+.label {
+    -fx-text-fill: #0D47A1; /* Dark blue */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* TextField and ComboBox Styling */
+.text-field, .combo-box {
+    -fx-background-color: #E3F2FD;
+    -fx-border-color: #1E88E5;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+/* Buttons Styling */
+.button {
+    -fx-background-color: #1976D2;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #1565C0;
+}
+
+.button:pressed {
+    -fx-background-color: #0D47A1;
+}
+
+/* TableView Styling */
+.table-view {
+    -fx-background-color: #E3F2FD;
+    -fx-border-color: #1E88E5;
+    -fx-border-radius: 10px;
+}
+
+.table-column {
+    -fx-alignment: CENTER;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
