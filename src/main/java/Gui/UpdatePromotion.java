@@ -105,12 +105,6 @@ public class UpdatePromotion {
                 return;
             }
 
-            // Vérification que le nouveau salaire est supérieur à l'ancien
-            if (nouveauSalaire <= currentPromotion.getNouv_sal()) {
-                afficherAlerte("Erreur", "Salaire insuffisant", "Le nouveau salaire doit être supérieur à l'ancien.");
-                return;
-            }
-
             // Mettre à jour les informations de la promotion
             currentPromotion.setPoste_promo(TFposte.getText());
             currentPromotion.setNouv_sal(nouveauSalaire);

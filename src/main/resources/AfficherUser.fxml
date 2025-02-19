@@ -120,7 +120,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                        <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="294.0" style="-fx-background-color: #007BFF;" text="ABSENCE">
+                        <Button mnemonicParsing="false" onAction="#openGestionAbsence" prefHeight="57.0" prefWidth="294.0" style="-fx-background-color: #007BFF;" text="ABSENCE">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>

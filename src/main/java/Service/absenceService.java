@@ -116,6 +116,10 @@ public class absenceService implements IService<absence> {
         List<absence> absences = new ArrayList<>();
         return absences;
     }
+
+    public boolean authenticateUser(String username, String password){
+        return false;
+    }
 }
 
 

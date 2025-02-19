@@ -131,4 +131,8 @@ public class penaliteService implements IService<penalite> {
         return penalites;
     }
 
+    public boolean authenticateUser(String username, String password){
+        return false;
+    }
+
 }

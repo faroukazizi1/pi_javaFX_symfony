@@ -281,6 +281,32 @@ public class AfficherUser {
         }
     }
 
+    @FXML
+    public void openGestionAbsence(ActionEvent event) {
+        try {
+            // Charger le fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ajouterabsence.fxml"));
+            Parent root = loader.load();
+
+            // Récupérer la fenêtre actuelle
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Définir la nouvelle scène sur le stage
+            stage.setScene(new Scene(root));
+
+            // Définir le titre de la fenêtre
+            stage.setTitle("Gestion des Absences");
+
+            // Afficher la nouvelle scène
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 
 
