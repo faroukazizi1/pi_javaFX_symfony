@@ -4,7 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import Model.user;
 import Service.userService;
@@ -223,6 +225,34 @@ public class AfficherUser {
             stage.getScene().setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void openFinance(ActionEvent event) {
+        try {
+            // Load the FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ajouterpret.fxml"));
+            Parent root = loader.load();
+
+            // If you want to pass data to the new controller, you can do so here:
+            // Example: loader.getController().setData(someData);
+
+            // Get the current stage (the window that triggered the event)
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            stage.setScene(new Scene(root));
+
+            // Optionally, you can set the title of the new window
+            stage.setTitle("Finance - Ajouter Pret");
+
+            // Show the new window
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // You can show an alert here for error handling if needed
         }
     }
 

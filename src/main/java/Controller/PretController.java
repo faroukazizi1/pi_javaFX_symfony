@@ -3,6 +3,7 @@ package Controller;
 import Service.PretService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,7 +14,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import models.Pret;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -349,4 +349,24 @@ public class PretController {
         alert.showAndWait();
     }
 
+    @FXML
+    private void openEmployeeListView(ActionEvent event) {
+        try {
+            // Charger la vue des employés
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherUser.fxml"));  // Assurez-vous que le chemin est correct
+            Parent root = loader.load();
+
+            // Récupérer la scène actuelle et la mettre à jour avec la vue des employés
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));  // Change la scène
+            stage.setTitle("Liste des Employés");  // Vous pouvez définir un titre approprié
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setTitle("Erreur de chargement");
+            error.setContentText("Échec du chargement de la vue des employés : " + e.getMessage());
+            error.showAndWait();
+        }
+    }
 }
