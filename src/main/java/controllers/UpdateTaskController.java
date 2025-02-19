@@ -1,5 +1,7 @@
 package controllers;
 
+import Model.user;
+import Service.userService;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -36,6 +38,7 @@ public class UpdateTaskController {
     @FXML private MFXComboBox<String> userComboBox;
 
     private ProjectServices x = new ProjectServices();
+    private userService u = new userService();
 
 
 
@@ -137,12 +140,21 @@ public class UpdateTaskController {
         alert.showAndWait();
     }
 
-    public void initialize(){
-        List<Project> projectNames = x.getAll(); // Get all projects
-        for (Project project : projectNames) {
-            projectComboBox.getItems().add(project.getTitre()); // Add project titles to the combo box
-        }
+    public void initialize() {
+        // Remplir le comboBox des projets
+        List<Project> projects = x.getAll();
+        projectComboBox.getItems().addAll(
+                projects.stream().map(Project::getTitre).toList()
+        );
+
+        // Remplir le comboBox des utilisateurs
+        List<user> users = u.getAll();
+        System.out.println("Users found: " + users.size());
+        userComboBox.getItems().addAll(
+                users.stream().map(user::getUsername).toList()
+        );
     }
+
 
     public void onClose(MouseEvent mouseEvent) {
     }

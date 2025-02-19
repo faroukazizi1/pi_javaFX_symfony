@@ -106,7 +106,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                        <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="295.0" style="-fx-background-color: #007BFF;" text="PROJECT">
+                        <Button mnemonicParsing="false" onAction="#openProjects" prefHeight="57.0" prefWidth="295.0" style="-fx-background-color: #007BFF;" text="PROJECT">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
