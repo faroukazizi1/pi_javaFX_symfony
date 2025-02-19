@@ -1,6 +1,7 @@
 package Service;
 
 import Util.DBconnection;
+import models.absence;
 import models.penalite;
 import java.sql.*;
 import java.util.ArrayList;
@@ -123,6 +124,11 @@ public class penaliteService implements IService<penalite> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<penalite> getPromotionsByUserId(int id){
+        List<penalite> penalites = new ArrayList<>();
+        return penalites;
     }
 
 }

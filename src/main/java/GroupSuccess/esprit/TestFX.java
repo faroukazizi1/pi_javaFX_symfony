@@ -16,19 +16,7 @@ public class TestFX extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Ajouterabsence.fxml"));
 
-
-
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-
-            primaryStage.setTitle("Gestion Absences&Penalités");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace(); // Affiche l'erreur dans la console pour un meilleur débogage
-        }
     }
 }
+
