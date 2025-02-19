@@ -10,7 +10,7 @@ import Model.user;
 import Service.userService;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
+import Gui.UserSession;
 import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.util.List;
@@ -63,11 +63,29 @@ public class AfficherUser {
     private TableColumn<user, Integer> Colid;
 
     @FXML
+    private Button button_ajouter;
+
+
+    @FXML
     void initialize() {
+
+        UserSession session = UserSession.getInstance();
+        String userRole = session.getRole();
+
+        if (!"RHR".equals(userRole)) { // Si ce n'est pas un Responsable RH
+            tableView.setVisible(false); // Masquer la table des utilisateurs
+            button_ajouter.setVisible(false);
+
+
+            return;
+        }
+
+        // Initialisation normale si c'est un Responsable RH
         try {
             List<user> tab_users = service.getAll();
             ObservableList<user> observableList = FXCollections.observableList(tab_users);
             tableView.setItems(observableList);
+
             Colid.setVisible(false);
             Colid.setCellValueFactory(new PropertyValueFactory<>("id"));
             Colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -81,57 +99,52 @@ public class AfficherUser {
             Coladdresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
             Colnumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
 
-            // Add "Delete" button to each row
-            Coldelete.setCellFactory(param -> new TableCell<>() {
-                private final Button deleteButton = new Button("Delete");
-
-                {
-                    deleteButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;");
-                    deleteButton.setOnAction(event -> {
-                        user selectedUser = getTableView().getItems().get(getIndex());
-                        deleteUser(selectedUser);
-                    });
-                }
-
-                @Override
-                protected void updateItem(Void item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        setGraphic(deleteButton);
-                    }
-                }
-            });
-
-            // Add "Update" button to each row
-            Colupdate.setCellFactory(param -> new TableCell<>() {
-                private final Button updateButton = new Button("Update");
-
-                {
-                    updateButton.setStyle("-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;");
-                    updateButton.setOnAction(event -> {
-                        user selectedUser = getTableView().getItems().get(getIndex());
-                        openUpdateUserForm(selectedUser);
-
-                    });
-                }
-
-                @Override
-                protected void updateItem(Void item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        setGraphic(updateButton);
-                    }
-                }
-            });
-
-
+            // Ajouter les boutons seulement si l'utilisateur est un Responsable RH
+            if ("RHR".equals(userRole)) {
+                addDeleteAndUpdateButtons();
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    // Fonction pour ajouter les boutons Delete et Update
+    private void addDeleteAndUpdateButtons() {
+        Coldelete.setCellFactory(param -> new TableCell<>() {
+            private final Button deleteButton = new Button("Delete");
+
+            {
+                deleteButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;");
+                deleteButton.setOnAction(event -> {
+                    user selectedUser = getTableView().getItems().get(getIndex());
+                    deleteUser(selectedUser);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : deleteButton);
+            }
+        });
+
+        Colupdate.setCellFactory(param -> new TableCell<>() {
+            private final Button updateButton = new Button("Update");
+
+            {
+                updateButton.setStyle("-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;");
+                updateButton.setOnAction(event -> {
+                    user selectedUser = getTableView().getItems().get(getIndex());
+                    openUpdateUserForm(selectedUser);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : updateButton);
+            }
+        });
     }
 
     // Function to delete a user from the database and refresh the table

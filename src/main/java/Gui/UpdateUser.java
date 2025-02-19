@@ -104,7 +104,7 @@ public class UpdateUser {
             afficherAlerte("Erreur", "Numéro de téléphone invalide", "Le numéro de téléphone doit contenir exactement 8 chiffres.");
             return;
         }
-        
+
         // Vérifier que le numéro de téléphone et le CIN sont des nombres valides
         int numero = 0, cin = 0;
         try {

@@ -16,7 +16,7 @@ public class TestFX extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherUser.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
         if (loader.getLocation() == null) {
             System.out.println("FXML file not found!");
         } else {

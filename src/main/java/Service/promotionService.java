@@ -102,5 +102,42 @@ public class promotionService implements IService<promotion> {
         return tab_promotion;
     }
 
+    public user HetUser(String email){
+        user u = new user();
+        return u;
+    }
+
+    public boolean authenticateUser(String username, String password){
+        return false;
+    }
+
+    public List<promotion> getPromotionsByUserId(int userId) {
+        List<promotion> promotions = new ArrayList<>();
+        String query = "SELECT * FROM promotion WHERE id_user = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                promotion promo = new promotion(
+                        rs.getInt("id"),
+                        rs.getString("type_promo"),
+                        rs.getString("raison"),
+                        rs.getString("poste_promo"),
+                        rs.getDouble("nouv_sal"),
+                        rs.getDate("date_promo"),
+                        rs.getString("avantage_supp"),
+                        rs.getInt("id_user")
+                );
+                promotions.add(promo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return promotions;
+    }
+
 
 }

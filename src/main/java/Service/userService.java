@@ -1,4 +1,5 @@
 package Service;
+import Model.promotion;
 import Model.user;
 import Util.DBconnection;
 
@@ -101,6 +102,60 @@ public class userService implements IService<user> {
 
         }
         return tab_users;
+    }
+
+    public boolean authenticateUser(String username, String password) {
+        String query = "SELECT * FROM user WHERE email = ? AND password = ?";
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setString(1, username);
+            statement.setString(2, password);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return resultSet.next(); // If a row is found, the user is authenticated
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            return false;
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public user HetUser(String email) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        user u = null; // Initialisation de la variable c
+
+        try {
+            String query = "SELECT * FROM user WHERE email = ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, email);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                u = new user( rs.getInt("id"),rs.getInt("cin"),rs.getString("nom"),rs.getString("email"),rs.getString("prenom"), rs.getString("username"), rs.getString("password"), rs.getString("role"), rs.getString("sexe"), rs.getString("adresse"), rs.getInt("numero"));
+
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+        return u;
+
+
+    }
+
+    public List<user> getPromotionsByUserId(int userId) {
+        List<user> promotions = new ArrayList<>();
+        return promotions;
+
     }
 
 

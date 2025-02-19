@@ -18,7 +18,7 @@
 <AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: #4A5568;" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AfficherUser">
 
             <children>
-                <Label layoutX="546.0" layoutY="14.0" prefHeight="54.0" prefWidth="418.0" style="-fx-background-color: wh;" text="AFFICHER EMPLOYE" textFill="WHITE">
+                <Label layoutX="515.0" layoutY="14.0" prefHeight="54.0" prefWidth="418.0" style="-fx-background-color: wh;" text="AFFICHER EMPLOYE" textFill="WHITE">
                     <font>
                         <Font name="Arial Black" size="36.0" />
                     </font>
@@ -42,7 +42,7 @@
                     </columns>
                 </TableView>
 
-                <Button layoutX="352.0" layoutY="574.0" mnemonicParsing="false" onAction="#handleAddEmploye" prefHeight="38.0" prefWidth="154.0" style="-fx-background-color: #FFCC00;" text="Ajouter Employé" textFill="WHITE">
+                <Button fx:id="button_ajouter" layoutX="352.0" layoutY="574.0" mnemonicParsing="false" onAction="#handleAddEmploye" prefHeight="38.0" prefWidth="154.0" style="-fx-background-color: #FFCC00;" text="Ajouter Employé" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>

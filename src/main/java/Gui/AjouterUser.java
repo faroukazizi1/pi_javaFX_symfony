@@ -53,10 +53,20 @@ public class AjouterUser implements Initializable {
     @FXML
     private TextField TFadresse;
 
+    private boolean isRegistrationMode = false; // Mode d'inscription
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Add choices to the ChoiceBox
         TFrole.getItems().addAll("RHR", "Employe");
+    }
+
+    public void initMode(boolean isRegistrationMode) {
+        this.isRegistrationMode = isRegistrationMode;
+        if (isRegistrationMode) {
+            TFrole.setValue("Employe"); // Définit le rôle automatiquement
+            TFrole.setVisible(false); // Cache la ComboBox
+        }
     }
 
     @FXML
@@ -168,6 +178,7 @@ public class AjouterUser implements Initializable {
             error.showAndWait();
         }
     }
+
 
 
 }

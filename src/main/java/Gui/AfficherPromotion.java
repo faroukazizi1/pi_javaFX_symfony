@@ -53,8 +53,12 @@ public class AfficherPromotion {
     @FXML
     private TableColumn<promotion, Void> Colupdate;
 
+
     @FXML
-    private Button Retour;
+    private Button button_back_employe;
+
+    @FXML
+    private Button button_ajoutPro;
 
 
 
@@ -65,8 +69,26 @@ public class AfficherPromotion {
 
     @FXML
     void initialize() {
+
+        UserSession session = UserSession.getInstance();
+        String userRole = session.getRole();
+        List<promotion> tab_promotion;
+
+        if ("RHR".equals(userRole)) {
+            // Si c'est un Responsable RH, récupérer toutes les promotions
+            tab_promotion = service.getAll();
+        } else {
+            button_back_employe.setVisible(false);
+            // Si c'est un Employé, récupérer uniquement ses promotions
+            tab_promotion = service.getPromotionsByUserId(session.getUserId());
+
+            // Masquer les colonnes delete et update pour les employés
+            Coldelete.setVisible(false);
+            Colmodifier.setVisible(false);
+            button_ajoutPro.setVisible(false);
+        }
+
         try {
-            List<promotion> tab_promotion = service.getAll(); // Fetch all promotions
             ObservableList<promotion> observableList = FXCollections.observableList(tab_promotion);
             Tableview.setItems(observableList);
             Colid.setVisible(false);
@@ -87,65 +109,68 @@ public class AfficherPromotion {
             System.out.println( e.getMessage());
         }
 
-        // Ajouter le bouton de suppression
-        Coldelete.setCellFactory(new Callback<TableColumn<promotion, Void>, TableCell<promotion, Void>>() {
-            @Override
-            public TableCell<promotion, Void> call(TableColumn<promotion, Void> param) {
-                return new TableCell<promotion, Void>() {
-                    private final Button btnDelete = new Button("Delete");
+        if ("RHR".equals(userRole)) { // Seulement si c'est un Responsable RH
+            // Ajouter le bouton de suppression
+            Coldelete.setCellFactory(new Callback<TableColumn<promotion, Void>, TableCell<promotion, Void>>() {
+                @Override
+                public TableCell<promotion, Void> call(TableColumn<promotion, Void> param) {
+                    return new TableCell<promotion, Void>() {
+                        private final Button btnDelete = new Button("Delete");
 
-                    {
-                        btnDelete.setOnAction(event -> {
-                            promotion selectedPromotion = getTableView().getItems().get(getIndex());
-                            if (selectedPromotion != null) {
-                                deletePromotion(selectedPromotion);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btnDelete);
+                        {
+                            btnDelete.setOnAction(event -> {
+                                promotion selectedPromotion = getTableView().getItems().get(getIndex());
+                                if (selectedPromotion != null) {
+                                    deletePromotion(selectedPromotion);
+                                }
+                            });
                         }
-                    }
-                };
-            }
-        });
 
-        Colmodifier.setCellFactory(new Callback<TableColumn<promotion, Void>, TableCell<promotion, Void>>() {
-            @Override
-            public TableCell<promotion, Void> call(TableColumn<promotion, Void> param) {
-                return new TableCell<promotion, Void>() {
-                    private final Button btnUpdate = new Button("Update");
-
-                    {
-                        btnUpdate.setOnAction(event -> {
-                            promotion selectedPromotion = getTableView().getItems().get(getIndex());
-                            if (selectedPromotion != null) {
-                                openUpdatePromotionForm(selectedPromotion);
+                        @Override
+                        public void updateItem(Void item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if (empty) {
+                                setGraphic(null);
+                            } else {
+                                setGraphic(btnDelete);
                             }
-                        });
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btnUpdate);
                         }
-                    }
-                };
-            }
+                    };
+                }
+            });
 
-        });
+            // Ajouter le bouton de modification
+            Colmodifier.setCellFactory(new Callback<TableColumn<promotion, Void>, TableCell<promotion, Void>>() {
+                @Override
+                public TableCell<promotion, Void> call(TableColumn<promotion, Void> param) {
+                    return new TableCell<promotion, Void>() {
+                        private final Button btnUpdate = new Button("Update");
+
+                        {
+                            btnUpdate.setOnAction(event -> {
+                                promotion selectedPromotion = getTableView().getItems().get(getIndex());
+                                if (selectedPromotion != null) {
+                                    openUpdatePromotionForm(selectedPromotion);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void updateItem(Void item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if (empty) {
+                                setGraphic(null);
+                            } else {
+                                setGraphic(btnUpdate);
+                            }
+                        }
+                    };
+                }
+            });
+        }
 
     }
+
 
     @FXML
     private void openAddPromotionForm(ActionEvent event) {
