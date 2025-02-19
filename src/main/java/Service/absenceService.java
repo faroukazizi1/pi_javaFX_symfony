@@ -111,6 +111,11 @@ public class absenceService implements IService<absence> {
             e.printStackTrace();
         }
     }
+
+    public List<absence> getPromotionsByUserId(int id){
+        List<absence> absences = new ArrayList<>();
+        return absences;
+    }
 }
 
 
