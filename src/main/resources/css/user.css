@@ -1,0 +1,51 @@
+/* Sidebar styles */
+.sidebar {
+    -fx-background-color: #2c3e50;
+}
+
+.sidebar-link {
+    -fx-background-color: #34495e;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10px;
+}
+
+.sidebar-link-active {
+    -fx-background-color: #1abc9c;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10px;
+}
+
+/* TableView styling */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ddd;
+}
+
+/* Alternating row colors */
+.table-view .table-row-cell:odd {
+    -fx-background-color: #f8f8f8; /* Light gray */
+}
+
+.table-view .table-row-cell:even {
+    -fx-background-color: #ffffff; /* White */
+}
+
+/* Table header styles */
+.table-view .column-header {
+    -fx-background-color: #2c3e50;
+    -fx-text-fill: white;
+}
+
+/* Table row border */
+.table-view .column-header, .table-view .table-row-cell {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #ddd;
+}
+
+/* Highlight selected row */
+.table-view .table-row-cell:selected {
+    -fx-background-color: #3498db; /* Blue for selected row */
+    -fx-text-fill: white;
+}

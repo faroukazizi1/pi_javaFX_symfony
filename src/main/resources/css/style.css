@@ -1,0 +1,50 @@
+/* General styling for AnchorPane */
+AnchorPane {
+    -fx-background-color: #001F3F;
+}
+
+/* Styling for the main Pane */
+Pane {
+    -fx-background-color: #4A5568;
+    -fx-background-radius: 10px;
+}
+
+/* Styling for the input fields */
+TextField, PasswordField, ComboBox {
+    -fx-pref-height: 50px;
+    -fx-pref-width: 250px;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #CBD5E0;
+    -fx-background-color: #E2E8F0;
+}
+
+/* Styling for the CheckBoxes */
+CheckBox {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+}
+
+/* Styling for the Button */
+Button {
+    -fx-background-color: #3182CE;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 150px;
+}
+
+Button:hover {
+    -fx-background-color: #2C5282;
+}
+
+/* Styling for the Label */
+Label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
