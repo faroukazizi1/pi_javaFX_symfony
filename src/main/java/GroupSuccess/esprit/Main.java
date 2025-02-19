@@ -8,7 +8,7 @@ import models.Reponse;
 import java.sql.Date;
 
 public class Main {
-    public static void main(String[] args) {}
+    public static void main(String[] args) {
 //        PretService pretService = new PretService();
 //        ReponseService reponseService = new ReponseService();
 //
@@ -75,4 +75,4 @@ public class Main {
 //            System.out.println("ID: " + r.getId_reponse() + ", Montant: " + r.getMontant_demande() + ", Mensualité: " + r.getMensualite_credit() + ", Autorisé: " + r.getMontant_autorise());
 //        }
     }
-
+}
