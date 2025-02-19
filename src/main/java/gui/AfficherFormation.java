@@ -123,5 +123,11 @@ public class AfficherFormation implements Initializable {
             }
         });
     }
+
+    public void AjouterFormation(ActionEvent actionEvent) {
+    }
+
+    public void mettreAJourFormation(ActionEvent actionEvent) {
+    }
 }
 

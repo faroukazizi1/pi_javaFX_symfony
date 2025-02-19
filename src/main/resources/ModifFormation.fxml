@@ -1,30 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Pos?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.ModifFormation" prefHeight="450.0" prefWidth="600.0">
-    <Label text="Modifier Formation" layoutX="220.0" layoutY="20.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="gui.ModifFormation"
+            prefHeight="500.0" prefWidth="600.0"
+            style="-fx-background-color: linear-gradient(to bottom, #2196F3, #64B5F6);">
 
-    <Label text="Titre" layoutX="50.0" layoutY="70.0"/>
-    <TextField fx:id="tfTitre" layoutX="200.0" layoutY="70.0"/>
+    <!-- Titre -->
+    <Label text="Modifier Formation" layoutX="160.0" layoutY="30.0"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;"/>
 
-    <Label text="Description" layoutX="50.0" layoutY="110.0"/>
-    <TextField fx:id="tfDescription" layoutX="200.0" layoutY="110.0"/>
+    <!-- Formulaire -->
+    <VBox spacing="15" layoutX="100.0" layoutY="80.0" prefWidth="400.0">
+        <HBox>
+            <Label text="Titre" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+            <TextField fx:id="tfTitre" promptText="Entrez le titre" style="-fx-background-color: white; -fx-border-radius: 5;"/>
+        </HBox>
 
-    <Label text="Date Début" layoutX="50.0" layoutY="150.0"/>
-    <TextField fx:id="tfDateD" layoutX="200.0" layoutY="150.0" promptText="YYYY-MM-DD"/>
+        <HBox>
+            <Label text="Description" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+            <TextField fx:id="tfDescription" promptText="Entrez la description" style="-fx-background-color: white; -fx-border-radius: 5;"/>
+        </HBox>
 
-    <Label text="Date Fin" layoutX="50.0" layoutY="190.0"/>
-    <TextField fx:id="tfDateF" layoutX="200.0" layoutY="190.0" promptText="YYYY-MM-DD"/>
+        <HBox>
+            <Label text="Date Début" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+            <TextField fx:id="tfDateD" promptText="YYYY-MM-DD" style="-fx-background-color: white; -fx-border-radius: 5;"/>
+        </HBox>
 
-    <Label text="Durée" layoutX="50.0" layoutY="230.0"/>
-    <TextField fx:id="tfDuree" layoutX="200.0" layoutY="230.0"/>
+        <HBox>
+            <Label text="Date Fin" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+            <TextField fx:id="tfDateF" promptText="YYYY-MM-DD" style="-fx-background-color: white; -fx-border-radius: 5;"/>
+        </HBox>
 
-    <Label text="Image" layoutX="50.0" layoutY="270.0"/>
-    <TextField fx:id="tfImage" layoutX="200.0" layoutY="270.0"/>
+        <HBox>
+            <Label text="Durée" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+            <TextField fx:id="tfDuree" promptText="Entrez la durée" style="-fx-background-color: white; -fx-border-radius: 5;"/>
+        </HBox>
 
-    <Label text="ID Formateur" layoutX="50.0" layoutY="310.0"/>
-    <TextField fx:id="tfIdFormateur" layoutX="200.0" layoutY="310.0"/>
+        <HBox>
+            <Label text="Image" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+            <TextField fx:id="tfImage" promptText="Entrez l'image" style="-fx-background-color: white; -fx-border-radius: 5;"/>
+        </HBox>
 
-    <Button text="Enregistrer" onAction="#handleSave" layoutX="250.0" layoutY="370.0"/>
+        <HBox>
+            <Label text="ID Formateur" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+            <TextField fx:id="tfIdFormateur" promptText="Entrez l'ID formateur" style="-fx-background-color: white; -fx-border-radius: 5;"/>
+        </HBox>
+
+        <!-- Bouton Enregistrer -->
+        <Button text="Enregistrer" onAction="#handleSave" layoutX="200.0" layoutY="370.0"
+                style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5;"/>
+    </VBox>
 </AnchorPane>

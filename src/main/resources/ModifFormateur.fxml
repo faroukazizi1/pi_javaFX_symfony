@@ -1,23 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Pos?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.ModifFormateur" prefHeight="400.0" prefWidth="600.0">
-    <Label text="Modifier Formateur" layoutX="230.0" layoutY="30.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
-    <Label text="Numéro" layoutX="50.0" layoutY="100.0"/>
-    <TextField fx:id="tfNumero" layoutX="150.0" layoutY="100.0"/>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="gui.ModifFormateur"
+            prefHeight="500.0" prefWidth="600.0"
+            style="-fx-background-color: linear-gradient(to bottom, #2196F3, #64B5F6);">
 
-    <Label text="Nom" layoutX="50.0" layoutY="150.0"/>
-    <TextField fx:id="tfNom" layoutX="150.0" layoutY="150.0"/>
+    <!-- Titre -->
+    <Label text="Modifier Formateur" layoutX="160.0" layoutY="30.0"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;"/>
 
-    <Label text="Prénom" layoutX="50.0" layoutY="200.0"/>
-    <TextField fx:id="tfPrenom" layoutX="150.0" layoutY="200.0"/>
+    <!-- Formulaire -->
+    <VBox spacing="15" layoutX="100.0" layoutY="80.0" prefWidth="400.0">
+        <HBox>
+            <Label text="Numéro" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+            <TextField fx:id="tfNumero" promptText="Entrez le numéro" style="-fx-background-color: white; -fx-border-radius: 5;"/>
+        </HBox>
 
-    <Label text="Email" layoutX="50.0" layoutY="250.0"/>
-    <TextField fx:id="tfEmail" layoutX="150.0" layoutY="250.0"/>
+        <HBox>
+            <Label text="Nom" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+            <TextField fx:id="tfNom" promptText="Entrez le nom" style="-fx-background-color: white; -fx-border-radius: 5;"/>
+        </HBox>
 
-    <Label text="Spécialité" layoutX="50.0" layoutY="300.0"/>
-    <TextField fx:id="tfSpecialite" layoutX="150.0" layoutY="300.0"/>
+        <HBox>
+            <Label text="Prénom" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+            <TextField fx:id="tfPrenom" promptText="Entrez le prénom" style="-fx-background-color: white; -fx-border-radius: 5;"/>
+        </HBox>
 
-    <Button text="Enregistrer" onAction="#handleSave" layoutX="250.0" layoutY="350.0"/>
+        <HBox>
+            <Label text="Email" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+            <TextField fx:id="tfEmail" promptText="Entrez l'email" style="-fx-background-color: white; -fx-border-radius: 5;"/>
+        </HBox>
+
+        <HBox>
+            <Label text="Spécialité" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
+            <TextField fx:id="tfSpecialite" promptText="Entrez la spécialité" style="-fx-background-color: white; -fx-border-radius: 5;"/>
+        </HBox>
+
+        <!-- Bouton Enregistrer -->
+        <Button text="Enregistrer" onAction="#handleSave" layoutX="200.0" layoutY="350.0"
+                style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5;"/>
+    </VBox>
 </AnchorPane>

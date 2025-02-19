@@ -5,18 +5,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx"
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="gui.AjouterFormateur">
+      fx:controller="gui.AjouterFormateur"
+      style="-fx-background-color: #E3F2FD; -fx-padding: 20px; -fx-pref-width: 400px; -fx-pref-height: 450px;">
 
-    <Label text="Ajouter un Formateur" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+    <Label text="Ajouter un Formateur"
+           style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
 
-    <TextField fx:id="txtNumero" promptText="Numéro"/>
-    <TextField fx:id="txtNom" promptText="Nom"/>
-    <TextField fx:id="txtPrenom" promptText="Prénom"/>
-    <TextField fx:id="txtEmail" promptText="Email"/>
-    <TextField fx:id="txtSpecialite" promptText="Spécialité"/>
+    <TextField fx:id="txtNumero" promptText="Numéro" style="-fx-font-size: 14px;"/>
+    <TextField fx:id="txtNom" promptText="Nom" style="-fx-font-size: 14px;"/>
+    <TextField fx:id="txtPrenom" promptText="Prénom" style="-fx-font-size: 14px;"/>
+    <TextField fx:id="txtEmail" promptText="Email" style="-fx-font-size: 14px;"/>
+    <TextField fx:id="txtSpecialite" promptText="Spécialité" style="-fx-font-size: 14px;"/>
 
-    <Button fx:id="btnAjouter" text="Ajouter" onAction="#ajouterFormateur"/>
+    <Button fx:id="btnAjouter" text="Ajouter"
+            style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 16px;"
+            onAction="#ajouterFormateur"/>
 </VBox>

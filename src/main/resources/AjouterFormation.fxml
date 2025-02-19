@@ -7,19 +7,23 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx"
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="gui.AjouterFormation">
+      fx:controller="gui.AjouterFormation"
+      style="-fx-background-color: #E3F2FD; -fx-padding: 20px; -fx-pref-width: 450px; -fx-pref-height: 500px;">
 
-    <Label text="Ajouter une Formation" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+    <Label text="Ajouter une Formation"
+           style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
 
-    <TextField fx:id="txtTitre" promptText="Titre de la formation"/>
-    <TextField fx:id="txtDescription" promptText="Description"/>
-    <DatePicker fx:id="dpDateD" promptText="Date de début"/>
-    <DatePicker fx:id="dpDateF" promptText="Date de fin"/>
-    <TextField fx:id="txtDuree" promptText="Durée (en jours)"/>
-    <TextField fx:id="txtImage" promptText="Image"/>
-    <TextField fx:id="txtIdFormateur" promptText="ID du formateur"/>
+    <TextField fx:id="txtTitre" promptText="Titre de la formation" style="-fx-font-size: 14px;"/>
+    <TextField fx:id="txtDescription" promptText="Description" style="-fx-font-size: 14px;"/>
+    <DatePicker fx:id="dpDateD" promptText="Date de début" style="-fx-font-size: 14px;"/>
+    <DatePicker fx:id="dpDateF" promptText="Date de fin" style="-fx-font-size: 14px;"/>
+    <TextField fx:id="txtDuree" promptText="Durée (en jours)" style="-fx-font-size: 14px;"/>
+    <TextField fx:id="txtImage" promptText="Image" style="-fx-font-size: 14px;"/>
+    <TextField fx:id="txtIdFormateur" promptText="ID du formateur" style="-fx-font-size: 14px;"/>
 
-    <Button fx:id="btnAjouter" text="Ajouter" onAction="#ajouterFormation"/>
+    <Button fx:id="btnAjouter" text="Ajouter"
+            style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 16px;"
+            onAction="#ajouterFormation"/>
 </VBox>
