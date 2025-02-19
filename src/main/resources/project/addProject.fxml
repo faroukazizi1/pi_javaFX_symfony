@@ -29,7 +29,7 @@
                 <padding>
                     <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
                 </padding>
-                <Text text="Ajouter Projet">
+                <Text text="Add Project">
                     <font>
                         <Font name="System Bold" size="40.0" />
                     </font>
@@ -37,31 +37,30 @@
                 <VBox prefHeight="259.0" prefWidth="299.0" spacing="15.0">
                     <VBox>
                         <children>
-                            <MFXTextField fx:id="nom_projet" floatingText="Nom du Projet" prefHeight="50.0" prefWidth="359.0" />
+                            <MFXTextField fx:id="nom_projet" floatingText="Title of Project" prefHeight="50.0" prefWidth="359.0" />
                             <Label fx:id="nom_projet_error" styleClass="label-error" />
                         </children>
                     </VBox>
                     <VBox>
                         <children>
-                            <MFXTextField fx:id="description_projet" floatingText="Description du Projet" prefHeight="50.0" prefWidth="362.0" />
+                            <MFXTextField fx:id="description_projet" floatingText="Description of Project" prefHeight="50.0" prefWidth="362.0" />
                             <Label fx:id="description_projet_error" styleClass="label-error" />
                         </children>
                     </VBox>
                     <VBox>
                         <children>
-                            <MFXDatePicker fx:id="date_debut_projet" floatMode="INLINE" floatingText="Date Debut du Projet" prefHeight="38.0" prefWidth="434.0" />
+                            <MFXDatePicker fx:id="date_debut_projet" floatMode="INLINE" floatingText="Start Date of Project" prefHeight="38.0" prefWidth="434.0" />
                             <Label fx:id="date_debut_projet_error" styleClass="label-error" />
                         </children>
                     </VBox>
                     <VBox>
                         <children>
-                            <MFXDatePicker fx:id="date_fin_projet" floatMode="INLINE" floatingText="Date Fin du Projet" prefHeight="38.0" prefWidth="372.0" />
+                            <MFXDatePicker fx:id="date_fin_projet" floatMode="INLINE" floatingText="End Date Fin of Project" prefHeight="38.0" prefWidth="372.0" />
                             <Label fx:id="date_fin_projet_error" styleClass="label-error" />
                         </children>
                     </VBox>
-
                 </VBox>
-                <MFXButton fx:id="add_project_btn" alignment="CENTER" buttonType="RAISED" depthLevel="LEVEL1" onAction="#addProject" rippleAnimateShadow="true" rippleRadius="30.0" style="-fx-background-color: #624DE3; -fx-text-fill: white; -fx-background-radius: 10;" styleClass="button-add" text="Ajouter Projet" textFill="WHITE">
+                <MFXButton fx:id="add_project_btn" alignment="CENTER" buttonType="RAISED" depthLevel="LEVEL1" onAction="#addProject" rippleAnimateShadow="true" rippleRadius="30.0" style="-fx-background-color: #624DE3; -fx-text-fill: white; -fx-background-radius: 10;" styleClass="button-add" text="Add Project" textFill="WHITE">
                     <padding>
                         <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
                     </padding>

@@ -101,7 +101,6 @@ public class Main {
             System.err.println("❌ Erreur lors de l'assignation de la tâche : " + e.getMessage());
         }
 
-
 // 🔹 Supprimer une tâche
         try {
             projectTask.delete(8);

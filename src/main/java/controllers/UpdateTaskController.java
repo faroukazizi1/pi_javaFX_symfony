@@ -23,15 +23,15 @@ public class UpdateTaskController {
     @FXML
     private TextField titreField;
     @FXML
-    private MFXTextField descriptionField;
-    @FXML
-    private MFXDatePicker dateField;
-    @FXML
     private Label titre_task_error;
 
     @FXML
+    private MFXTextField descriptionField;
+    @FXML
     private Label description_error;
 
+    @FXML
+    private MFXDatePicker dateField;
     @FXML
     private Label datefield_error;
 

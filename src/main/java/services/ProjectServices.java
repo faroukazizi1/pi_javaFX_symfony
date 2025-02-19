@@ -39,8 +39,8 @@ public class ProjectServices implements IService<Project> {
             ps.setDate(5, project.getDate_fin());
 
             ps.executeUpdate();
-            System.out.println("✅ Project added successfully!");
-        } catch (SQLException e) { System.out.println("❌ Add Error : " + e.getMessage()); }
+            System.out.println("Project added successfully!");
+        } catch (SQLException e) { System.out.println(" Add Error : " + e.getMessage()); }
     }
 
     // ✅ Affichage de tous les projets
@@ -61,7 +61,7 @@ public class ProjectServices implements IService<Project> {
                 project.setDate_fin(rs.getDate("date_fin"));
                 projects.add(project);
             }
-        } catch (SQLException e) { System.out.println("❌ Display Error: " + e.getMessage()); }
+        } catch (SQLException e) { System.out.println(" Display Error: " + e.getMessage()); }
         return projects;
     }
 
@@ -84,7 +84,7 @@ public class ProjectServices implements IService<Project> {
                 projects.add(project);
             }
         } catch (SQLException e) {
-            System.out.println("❌ Display Error: " + e.getMessage());
+            System.out.println(" Display Error: " + e.getMessage());
         }
 
         return projects;
@@ -103,9 +103,9 @@ public class ProjectServices implements IService<Project> {
 
             int rowsUpdated = ps.executeUpdate();
             if (rowsUpdated > 0) {
-                System.out.println("✅ Project updated successfully!");
-            } else { System.out.println("⚠️ No project found with ID: " + project.getId()); }
-        } catch (SQLException e) { System.out.println("❌ Update Error: " + e.getMessage()); }
+                System.out.println(" Project updated successfully!");
+            } else { System.out.println("⚠ No project found with ID: " + project.getId()); }
+        } catch (SQLException e) { System.out.println(" Update Error: " + e.getMessage()); }
     }
 
     // ✅ Supprimer un projet (Delete)
@@ -117,9 +117,9 @@ public class ProjectServices implements IService<Project> {
             int rowsDeleted = ps.executeUpdate();
 
             if (rowsDeleted > 0) {
-                System.out.println("✅ Project deleted successfully!");
-            } else { System.out.println("⚠️ No project found with ID to delete: " + project.getId()); }
-        } catch (SQLException e) { System.out.println("❌ Delete Error: " + e.getMessage()); }
+                System.out.println(" Project deleted successfully!");
+            } else { System.out.println(" No project found with ID to delete: " + project.getId()); }
+        } catch (SQLException e) { System.out.println(" Delete Error: " + e.getMessage()); }
     }
     public void delete2(int projectId) {
         String query = "DELETE FROM project WHERE id=?";
@@ -131,12 +131,12 @@ public class ProjectServices implements IService<Project> {
             int rowsDeleted = ps.executeUpdate();
 
             if (rowsDeleted > 0) {
-                System.out.println("✅ Project deleted successfully!");
+                System.out.println(" Project deleted successfully!");
             } else {
-                System.out.println("⚠️ No project found with ID: " + projectId + " to delete.");
+                System.out.println(" No project found with ID: " + projectId + " to delete.");
             }
         } catch (SQLException e) {
-            System.out.println("❌ Delete Error: " + e.getMessage());
+            System.out.println(" Delete Error: " + e.getMessage());
         }
     }
     // Get a project by its ID
@@ -158,7 +158,7 @@ public class ProjectServices implements IService<Project> {
                 project.setDate_fin(rs.getDate("date_fin"));
             }
         } catch (SQLException e) {
-            System.out.println("❌ Get Project by ID Error: " + e.getMessage());
+            System.out.println(" Get Project by ID Error: " + e.getMessage());
         }
 
         return project;
@@ -177,7 +177,7 @@ public class ProjectServices implements IService<Project> {
                 projectId = rs.getInt("id"); // Extract the project ID
             }
         } catch (SQLException e) {
-            System.out.println("❌ Get Project ID by Titre Error: " + e.getMessage());
+            System.out.println(" Get Project ID by Titre Error: " + e.getMessage());
         }
 
         return projectId;

@@ -10,52 +10,67 @@ import models.Project;
 import services.ProjectServices;
 
 import java.sql.Date;
-import java.time.LocalDate;
+//import java.time.LocalDate;
 
 public class AddProject {
+
     ProjectServices projectService = new ProjectServices();
-    @FXML
-    public MFXButton add_project_btn;
-
-
-
-    @FXML
-    private MFXDatePicker date_debut_projet;
-
-    @FXML
-    private MFXDatePicker date_fin_projet;
-
-    @FXML
-    private MFXTextField description_projet;
 
     @FXML
     private MFXTextField nom_projet;
+    @FXML
+    private Label nom_projet_error;
 
     @FXML
-    private Label date_debut_projet_error;
-
-    @FXML
-    private Label date_fin_projet_error;
-
+    private MFXTextField description_projet;
     @FXML
     private Label description_projet_error;
 
     @FXML
-    private Label nom_projet_error;
+    private MFXDatePicker date_debut_projet;
+    @FXML
+    private Label date_debut_projet_error;
+
+    @FXML
+    private MFXDatePicker date_fin_projet;
+    @FXML
+    private Label date_fin_projet_error;
+
+    @FXML
+    public MFXButton add_project_btn;
 
     public void onClose() {
         add_project_btn.getScene().getWindow().hide();
     }
+    public void onMinimize() {}
+    public void initialize() {}
 
-
-    public void onMinimize() {
+    private void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.show();
     }
+
+    private void resetInputsErrors() {
+        nom_projet_error.setText("");
+        description_projet_error.setText("");
+        date_debut_projet_error.setText("");
+        date_fin_projet_error.setText("");
+    }
+
 
     public void addProject() {
         boolean isError = false;
         resetInputsErrors();
+
         if (nom_projet.getText().isEmpty()) {
             nom_projet_error.setText("This field is required");
+            isError = true;
+        }
+        if (nom_projet.getText().matches("\\d+")) {
+            nom_projet_error.setText("Project name cannot be only numbers.");
             isError = true;
         }
 
@@ -63,7 +78,10 @@ public class AddProject {
             description_projet_error.setText("This field is required");
             isError = true;
         }
-
+        if (description_projet.getText().matches("\\d+")) {
+            description_projet_error.setText("Description cannot be only numbers.");
+            isError = true;
+        }
 
         if (date_debut_projet.getValue() == null) {
             date_debut_projet_error.setText("This field is required");
@@ -92,38 +110,11 @@ public class AddProject {
 
         try {
             projectService.add(new Project(titre, description, "inactve", date_debut, date_fin));
+            showAlert("Success", "Project added successfully!", Alert.AlertType.INFORMATION);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            displayError("Error occurred while adding project", e.getMessage());
+            showAlert("Error", "An error occurred while adding the project: " + e.getMessage(), Alert.AlertType.ERROR);
         }
         add_project_btn.getScene().getWindow().hide();
     }
-
-    private void resetInputsErrors() {
-        nom_projet_error.setText("");
-        description_projet_error.setText("");
-        date_debut_projet_error.setText("");
-        date_fin_projet_error.setText("");
-    }
-
-    public void initialize() {
-
-    }
-
-    public static void displayError(String titre, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(titre);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    public static void displaySuccess(String titre, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText(titre);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
 }

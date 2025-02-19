@@ -14,7 +14,7 @@ public class home extends Application {
         Pane root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Ajouter un Événement");
+            primaryStage.setTitle("Gestion_Projet");
         primaryStage.show();
     }
 

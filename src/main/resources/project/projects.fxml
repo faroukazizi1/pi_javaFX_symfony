@@ -69,7 +69,7 @@
                             </ImageView>
                         </graphic>
                     </Button>
-                    <Button fx:id="Document_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onDocumentsButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Congés" textFill="WHITE">
+                    <Button fx:id="Document_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onDocumentsButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Conges" textFill="WHITE">
                         <font>
                             <Font name="System Bold" size="19.0" />
                         </font>
@@ -137,7 +137,7 @@
                     </HBox>
                 </HBox>
                 <TabPane prefHeight="582.0" prefWidth="918.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-                    <Tab text="Acceuil">
+                    <Tab text="Project">
                         <VBox prefHeight="525.0" prefWidth="918.0" spacing="20.0" styleClass="body" VBox.vgrow="ALWAYS">
                             <opaqueInsets>
                                 <Insets />
@@ -210,8 +210,8 @@
                                     </HBox>
                                     <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                                     <HBox spacing="5.0">
-                                        <Button fx:id="open_modal_btn" mnemonicParsing="false" onAction="#onOpenAddModal" styleClass="button-add" text="Ajouter Projet" />
-                                        <Button fx:id="open_modal_tache_btn" mnemonicParsing="false" onAction="#onOpenAddTacheModal" styleClass="button-add-inline" text="Ajouter Tache" />
+                                        <Button fx:id="open_modal_btn" mnemonicParsing="false" onAction="#onOpenAddModal" styleClass="button-add" text="Add Project" />
+                                        <Button fx:id="open_modal_tache_btn" mnemonicParsing="false" onAction="#onOpenAddTacheModal" styleClass="button-add-inline" text="Add Task" />
                                         <Button mnemonicParsing="false" onAction="#openCalendar" styleClass="button-add-inline" text="Calendar" />
                                     </HBox>
                                 </HBox>
@@ -240,24 +240,22 @@
                             </HBox>
                         </VBox>
                     </Tab>
-                    <Tab text="Tache">
+                    <Tab text="Task">
                         <VBox prefHeight="525.0" prefWidth="918.0" spacing="20.0" styleClass="body" VBox.vgrow="ALWAYS">
                             <HBox>
                                 <padding>
                                     <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                                 </padding>
-
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des taches">
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="List Tasks">
                                     <font>
                                         <Font name="System Bold" size="32.0" />
                                     </font>
                                 </Text>
                                 <Pane prefHeight="0.0" prefWidth="482.0" HBox.hgrow="ALWAYS" />
                                 <HBox alignment="CENTER" prefHeight="47.0" prefWidth="392.0" spacing="5.0">
-                                    <Button mnemonicParsing="false" onAction="#onOpenTask" styleClass="show-task-button" text="Show All tasks" />
-
-                                    <MFXComboBox fx:id="user_select" floatingText="Choisir Utilisateur" prefHeight="40.0" prefWidth="166.0" />
-                                    <Button mnemonicParsing="false" onAction="#showTasks" prefHeight="70.0" prefWidth="200"  styleClass="button-add-inline" text="Lister" />
+                                    <Button mnemonicParsing="false" onAction="#onOpenTask" styleClass="show-task-button" text="Show all tasks" />
+                                    <MFXComboBox fx:id="user_select" floatingText="Users" prefHeight="40.0" prefWidth="166.0" />
+                                    <Button mnemonicParsing="false" onAction="#showTasks" prefHeight="70.0" prefWidth="200"  styleClass="button-add-inline" text="Show" />
                                 </HBox>
                             </HBox>
                             <HBox spacing="50.0" VBox.vgrow="ALWAYS">

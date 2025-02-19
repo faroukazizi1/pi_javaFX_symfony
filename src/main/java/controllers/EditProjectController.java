@@ -1,45 +1,48 @@
 package controllers;
 
-import Util.Modals;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import models.Project;
 import services.ProjectServices;
+import javafx.event.ActionEvent;
 
 import java.sql.Date;
 
 public class EditProjectController {
 
-    private ProjectServices projectService = new ProjectServices();
+    ProjectServices projectService = new ProjectServices();
     private Project selectedProject = null;
+
+    @FXML
+    private MFXTextField nom_projet;
+    @FXML
+    private Label nom_projet_error;
+
+    @FXML
+    private MFXTextField description_projet;
+    @FXML
+    private Label description_projet_error;
+
+    @FXML
+    private MFXDatePicker date_debut_projet;
+    @FXML
+    private Label date_debut_projet_error;
+
+    @FXML
+    private MFXDatePicker date_fin_projet;
+    @FXML
+    private Label date_fin_projet_error;
 
     @FXML
     public MFXButton edit_project_btn;
 
-
-    @FXML
-    private MFXDatePicker date_debut_projet;
-
-    @FXML
-    private MFXDatePicker date_fin_projet;
-
-    @FXML
-    private MFXTextField description_projet;
-
-    @FXML
-    private MFXTextField nom_projet;
-
-    public void initialize() {
-
-    }
-
-    public Project getSelectedProject() {
-        return selectedProject;
-    }
+    public void onClose() { edit_project_btn.getScene().getWindow().hide(); }
+    public void onMinimize() {}
+    public void initialize() {}
 
     private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
@@ -48,7 +51,6 @@ public class EditProjectController {
         alert.setContentText(message);
         alert.show();
     }
-
 
     public void setSelectedProject(Project selectedProject) {
         this.selectedProject = selectedProject;
@@ -61,34 +63,52 @@ public class EditProjectController {
         }
     }
 
-    public void onClose() {
-        edit_project_btn.getScene().getWindow().hide();
+    private void resetInputsErrors() {
+        nom_projet_error.setText("");
+        description_projet_error.setText("");
+        date_debut_projet_error.setText("");
+        date_fin_projet_error.setText("");
     }
-
-
-    public void onMinimize() {
-    }
-
     public void editProject(ActionEvent actionEvent) {
-        // Validate fields
-        if (nom_projet.getText().isEmpty() || description_projet.getText().isEmpty() || date_debut_projet.getValue() == null || date_fin_projet.getValue() == null) {
-            showAlert("Error", "Please fill in all fields.", Alert.AlertType.ERROR);
-            return; // Exit the method if validation fails
-        }
+        boolean isError = false;
+        resetInputsErrors();
 
-        // Validate that the project name is not only numbers
+        if (nom_projet.getText().isEmpty()) {
+            nom_projet_error.setText("This field is required");
+            isError = true;
+        }
         if (nom_projet.getText().matches("\\d+")) {
-            showAlert("Invalid Input", "Project name cannot be only numbers.", Alert.AlertType.WARNING);
-            return;
+            nom_projet_error.setText("Project name cannot be only numbers.");
+            isError = true;
         }
 
-        // Check if the end date is after the start date
+        if (description_projet.getText().isEmpty()) {
+            description_projet_error.setText("This field is required");
+            isError = true;
+        }
+        if (description_projet.getText().matches("\\d+")) {
+            description_projet_error.setText("Description cannot be only numbers.");
+            isError = true;
+        }
+        if (date_debut_projet.getValue() == null) {
+            date_debut_projet_error.setText("This field is required");
+            isError = true;
+        }
+
+        if (date_fin_projet.getValue() == null) {
+            date_fin_projet_error.setText("This field is required");
+            isError = true;
+        }
+
         if (date_debut_projet.getValue() != null && date_fin_projet.getValue() != null) {
             if (date_fin_projet.getValue().isBefore(date_debut_projet.getValue())) {
-                showAlert("Invalid Date", "End date should be after the start date.", Alert.AlertType.WARNING);
-                return;
+                date_fin_projet_error.setText("This field should be after date debut.");
+                isError = true;
             }
         }
+
+        if (isError)
+            return;
 
         // Proceed with project update if validation passed
         String title = nom_projet.getText();
@@ -113,7 +133,6 @@ public class EditProjectController {
 
         edit_project_btn.getScene().getWindow().hide();
     }
-
 
 
 }
