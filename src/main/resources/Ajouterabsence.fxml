@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<TabPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+
+   <!-- Onglet "Ajouter une absence" -->
+   <Tab text="Ajouter une Absence">
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="37.0" layoutY="141.0" text="DATE" />
+            <Label layoutX="23.0" layoutY="191.0" text="NOMBRE D'ABSENCE" />
+            <Label layoutX="37.0" layoutY="241.0" text="TYPE" />
+
+            <TextField fx:id="nbrAbsFieldAdd" layoutX="251.0" layoutY="187.0" prefWidth="179.0" />
+            <ComboBox fx:id="typeComboBoxAdd" layoutX="250.0" layoutY="237.0" prefWidth="185.0" />
+            <DatePicker fx:id="datePickerAdd" layoutX="248.0" layoutY="138.0" />
+
+            <Button layoutX="216.0" layoutY="300.0" onAction="#handleAddAbsence" text="AJOUTER" />
+            <Label layoutX="195.0" layoutY="36.0" text="AJOUTER ABSENCE" />
+         </children>
+      </AnchorPane>
+   </Tab>
+
+   <!-- Onglet "Mettre à jour une absence" -->
+   <Tab text="Mettre à Jour">
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="50.0" layoutY="154.0" text="DATE" />
+            <Label layoutX="30.0" layoutY="206.0" text="NOMBRE D'ABSENCE" />
+            <Label layoutX="43.0" layoutY="258.0" text="TYPE" />
+            <Label layoutX="44.0" layoutY="104.0" text="ID" />
+
+            <TextField fx:id="nbrAbsFieldUpdate" layoutX="246.0" layoutY="202.0" prefWidth="177.0" />
+            <TextField fx:id="nbrAbsFieldUpdateValue" layoutX="243.0" layoutY="100.0" prefWidth="176.0" />
+            <ComboBox fx:id="typeComboBoxUpdate" layoutX="241.0" layoutY="254.0" prefWidth="186.0" />
+            <DatePicker fx:id="datePickerUpdate" layoutX="244.0" layoutY="151.0" prefWidth="178.0" />
+
+            <Button layoutX="223.0" layoutY="320.0" onAction="#handleUpdateAbsence" text="METTRE À JOUR" />
+            <Label layoutX="195.0" layoutY="36.0" text="MODIFIER ABSENCE" />
+         </children>
+      </AnchorPane>
+   </Tab>
+
+   <!-- Onglet "Supprimer une absence" -->
+   <Tab text="Supprimer">
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="46.0" layoutY="142.0" text="ID" />
+            <TextField fx:id="nbrAbsFieldDelete" layoutX="266.0" layoutY="139.0" />
+            <Button layoutX="200.0" layoutY="257.0" onAction="#handleDeleteAbsence" text="SUPPRIMER ABSENCE" />
+            <Label layoutX="194.0" layoutY="29.0" text="SUPPRIMER ABSENCE" />
+         </children>
+      </AnchorPane>
+   </Tab>
+
+   <!-- Onglet "Voir les Absences" -->
+   <Tab text="Voir les Absences">
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <!-- GridView pour afficher les absences -->
+            <GridPane fx:id="absenceGridView" hgap="10" layoutX="30.0" layoutY="50.0" prefHeight="231.0" prefWidth="553.0" vgap="10">
+               <!-- Titres des colonnes -->
+               <Label text="ID" GridPane.columnIndex="0" />
+               <Label text="Date" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+               <Label text="Nombre d'absences" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+               <Label text="Type" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
+
+               <!-- Les données seront ajoutées dynamiquement ici -->
+            </GridPane>
+
+            <!-- Bouton pour voir les absences -->
+            <Button layoutX="462.0" layoutY="304.0" onAction="#handleViewAbsences" text="VOIR LES ABSENCES" />
+            <Button layoutX="493.0" layoutY="356.0" onAction="#handleNavigateToPenalites" text="Naviguer vers les Penalites " />
+         </children>
+      </AnchorPane>
+   </Tab>
+
+
+</TabPane>

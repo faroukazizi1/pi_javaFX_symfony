@@ -1,0 +1,109 @@
+/* Style général de l'application */
+.tab-pane {
+    -fx-background-color: #f0f0f0; /* Fond gris clair */
+    -fx-font-family: Arial, sans-serif;
+}
+
+/* Style des onglets */
+.tab {
+    -fx-background-color: #007acc; /* Bleu pour les onglets */
+    -fx-text-fill: white; /* Texte des onglets en blanc */
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+}
+
+/* Style des onglets sélectionnés */
+.tab:selected {
+    -fx-background-color: #005f8a; /* Bleu foncé pour l'onglet actif */
+}
+
+/* Style des labels */
+.label {
+    -fx-text-fill: #333;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Style des champs de texte */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #007acc;
+    -fx-border-radius: 10px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.0, 2, 2);
+}
+
+/* Style des champs de texte au survol */
+.text-field:hover {
+    -fx-border-color: #005f8a;
+}
+
+/* Style des comboBox */
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #007acc;
+    -fx-border-radius: 10px;
+    -fx-padding: 8px;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
+}
+
+/* Style des boutons */
+.button {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 30px;
+    -fx-border-radius: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0.0, 2, 2);
+
+}
+
+/* Style des boutons lorsqu'ils sont survolés */
+.button:hover {
+    -fx-background-color: #005f8a;
+}
+
+/* Style des TableView */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #007acc;
+    -fx-border-radius: 5px;
+    -fx-font-size: 14px;
+}
+
+/* Style des colonnes de TableView */
+.table-column {
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}
+
+/* Style du fond de la fenêtre */
+.anchor-pane {
+    -fx-background-color: #f0f0f0; /* Fond gris clair */
+    -fx-padding: 20px;
+}
+
+/* Style de l'en-tête de chaque onglet */
+.tab-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: white; /* Texte blanc pour les en-têtes */
+    -fx-font-weight: bold;
+}
+
+/* Espacement autour des éléments */
+.children {
+    -fx-spacing: 10px;
+}
+
+/* Positionnement des éléments */
+.layoutX {
+    -fx-layout-x: 10px;
+}
+
+.layoutY {
+    -fx-layout-y: 10px;
+}
+
