@@ -35,10 +35,6 @@ public class UpdateTaskController {
     @FXML
     private Label datefield_error;
 
-    @FXML
-    private TextField projectIdField;
-    @FXML
-    private TextField userIdField;
     @FXML private MFXComboBox<String> projectComboBox;
     @FXML private MFXComboBox<String> userComboBox;
 
@@ -60,8 +56,8 @@ public class UpdateTaskController {
         projectComboBox.selectItem(project.getTitre());
         User user = y.getUserById(task.getUser_test_id());
         userComboBox.selectItem(user.getNom());
-
     }
+
     private void resetInputsErrors() {
         titre_task_error.setText("");
         description_error.setText("");
@@ -74,36 +70,38 @@ public class UpdateTaskController {
         boolean isError = false;
         resetInputsErrors();
 
-        // Validate fields
+
         if (titreField.getText().isEmpty()) {
             titre_task_error.setText("Title is required");
+            isError = true;
+        }
+        if (titreField.getText().matches("\\d+")) {
+            titre_task_error.setText("Task name cannot be only numbers.");
             isError = true;
         }
         if (descriptionField.getText().isEmpty()) {
             description_error.setText("Description is required");
             isError = true;
         }
+        if (descriptionField.getText().matches("\\d+")) {
+            description_error.setText("Description cannot be only numbers.");
+            isError = true;
+        }
+
         if (dateField.getValue() == null) {
             datefield_error.setText("Date is required");
             isError = true;
         } else {
-            // Check if the date is in the past
             if (dateField.getValue().isBefore(java.time.LocalDate.now())) {
                 datefield_error.setText("The date cannot be in the past");
                 isError = true;
             }
         }
 
-        // Validate that the title is not only numbers
-        if (titreField.getText().matches("\\d+")) {
-            titre_task_error.setText("Invalid Input: The title should not be only numbers.");
-            isError = true;
-        }
-
         // If there are validation errors, stop execution
-        if (isError) {
+        if (isError)
             return;
-        }
+
         if (selectedTask != null) {
             try {
                 // Update the task with the new values

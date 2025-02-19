@@ -9,7 +9,6 @@
 <?import javafx.scene.text.Text?>
 
 
-
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="controllers.AddTask"
@@ -21,7 +20,7 @@
             <padding>
                 <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
             </padding>
-            <Text text="Ajouter Tache">
+            <Text text="Add Task">
                 <font>
                     <Font name="System Bold" size="40.0" />
                 </font>
@@ -35,24 +34,24 @@
                 </VBox>
                 <VBox>
                     <children>
-                        <MFXTextField fx:id="titre_input" floatingText="Titre du tache" prefHeight="50.0" prefWidth="362.0" />
+                        <MFXTextField fx:id="titre_input" floatingText="Title of task" prefHeight="50.0" prefWidth="362.0" />
                         <Label fx:id="titre_error" styleClass="label-error" />
                     </children>
                 </VBox>
                 <VBox>
                     <children>
-                        <MFXTextField fx:id="description_input" floatingText="Description du Tache" prefHeight="50.0" prefWidth="362.0" />
+                        <MFXTextField fx:id="description_input" floatingText="Description of task" prefHeight="50.0" prefWidth="362.0" />
                         <Label fx:id="description_error" styleClass="label-error" />
                     </children>
                 </VBox>
                 <VBox>
                     <children>
-                        <MFXDatePicker fx:id="date_input" floatMode="INLINE" floatingText="Date du Tache" prefHeight="38.0" prefWidth="434.0" />
+                        <MFXDatePicker fx:id="date_input" floatMode="INLINE" floatingText="Date of task" prefHeight="38.0" prefWidth="434.0" />
                         <Label fx:id="date_error" styleClass="label-error" />
                     </children>
                 </VBox>
             </VBox>
-            <MFXButton fx:id="add_task_btn" alignment="CENTER" buttonType="RAISED" depthLevel="LEVEL1" onAction="#addTask" rippleAnimateShadow="true" rippleRadius="30.0" style="-fx-background-color: #624DE3; -fx-text-fill: white; -fx-background-radius: 10;" styleClass="button-add" text="Ajouter Tache" textFill="WHITE">
+            <MFXButton fx:id="add_task_btn" alignment="CENTER" buttonType="RAISED" depthLevel="LEVEL1" onAction="#addTask" rippleAnimateShadow="true" rippleRadius="30.0" style="-fx-background-color: #624DE3; -fx-text-fill: white; -fx-background-radius: 10;" styleClass="button-add" text="Add Task" textFill="WHITE">
                 <padding>
                     <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
                 </padding>

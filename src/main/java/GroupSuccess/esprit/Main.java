@@ -46,7 +46,6 @@ public class Main {
                     p.getStatut() + " | " + p.getDate_debut() + " → " + p.getDate_fin());
         }
 
-
         //  --------🔹🔹🔹🔹🔹🔹🔹🔹-----ProjectTask-----🔹🔹🔹🔹🔹🔹🔹----------
         System.out.println("\n ----------------------- ProjectTask ------------------------:");
 
@@ -59,7 +58,7 @@ public class Main {
                 5);
         // Ajouter une nouvelle tâche
         try {
-            projectTask.create(newTask);
+            ProjectTaskService.create(newTask);
             System.out.println("✅ Tâche ajoutée avec succès.");
         } catch (SQLException e) {
             System.err.println("❌ Erreur lors de l'ajout de la tâche : " + e.getMessage());
@@ -80,27 +79,6 @@ public class Main {
             System.err.println("❌ ID de la tâche invalide.");
         }
 
-// 🔹 Changer le statut d'une tâche
-        int taskIdToChangeStatus = 6;  // Assurez-vous que l'ID existe en base de données
-
-        try {
-            projectTask.changeTaskStatus(taskIdToChangeStatus, ProjectTask.Statut.DONE);
-            System.out.println("✅ Statut de la tâche changé avec succès.");
-        } catch (SQLException e) {
-            System.err.println("❌ Erreur lors du changement de statut : " + e.getMessage());
-        }
-
-// 🔹 Assigner une tâche à un utilisateur
-        int taskIdToAssign = 5;  // Assurez-vous que l'ID existe en base de données
-        int userIdToAssign = 1;  // ID de l'utilisateur à assigner
-
-        try {
-            projectTask.assignTaskToUser(taskIdToAssign, userIdToAssign);
-            System.out.println("✅ Tâche assignée à un utilisateur avec succès.");
-        } catch (SQLException e) {
-            System.err.println("❌ Erreur lors de l'assignation de la tâche : " + e.getMessage());
-        }
-
 // 🔹 Supprimer une tâche
         try {
             projectTask.delete(8);
@@ -116,7 +94,7 @@ public class Main {
                 System.out.println(task);
             }
         } catch (SQLException e) {
-            System.err.println("❌ Erreur lors de la récupération des tâches après suppression : " + e.getMessage());
+            System.err.println(" Erreur lors de la récupération des tâches après suppression : " + e.getMessage());
         }
 
     }

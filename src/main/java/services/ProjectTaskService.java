@@ -11,18 +11,7 @@ public class ProjectTaskService {
 
     static Connection conn = DBconnection.getInstance().getConn();
 
-    public void create(ProjectTask task) throws SQLException {
-        String query = "INSERT INTO project_task (titre, description, date, statut, project_id, user_id) VALUES (?, ?, ?, ?, ?, ?)";
-        PreparedStatement preparedStatement = conn.prepareStatement(query);
-        preparedStatement.setString(1, task.getTitre());
-        preparedStatement.setString(2, task.getDescription());
-        preparedStatement.setDate(3, task.getDate());
-        preparedStatement.setString(4, task.getStatut().toString());
-        preparedStatement.setInt(5, task.getProject_id());
-        preparedStatement.setInt(6, task.getUser_test_id());
-        preparedStatement.executeUpdate();
-    }
-    public static void create2(ProjectTask task) throws SQLException {
+    public static void create(ProjectTask task) throws SQLException {
         String query = "INSERT INTO project_task (titre, description, date, statut, project_id, user_id) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = conn.prepareStatement(query);
         preparedStatement.setString(1, task.getTitre());
@@ -64,7 +53,6 @@ public class ProjectTaskService {
                     resultSet.getInt("user_id")
             ));
         }
-
         return projectTasks;
     }
 
@@ -77,56 +65,11 @@ public class ProjectTaskService {
             int rowsAffected = preparedStatement.executeUpdate();
 
             if (rowsAffected == 0) {
-                System.out.println("⚠️ Aucune tâche trouvée avec l'ID : " + taskId);
+                System.out.println("Aucune tâche trouvée avec l'ID : " + taskId);
             } else {
-                System.out.println("✅ Tâche supprimée avec succès.");
+                System.out.println(" Tache supprimee avec succes.");
             }
         }
-    }
-
-    public void changeTaskStatus(int taskId, ProjectTask.Statut statut) throws SQLException {
-        String query = "UPDATE project_task SET statut = ? WHERE id = ?";
-        PreparedStatement preparedStatement = conn.prepareStatement(query);
-        preparedStatement.setString(1, statut.toString());
-        preparedStatement.setInt(2, taskId);
-        preparedStatement.executeUpdate();
-    }
-
-    public void assignTaskToUser(int taskId, int userId) throws SQLException {
-        String query = "UPDATE project_task SET user_id = ? WHERE id = ?";
-        PreparedStatement preparedStatement = conn.prepareStatement(query);
-        preparedStatement.setInt(1, userId);
-        preparedStatement.setInt(2, taskId);
-        preparedStatement.executeUpdate();
-    }
-
-    public void removeTaskFromUser(int taskId) throws SQLException {
-        String query = "UPDATE project_task SET user_id = NULL WHERE id = ?";
-        PreparedStatement preparedStatement = conn.prepareStatement(query);
-        preparedStatement.setInt(1, taskId);
-        preparedStatement.executeUpdate();
-    }
-
-    public List<ProjectTask> getTasksByProject(int projectId) throws SQLException {
-        List<ProjectTask> tasks = new ArrayList<>();
-
-        String query = "SELECT * FROM project_task WHERE project_id = ?";
-        PreparedStatement preparedStatement = conn.prepareStatement(query);
-        preparedStatement.setInt(1, projectId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        while (resultSet.next()) {
-            tasks.add(new ProjectTask(
-                    resultSet.getInt("id"),
-                    resultSet.getString("titre"),
-                    resultSet.getString("description"),
-                    resultSet.getDate("date"),
-                    ProjectTask.Statut.valueOf(resultSet.getString("statut")),
-                    resultSet.getInt("project_id"),
-                    resultSet.getInt("user_id")
-            ));
-        }
-        return tasks;
     }
 
     public List<ProjectTask> getTasksByUser(int userId) throws SQLException {
@@ -148,7 +91,6 @@ public class ProjectTaskService {
                     resultSet.getInt("user_id")
             ));
         }
-
         return tasks;
     }
 

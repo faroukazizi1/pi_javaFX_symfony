@@ -1,7 +1,6 @@
 package controllers;
 
 import Util.KeyValuePair;
-import Util.Modals;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
@@ -16,10 +15,6 @@ import services.ProjectTaskService;
 import services.UserService;
 
 
-import java.sql.Date;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.List;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -51,11 +46,36 @@ public class AddTask {
     @FXML
     private MFXButton add_task_btn;
 
+    @FXML
+    void onClose() {
+        add_task_btn.getScene().getWindow().hide();
+    }
+    public void onMinimize(MouseEvent mouseEvent) {}
+    public void initialize() throws SQLException {
+        List<User> users = UserService.getAll2();
+        for (User user : users) {
+            user_input.getItems().addAll(new KeyValuePair<>(user.getNom(), user.getId()));
+        }
+    }
+    private void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.show();
+    }
+    private void resetInputsErrors() {
+        titre_error.setText("");
+        description_error.setText("");
+        date_error.setText("");
+        user_error.setText("");
+    }
+
+
 
     @FXML
     void addTask() {
         boolean isError = false;
-
         resetInputsErrors();
 
         if (titre_input.getText().isEmpty()) {
@@ -63,12 +83,16 @@ public class AddTask {
             isError = true;
         }
         if (titre_input.getText().matches("\\d+")) {
-            titre_error.setText("Invalid Input"+ "Project name cannot be only numbers.");
-            return;
+            titre_error.setText("Title cannot be only numbers.");
+            isError = true;
         }
 
         if (description_input.getText().isEmpty()) {
             description_error.setText("Description is required");
+            isError = true;
+        }
+        if (description_input.getText().matches("\\d+")) {
+            description_error.setText("Description cannot be only numbers.");
             isError = true;
         }
 
@@ -86,71 +110,31 @@ public class AddTask {
             user_error.setText("User is required");
             isError = true;
         }
-
-        if (isError) {
+        // If there are validation errors, stop execution
+        if (isError)
             return;
-        }
+
         try {
-            ProjectTaskService.create2(
-                    new ProjectTask(
-                            titre_input.getText(),
-                            description_input.getText(),
-                            Date.valueOf(date_input.getValue()),
-                            ProjectTask.Statut.TODO,
-                            project_id,
-                            user_input.getSelectionModel().getSelectedItem().getActualValue()
+            ProjectTaskService.create(new ProjectTask(
+                    titre_input.getText(),
+                    description_input.getText(),
+                    Date.valueOf(date_input.getValue()),
+                    ProjectTask.Statut.TODO,
+                    project_id,
+                    user_input.getSelectionModel().getSelectedItem().getActualValue()
                     )
             );
             add_task_btn.getScene().getWindow().hide();
-
-            // Display success alert
-            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-            successAlert.setTitle("Success");
-            successAlert.setHeaderText("Task added successfully");
-            successAlert.setContentText("Task has been added successfully.");
-            successAlert.showAndWait();
+            showAlert("Success", "Task added successfully!", Alert.AlertType.INFORMATION);
 
         } catch (Exception e) {
-            // Display error alert
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-            errorAlert.setTitle("Error");
-            errorAlert.setHeaderText("Failed to add task");
-            errorAlert.setContentText("An error occurred while adding the task. Please try again.");
-            errorAlert.showAndWait();
-
             System.err.println(e.getMessage());
+            showAlert("Error", "An error occurred while adding the task: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
-
-
-
-    @FXML
-    void onClose() {
-        add_task_btn.getScene().getWindow().hide();
-    }
     public void setProjectId(int project_id) {
         this.project_id = project_id;
-    }
-
-    public void initialize() throws SQLException {  ;
-        List<User> users = UserService.getAll2();
-
-        for (User user : users) {
-
-            user_input.getItems().addAll(new KeyValuePair<>(user.getNom(), user.getId()));
-        }
-    }
-
-
-    private void resetInputsErrors() {
-        titre_error.setText("");
-        description_error.setText("");
-        date_error.setText("");
-        user_error.setText("");
-    }
-
-    public void onMinimize(MouseEvent mouseEvent) {
     }
 }
 

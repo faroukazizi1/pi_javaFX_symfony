@@ -20,29 +20,29 @@
                     <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
                 </padding>
 
-                <Text text="Modifier Tâche">
+                <Text text="Update Task">
                     <font>
                         <Font name="System Bold" size="35.0" />
                     </font>
                 </Text>
 
                 <VBox spacing="15.0">
-                    <MFXTextField fx:id="titreField" floatingText="Titre de la Tâche" prefHeight="50.0" prefWidth="400.0"/>
+                    <MFXTextField fx:id="titreField" floatingText="Title of Task" prefHeight="50.0" prefWidth="400.0"/>
                     <Label fx:id="titre_task_error" styleClass="label-error" />
 
-                    <MFXTextField fx:id="descriptionField" floatingText="Description" prefHeight="50.0" prefWidth="400.0"/>
+                    <MFXTextField fx:id="descriptionField" floatingText="Description of Task" prefHeight="50.0" prefWidth="400.0"/>
                     <Label fx:id="description_error" styleClass="label-error" />
 
-                    <MFXDatePicker fx:id="dateField" floatingText="Date de la Tâche" floatMode="INLINE" prefHeight="50.0" prefWidth="400.0"/>
+                    <MFXDatePicker fx:id="dateField" floatingText="Date of Task" floatMode="INLINE" prefHeight="50.0" prefWidth="400.0"/>
                     <Label fx:id="datefield_error" styleClass="label-error" />
 
 
-                    <MFXComboBox fx:id="projectComboBox" floatingText="Projet" prefHeight="50.0" prefWidth="400.0"/>
+                    <MFXComboBox fx:id="projectComboBox" floatingText="Project" prefHeight="50.0" prefWidth="400.0"/>
 
-                    <MFXComboBox fx:id="userComboBox" floatingText="Utilisateur" prefHeight="50.0" prefWidth="400.0"/>
+                    <MFXComboBox fx:id="userComboBox" floatingText="User" prefHeight="50.0" prefWidth="400.0"/>
                 </VBox>
 
-                <MFXButton fx:id="updateTaskBtn" text="Mettre à jour la Tâche"
+                <MFXButton fx:id="updateTaskBtn" text="Update Task"
                            buttonType="RAISED" depthLevel="LEVEL1"
                            onAction="#onUpdateTask"
                            rippleAnimateShadow="true" rippleRadius="30.0"

@@ -69,6 +69,8 @@ public class EditProjectController {
         date_debut_projet_error.setText("");
         date_fin_projet_error.setText("");
     }
+
+
     public void editProject(ActionEvent actionEvent) {
         boolean isError = false;
         resetInputsErrors();
@@ -107,6 +109,7 @@ public class EditProjectController {
             }
         }
 
+        // If there are validation errors, stop execution
         if (isError)
             return;
 
