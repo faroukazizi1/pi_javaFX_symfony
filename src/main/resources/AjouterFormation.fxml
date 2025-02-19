@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="gui.AjouterFormation">
+
+    <Label text="Ajouter une Formation" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="txtTitre" promptText="Titre de la formation"/>
+    <TextField fx:id="txtDescription" promptText="Description"/>
+    <DatePicker fx:id="dpDateD" promptText="Date de début"/>
+    <DatePicker fx:id="dpDateF" promptText="Date de fin"/>
+    <TextField fx:id="txtDuree" promptText="Durée (en jours)"/>
+    <TextField fx:id="txtImage" promptText="Image"/>
+    <TextField fx:id="txtIdFormateur" promptText="ID du formateur"/>
+
+    <Button fx:id="btnAjouter" text="Ajouter" onAction="#ajouterFormation"/>
+</VBox>

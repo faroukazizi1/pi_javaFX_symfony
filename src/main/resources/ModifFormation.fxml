@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.ModifFormation" prefHeight="450.0" prefWidth="600.0">
+    <Label text="Modifier Formation" layoutX="220.0" layoutY="20.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+    <Label text="Titre" layoutX="50.0" layoutY="70.0"/>
+    <TextField fx:id="tfTitre" layoutX="200.0" layoutY="70.0"/>
+
+    <Label text="Description" layoutX="50.0" layoutY="110.0"/>
+    <TextField fx:id="tfDescription" layoutX="200.0" layoutY="110.0"/>
+
+    <Label text="Date Début" layoutX="50.0" layoutY="150.0"/>
+    <TextField fx:id="tfDateD" layoutX="200.0" layoutY="150.0" promptText="YYYY-MM-DD"/>
+
+    <Label text="Date Fin" layoutX="50.0" layoutY="190.0"/>
+    <TextField fx:id="tfDateF" layoutX="200.0" layoutY="190.0" promptText="YYYY-MM-DD"/>
+
+    <Label text="Durée" layoutX="50.0" layoutY="230.0"/>
+    <TextField fx:id="tfDuree" layoutX="200.0" layoutY="230.0"/>
+
+    <Label text="Image" layoutX="50.0" layoutY="270.0"/>
+    <TextField fx:id="tfImage" layoutX="200.0" layoutY="270.0"/>
+
+    <Label text="ID Formateur" layoutX="50.0" layoutY="310.0"/>
+    <TextField fx:id="tfIdFormateur" layoutX="200.0" layoutY="310.0"/>
+
+    <Button text="Enregistrer" onAction="#handleSave" layoutX="250.0" layoutY="370.0"/>
+</AnchorPane>

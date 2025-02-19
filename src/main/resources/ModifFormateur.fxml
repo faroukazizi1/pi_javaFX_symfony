@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.ModifFormateur" prefHeight="400.0" prefWidth="600.0">
+    <Label text="Modifier Formateur" layoutX="230.0" layoutY="30.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+    <Label text="Numéro" layoutX="50.0" layoutY="100.0"/>
+    <TextField fx:id="tfNumero" layoutX="150.0" layoutY="100.0"/>
+
+    <Label text="Nom" layoutX="50.0" layoutY="150.0"/>
+    <TextField fx:id="tfNom" layoutX="150.0" layoutY="150.0"/>
+
+    <Label text="Prénom" layoutX="50.0" layoutY="200.0"/>
+    <TextField fx:id="tfPrenom" layoutX="150.0" layoutY="200.0"/>
+
+    <Label text="Email" layoutX="50.0" layoutY="250.0"/>
+    <TextField fx:id="tfEmail" layoutX="150.0" layoutY="250.0"/>
+
+    <Label text="Spécialité" layoutX="50.0" layoutY="300.0"/>
+    <TextField fx:id="tfSpecialite" layoutX="150.0" layoutY="300.0"/>
+
+    <Button text="Enregistrer" onAction="#handleSave" layoutX="250.0" layoutY="350.0"/>
+</AnchorPane>

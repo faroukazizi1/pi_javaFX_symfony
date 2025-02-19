@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.AfficherFormateur" prefHeight="600.0" prefWidth="800.0">
+    <!-- TableView avec ScrollPane -->
+    <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="500.0" prefWidth="760.0">
+        <TableView fx:id="tableFormateurs">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="80"/>
+                <TableColumn fx:id="colNumero" text="Numéro" prefWidth="120"/>
+                <TableColumn fx:id="colNom" text="Nom" prefWidth="150"/>
+                <TableColumn fx:id="colPrenom" text="Prénom" prefWidth="150"/>
+                <TableColumn fx:id="colEmail" text="Email" prefWidth="150"/>
+                <TableColumn fx:id="colSpecialite" text="Spécialité" prefWidth="150"/>
+
+                <!-- Colonne Mettre à jour -->
+                <TableColumn fx:id="colUpdate" text="Mettre à jour" prefWidth="100"/>
+
+                <!-- Colonne Supprimer -->
+                <TableColumn fx:id="colDelete" text="Supprimer" prefWidth="100"/>
+            </columns>
+        </TableView>
+    </ScrollPane>
+
+    <!-- Vous pouvez ajouter d'autres éléments ici si nécessaire -->
+</AnchorPane>
