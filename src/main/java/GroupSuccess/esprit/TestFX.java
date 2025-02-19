@@ -16,6 +16,7 @@ public class TestFX extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
     }
 }
 

@@ -145,6 +145,15 @@ public class ReponseService implements IService<Reponse> {
         }
     }
 
+    public List<Reponse> getPromotionsByUserId(int id){
+        List<Reponse> reponses = new ArrayList<>();
+        return reponses;
+    }
+
+    public boolean authenticateUser(String username, String password){
+        return false;
+    }
+
 
 
 }

@@ -150,5 +150,13 @@ public class PretService implements IService<Pret> {
         return prets.stream().map(Pret::getIdPret).collect(Collectors.toList());
     }
 
+    public List<Pret> getPromotionsByUserId(int id){
+        List<Pret> prets = new ArrayList<>();
+        return prets;
+    }
+
+    public boolean authenticateUser(String username, String password){
+        return false;
+    }
 
 }
