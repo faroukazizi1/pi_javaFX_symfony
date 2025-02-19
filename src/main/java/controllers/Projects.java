@@ -20,7 +20,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.BoxBlur;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -29,10 +28,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Project;
 import models.ProjectTask;
-import models.User;
 import services.ProjectServices;
 import services.ProjectTaskService;
-import services.UserService;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -42,7 +39,7 @@ public class Projects  implements TaskUpdateListener {
     public static final int SCREEN_WIDTH = 1200;
     public static final int SCREEN_HEIGHT = 700;
 
-    UserService userService = new UserService();
+
     @FXML
     private Button Association_Btn, Event_Btn, Logout_Btn, Reclamation_Btn, User_Btn, Document_Btn;
     public Button participate_btn;
@@ -253,13 +250,7 @@ public class Projects  implements TaskUpdateListener {
     }
 
     public void initialize() throws Exception {
-        List<User> users = userService.getAll();
 
-        for (User user : users) {
-
-            user_select.getItems().addAll(new KeyValuePair<>(user.getNom(), user.getId()));
-        }
-        showProjects();
 
     }
     @FXML

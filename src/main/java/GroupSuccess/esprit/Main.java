@@ -14,7 +14,7 @@ import java.util.List;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
+  /*      //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
         // Initialiser la connexion à la base de données
         DBconnection.getInstance();
@@ -96,6 +96,6 @@ public class Main {
         } catch (SQLException e) {
             System.err.println(" Erreur lors de la récupération des tâches après suppression : " + e.getMessage());
         }
-
+*/
     }
 }

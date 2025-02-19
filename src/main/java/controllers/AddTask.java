@@ -10,9 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import models.ProjectTask;
-import models.User;
 import services.ProjectTaskService;
-import services.UserService;
 
 
 import java.sql.Date;
@@ -52,10 +50,7 @@ public class AddTask {
     }
     public void onMinimize(MouseEvent mouseEvent) {}
     public void initialize() throws SQLException {
-        List<User> users = UserService.getAll2();
-        for (User user : users) {
-            user_input.getItems().addAll(new KeyValuePair<>(user.getNom(), user.getId()));
-        }
+
     }
     private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);

@@ -9,13 +9,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Project;
 import models.ProjectTask;
-import models.User;
 import services.ProjectServices;
 import services.ProjectTaskService;
-import services.UserService;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 public class UpdateTaskController {
@@ -39,7 +36,7 @@ public class UpdateTaskController {
     @FXML private MFXComboBox<String> userComboBox;
 
     private ProjectServices x = new ProjectServices();
-    private UserService y = new UserService();
+
 
 
     private ProjectTask selectedTask;
@@ -54,8 +51,7 @@ public class UpdateTaskController {
 
         Project project = x.getProjectById(task.getProject_id());
         projectComboBox.selectItem(project.getTitre());
-        User user = y.getUserById(task.getUser_test_id());
-        userComboBox.selectItem(user.getNom());
+
     }
 
     private void resetInputsErrors() {
@@ -109,7 +105,7 @@ public class UpdateTaskController {
                 selectedTask.setDescription(descriptionField.getText());
                 selectedTask.setDate(java.sql.Date.valueOf(dateField.getValue())); // Convert LocalDate to java.sql.Date
                 selectedTask.setProject_id(x.getProjectIdByTitre(projectComboBox.getValue()));
-                selectedTask.setUser_test_id(y.getUserIdByName(userComboBox.getValue()));
+
 
                 // Update the task in the database
                 ProjectTaskService taskService = new ProjectTaskService();
@@ -146,11 +142,6 @@ public class UpdateTaskController {
         for (Project project : projectNames) {
             projectComboBox.getItems().add(project.getTitre()); // Add project titles to the combo box
         }
-        List<User> users = y.getAll(); // Get all users
-        for (User user : users) {
-            userComboBox.getItems().add(user.getNom()); // Add user names to the combo box
-        }
-
     }
 
     public void onClose(MouseEvent mouseEvent) {
