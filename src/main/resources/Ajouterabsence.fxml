@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<TabPane prefHeight="400.0" prefWidth="600.0" stylesheets="style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+
+   <!-- Onglet Ajouter une Absence -->
+   <Tab text="Ajouter une Absence">
+      <AnchorPane>
+         <children>
+            <!-- Logo en haut à droite -->
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="520.0" layoutY="10.0">
+               <image>
+                  <Image url="java-logo.png" />
+               </image>
+            </ImageView>
+
+            <Label layoutX="82.0" layoutY="112.0" text="DATE" />
+            <Label layoutX="82.0" layoutY="162.0" text="NOMBRE D'ABSENCE" />
+            <Label layoutX="82.0" layoutY="202.0" text="TYPE" />
+            <DatePicker fx:id="datePickerAdd" layoutX="220.0" layoutY="109.0" />
+            <TextField fx:id="nbrAbsFieldAdd" layoutX="220.0" layoutY="158.0" />
+            <ComboBox fx:id="typeComboBoxAdd" layoutX="220.0" layoutY="198.0" prefHeight="26.0" prefWidth="153.0" />
+            <Button fx:id="addButton" layoutX="229.0" layoutY="269.0" onAction="#handleAddAbsence" prefHeight="26.0" prefWidth="124.0" text="AJOUTER" />
+         </children>
+      </AnchorPane>
+   </Tab>
+
+   <!-- Onglet Mise à jour -->
+   <Tab text="Mise à jour">
+      <AnchorPane>
+         <children>
+            <!-- Logo en haut à droite -->
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="520.0" layoutY="10.0">
+               <image>
+                  <Image url="java-logo.png" />
+               </image>
+            </ImageView>
+
+            <Label layoutX="76.0" layoutY="79.0" text="ID" />
+            <Label layoutX="81.0" layoutY="120.0" text="DATE" />
+            <Label layoutX="82.0" layoutY="162.0" text="NOMBRE D'ABSENCE" />
+            <Label layoutX="82.0" layoutY="202.0" text="TYPE" />
+            <TextField fx:id="nbrAbsFieldUpdate" layoutX="239.0" layoutY="75.0" />
+            <TextField fx:id="nbrAbsFieldUpdateValue" layoutX="233.0" layoutY="157.0" prefHeight="26.0" prefWidth="162.0" />
+            <ComboBox fx:id="typeComboBoxUpdate" layoutX="229.0" layoutY="198.0" prefHeight="26.0" prefWidth="160.0" />
+            <DatePicker fx:id="datePickerUpdate" layoutX="234.0" layoutY="116.0" prefHeight="26.0" prefWidth="161.0" />
+            <Button fx:id="updateButton" layoutX="229.0" layoutY="269.0" onAction="#handleUpdateAbsence" text="METTRE À JOUR" />
+         </children>
+      </AnchorPane>
+   </Tab>
+
+   <!-- Onglet Suppression -->
+   <Tab text="Suppression">
+      <AnchorPane>
+         <children>
+            <!-- Logo en haut à droite -->
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="520.0" layoutY="10.0">
+               <image>
+                  <Image url="java-logo.png" />
+               </image>
+            </ImageView>
+
+            <Label layoutX="82.0" layoutY="112.0" text="ID" />
+            <TextField fx:id="nbrAbsFieldDelete" layoutX="220.0" layoutY="75.0" />
+            <Button fx:id="deleteButton" layoutX="229.0" layoutY="169.0" onAction="#handleDeleteAbsence" text="SUPPRIMER" />
+         </children>
+      </AnchorPane>
+   </Tab>
+
+   <!-- Onglet Voir les Absences -->
+   <Tab text="Voir les Absences">
+      <AnchorPane prefHeight="428.0" prefWidth="654.0">
+         <children>
+            <!-- Logo en haut à droite -->
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="520.0" layoutY="10.0">
+               <image>
+                  <Image url="java-logo.png" />
+               </image>
+            </ImageView>
+
+            <!-- GridView pour afficher les absences -->
+            <GridPane fx:id="absenceGridView" hgap="10" layoutX="30.0" layoutY="9.0" prefHeight="298.0" prefWidth="540.0" vgap="10">
+               <!-- Titres des colonnes -->
+               <Label text="ID" GridPane.columnIndex="0" />
+               <Label text="Date" GridPane.columnIndex="1" />
+               <Label text="Nombre d'absences" GridPane.columnIndex="2" />
+               <Label text="Type" GridPane.columnIndex="3" />
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
+            </GridPane>
+
+            <!-- Bouton pour voir les absences -->
+            <Button layoutX="30.0" layoutY="311.0" onAction="#handleViewAbsences" prefHeight="37.0" prefWidth="235.0" text="VOIR LES ABSENCES" />
+            <Button layoutX="420.0" layoutY="313.0" onAction="#handleNavigateToPenalites" prefHeight="24.0" prefWidth="178.0" text="Consulter les Pénalités" />
+         </children>
+      </AnchorPane>
+   </Tab>
+</TabPane>

@@ -105,3 +105,13 @@
 .layoutY {
     -fx-layout-y: 10px;
 }
+
+/*logo*/
+.logo {
+    -fx-background-image: url("java-logo.png");
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-min-width: 150px;
+    -fx-min-height: 150px;
+}
