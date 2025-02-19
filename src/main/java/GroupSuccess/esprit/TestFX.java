@@ -24,7 +24,7 @@ public class TestFX extends Application {
             Parent root = loader.load();
             Scene scene = new Scene(root);
 
-            primaryStage.setTitle("Gestion Absence");
+            primaryStage.setTitle("Gestion Absences&Penalités");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
