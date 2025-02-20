@@ -2,6 +2,8 @@ package Service;
 
 import Util.DBconnection;
 import models.absence;
+import models.penalite;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +94,21 @@ public class absenceService implements IService<absence> {
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la suppression : " + e.getMessage());
+        }
+    }
+    // Exemple de méthode pour associer une pénalité à une absence
+    public void applyPenaliteToAbsence(int absenceId, penalite penalite) {
+        // Logique pour mettre à jour l'absence et lui associer la pénalité.
+        // Cela pourrait signifier une mise à jour dans la base de données ou une modification de l'état de l'absence.
+
+        // Si tu utilises une base de données, voici un exemple de mise à jour :
+        String sql = "UPDATE absences SET penalite_id = ? WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, penalite.getId_pen());  // ID de la pénalité
+            stmt.setInt(2, absenceId);             // ID de l'absence
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -25,11 +25,12 @@ public class penaliteService implements IService<penalite> {
 
     @Override
     public void add(penalite penalite) {
-        String SQL = "INSERT INTO penalite (type, seuil_abs) VALUES (?, ?)";
+        String SQL = "INSERT INTO penalite (type, seuil_abs, id_absence) VALUES (?, ?, ?)";
 
         try (PreparedStatement pstmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, penalite.getType());
             pstmt.setInt(2, penalite.getSeuil_abs());
+            pstmt.setInt(3, penalite.getId_absence()); // Ajout de l'id de l'absence
 
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted > 0) {
@@ -48,18 +49,20 @@ public class penaliteService implements IService<penalite> {
         }
     }
 
+
     @Override
     public void update(penalite penalite) {
         if (conn == null) {
             System.out.println(" Connexion non disponible !");
             return;
         }
-        String SQL = "UPDATE penalite SET type = ?, seuil_abs = ? WHERE id_pen = ?";
+        String SQL = "UPDATE penalite SET type = ?, seuil_abs = ?, id_absence = ? WHERE id_pen = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
             pstmt.setString(1, penalite.getType());
             pstmt.setInt(2, penalite.getSeuil_abs());
-            pstmt.setInt(3, penalite.getId_pen());
+            pstmt.setInt(3, penalite.getId_absence());
+            pstmt.setInt(4, penalite.getId_pen());
 
             int rowsUpdated = pstmt.executeUpdate();
             if (rowsUpdated > 0) {
@@ -88,8 +91,9 @@ public class penaliteService implements IService<penalite> {
                 int id_pen = rs.getInt("id_pen");
                 String type = rs.getString("type");
                 int seuil_abs = rs.getInt("seuil_abs");
+                int id_absence = rs.getInt("id_absence");
 
-                penalite pen = new penalite(id_pen, type, seuil_abs);
+                penalite pen = new penalite(id_pen, type, seuil_abs, id_absence);
                 penalites.add(pen);
             }
         } catch (SQLException e) {
@@ -120,4 +124,5 @@ public class penaliteService implements IService<penalite> {
             e.printStackTrace();
         }
     }
+
 }
