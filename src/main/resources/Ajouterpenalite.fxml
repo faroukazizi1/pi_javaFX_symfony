@@ -6,16 +6,26 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
 <TabPane stylesheets="style.css" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PenaliteController">
+
     <!-- Onglet Ajouter -->
     <Tab text="Ajouter">
         <AnchorPane>
             <children>
+                <!-- Logo en haut à droite -->
+                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="520.0" layoutY="10.0">
+                    <image>
+                        <Image url="java-logo.png" />
+                    </image>
+                </ImageView>
+
                 <Label layoutX="82.0" layoutY="112.0" text="TYPE" />
                 <Label layoutX="82.0" layoutY="162.0" text="SEUIL" />
                 <ComboBox fx:id="typeComboBoxAdd" layoutX="220.0" layoutY="109.0" />
@@ -29,6 +39,13 @@
     <Tab text="Mise à jour">
         <AnchorPane>
             <children>
+                <!-- Logo en haut à droite -->
+                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="520.0" layoutY="10.0">
+                    <image>
+                        <Image url="java-logo.png" />
+                    </image>
+                </ImageView>
+
                 <Label layoutX="82.0" layoutY="112.0" text="ID" />
                 <Label layoutX="82.0" layoutY="162.0" text="SEUIL" />
                 <Label layoutX="82.0" layoutY="202.0" text="TYPE" />
@@ -44,6 +61,13 @@
     <Tab text="Suppression">
         <AnchorPane>
             <children>
+                <!-- Logo en haut à droite -->
+                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="520.0" layoutY="10.0">
+                    <image>
+                        <Image url="java-logo.png" />
+                    </image>
+                </ImageView>
+
                 <Label layoutX="82.0" layoutY="112.0" text="ID" />
                 <TextField fx:id="idFieldDelete" layoutX="220.0" layoutY="75.0" />
                 <Button fx:id="deleteButton" layoutX="229.0" layoutY="239.0" onAction="#handleDeletePenalite" text="SUPPRIMER" />
@@ -55,20 +79,27 @@
     <Tab text="Voir les Pénalités">
         <AnchorPane prefHeight="428.0" prefWidth="654.0">
             <children>
+                <!-- Logo en haut à droite -->
+                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="520.0" layoutY="10.0">
+                    <image>
+                        <Image url="java-logo.png" />
+                    </image>
+                </ImageView>
+
                 <!-- GridView pour afficher les pénalités -->
                 <GridPane fx:id="penaliteGridView" hgap="10" layoutX="30.0" layoutY="9.0" prefHeight="298.0" prefWidth="540.0" vgap="10">
                     <!-- Titres des colonnes -->
                     <Label text="ID" GridPane.columnIndex="0" />
                     <Label text="Type" GridPane.columnIndex="1" />
                     <Label text="Seuil" GridPane.columnIndex="2" />
-               <columnConstraints>
-                  <ColumnConstraints />
-                  <ColumnConstraints />
-                  <ColumnConstraints />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints />
-               </rowConstraints>
+                    <columnConstraints>
+                        <ColumnConstraints />
+                        <ColumnConstraints />
+                        <ColumnConstraints />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints />
+                    </rowConstraints>
                 </GridPane>
 
                 <!-- Bouton pour voir les pénalités -->

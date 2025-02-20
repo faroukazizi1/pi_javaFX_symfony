@@ -121,4 +121,3 @@ public class penaliteService implements IService<penalite> {
         }
     }
 }
-
