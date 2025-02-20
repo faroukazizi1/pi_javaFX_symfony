@@ -15,32 +15,25 @@ import services.ProjectTaskService;
 import services.UserService;
 
 import java.sql.SQLException;
-import java.util.Date;
+//import java.util.Date;
 import java.util.List;
 
 public class UpdateTaskController {
 
-    @FXML
-    private TextField titreField;
-    @FXML
-    private Label titre_task_error;
+    @FXML private TextField titreField;
+    @FXML private Label titre_task_error;
 
-    @FXML
-    private MFXTextField descriptionField;
-    @FXML
-    private Label description_error;
+    @FXML private MFXTextField descriptionField;
+    @FXML private Label description_error;
 
-    @FXML
-    private MFXDatePicker dateField;
-    @FXML
-    private Label datefield_error;
+    @FXML private MFXDatePicker dateField;
+    @FXML private Label datefield_error;
 
     @FXML private MFXComboBox<String> projectComboBox;
     @FXML private MFXComboBox<String> userComboBox;
 
-    private ProjectServices x = new ProjectServices();
-    private UserService y = new UserService();
-
+    private final ProjectServices x = new ProjectServices();
+    private final UserService y = new UserService();
 
     private ProjectTask selectedTask;
 
@@ -148,11 +141,9 @@ public class UpdateTaskController {
         }
         List<User> users = y.getAll(); // Get all users
         for (User user : users) {
-            userComboBox.getItems().add(user.getNom()); // Add user names to the combo box
+            userComboBox.getItems().add(user.getNom()); // Add user_names to the combo box
         }
-
     }
-
     public void onClose(MouseEvent mouseEvent) {
     }
 }

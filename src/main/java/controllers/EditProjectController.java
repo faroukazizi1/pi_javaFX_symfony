@@ -17,28 +17,19 @@ public class EditProjectController {
     ProjectServices projectService = new ProjectServices();
     private Project selectedProject = null;
 
-    @FXML
-    private MFXTextField nom_projet;
-    @FXML
-    private Label nom_projet_error;
+    @FXML private MFXTextField nom_projet;
+    @FXML private Label nom_projet_error;
 
-    @FXML
-    private MFXTextField description_projet;
-    @FXML
-    private Label description_projet_error;
+    @FXML private MFXTextField description_projet;
+    @FXML private Label description_projet_error;
 
-    @FXML
-    private MFXDatePicker date_debut_projet;
-    @FXML
-    private Label date_debut_projet_error;
+    @FXML private MFXDatePicker date_debut_projet;
+    @FXML private Label date_debut_projet_error;
 
-    @FXML
-    private MFXDatePicker date_fin_projet;
-    @FXML
-    private Label date_fin_projet_error;
+    @FXML private MFXDatePicker date_fin_projet;
+    @FXML private Label date_fin_projet_error;
 
-    @FXML
-    public MFXButton edit_project_btn;
+    @FXML public MFXButton edit_project_btn;
 
     public void onClose() { edit_project_btn.getScene().getWindow().hide(); }
     public void onMinimize() {}
@@ -133,10 +124,7 @@ public class EditProjectController {
             // Show error alert
             showAlert("Error", "An error occurred while updating the project: " + e.getMessage(), Alert.AlertType.ERROR);
         }
-
         edit_project_btn.getScene().getWindow().hide();
     }
-
-
 }
 

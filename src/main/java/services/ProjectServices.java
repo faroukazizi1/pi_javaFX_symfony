@@ -16,16 +16,6 @@ public class ProjectServices implements IService<Project> {
     static Connection conn = DBconnection.getInstance().getConn();
 
 
-    // 1ére methode Insert(Statement)/ N'est pas Protège contre les injections SQL/ Rapide mais non sécurisé	/ Moins lisible
-   /* @Override
-    public void add(Project project) {
-        String SQL = "INSERT INTO `project`(`titre`, `description`, `statut`, `date_debut`, `date_fin`) VALUES ('"+project.getTitre()+"','"+project.getDescription()+"','"+project.getStatut()+"','"+project.getDate_debut()+"','"+project.getDate_fin()+"')";
-        try { Statement stmt = conn.createStatement();
-              stmt.executeUpdate(SQL);
-              System.out.println("Project added");
-            } catch (SQLException e) { System.out.println(e.getMessage()); } } */
-
-    /* 2éme methode
     // ✅ Ajouter un projet (PreparedStatement)/ Protège contre les injections SQL	/ Légèrement plus lent / Plus propre et lisible*/
     @Override
     public void add(Project project) {

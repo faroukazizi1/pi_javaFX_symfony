@@ -16,28 +16,19 @@ public class AddProject {
 
     ProjectServices projectService = new ProjectServices();
 
-    @FXML
-    private MFXTextField nom_projet;
-    @FXML
-    private Label nom_projet_error;
+    @FXML private MFXTextField nom_projet;
+    @FXML private Label nom_projet_error;
 
-    @FXML
-    private MFXTextField description_projet;
-    @FXML
-    private Label description_projet_error;
+    @FXML private MFXTextField description_projet;
+    @FXML private Label description_projet_error;
 
-    @FXML
-    private MFXDatePicker date_debut_projet;
-    @FXML
-    private Label date_debut_projet_error;
+    @FXML private MFXDatePicker date_debut_projet;
+    @FXML private Label date_debut_projet_error;
 
-    @FXML
-    private MFXDatePicker date_fin_projet;
-    @FXML
-    private Label date_fin_projet_error;
+    @FXML private MFXDatePicker date_fin_projet;
+    @FXML private Label date_fin_projet_error;
 
-    @FXML
-    public MFXButton add_project_btn;
+    @FXML public MFXButton add_project_btn;
 
     public void onClose() {
         add_project_btn.getScene().getWindow().hide();

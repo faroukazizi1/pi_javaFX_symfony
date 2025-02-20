@@ -20,7 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.BoxBlur;
-import javafx.scene.input.MouseEvent;
+//import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -44,7 +44,7 @@ public class Projects  implements TaskUpdateListener {
 
     UserService userService = new UserService();
     @FXML
-    private Button Association_Btn, Event_Btn, Logout_Btn, Reclamation_Btn, User_Btn, Document_Btn;
+    private Button Event_Btn, Logout_Btn, Reclamation_Btn, User_Btn, Document_Btn;
     public Button participate_btn;
     public Button tasks_btn;
     ProjectServices projectService = new ProjectServices();
@@ -54,34 +54,23 @@ public class Projects  implements TaskUpdateListener {
     //UserService userService = new UserService();
     Project selectedProject = null;
 
-    @FXML
-    private MFXScrollPane done_tasks;
+    @FXML private MFXScrollPane todo_tasks;
 
-    @FXML
-    private MFXScrollPane inprogress_tasks;
+    @FXML private MFXScrollPane done_tasks;
 
-    @FXML
-    private MFXScrollPane todo_tasks;
+    @FXML private MFXScrollPane inprogress_tasks;
 
-    @FXML
-    private TableView<Project> Projects_Table;
+    @FXML private TableView<Project> Projects_Table;
 
+    @FXML private TableColumn<Project, Date> date_debut_col, date_fin_col;
 
+    @FXML private TableColumn<Project, String> title_col, description_col, statut_col;
 
-    @FXML
-    private TableColumn<Project, Date> date_debut_col, date_fin_col;
+    @FXML private Text numOfProjects, numOfActiveProjects, numOfInactiveProjects, statut_txt;
 
-    @FXML
-    private TableColumn<Project, String> title_col, description_col, statut_col;
+    @FXML private Button Home_Btn, statut_btn;
 
-    @FXML
-    private Text numOfProjects, numOfActiveProjects, numOfInactiveProjects, statut_txt;
-
-    @FXML
-    private Button Home_Btn, statut_btn;
-
-    @FXML
-    private MFXComboBox<KeyValuePair<Integer>> user_select;
+    @FXML private MFXComboBox<KeyValuePair<Integer>> user_select;
 
     String userRole;
     public void onHomeButtonClick(ActionEvent actionEvent) {
@@ -97,9 +86,6 @@ public class Projects  implements TaskUpdateListener {
     }
 
     public void onEventButtonClick(ActionEvent actionEvent) {
-    }
-
-    public void onAssociationButtonClick(ActionEvent actionEvent) {
     }
 
     public void onLogoutButtonClick(ActionEvent actionEvent) {
@@ -254,9 +240,7 @@ public class Projects  implements TaskUpdateListener {
 
     public void initialize() throws Exception {
         List<User> users = userService.getAll();
-
         for (User user : users) {
-
             user_select.getItems().addAll(new KeyValuePair<>(user.getNom(), user.getId()));
         }
         showProjects();

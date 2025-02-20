@@ -23,21 +23,15 @@ public class Taskmanager {
     @FXML
 private TableView<ProjectTask> taskTable;
 
-    @FXML
-    private TableColumn<ProjectTask, Integer> idColumn;
-    @FXML
-    private TableColumn<ProjectTask, String> titreColumn;
-    @FXML
-    private TableColumn<ProjectTask, String> descriptionColumn;
-    @FXML
-    private TableColumn<ProjectTask, String> dateColumn;
-    @FXML
-    private TableColumn<ProjectTask, String> statutColumn;
+    @FXML private TableColumn<ProjectTask, Integer> idColumn;
+    @FXML private TableColumn<ProjectTask, String> titreColumn;
+    @FXML private TableColumn<ProjectTask, String> descriptionColumn;
+    @FXML private TableColumn<ProjectTask, String> dateColumn;
+    @FXML private TableColumn<ProjectTask, String> statutColumn;
 
-    @FXML
-    private AnchorPane taskPane;
+    @FXML private AnchorPane taskPane;
 
-    private ProjectTaskService taskService = new ProjectTaskService();
+    private final ProjectTaskService taskService = new ProjectTaskService();
 
     @FXML
     public void onOpenTask() {
@@ -129,8 +123,7 @@ private TableView<ProjectTask> taskTable;
         taskTable.getItems().addAll(tasks);
     }
 
-    public void showTasks(ActionEvent event) {
-    }
+
     public void initialize(){
         List<ProjectTask> tasks = null;
         try {
@@ -139,7 +132,5 @@ private TableView<ProjectTask> taskTable;
             throw new RuntimeException(e);
         }
         populateTable(tasks);
-
-
     }
 }

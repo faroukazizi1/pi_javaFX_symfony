@@ -23,28 +23,19 @@ import java.util.List;
 public class AddTask {
     private int project_id;
 
-    @FXML
-    private MFXComboBox<KeyValuePair<Integer>> user_input;
-    @FXML
-    private Label user_error;
+    @FXML private MFXComboBox<KeyValuePair<Integer>> user_input;
+    @FXML private Label user_error;
 
-    @FXML
-    private MFXTextField titre_input;
-    @FXML
-    private Label titre_error;
+    @FXML private MFXTextField titre_input;
+    @FXML private Label titre_error;
 
-    @FXML
-    private MFXTextField description_input;
-    @FXML
-    private Label description_error;
+    @FXML private MFXTextField description_input;
+    @FXML private Label description_error;
 
-    @FXML
-    private MFXDatePicker date_input;
-    @FXML
-    private Label date_error;
+    @FXML private MFXDatePicker date_input;
+    @FXML private Label date_error;
 
-    @FXML
-    private MFXButton add_task_btn;
+    @FXML private MFXButton add_task_btn;
 
     @FXML
     void onClose() {
