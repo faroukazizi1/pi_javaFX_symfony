@@ -1,6 +1,6 @@
 /* Style général de l'application */
 .tab-pane {
-    -fx-background-color: #f0f0f0; /* Fond gris clair */
+    -fx-background-color: #E0F2FF; /* Bleu très clair */
     -fx-font-family: Arial, sans-serif;
 }
 
@@ -58,7 +58,6 @@
     -fx-padding: 10px 30px;
     -fx-border-radius: 15px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0.0, 2, 2);
-
 }
 
 /* Style des boutons lorsqu'ils sont survolés */
@@ -82,7 +81,7 @@
 
 /* Style du fond de la fenêtre */
 .anchor-pane {
-    -fx-background-color: #f0f0f0; /* Fond gris clair */
+    -fx-background-color: #E0F2FF; /* Bleu très clair */
     -fx-padding: 20px;
 }
 
@@ -107,3 +106,12 @@
     -fx-layout-y: 10px;
 }
 
+/*logo*/
+.logo {
+    -fx-background-image: url("java-logo.png");
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-min-width: 150px;
+    -fx-min-height: 150px;
+}
