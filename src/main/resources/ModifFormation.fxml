@@ -1,58 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.geometry.Pos?>
-
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="gui.ModifFormation"
-            prefHeight="500.0" prefWidth="600.0"
-            style="-fx-background-color: linear-gradient(to bottom, #2196F3, #64B5F6);">
+<?import javafx.scene.layout.VBox?>
 
-    <!-- Titre -->
-    <Label text="Modifier Formation" layoutX="160.0" layoutY="30.0"
-           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ModifFormation">
 
-    <!-- Formulaire -->
-    <VBox spacing="15" layoutX="100.0" layoutY="80.0" prefWidth="400.0">
-        <HBox>
-            <Label text="Titre" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
-            <TextField fx:id="tfTitre" promptText="Entrez le titre" style="-fx-background-color: white; -fx-border-radius: 5;"/>
-        </HBox>
-
-        <HBox>
-            <Label text="Description" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
-            <TextField fx:id="tfDescription" promptText="Entrez la description" style="-fx-background-color: white; -fx-border-radius: 5;"/>
-        </HBox>
-
-        <HBox>
-            <Label text="Date Début" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
-            <TextField fx:id="tfDateD" promptText="YYYY-MM-DD" style="-fx-background-color: white; -fx-border-radius: 5;"/>
-        </HBox>
-
-        <HBox>
-            <Label text="Date Fin" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
-            <TextField fx:id="tfDateF" promptText="YYYY-MM-DD" style="-fx-background-color: white; -fx-border-radius: 5;"/>
-        </HBox>
-
-        <HBox>
-            <Label text="Durée" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
-            <TextField fx:id="tfDuree" promptText="Entrez la durée" style="-fx-background-color: white; -fx-border-radius: 5;"/>
-        </HBox>
-
-        <HBox>
-            <Label text="Image" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
-            <TextField fx:id="tfImage" promptText="Entrez l'image" style="-fx-background-color: white; -fx-border-radius: 5;"/>
-        </HBox>
-
-        <HBox>
-            <Label text="ID Formateur" style="-fx-font-size: 14px; -fx-text-fill: white;"/>
-            <TextField fx:id="tfIdFormateur" promptText="Entrez l'ID formateur" style="-fx-background-color: white; -fx-border-radius: 5;"/>
-        </HBox>
-
-        <!-- Bouton Enregistrer -->
-        <Button text="Enregistrer" onAction="#handleSave" layoutX="200.0" layoutY="370.0"
-                style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5;"/>
+    <!-- Sidebar -->
+    <VBox fx:id="sidebar" alignment="CENTER" prefHeight="500" prefWidth="250" styleClass="sidebar">
+        <Button styleClass="sidebar-link" text="Accueil" />
+        <Button styleClass="sidebar-link-active" text="Formations" />
+        <Button styleClass="sidebar-link" text="Formateurs" />
+        <Button styleClass="sidebar-logout" text="Déconnexion" />
     </VBox>
+
+    <!-- Contenu principal -->
+    <VBox layoutX="267.0" layoutY="50.0" prefHeight="292.0" prefWidth="503.0" spacing="20" styleClass="body">
+        <!-- Titre -->
+        <Label alignment="CENTER" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #0C162C;" text="Modifier Formation" textAlignment="CENTER" />
+
+        <!-- Formulaire -->
+        <VBox alignment="CENTER" spacing="15">
+            <HBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="Titre" />
+                <TextField fx:id="tfTitre" promptText="Entrez le titre" styleClass="card" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="Description" />
+                <TextField fx:id="tfDescription" promptText="Entrez la description" styleClass="card" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="Date Début" />
+                <TextField fx:id="tfDateD" promptText="YYYY-MM-DD" styleClass="card" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="Date Fin" />
+                <TextField fx:id="tfDateF" promptText="YYYY-MM-DD" styleClass="card" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="Durée" />
+                <TextField fx:id="tfDuree" promptText="Entrez la durée" styleClass="card" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="Image" />
+                <TextField fx:id="tfImage" promptText="Entrez l'image" styleClass="card" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="ID Formateur" />
+                <TextField fx:id="tfIdFormateur" promptText="Entrez l'ID formateur" styleClass="card" />
+            </HBox>
+
+            <!-- Boutons -->
+            <HBox alignment="CENTER" spacing="20">
+                <Button onAction="#handleSave" styleClass="button-add" text="Enregistrer" />
+                <Button onAction="#handleRetour" styleClass="button-delete" text="Retour" />
+            </HBox>
+        </VBox>
+    </VBox>
+
 </AnchorPane>

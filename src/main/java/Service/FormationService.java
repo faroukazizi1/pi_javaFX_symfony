@@ -66,13 +66,34 @@ public class FormationService implements IService<Formation>  {
     @Override
     public List<Formation> getAll() {
         String req = "SELECT * FROM `formation`";
-        ArrayList<Formation> formation = new ArrayList<>();
+        ArrayList<Formation> formations = new ArrayList<>();
         Statement stm;
         try {
             stm = this.conn.createStatement();
-
-
             ResultSet rs = stm.executeQuery(req);
+            while (rs.next()) {
+                Formation f = new Formation();
+                f.setId_form(rs.getInt("id_form"));
+                f.setTitre(rs.getString("Titre"));
+                f.setDescription(rs.getString("Description"));
+                f.setDate_D(rs.getDate("Date_D"));
+                f.setDate_F(rs.getDate("Date_F"));
+                f.setDuree(rs.getInt("Duree")); // Correctement liée à la durée
+                f.setImage(rs.getString("Image"));
+                f.setId_Formateur(rs.getInt("id_Formateur"));
+                formations.add(f);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return formations;
+    }
+    public List<Formation> searchByTitle(String title) {
+        String req = "SELECT * FROM formation WHERE Titre LIKE ?";
+        List<Formation> formations = new ArrayList<>();
+        try (PreparedStatement pst = conn.prepareStatement(req)) {
+            pst.setString(1, "%" + title + "%");  // Requête insensible à la casse
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Formation f = new Formation();
                 f.setId_form(rs.getInt("id_form"));
@@ -82,18 +103,14 @@ public class FormationService implements IService<Formation>  {
                 f.setDate_F(rs.getDate("Date_F"));
                 f.setDuree(rs.getInt("Duree"));
                 f.setImage(rs.getString("Image"));
-                f.setDuree(rs.getInt("id_Formateur"));
-
-
-                formation.add(f);
+                f.setId_Formateur(rs.getInt("id_Formateur"));
+                formations.add(f);
             }
-
-
-        } catch (SQLException ex) {
-
-            System.out.println(ex.getMessage());
-
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return formation;
+        return formations;
     }
+
+
 }

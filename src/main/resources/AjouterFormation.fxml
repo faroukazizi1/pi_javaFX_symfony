@@ -1,29 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
-<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="gui.AjouterFormation"
-      style="-fx-background-color: #E3F2FD; -fx-padding: 20px; -fx-pref-width: 450px; -fx-pref-height: 500px;">
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="gui.AjouterFormation"
+            prefHeight="500.0" prefWidth="800.0"
+            stylesheets="@style.css">
 
-    <Label text="Ajouter une Formation"
-           style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
+    <!-- Sidebar -->
+    <VBox fx:id="sidebar" alignment="CENTER" prefHeight="500" prefWidth="250" styleClass="sidebar">
+        <Button styleClass="sidebar-link" text="Accueil" />
+        <Button styleClass="sidebar-link-active" text="Formations" />
+        <Button styleClass="sidebar-link" text="Formateurs" />
+        <Button styleClass="sidebar-logout" text="Déconnexion" />
+    </VBox>
 
-    <TextField fx:id="txtTitre" promptText="Titre de la formation" style="-fx-font-size: 14px;"/>
-    <TextField fx:id="txtDescription" promptText="Description" style="-fx-font-size: 14px;"/>
-    <DatePicker fx:id="dpDateD" promptText="Date de début" style="-fx-font-size: 14px;"/>
-    <DatePicker fx:id="dpDateF" promptText="Date de fin" style="-fx-font-size: 14px;"/>
-    <TextField fx:id="txtDuree" promptText="Durée (en jours)" style="-fx-font-size: 14px;"/>
-    <TextField fx:id="txtImage" promptText="Image" style="-fx-font-size: 14px;"/>
-    <TextField fx:id="txtIdFormateur" promptText="ID du formateur" style="-fx-font-size: 14px;"/>
+    <!-- Contenu principal -->
+    <VBox layoutX="267.0" layoutY="50.0" prefHeight="400.0" prefWidth="503.0" spacing="20" styleClass="body">
+        <!-- Titre -->
+        <Label alignment="CENTER" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #0C162C;" text="Ajouter une Formation" textAlignment="CENTER" />
 
-    <Button fx:id="btnAjouter" text="Ajouter"
-            style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8px 16px;"
-            onAction="#ajouterFormation"/>
-</VBox>
+        <!-- Formulaire -->
+        <VBox spacing="15">
+            <HBox spacing="10">
+                <Label text="Titre" styleClass="label-form"/>
+                <TextField fx:id="txtTitre" promptText="Titre de la formation" styleClass="input-field"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Description" styleClass="label-form"/>
+                <TextField fx:id="txtDescription" promptText="Description" styleClass="input-field"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Date Début" styleClass="label-form"/>
+                <DatePicker fx:id="dpDateD" promptText="YYYY-MM-DD" styleClass="input-field"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Date Fin" styleClass="label-form"/>
+                <DatePicker fx:id="dpDateF" promptText="YYYY-MM-DD" styleClass="input-field"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Durée" styleClass="label-form"/>
+                <TextField fx:id="txtDuree" promptText="Durée (en jours)" styleClass="input-field"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Image" styleClass="label-form"/>
+                <TextField fx:id="txtImage" promptText="Image" styleClass="input-field"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="ID Formateur" styleClass="label-form"/>
+                <TextField fx:id="txtIdFormateur" promptText="ID du formateur" styleClass="input-field"/>
+            </HBox>
+
+            <!-- Boutons -->
+            <HBox alignment="CENTER" spacing="20">
+                <Button fx:id="btnAjouter" text="Ajouter" onAction="#ajouterFormation" styleClass="button-add"/>
+                <!-- New button to navigate to Formation List -->
+                <Button fx:id="btnListeFormations" text="Liste des Formations" onAction="#showFormationList" styleClass="button-commun"/>
+
+            </HBox>
+        </VBox>
+    </VBox>
+
+</AnchorPane>

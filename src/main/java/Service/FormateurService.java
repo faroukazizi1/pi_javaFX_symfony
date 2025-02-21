@@ -14,8 +14,8 @@ public class FormateurService implements IService<Formateur>{
     public Formateur getFormateurById(int id) {
         if (formateursList != null && !formateursList.isEmpty()) {
             for (Formateur formateur : formateursList) {
-                System.out.println("Vérification de l'ID : " + formateur.getid_Formateur());  // Debug
-                if (formateur.getid_Formateur() == id) {
+                System.out.println("Vérification de l'ID : " + formateur.getId_Formateur());  // Debug
+                if (formateur.getId_Formateur() == id) {
                     return formateur;
                 }
             }
@@ -45,7 +45,7 @@ public class FormateurService implements IService<Formateur>{
                 "', Prenom_F = '" + formateur.getPrenom_F() +
                 "', Email = '" + formateur.getEmail() +
                 "', Specialite = '" + formateur.getSpecialite() +
-                "' WHERE id_Formateur = " + formateur.getid_Formateur();
+                "' WHERE id_Formateur = " + formateur.getId_Formateur();
 
         Statement stmt = null;
         try {
@@ -60,7 +60,7 @@ public class FormateurService implements IService<Formateur>{
     public void delete(Formateur x) {
         String SQL = "DELETE FROM formateur WHERE id_Formateur = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-            pstmt.setInt(1,x.getid_Formateur());
+            pstmt.setInt(1,x.getId_Formateur());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -79,7 +79,7 @@ public class FormateurService implements IService<Formateur>{
             ResultSet rs=  stm.executeQuery(req);
             while (rs.next()){
                 Formateur fo = new Formateur();
-                fo.setid_Formateur(rs.getInt("id_Formateur"));
+                fo.setId_Formateur(rs.getInt("id_Formateur"));
                 fo.setNumero(rs.getInt("Numero"));
                 fo.setNom_F(rs.getString("Nom_F"));
                 fo.setPrenom_F(rs.getString("Prenom_F"));

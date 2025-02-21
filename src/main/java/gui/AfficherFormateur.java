@@ -1,11 +1,10 @@
 package gui;
 
-import Model.Formateur;
-import Service.FormateurService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,7 +12,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-import javafx.util.Callback;
+
+import Model.Formateur;
+import Service.FormateurService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,9 +38,12 @@ public class AfficherFormateur implements Initializable {
     @FXML
     private TableColumn<Formateur, String> colSpecialite;
     @FXML
-    private TableColumn<Formateur, Void> colUpdate;
+    private TableColumn<Formateur, String> colUpdate;
     @FXML
-    private TableColumn<Formateur, Void> colDelete;
+    private TableColumn<Formateur, String> colDelete;
+
+    @FXML
+    private Button btnAjouterFormateur;
 
     private final FormateurService formateurService = new FormateurService();
 
@@ -52,34 +56,54 @@ public class AfficherFormateur implements Initializable {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
         colSpecialite.setCellValueFactory(new PropertyValueFactory<>("Specialite"));
 
-        colUpdate.setCellFactory(param -> new TableCell<>() {
-            private final Button btnModifier = new Button("Modifier");
-            {
-                btnModifier.setOnAction(event -> {
-                    Formateur formateur = getTableView().getItems().get(getIndex());
-                    openModifierPage(formateur);
-                });
-            }
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                setGraphic(empty ? null : btnModifier);
-            }
+        colUpdate.setCellFactory(param -> {
+            TableCell<Formateur, String> cell = new TableCell<Formateur, String>() {
+                private final Button btn = new Button("Modifier");
+
+                {
+                    btn.getStyleClass().add("btn-modifier");  // Ajout de la classe CSS
+                    btn.setOnAction(event -> {
+                        Formateur formateur = getTableView().getItems().get(getIndex());
+                        openModifierPage(formateur);  // Appel de la méthode pour ouvrir le formulaire de modification
+                    });
+                }
+
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(btn);
+                    }
+                }
+            };
+            return cell;
         });
 
-        colDelete.setCellFactory(param -> new TableCell<>() {
-            private final Button btnSupprimer = new Button("Supprimer");
-            {
-                btnSupprimer.setOnAction(event -> {
-                    Formateur formateur = getTableView().getItems().get(getIndex());
-                    supprimerFormateur(formateur);
-                });
-            }
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                setGraphic(empty ? null : btnSupprimer);
-            }
+        colDelete.setCellFactory(param -> {
+            TableCell<Formateur, String> cell = new TableCell<Formateur, String>() {
+                private final Button btn = new Button("Supprimer");
+
+                {
+                    btn.getStyleClass().add("btn-supprimer");  // Ajout de la classe CSS
+                    btn.setOnAction(event -> {
+                        Formateur formateur = getTableView().getItems().get(getIndex());
+                        supprimerFormateur(formateur);  // Appel de la méthode pour supprimer le formateur
+                    });
+                }
+
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(btn);
+                    }
+                }
+            };
+            return cell;
         });
 
         loadFormateurs();
@@ -114,5 +138,21 @@ public class AfficherFormateur implements Initializable {
                 loadFormateurs();
             }
         });
+    }
+
+    @FXML
+    private void handleAjouterFormateur(ActionEvent event) {
+        switchScene(event, "/AjouetFormateur.fxml");
+    }
+
+    private void switchScene(ActionEvent event, String fxmlFile) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -31,11 +31,11 @@ public class Formateur {
 
     }
 
-    public int getid_Formateur() {
+    public int getId_Formateur() {
         return id_Formateur;
     }
 
-    public void setid_Formateur(int id_Formateur) {
+    public void setId_Formateur(int id_Formateur) {
         this.id_Formateur = id_Formateur;
     }
 
