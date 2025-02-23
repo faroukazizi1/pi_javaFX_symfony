@@ -123,7 +123,6 @@ private TableView<ProjectTask> taskTable;
         taskTable.getItems().addAll(tasks);
     }
 
-
     public void initialize(){
         List<ProjectTask> tasks = null;
         try {

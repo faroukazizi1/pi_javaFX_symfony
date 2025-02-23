@@ -39,20 +39,14 @@ import java.sql.Date;
 import java.util.List;
 
 public class Projects  implements TaskUpdateListener {
-    public static final int SCREEN_WIDTH = 1200;
-    public static final int SCREEN_HEIGHT = 700;
 
     UserService userService = new UserService();
-    @FXML
-    private Button Event_Btn, Logout_Btn, Reclamation_Btn, User_Btn, Document_Btn;
-    public Button participate_btn;
-    public Button tasks_btn;
     ProjectServices projectService = new ProjectServices();
     ProjectTaskService projectTaskService = new ProjectTaskService();
-    //ProjectParticipantService projectParticipantService = new ProjectParticipantService();
-    //CitoyenService citoyenService = new CitoyenService();
-    //UserService userService = new UserService();
+
     Project selectedProject = null;
+
+    @FXML private Text numOfProjects, numOfActiveProjects, numOfInactiveProjects, statut_txt;
 
     @FXML private MFXScrollPane todo_tasks;
 
@@ -62,17 +56,14 @@ public class Projects  implements TaskUpdateListener {
 
     @FXML private TableView<Project> Projects_Table;
 
-    @FXML private TableColumn<Project, Date> date_debut_col, date_fin_col;
-
     @FXML private TableColumn<Project, String> title_col, description_col, statut_col;
 
-    @FXML private Text numOfProjects, numOfActiveProjects, numOfInactiveProjects, statut_txt;
+    @FXML private TableColumn<Project, Date> date_debut_col, date_fin_col;
 
     @FXML private Button Home_Btn, statut_btn;
 
     @FXML private MFXComboBox<KeyValuePair<Integer>> user_select;
 
-    String userRole;
     public void onHomeButtonClick(ActionEvent actionEvent) {
     }
 
@@ -90,13 +81,13 @@ public class Projects  implements TaskUpdateListener {
 
     public void onLogoutButtonClick(ActionEvent actionEvent) {
     }
-
+    // Méthode pour ouvrir la fenêtre d'ajout d'un projet
     @FXML
     void onOpenAddModal(ActionEvent event) throws Exception {
+        // Application d'un effet de flou sur la fenêtre principale
         BoxBlur blur = new BoxBlur(3, 3, 3);
         Node source = (Node) event.getSource();
         Stage primaryStage = (Stage) source.getScene().getWindow();
-
         primaryStage.getScene().getRoot().setEffect(blur);
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/project/addProject.fxml"));
@@ -110,8 +101,9 @@ public class Projects  implements TaskUpdateListener {
 
         stage.showAndWait();
         showProjects();
-        primaryStage.getScene().getRoot().setEffect(null);
+        primaryStage.getScene().getRoot().setEffect(null);//retirer l'effet flou
     }
+
     public void onOpenAddTacheModal(ActionEvent event) throws Exception {
         if (selectedProject == null) {
             Modals.displayError("Error occurred while adding task", "Please select a project to add task");
@@ -186,6 +178,8 @@ public class Projects  implements TaskUpdateListener {
     @FXML
     public void showTasks() {
         System.out.println("show");
+
+        // Création des conteneurs pour les tâches des statuts (à faire, en cours, terminées)
         VBox toDovBox = new VBox();
         toDovBox.setSpacing(10);
         toDovBox.setAlignment(Pos.CENTER);
@@ -214,6 +208,8 @@ public class Projects  implements TaskUpdateListener {
 
                 taskController.setTask(task);
                 taskController.setUpdateListener(this);
+
+                // Ajoute la tâche au conteneur approprié
                 switch (task.getStatut()) {
                     case TODO:
                         toDovBox.getChildren().add(taskLoader);
@@ -227,6 +223,7 @@ public class Projects  implements TaskUpdateListener {
                 }
             }
 
+            // Ajoute le contenu à la vue correspondante
             todo_tasks.setContent(toDovBox);
             inprogress_tasks.setContent(inProgressvBox);
             done_tasks.setContent(donevBox);
@@ -282,7 +279,7 @@ public class Projects  implements TaskUpdateListener {
         ObservableList<Project> projects = FXCollections.observableArrayList(ProjectServices.getAll2());
 
         Projects_Table.setItems(projects);
-            title_col.setCellValueFactory(new PropertyValueFactory<>("titre"));
+        title_col.setCellValueFactory(new PropertyValueFactory<>("titre"));
         date_debut_col.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
         description_col.setCellValueFactory(new PropertyValueFactory<>("description"));
         date_fin_col.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
@@ -293,6 +290,7 @@ public class Projects  implements TaskUpdateListener {
         showTasks();
     }
 
+    // Ouvrir la fenêtre de gestion des tâches
     public void onOpenTask(ActionEvent event) {
         try {
             // Load the tasks window

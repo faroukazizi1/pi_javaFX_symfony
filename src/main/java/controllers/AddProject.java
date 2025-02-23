@@ -6,6 +6,7 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import models.Project;
 import services.ProjectServices;
 
@@ -33,8 +34,7 @@ public class AddProject {
     public void onClose() {
         add_project_btn.getScene().getWindow().hide();
     }
-    public void onMinimize() {}
-    public void initialize() {}
+    public void onMinimize() { ((Stage) add_project_btn.getScene().getWindow()).setIconified(true);}
 
     private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
@@ -90,10 +90,11 @@ public class AddProject {
                 isError = true;
             }
         }
-
+        // Si une erreur est trouvée, la fonction addProject() s'arrête.
         if (isError)
             return;
 
+        //Récupération des valeurs des champs
         String titre = nom_projet.getText();
         String description = description_projet.getText();
         Date date_debut = Date.valueOf(date_debut_projet.getValue());

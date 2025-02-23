@@ -101,7 +101,7 @@ public class AddTask {
             user_error.setText("User is required");
             isError = true;
         }
-        // If there are validation errors, stop execution
+
         if (isError)
             return;
 

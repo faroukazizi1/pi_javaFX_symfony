@@ -48,6 +48,4 @@
             <DropShadow blurType="TWO_PASS_BOX" height="10.0" radius="4.5" width="10.0" />
         </effect>
     </VBox>
-
-
 </AnchorPane>

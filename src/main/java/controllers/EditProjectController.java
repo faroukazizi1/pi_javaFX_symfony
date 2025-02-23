@@ -100,7 +100,6 @@ public class EditProjectController {
             }
         }
 
-        // If there are validation errors, stop execution
         if (isError)
             return;
 
