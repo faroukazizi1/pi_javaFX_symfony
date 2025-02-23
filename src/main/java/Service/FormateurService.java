@@ -1,4 +1,5 @@
 package Service;
+
 import Model.Formateur;
 import Util.DBconnection;
 
@@ -6,61 +7,54 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormateurService implements IService<Formateur>{
-    Connection conn = DBconnection.getInstance().getConn();;
-    private List<Formateur> formateursList = new ArrayList<>();
-
-    // Méthode pour récupérer un formateur par ID
-    public Formateur getFormateurById(int id) {
-        if (formateursList != null && !formateursList.isEmpty()) {
-            for (Formateur formateur : formateursList) {
-                System.out.println("Vérification de l'ID : " + formateur.getId_Formateur());  // Debug
-                if (formateur.getId_Formateur() == id) {
-                    return formateur;
-                }
-            }
-        }
-        return null;
-    }
+public class FormateurService implements IService<Formateur> {
+    private final Connection conn = DBconnection.getInstance().getConn();
 
     @Override
     public void add(Formateur formateur) {
-        String SQL = "insert into formateur (Numero,  Nom_F, Prenom_F, Email, Specialite) values ('" +
-                formateur.getNumero() + "','" + formateur.getNom_F() + "','" +
-                formateur.getPrenom_F() + "','" + formateur.getEmail()  + "','" + formateur.getSpecialite()    + "')";
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-            stmt.executeUpdate(SQL);
+        String SQL = "INSERT INTO formateur (Numero, Nom_F, Prenom_F, Email, Specialite) VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+            pstmt.setInt(1, formateur.getNumero());
+            pstmt.setString(2, formateur.getNom_F());
+            pstmt.setString(3, formateur.getPrenom_F());
+            pstmt.setString(4, formateur.getEmail());
+            pstmt.setString(5, formateur.getSpecialite());
+
+            int rowsInserted = pstmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Formateur ajouté avec succès !");
+            } else {
+                System.out.println("L'ajout a échoué.");
+            }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
-
 
     @Override
     public void update(Formateur formateur) {
-        String SQL = "UPDATE formateur SET Numero = '" + formateur.getNumero() +
-                "', Nom_F = '" + formateur.getNom_F() +
-                "', Prenom_F = '" + formateur.getPrenom_F() +
-                "', Email = '" + formateur.getEmail() +
-                "', Specialite = '" + formateur.getSpecialite() +
-                "' WHERE id_Formateur = " + formateur.getId_Formateur();
+        String SQL = "UPDATE formateur SET Numero = ?, Nom_F = ?, Prenom_F = ?, Email = ?, Specialite = ? WHERE id_Formateur = ?";
 
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-            stmt.executeUpdate(SQL);
+        try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+            pstmt.setInt(1, formateur.getNumero());
+            pstmt.setString(2, formateur.getNom_F());
+            pstmt.setString(3, formateur.getPrenom_F());
+            pstmt.setString(4, formateur.getEmail());
+            pstmt.setString(5, formateur.getSpecialite());
+            pstmt.setInt(6, formateur.getId_Formateur());
+
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
     @Override
-    public void delete(Formateur x) {
+    public void delete(Formateur formateur) {
         String SQL = "DELETE FROM formateur WHERE id_Formateur = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-            pstmt.setInt(1,x.getId_Formateur());
+            pstmt.setInt(1, formateur.getId_Formateur());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -69,15 +63,12 @@ public class FormateurService implements IService<Formateur>{
 
     @Override
     public List<Formateur> getAll() {
-        String req = "SELECT * FROM `formateur`";
-        ArrayList<Formateur> formateur = new ArrayList<>();
-        Statement stm;
-        try {
-            stm = this.conn.createStatement();
+        String req = "SELECT * FROM formateur";
+        List<Formateur> formateurs = new ArrayList<>();
 
-
-            ResultSet rs=  stm.executeQuery(req);
-            while (rs.next()){
+        try (Statement stm = conn.createStatement();
+             ResultSet rs = stm.executeQuery(req)) {
+            while (rs.next()) {
                 Formateur fo = new Formateur();
                 fo.setId_Formateur(rs.getInt("id_Formateur"));
                 fo.setNumero(rs.getInt("Numero"));
@@ -86,20 +77,11 @@ public class FormateurService implements IService<Formateur>{
                 fo.setEmail(rs.getString("Email"));
                 fo.setSpecialite(rs.getString("Specialite"));
 
-
-
-                formateur.add(fo);
+                formateurs.add(fo);
             }
-
-
         } catch (SQLException ex) {
-
             System.out.println(ex.getMessage());
-
         }
-        return formateur;
+        return formateurs;
     }
-
-
-
 }

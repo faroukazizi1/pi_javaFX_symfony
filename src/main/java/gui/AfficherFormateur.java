@@ -1,5 +1,9 @@
 package gui;
 
+import Model.Formateur;
+import Service.FormateurService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,17 +13,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
-
-import Model.Formateur;
-import Service.FormateurService;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class AfficherFormateur implements Initializable {
 
@@ -38,10 +40,15 @@ public class AfficherFormateur implements Initializable {
     @FXML
     private TableColumn<Formateur, String> colSpecialite;
     @FXML
-    private TableColumn<Formateur, String> colUpdate;
+    private TableColumn<Formateur, Void> colUpdate;
     @FXML
-    private TableColumn<Formateur, String> colDelete;
-
+    private TableColumn<Formateur, Void> colDelete;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private ComboBox<String> sortComboBox;
+    @FXML
+    private ComboBox<String> searchTypeComboBox;
     @FXML
     private Button btnAjouterFormateur;
 
@@ -56,55 +63,12 @@ public class AfficherFormateur implements Initializable {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
         colSpecialite.setCellValueFactory(new PropertyValueFactory<>("Specialite"));
 
-        colUpdate.setCellFactory(param -> {
-            TableCell<Formateur, String> cell = new TableCell<Formateur, String>() {
-                private final Button btn = new Button("Modifier");
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> handleSearch());
+        searchTypeComboBox.setOnAction(event -> handleSearch());
+        sortComboBox.setOnAction(event -> handleSort());
 
-                {
-                    btn.getStyleClass().add("btn-modifier");  // Ajout de la classe CSS
-                    btn.setOnAction(event -> {
-                        Formateur formateur = getTableView().getItems().get(getIndex());
-                        openModifierPage(formateur);  // Appel de la méthode pour ouvrir le formulaire de modification
-                    });
-                }
-
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        setGraphic(btn);
-                    }
-                }
-            };
-            return cell;
-        });
-
-        colDelete.setCellFactory(param -> {
-            TableCell<Formateur, String> cell = new TableCell<Formateur, String>() {
-                private final Button btn = new Button("Supprimer");
-
-                {
-                    btn.getStyleClass().add("btn-supprimer");  // Ajout de la classe CSS
-                    btn.setOnAction(event -> {
-                        Formateur formateur = getTableView().getItems().get(getIndex());
-                        supprimerFormateur(formateur);  // Appel de la méthode pour supprimer le formateur
-                    });
-                }
-
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                    } else {
-                        setGraphic(btn);
-                    }
-                }
-            };
-            return cell;
-        });
+        sortComboBox.getItems().addAll("Trier par spécialité", "Trier par nom");
+        searchTypeComboBox.getItems().addAll("Nom", "ID");
 
         loadFormateurs();
     }
@@ -113,16 +77,75 @@ public class AfficherFormateur implements Initializable {
         List<Formateur> formateurs = formateurService.getAll();
         ObservableList<Formateur> observableList = FXCollections.observableArrayList(formateurs);
         tableFormateurs.setItems(observableList);
+        setupUpdateAndDeleteButtons();
     }
 
-    private void openModifierPage(Formateur formateur) {
+    private void setupUpdateAndDeleteButtons() {
+        colUpdate.setCellFactory(param -> new TableCell<>() {
+            private final Button updateButton = new Button("Modifier");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    updateButton.setOnAction(event -> handleUpdate(getTableView().getItems().get(getIndex())));
+                    setGraphic(updateButton);
+                }
+            }
+        });
+
+        colDelete.setCellFactory(param -> new TableCell<>() {
+            private final Button deleteButton = new Button("Supprimer");
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    deleteButton.setOnAction(event -> handleDelete(getTableView().getItems().get(getIndex())));
+                    setGraphic(deleteButton);
+                }
+            }
+        });
+    }
+
+    @FXML
+    private void handleSearch() {
+        String searchType = searchTypeComboBox.getValue();
+        String searchText = searchField.getText().toLowerCase();
+        List<Formateur> formateurs = formateurService.getAll();
+
+        List<Formateur> filteredFormateurs = formateurs.stream()
+                .filter(f -> "Nom".equals(searchType) ? f.getNom_F().toLowerCase().contains(searchText) :
+                        "ID".equals(searchType) && String.valueOf(f.getId_Formateur()).equals(searchText))
+                .collect(Collectors.toList());
+
+        tableFormateurs.setItems(FXCollections.observableArrayList(filteredFormateurs));
+    }
+
+    @FXML
+    private void handleSort() {
+        String selectedSortOption = sortComboBox.getValue();
+        List<Formateur> formateurs = formateurService.getAll();
+
+        if (selectedSortOption != null) {
+            formateurs.sort((f1, f2) -> "Trier par spécialité".equals(selectedSortOption) ?
+                    f1.getSpecialite().compareToIgnoreCase(f2.getSpecialite()) :
+                    f1.getNom_F().compareToIgnoreCase(f2.getNom_F()));
+        }
+
+        tableFormateurs.setItems(FXCollections.observableArrayList(formateurs));
+    }
+
+    @FXML
+    private void handleAjouterFormateur(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifFormateur.fxml"));
-            Parent root = loader.load();
-            ModifFormateur controller = loader.getController();
-            controller.setFormateur(formateur);
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) tableFormateurs.getScene().getWindow();
+            Parent parent = FXMLLoader.load(getClass().getResource("/AjoutFormateur.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -130,24 +153,69 @@ public class AfficherFormateur implements Initializable {
         }
     }
 
-    private void supprimerFormateur(Formateur formateur) {
-        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION, "Voulez-vous vraiment supprimer ce formateur?", ButtonType.YES, ButtonType.NO);
-        confirmation.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.YES) {
-                formateurService.delete(formateur);
-                loadFormateurs();
-            }
-        });
-    }
-
-    @FXML
-    private void handleAjouterFormateur(ActionEvent event) {
-        switchScene(event, "/AjouetFormateur.fxml");
-    }
-
-    private void switchScene(ActionEvent event, String fxmlFile) {
+    private void handleUpdate(Formateur formateur) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+            System.out.println("Chargement du fichier FXML...");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifFormateur.fxml"));
+            Parent root = loader.load();
+            System.out.println("FXML chargé avec succès");
+
+            ModifFormateur controller = loader.getController();
+            if (controller == null) {
+                System.out.println("Erreur : Le contrôleur est null !");
+                return;
+            }
+
+            controller.setFormateur(formateur);
+            System.out.println("Données du formateur envoyées au contrôleur");
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.setTitle("Modifier Formateur");
+            stage.showAndWait();
+
+            loadFormateurs();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors du chargement du fichier FXML !");
+        }
+    }
+
+
+    private void handleDelete(Formateur formateur) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText("Voulez-vous vraiment supprimer ce formateur ?");
+        alert.setContentText("Nom: " + formateur.getNom_F());
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            formateurService.delete(formateur);
+            loadFormateurs();
+        }
+    }
+    @FXML
+    private void handleAfficherFormation(ActionEvent event) {
+        try {
+            // Charger le fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherFormation.fxml"));
+            Parent root = loader.load();
+
+            // Obtenir la scène actuelle et changer de scène
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace(); // Gérer l'erreur en affichant la trace
+        }
+    }
+    @FXML
+    private void handleAfficherStatistiques(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/StatistiquesFormation.fxml"));
+            Parent root = loader.load();
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -155,4 +223,5 @@ public class AfficherFormateur implements Initializable {
             e.printStackTrace();
         }
     }
+
 }

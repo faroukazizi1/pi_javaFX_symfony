@@ -652,3 +652,100 @@
     -fx-background-color: #4caf50;
     -fx-background-radius: 5px;
 }
+
+.search-field {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+
+
+    -fx-font-family: "Arial";
+    -fx-pref-height: 30px;
+    -fx-pref-width: 600px;
+
+
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+}
+.search-field {
+    -fx-font-size: 12px;  /* Réduire la taille de la police */
+    -fx-padding: 5px;  /* Réduire l'espacement intérieur */
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-font-family: "Arial";
+    -fx-pref-height: 40px;  /* Réduire la hauteur */
+    -fx-pref-width: 200px;  /* Réduire la largeur */
+}
+
+.search-box {
+    width: 50%;  /* Réduire encore la largeur de la barre de recherche */
+    padding: 3px;  /* Réduire l'espacement autour de la barre de recherche */
+}
+
+.search-field, .search-combo-box, .sort-combo-box {
+    min-width: 80px;  /* Réduire la largeur minimale */
+    max-width: 120px;  /* Limiter encore la largeur maximale */
+    height: 80px;  /* Réduire la hauteur */
+}
+
+.search-combo-box {
+    margin-right: 5px;  /* Espace entre les éléments */
+}
+.search-combo-box {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-font-size: 12px;
+    -fx-font-family: "Arial";
+    -fx-pref-height: 25px;
+    -fx-pref-width: 120px;
+    -fx-padding: 5px;
+    -fx-min-width: 100px;
+    -fx-max-width: 150px;
+    -fx-background-radius: 5;
+}
+
+.search-combo-box {
+    margin-right: 10px; /* Ajoute un espace entre les éléments de la barre de recherche */
+}
+
+/* Style du titre */
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000; /* Bleu */
+    -fx-alignment: center;
+}
+
+/* Style pour le graphique */
+.chart {
+    -fx-background-color: #f4f4f4; /* Gris clair pour l'arrière-plan */
+}
+
+/* Style des barres du graphique */
+.chart-bar {
+    -fx-bar-fill: #1E90FF; /* Bleu pour les barres */
+}
+
+/* Style des axes */
+.axis {
+    -fx-tick-label-fill: #1E90FF; /* Couleur bleu des étiquettes des axes */
+    -fx-label-fill: #1E90FF; /* Couleur bleu des labels des axes */
+}
+
+/* Style pour l'axe X */
+.category-axis .axis-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E90FF; /* Bleu */
+}
+
+/* Style pour l'axe Y */
+.number-axis .axis-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E90FF; /* Bleu */
+}
+

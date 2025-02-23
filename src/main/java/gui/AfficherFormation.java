@@ -261,6 +261,34 @@ public class AfficherFormation implements Initializable {
         ObservableList<Formation> observableList = FXCollections.observableArrayList(formations);
         tableFormations.setItems(observableList);
     }
+    @FXML
+    private void handleAfficherFormateur(ActionEvent event) {
+        try {
+            // Charger le fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherFormateur.fxml"));
+            Parent root = loader.load();
+
+            // Obtenir la scène actuelle et changer de scène
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace(); // Gérer l'erreur en affichant la trace
+        }
+    }
+    @FXML
+    private void handleAfficherStatistiques(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/StatistiquesFormation.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

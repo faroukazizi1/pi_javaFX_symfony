@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css"
             xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="gui.AjouterFormateur">
@@ -50,8 +51,9 @@
 
             <HBox spacing="10">
                 <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="Spécialité"/>
-                <TextField fx:id="txtSpecialite" promptText="Entrez la spécialité" styleClass="card"/>
+                <ComboBox fx:id="cmbSpecialite" styleClass="card"/>
             </HBox>
+
 
             <!-- Boutons -->
             <HBox alignment="CENTER" spacing="20">

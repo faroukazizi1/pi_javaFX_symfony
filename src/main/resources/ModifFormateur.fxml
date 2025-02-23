@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +13,7 @@
     <!-- Sidebar -->
     <VBox fx:id="sidebar" alignment="CENTER" prefHeight="500" prefWidth="250" styleClass="sidebar">
 
-    <Button styleClass="sidebar-link" text="Accueil" />
+        <Button styleClass="sidebar-link" text="Accueil" />
         <Button styleClass="sidebar-link-active" text="Formations" />
         <Button styleClass="sidebar-link" text="Formateurs" />
         <Button styleClass="sidebar-logout" text="Déconnexion" />
@@ -45,9 +46,10 @@
                 <TextField fx:id="tfEmail" promptText="Entrez l'email" styleClass="card" />
             </HBox>
 
+            <!-- ComboBox pour la spécialité -->
             <HBox spacing="10">
                 <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="Spécialité" />
-                <TextField fx:id="tfSpecialite" promptText="Entrez la spécialité" styleClass="card" />
+                <ComboBox fx:id="cmbSpecialite" promptText="Sélectionnez la spécialité" styleClass="card" />
             </HBox>
 
             <!-- Boutons -->

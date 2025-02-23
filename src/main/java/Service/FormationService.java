@@ -4,7 +4,9 @@ import Util.DBconnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FormationService implements IService<Formation>  {
     Connection conn;
@@ -110,6 +112,16 @@ public class FormationService implements IService<Formation>  {
             e.printStackTrace();
         }
         return formations;
+    }
+    public Map<String, Integer> getStatistiquesParMois() {
+        // Exemple de données. Remplacer par une logique réelle qui récupère les formations
+        Map<String, Integer> statistiques = new HashMap<>();
+        statistiques.put("Janvier", 5);
+        statistiques.put("Février", 3);
+        statistiques.put("Mars", 7);
+        statistiques.put("Avril", 2);
+        statistiques.put("Mai", 9);
+        return statistiques;
     }
 
 

@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -26,12 +27,21 @@ public class ModifFormateur {
     private TextField tfNumero;
     @FXML
     private TextField tfSpecialite;
+    @FXML
+    private ComboBox<String> cmbSpecialite;  // ComboBox pour la spécialité
+
 
     private Formateur formateur;
     private FormateurService formateurService = new FormateurService();
 
     @FXML
     public void initialize() {
+        cmbSpecialite.getItems().addAll("Soft Skills", "Programmation Web", "Programmation Mobile", "Programmation Desktop");
+
+        // Si le formateur est déjà défini, on sélectionne sa spécialité dans le ComboBox
+        if (formateur != null) {
+            cmbSpecialite.setValue(formateur.getSpecialite());
+        }
         // Initialisation des champs si nécessaire
     }
 
@@ -42,7 +52,8 @@ public class ModifFormateur {
         tfPrenom.setText(formateur.getPrenom_F());
         tfEmail.setText(formateur.getEmail());
         tfNumero.setText(String.valueOf(formateur.getNumero()));
-        tfSpecialite.setText(formateur.getSpecialite());
+        cmbSpecialite.setValue(formateur.getSpecialite()); // Utiliser cmbSpecialite au lieu de tfSpecialite
+
     }
 
     @FXML
@@ -70,12 +81,23 @@ public class ModifFormateur {
             return; // Arrête l'exécution si l'email est invalide
         }
 
+        // Récupérer la spécialité sélectionnée dans le ComboBox
+        String specialite = cmbSpecialite.getValue();
+        if (specialite == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner une spécialité.");
+            alert.showAndWait();
+            return;
+        }
+
         // Mettre à jour le formateur avec les nouvelles valeurs
         formateur.setNom_F(tfNom.getText());
         formateur.setPrenom_F(tfPrenom.getText());
         formateur.setEmail(email);
         formateur.setNumero(Integer.parseInt(numeroStr));
-        formateur.setSpecialite(tfSpecialite.getText());
+        formateur.setSpecialite(specialite);
 
         // Appeler le service pour mettre à jour le formateur dans la base de données
         formateurService.update(formateur);
@@ -86,6 +108,7 @@ public class ModifFormateur {
         alert.setContentText("Le formateur a été modifié avec succès !");
         alert.showAndWait();
     }
+
 
     @FXML
     private void handleSave() {
