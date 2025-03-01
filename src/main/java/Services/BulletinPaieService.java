@@ -79,7 +79,7 @@ public class BulletinPaieService {
     }
 
     public static List<BulletinPaie> getBulletinsPaieByMonthAndYear(int month, int year) {
-        String query = "SELECT * FROM BulletinPaie WHERE mois = ? AND annee = ?";
+        String query = "SELECT * FROM bulletinpaie WHERE mois = ? AND annee = ?";
         List<BulletinPaie> bulletins = new ArrayList<>();
 
         try (PreparedStatement stmt = conn.prepareStatement(query)) {

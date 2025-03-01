@@ -40,17 +40,16 @@
             }
         }
         public static boolean ajouterConge(TypeConge type, String dateDebut, String dateFin, int employeId) {
-            String query = "INSERT INTO DemandeConge (employe_id, date_debut, date_fin, type_conge, statut, date_demande, file_attachment) " +
-                    "VALUES (?, ?, ?, ?, 'EN_ATTENTE', NOW(), ?)";
+            String query = "INSERT INTO DemandeConge (employe_id, date_debut, date_fin, type_conge) " +
+                    "VALUES (?, ?, ?, ?)";
 
-            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion_conges", "root", "");
+            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/management_user", "root", "");
                  PreparedStatement stmt = connection.prepareStatement(query)) {
 
                 stmt.setInt(1, employeId);
                 stmt.setString(2, dateDebut);
                 stmt.setString(3, dateFin);
-                stmt.setString(4, type.name());  // Set the type_conge
-                stmt.setString(5, null); // Or set an empty string "" if you want to indicate no attachment
+                stmt.setString(4, type.name());
 
                 int rowsAffected = stmt.executeUpdate();
 
@@ -116,7 +115,7 @@
             ObservableList<DemandeConge> demandes = FXCollections.observableArrayList();
 
             String query = "SELECT * FROM demandeConge WHERE employe_id = ?"; // Corrected table name
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion_conges", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/management_user", "root", "");
                  PreparedStatement stmt = conn.prepareStatement(query)) {
 
                 stmt.setInt(1, userId); // Dynamically set the user_id
