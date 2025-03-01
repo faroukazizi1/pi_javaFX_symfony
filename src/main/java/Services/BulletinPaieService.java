@@ -15,7 +15,6 @@ public class BulletinPaieService {
     public static int createBulletinPaie(BulletinPaie bulletin) {
         String query = "INSERT INTO BulletinPaie (employe_id, mois, annee, salaire_brut, deductions, salaire_net) VALUES (?, ?, ?, ?, ?, ?)";
         int generatedId = -1;
-
         try (PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, bulletin.getEmployeId());
             stmt.setString(2, bulletin.getMois());
@@ -29,11 +28,10 @@ public class BulletinPaieService {
             if (rs.next()) {
                 generatedId = rs.getInt(1);  // Get generated ID
 
-                // Récupérer l'email de l'employé
+
                 String email = getEmailByUserId(bulletin.getEmployeId());
 
                 if (email != null) {
-                    // Construire le contenu de l'email
                     String subject = "Votre bulletin de paie - " + bulletin.getMois() + " " + bulletin.getAnnee();
                     String body = "Bonjour,\n\nVotre bulletin de paie a été généré.\n\n" +
                             "Mois: " + bulletin.getMois() + "\n" +

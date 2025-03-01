@@ -43,7 +43,7 @@
             String query = "INSERT INTO DemandeConge (employe_id, date_debut, date_fin, type_conge) " +
                     "VALUES (?, ?, ?, ?)";
 
-            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/management_user", "root", "");
+            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion_conges", "root", "");
                  PreparedStatement stmt = connection.prepareStatement(query)) {
 
                 stmt.setInt(1, employeId);
@@ -115,25 +115,25 @@
             ObservableList<DemandeConge> demandes = FXCollections.observableArrayList();
 
             String query = "SELECT * FROM demandeConge WHERE employe_id = ?"; // Corrected table name
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/management_user", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion_conges", "root", "");
                  PreparedStatement stmt = conn.prepareStatement(query)) {
 
-                stmt.setInt(1, userId); // Dynamically set the user_id
+                stmt.setInt(1, userId);
 
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
                     int id = rs.getInt("id");
-                    String type = rs.getString("type_conge"); // Adjusted column name based on your table
-                    String datedebut = rs.getString("date_debut"); // Adjusted column name based on your table
-                    String datefin = rs.getString("date_fin"); // Adjusted column name based on your table
+                    String type = rs.getString("type_conge");
+                    String datedebut = rs.getString("date_debut");
+                    String datefin = rs.getString("date_fin");
                     String statut = rs.getString("statut");
 
                     DemandeConge demandeConge = new DemandeConge(id, userId, type, datedebut, datefin, statut, statut);
                     demandes.add(demandeConge);
                 }
             } catch (SQLException e) {
-                e.printStackTrace(); // Consider replacing with proper logging or user-friendly message
+                e.printStackTrace();
             }
 
             return demandes;
