@@ -33,6 +33,7 @@
                         <TableColumn fx:id="Colid_user" prefWidth="120.0" text="Id User" />
                         <TableColumn fx:id="Coldelete" prefWidth="80.0" text="Supprimer" />
                         <TableColumn fx:id="Colmodifier" prefWidth="80.0" text="Modifier" />
+            <TableColumn fx:id="ColQr" prefWidth="75.0" text="Qr Code" />
                     </columns>
                 </TableView>
 
@@ -172,5 +173,14 @@
             <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
+      <Button layoutX="1127.0" layoutY="566.0" mnemonicParsing="false" onAction="#Logout" prefHeight="48.0" prefWidth="41.0" style="-fx-background-color: white;">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/logout.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
             </children>
         </AnchorPane>

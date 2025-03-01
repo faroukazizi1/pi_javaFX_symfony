@@ -115,6 +115,17 @@ public class login {
         }
     }
 
+    @FXML
+    private void ForgetPasswordForm(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ForgetPassword.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.setTitle("ForgetPasswordForm");
+    }
+
 
 
 }

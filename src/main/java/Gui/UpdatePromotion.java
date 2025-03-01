@@ -8,11 +8,15 @@ import Service.promotionService;
 import Service.userService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
@@ -169,6 +173,19 @@ public class UpdatePromotion {
             }
         }
     }
+
+    @FXML
+    private void openPromotionListView(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPromotion.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            afficherAlerte("Erreur", "Échec du retour", "Impossible de retourner à la liste des promotions.");
+        }
+    }
+
 
 
 }

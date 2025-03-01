@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import Model.user;
 import Service.userService;
@@ -70,42 +71,48 @@ public class AfficherUser {
     void initialize() {
 
         UserSession session = UserSession.getInstance();
-        String userRole = session.getRole();
+        if(session!=null) {
+            String userRole = session.getRole();
+            if (!"RHR".equals(userRole)) { // Si ce n'est pas un Responsable RH
+                tableView.setVisible(false); // Masquer la table des utilisateurs
+                button_ajouter.setVisible(false);
 
-        if (!"RHR".equals(userRole)) { // Si ce n'est pas un Responsable RH
-            tableView.setVisible(false); // Masquer la table des utilisateurs
-            button_ajouter.setVisible(false);
 
-
-            return;
-        }
-
-        // Initialisation normale si c'est un Responsable RH
-        try {
-            List<user> tab_users = service.getAll();
-            ObservableList<user> observableList = FXCollections.observableList(tab_users);
-            tableView.setItems(observableList);
-
-            Colid.setVisible(false);
-            Colid.setCellValueFactory(new PropertyValueFactory<>("id"));
-            Colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            Colprenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-            Colcin.setCellValueFactory(new PropertyValueFactory<>("cin"));
-            Colusername.setCellValueFactory(new PropertyValueFactory<>("username"));
-            Colpassword.setCellValueFactory(new PropertyValueFactory<>("password"));
-            Colemail.setCellValueFactory(new PropertyValueFactory<>("email"));
-            Colrole.setCellValueFactory(new PropertyValueFactory<>("role"));
-            Colsexe.setCellValueFactory(new PropertyValueFactory<>("sexe"));
-            Coladdresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
-            Colnumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
-
-            // Ajouter les boutons seulement si l'utilisateur est un Responsable RH
-            if ("RHR".equals(userRole)) {
-                addDeleteAndUpdateButtons();
+                return;
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+
+            // Initialisation normale si c'est un Responsable RH
+            try {
+                List<user> tab_users = service.getAll();
+                ObservableList<user> observableList = FXCollections.observableList(tab_users);
+                tableView.setItems(observableList);
+
+                Colid.setVisible(false);
+                Colid.setCellValueFactory(new PropertyValueFactory<>("id"));
+                Colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+                Colprenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+                Colcin.setCellValueFactory(new PropertyValueFactory<>("cin"));
+                Colusername.setCellValueFactory(new PropertyValueFactory<>("username"));
+                Colpassword.setCellValueFactory(new PropertyValueFactory<>("password"));
+                Colemail.setCellValueFactory(new PropertyValueFactory<>("email"));
+                Colrole.setCellValueFactory(new PropertyValueFactory<>("role"));
+                Colsexe.setCellValueFactory(new PropertyValueFactory<>("sexe"));
+                Coladdresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
+                Colnumero.setCellValueFactory(new PropertyValueFactory<>("numero"));
+
+                // Ajouter les boutons seulement si l'utilisateur est un Responsable RH
+                if ("RHR".equals(userRole)) {
+                    addDeleteAndUpdateButtons();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
+        else{
+            System.out.println("User session is null!");
+        }
+
+
     }
 
     // Fonction pour ajouter les boutons Delete et Update
@@ -225,6 +232,69 @@ public class AfficherUser {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void DeepSeekAI(ActionEvent event) {
+        try {
+            // Charger la vue des employés
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/DeepSeekAPI.fxml"));  // Assurez-vous que le chemin est correct
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("DeepSeekAI");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void Logout(ActionEvent event) {
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirm Logout");
+        confirmation.setHeaderText("Are you sure you want to logout?");
+        confirmation.setContentText("This action cannot be undone.");
+
+        // Adding explicit OK and CANCEL buttons
+        confirmation.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+
+        confirmation.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {  // More reliable check
+                try {
+                    // Clearing the user session safely
+                    UserSession session = UserSession.getInstance();
+                    if (session != null) {
+                        session.cleanUserSession();
+                    }
+
+                    // Switch to the login screen
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.setTitle("Login");
+
+                } catch (IOException e) {
+                    System.err.println("Error loading Login.fxml: " + e.getMessage()); // Logging
+                    showErrorDialog("Failed to load login screen. Please try again.");
+                } catch (Exception e) {
+                    System.err.println("Unexpected error during logout: " + e.getMessage()); // Logging
+                    showErrorDialog("An unexpected error occurred. Please restart the application.");
+                }
+            }
+        });
+    }
+
+    // Helper method for error messages
+    private void showErrorDialog(String message) {
+        Alert error = new Alert(Alert.AlertType.ERROR);
+        error.setTitle("Error");
+        error.setHeaderText(null);
+        error.setContentText(message);
+        error.showAndWait();
+    }
+
 
 
 

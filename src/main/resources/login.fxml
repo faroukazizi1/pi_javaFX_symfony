@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="614.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.login">
    <children>
       <Pane prefHeight="614.0" prefWidth="477.0" style="-fx-background-color: #001F3F;">
@@ -41,7 +40,7 @@
             <PasswordField fx:id="tf_CheckPasswordUser" prefWidth="258.0" />
          </children>
       </HBox>
-      <Button fx:id="SignIn_Btn1" alignment="CENTER" contentDisplay="CENTER" layoutX="930.0" layoutY="361.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="130.0" styleClass="left-sidebar-users-link" text="Forget password ?" textAlignment="CENTER">
+      <Button fx:id="SignIn_Btn1" alignment="CENTER" contentDisplay="CENTER" layoutX="930.0" layoutY="361.0" mnemonicParsing="false" onAction="#ForgetPasswordForm" prefHeight="18.0" prefWidth="130.0" styleClass="left-sidebar-users-link" text="Forget password ?" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

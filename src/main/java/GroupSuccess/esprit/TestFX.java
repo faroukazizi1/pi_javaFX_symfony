@@ -17,5 +17,24 @@ public class TestFX extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+        if (loader.getLocation() == null) {
+            System.out.println("FXML file not found!");
+        } else {
+            System.out.println("FXML file loaded successfully.");
+        }
+        try {
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("Gestion User");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+
     }
 }

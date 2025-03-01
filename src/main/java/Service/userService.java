@@ -3,9 +3,11 @@ import Model.promotion;
 import Model.user;
 import Util.DBconnection;
 
+import javax.swing.text.html.HTMLDocument;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class userService implements IService<user> {
 
@@ -15,46 +17,79 @@ public class userService implements IService<user> {
 
     @Override
     public void add(user user) {
-        String SQL = "INSERT INTO user(cin, nom, prenom, email, username, password, role, sexe, adresse, numero) VALUES ('"
-                + user.getCin() + "','"
-                + user.getNom() + "','"
-                + user.getPrenom() + "','"
-                + user.getEmail() + "','"
-                + user.getUsername() + "','"
-                + user.getPassword() + "','"
-                + user.getRole() + "','"
-                + user.getSexe() + "','"
-                + user.getAdresse() + "','"
-                + user.getNumero() + "')";
+        String SQL = "INSERT INTO user(cin, nom, prenom, email, username, password, role, sexe, adresse, numero) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-            stmt.executeUpdate(SQL);
+        try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+            pstmt.setInt(1, user.getCin());
+            pstmt.setString(2, user.getNom());
+            pstmt.setString(3, user.getPrenom());
+            pstmt.setString(4, user.getEmail());
+            pstmt.setString(5, user.getUsername());
+
+            //Hash du mot de passe
+            String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+            pstmt.setString(6, hashedPassword);
+
+            pstmt.setString(7, user.getRole());
+            pstmt.setString(8, user.getSexe());
+            pstmt.setString(9, user.getAdresse());
+            pstmt.setInt(10, user.getNumero());
+
+            pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.err.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
         }
     }
-
     @Override
     public void update(user user) {
-        String SQL = "UPDATE `user` SET `cin`=?,`nom`=?,`prenom`=?,`email`=?,`username`=?,`password`=?,`role`=?,`sexe`=?,`adresse`=?,`numero`=? WHERE id =  ?";
-        try{
-            PreparedStatement pstmt2 = conn.prepareStatement(SQL);
+        String SQL_SELECT = "SELECT password FROM user WHERE id = ?";
+        String SQL_UPDATE = "UPDATE `user` SET `cin`=?, `nom`=?, `prenom`=?, `email`=?, `username`=?, `password`=?, `role`=?, `sexe`=?, `adresse`=?, `numero`=? WHERE id = ?";
+
+        try {
+            // 1️⃣ Récupérer l'ancien mot de passe
+            PreparedStatement pstmt1 = conn.prepareStatement(SQL_SELECT);
+            pstmt1.setInt(1, user.getId());
+            ResultSet rs = pstmt1.executeQuery();
+
+            String oldPassword = null;
+            if (rs.next()) {
+                oldPassword = rs.getString("password"); // L'ancien mot de passe haché
+            }
+            rs.close();
+            pstmt1.close();
+
+            // 2️⃣ Vérifier si l'utilisateur a entré un nouveau mot de passe
+            String finalPassword;
+            if (user.getPassword() == null || user.getPassword().isEmpty()) {
+                finalPassword = oldPassword; // Garder l'ancien mot de passe haché
+            } else {
+                finalPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()); // Hacher le nouveau mot de passe
+            }
+
+            // 3️⃣ Mise à jour de l'utilisateur
+            PreparedStatement pstmt2 = conn.prepareStatement(SQL_UPDATE);
             pstmt2.setInt(1, user.getCin());
             pstmt2.setString(2, user.getNom());
             pstmt2.setString(3, user.getPrenom());
             pstmt2.setString(4, user.getEmail());
             pstmt2.setString(5, user.getUsername());
-            pstmt2.setString(6, user.getPassword());
+            pstmt2.setString(6, finalPassword); // Utiliser le mot de passe final (ancien ou haché)
             pstmt2.setString(7, user.getRole());
             pstmt2.setString(8, user.getSexe());
             pstmt2.setString(9, user.getAdresse());
             pstmt2.setInt(10, user.getNumero());
             pstmt2.setInt(11, user.getId());
-            pstmt2.executeUpdate();
+
+            int rowsUpdated = pstmt2.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("✅ Utilisateur mis à jour avec succès !");
+            } else {
+                System.out.println("⚠️ Aucun utilisateur mis à jour.");
+            }
+            pstmt2.close();
+
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("❌ Erreur lors de la mise à jour de l'utilisateur : " + e.getMessage());
         }
     }
 
@@ -105,21 +140,23 @@ public class userService implements IService<user> {
     }
 
     public boolean authenticateUser(String username, String password) {
-        String query = "SELECT * FROM user WHERE email = ? AND password = ?";
+        String query = "SELECT password FROM user WHERE email = ?";
         try (PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setString(1, username);
-            statement.setString(2, password);
             try (ResultSet resultSet = statement.executeQuery()) {
-                return resultSet.next(); // If a row is found, the user is authenticated
+                if (resultSet.next()) {
+                    String hashedPassword = resultSet.getString("password");
+
+                    // 🔑 Vérification du mot de passe saisi avec le hash stocké
+                    return BCrypt.checkpw(password, hashedPassword);
+                }
             }
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-            return false;
-        } catch (Exception ex) {
-            System.err.println(ex.getMessage());
-            return false;
+            System.err.println("Erreur SQL lors de l'authentification : " + ex.getMessage());
         }
+        return false;
     }
+
 
     public user HetUser(String email) {
         PreparedStatement pstmt = null;
@@ -158,6 +195,34 @@ public class userService implements IService<user> {
 
     }
 
+    public int getUserIdByEmail(String email) {
+        String sql = "SELECT id FROM user WHERE email = ?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur SQL: " + e.getMessage());
+        }
+        return -1;
+    }
+
+    public void modifyPassword(int userId, String newPassword) {
+        String sql = "UPDATE user SET password = ? WHERE id = ?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+            pstmt.setString(1, hashedPassword);
+            pstmt.setInt(2, userId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

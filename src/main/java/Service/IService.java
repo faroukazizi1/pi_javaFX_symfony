@@ -11,4 +11,6 @@ public interface IService<T> {
     public boolean authenticateUser(String username, String password);
     public user HetUser(String email);
     List<T> getPromotionsByUserId(int id);
+    public int getUserIdByEmail(String email);
+    public void modifyPassword(int userId, String newPassword);
 }
