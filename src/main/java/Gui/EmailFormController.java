@@ -1,4 +1,4 @@
-package GroupSuccess.esprit;
+package Gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

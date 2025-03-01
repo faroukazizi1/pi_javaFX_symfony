@@ -1,9 +1,9 @@
-package GroupSuccess.esprit;
+package Gui;
 
-import Services.BulletinPaieService;
+import Service.BulletinPaieService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import models.BulletinPaie;
+import Model.BulletinPaie;
 
 import java.math.BigDecimal;
 

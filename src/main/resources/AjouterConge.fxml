@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns:fx="http://javafx.com/javafx"
-            fx:controller="GroupSuccess.esprit.AjouterCongeController"
+            fx:controller="Gui.AjouterCongeController"
             prefWidth="450" prefHeight="350">
 
     <VBox alignment="CENTER" spacing="30" layoutX="50" layoutY="30">

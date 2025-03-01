@@ -7,7 +7,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="GroupSuccess.esprit.GestionPaieController"
+            fx:controller="Gui.GestionPaieController"
             prefHeight="400.0" prefWidth="600.0">
 
     <TableView fx:id="tablePaie" layoutX="50" layoutY="50" prefWidth="500" prefHeight="200">

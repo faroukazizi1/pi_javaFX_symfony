@@ -1,16 +1,15 @@
-package GroupSuccess.esprit;
+package Gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import models.DemandeConge;
-import Services.GestionConge;
+import Model.DemandeConge;
+import Service.GestionConge;
 
 import javafx.scene.input.MouseEvent; // Import MouseEvent
 

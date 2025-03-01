@@ -1,18 +1,17 @@
-package GroupSuccess.esprit;
+package Gui;
 
-import Services.BulletinPaieService;
+import Service.BulletinPaieService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
-import models.BulletinPaie;
-import models.TypeConge;
+import Model.BulletinPaie;
+import Model.TypeConge;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 

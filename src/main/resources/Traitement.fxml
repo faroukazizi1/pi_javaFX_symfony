@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="GroupSuccess.esprit.TraitementDemandeController" alignment="CENTER" spacing="20">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="Gui.TraitementDemandeController" alignment="CENTER" spacing="20">
 
     <TableView fx:id="tableDemandeConge" prefHeight="400" prefWidth="800">
         <columns>

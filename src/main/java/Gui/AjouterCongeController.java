@@ -1,4 +1,4 @@
-package GroupSuccess.esprit;
+package Gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,8 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import models.TypeConge;
-import Services.GestionConge;
+import Model.TypeConge;
+import Service.GestionConge;
 
 import java.io.IOException;
 import java.time.LocalDate;

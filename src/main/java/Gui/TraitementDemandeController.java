@@ -1,13 +1,13 @@
-package GroupSuccess.esprit;
+package Gui;
 
-import Services.GestionConge;
+import Service.GestionConge;
 import Util.DBconnection;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import models.StatutDemande;
-import models.DemandeConge;
+import Model.StatutDemande;
+import Model.DemandeConge;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

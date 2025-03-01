@@ -1,7 +1,7 @@
-package Services;
+package Service;
 
 import Util.DBconnection;
-import models.BulletinPaie;
+import Model.BulletinPaie;
 import java.sql.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;

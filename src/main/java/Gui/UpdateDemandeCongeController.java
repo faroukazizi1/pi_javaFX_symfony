@@ -1,4 +1,4 @@
-package GroupSuccess.esprit;
+package Gui;
 
 import Util.DBconnection;
 import javafx.collections.FXCollections;
@@ -7,9 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
-import models.DemandeConge;
-import Services.GestionConge;
-import models.TypeConge;
+import Model.DemandeConge;
+import Service.GestionConge;
+import Model.TypeConge;
 
 public class UpdateDemandeCongeController {
 
