@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.GestionCongeController">
+
+    <TableView fx:id="tableConge" layoutX="50" layoutY="50" prefHeight="350" prefWidth="700">
+        <columns>
+            <TableColumn fx:id="employeIdColumn" prefWidth="120" text="Employé ID" />
+            <TableColumn fx:id="typeColumn" prefWidth="120" text="Type" />
+            <TableColumn fx:id="debutColumn" prefWidth="120" text="Début" />
+            <TableColumn fx:id="finColumn" prefWidth="120" text="Fin" />
+            <TableColumn fx:id="statutColumn" prefWidth="120" text="Statut" />
+            <TableColumn fx:id="actionColumn" prefWidth="100" text="Action" />
+
+        </columns>
+    </TableView>
+
+</AnchorPane>
