@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/javafx"
+            fx:controller="GroupSuccess.esprit.AjouterCongeController"
+            prefWidth="450" prefHeight="350">
+
+    <VBox alignment="CENTER" spacing="30" layoutX="50" layoutY="30">
+        <HBox spacing="25">
+            <Label text="Type de Congé" />
+            <ComboBox fx:id="typeCongeComboBox" prefWidth="180" />
+        </HBox>
+
+        <HBox spacing="25">
+            <Label text="Date Début" />
+            <DatePicker fx:id="debutDatePicker" />
+        </HBox>
+
+        <HBox spacing="25">
+            <Label text="Date Fin" />
+            <DatePicker fx:id="finDatePicker" />
+        </HBox>
+
+        <HBox spacing="50">
+            <Button fx:id="btnValider" text="Valider" onAction="#handleValiderAction"/>
+            <Button fx:id="btnAnnuler" text="Annuler" onAction="#handleAnnulerAction"/>
+        </HBox>
+
+        <Button text="Afficher Demandes" fx:id="btnAfficher" onAction="#handleAfficherAction"/>
+
+    </VBox>
+
+</AnchorPane>

@@ -20,6 +20,14 @@ public class DBconnection {
     }
 
     public Connection getConn() {
+        try {
+            if (conn == null || conn.isClosed()) {
+                this.conn = DriverManager.getConnection(url, user, password);
+                System.out.println("Connection re-established");
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to reconnect: " + e.getMessage());
+        }
         return conn;
     }
 
@@ -27,11 +35,18 @@ public class DBconnection {
         try {
             this.conn = DriverManager.getConnection(url, user, password);
             System.out.println("Connection established");
-
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error during connection: " + e.getMessage());
         }
     }
-
-
+    public void closeConnection() {
+        try {
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+                System.out.println("Connection closed");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error closing connection: " + e.getMessage());
+        }
+    }
 }

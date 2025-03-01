@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="GroupSuccess.esprit.TraitementDemandeController" alignment="CENTER" spacing="20">
+
+    <TableView fx:id="tableDemandeConge" prefHeight="400" prefWidth="800">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="100" />
+            <TableColumn fx:id="employeColumn" text="Employé" prefWidth="150" />
+            <TableColumn fx:id="typeCongeColumn" text="Type de Congé" prefWidth="150" />
+            <TableColumn fx:id="dateDebutColumn" text="Date Début" prefWidth="150" />
+            <TableColumn fx:id="dateFinColumn" text="Date Fin" prefWidth="150" />
+            <TableColumn fx:id="dateDemandeColumn" text="Date Demande" prefWidth="150" />
+            <TableColumn fx:id="statutColumn" text="Statut" prefWidth="120" />
+        </columns>
+    </TableView>
+
+    <ComboBox fx:id="comboStatut" promptText="Choisir un statut" />
+
+    <HBox spacing="10">
+        <Button fx:id="btnTraiter" text="Traiter Demande" onAction="#handleTraiterDemande" />
+    </HBox>
+</VBox>
