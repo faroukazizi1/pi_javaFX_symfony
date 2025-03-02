@@ -26,6 +26,7 @@ public class AjouterCongeController {
 
     @FXML
     public void initialize() {
+
         if (typeCongeComboBox != null) {
             ObservableList<TypeConge> typesConges = FXCollections.observableArrayList(TypeConge.values());
             typeCongeComboBox.setItems(typesConges);

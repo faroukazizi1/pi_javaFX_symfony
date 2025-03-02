@@ -149,7 +149,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="RECLAMATION">
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="CONGES">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>

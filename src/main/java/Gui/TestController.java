@@ -40,16 +40,40 @@ public class TestController {
     @FXML private TableColumn<BulletinPaie, String> colDeductions;
     @FXML private TableColumn<BulletinPaie, String> colSalaireNet;
 
+    // Tabs
+    @FXML private TabPane tabPane;
+    @FXML private Tab tabConge;
+    @FXML private Tab tabBulletinPaie;
+    @FXML private Tab tabTraitement;
+    @FXML private Tab tabCreationBulletin;
+
     @FXML
     public void initialize() {
+        // Existing initialization logic...
+
+        // Get the user session
+        UserSession session = UserSession.getInstance();
+        if (session != null) {
+            String role = session.getRole();
+
+            if ("RHR".equals(role)) {
+                // Show only Traitement de demandes & Création Bulletin de Paie
+                tabPane.getTabs().remove(tabConge);
+                tabPane.getTabs().remove(tabBulletinPaie);
+            } else if ("Employé".equals(role)) {
+                // Show only Congé & Bulletin de Paie
+                tabPane.getTabs().remove(tabTraitement);
+                tabPane.getTabs().remove(tabCreationBulletin);
+            }
+        }
+
+        // Configure ComboBox for Type de Congé
         if (typeCongeComboBox != null) {
             ObservableList<TypeConge> typesConges = FXCollections.observableArrayList(TypeConge.values());
             typeCongeComboBox.setItems(typesConges);
-
-            // Debugging: Check the combo items
-            typesConges.forEach(type -> System.out.println(type));
         }
 
+        // Set up Table Columns for Bulletin de Paie
         if (colSalaireBrut != null) {
             colSalaireBrut.setCellValueFactory(new PropertyValueFactory<>("salaireBrut"));
             colDeductions.setCellValueFactory(new PropertyValueFactory<>("deductions"));

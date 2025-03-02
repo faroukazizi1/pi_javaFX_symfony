@@ -305,6 +305,25 @@ public class AfficherUser {
         }
     }
 
+    @FXML
+    public void openGestionConges(ActionEvent event){
+        try {
+            // Charger le fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Main.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            stage.setScene(new Scene(root));
+
+            stage.setTitle("Gestion des Conges");
+
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
