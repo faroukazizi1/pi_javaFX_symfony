@@ -1,5 +1,6 @@
 package GroupSuccess.esprit;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,11 +8,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class TestFX extends Application {
 
-    public static void main(String[] args) {
-        launch(args);
+    public static void main(MysqlxDatatypes.Scalar.String[] args) {
+        launch(Arrays.toString(args));
     }
 
     @Override
