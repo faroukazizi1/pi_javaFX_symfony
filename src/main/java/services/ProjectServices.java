@@ -172,4 +172,68 @@ public class ProjectServices implements IService<Project> {
 
         return projectId;
     }
+    public void activateProject(int projectId) {
+        String query = "UPDATE project SET statut = 'active' WHERE id = ? AND statut = 'inactive'";
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, projectId);
+            int rowsUpdated = ps.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println(" Project activated successfully!");
+            } else {
+                System.out.println(" No inactive project found with ID: " + projectId);
+            }
+        } catch (SQLException e) {
+            System.out.println(" Activation Error: " + e.getMessage());
+        }
+    }
+    public void deactivateProject(int projectId) {
+        String query = "UPDATE project SET statut = 'inactive' WHERE id = ? AND statut = 'active'";
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, projectId);
+            int rowsUpdated = ps.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println(" Project deactivated successfully!");
+            } else {
+                System.out.println(" No active project found with ID: " + projectId);
+            }
+        } catch (SQLException e) {
+            System.out.println(" Deactivation Error: " + e.getMessage());
+        }
+    }
+    public List<Project> readActiveProjects() {
+        return getProjectsByStatus("active");
+    }
+
+    public List<Project> readInactiveProjects() {
+        return getProjectsByStatus("inactive");
+    }
+
+    private List<Project> getProjectsByStatus(String status) {
+        List<Project> projects = new ArrayList<>();
+        String query = "SELECT * FROM project WHERE statut = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, status);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                projects.add(mapResultSetToProject(rs));
+            }
+        } catch (SQLException e) {
+            System.out.println(" Error fetching " + status + " projects: " + e.getMessage());
+        }
+        return projects;
+    }
+
+    private static Project mapResultSetToProject(ResultSet rs) throws SQLException {
+        Project project = new Project();
+        project.setId(rs.getInt("id"));
+        project.setTitre(rs.getString("titre"));
+        project.setDescription(rs.getString("description"));
+        project.setStatut(rs.getString("statut"));
+        project.setDate_debut(rs.getDate("date_debut"));
+        project.setDate_fin(rs.getDate("date_fin"));
+        return project;
+    }
 }

@@ -20,10 +20,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Taskmanager {
-    @FXML
-private TableView<ProjectTask> taskTable;
-
-    @FXML private TableColumn<ProjectTask, Integer> idColumn;
+    //Show all tasks
+    @FXML private TableView<ProjectTask> taskTable;
     @FXML private TableColumn<ProjectTask, String> titreColumn;
     @FXML private TableColumn<ProjectTask, String> descriptionColumn;
     @FXML private TableColumn<ProjectTask, String> dateColumn;
@@ -113,7 +111,6 @@ private TableView<ProjectTask> taskTable;
 
 
     private void populateTable(List<ProjectTask> tasks) {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         titreColumn.setCellValueFactory(new PropertyValueFactory<>("titre"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));

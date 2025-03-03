@@ -109,7 +109,7 @@ public class UpdateTaskController {
                 taskService.update(selectedTask);
 
                 // Show success alert
-                showAlert("Success", "Task updated successfully!", Alert.AlertType.INFORMATION);
+                showAlert("Success", "Task '" + selectedTask.getTitre() + "' updated successfully!", Alert.AlertType.INFORMATION);
 
                 // Close the update window (optional)
                 Stage stage = (Stage) titreField.getScene().getWindow();

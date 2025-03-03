@@ -6,6 +6,7 @@ import Util.Modals;
 import Util.TaskUpdateListener;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,12 +16,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.input.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.BoxBlur;
 //import javafx.scene.input.MouseEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -36,10 +39,12 @@ import services.UserService;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Projects  implements TaskUpdateListener {
 
+    public Button Association_Btn;
     UserService userService = new UserService();
     ProjectServices projectService = new ProjectServices();
     ProjectTaskService projectTaskService = new ProjectTaskService();
@@ -63,6 +68,11 @@ public class Projects  implements TaskUpdateListener {
     @FXML private Button Home_Btn, statut_btn;
 
     @FXML private MFXComboBox<KeyValuePair<Integer>> user_select;
+
+    @FXML
+    private TabPane projectTabPane;
+
+    public static final DataFormat TASK_FORMAT = new DataFormat("application/x-task");
 
     public void onHomeButtonClick(ActionEvent actionEvent) {
     }
@@ -128,10 +138,13 @@ public class Projects  implements TaskUpdateListener {
 
         stage.showAndWait();
         showProjects();
+        //actualiser la liste affichée des projets dans la table.
+       // numOfProjects.setText(String.valueOf(projectService.getAll().size()));
         primaryStage.getScene().getRoot().setEffect(null);
     }
 
-    public void openCalendar(ActionEvent actionEvent) {
+    public void openCalendar()throws SQLException {
+        CalendarController.openCalendar();
     }
 
     @FXML
@@ -140,8 +153,29 @@ public class Projects  implements TaskUpdateListener {
         if (statut_txt != null) {
             statut_txt.setText("Projet (" + selectedProject.getTitre() + "): " + selectedProject.getStatut());
             statut_btn.setDisable(false);
-            statut_btn.setText(selectedProject.getStatut().equals("active") ? "Terminer" : "Activer");
+            statut_btn.setText(selectedProject.getStatut().equals("active") ? "Disable" : "Active");
         }
+    }
+    @FXML
+    void changeStatut() throws Exception {
+        if (selectedProject == null) {
+            Modals.displayError("Error occurred while changing statut", "Please select a project to change statut");
+            return;
+        }
+
+        if (selectedProject.getStatut().equals("inactive")) {
+
+            projectService.activateProject(selectedProject.getId());
+        } else {
+            projectService.deactivateProject(selectedProject.getId());
+        }
+
+        showProjects();
+
+        selectedProject = null;
+        statut_txt.setText("");
+        statut_btn.setText("Statut");
+        statut_btn.setDisable(true);
     }
 
     @FXML
@@ -174,75 +208,28 @@ public class Projects  implements TaskUpdateListener {
         }
     }
 
-
-    @FXML
-    public void showTasks() {
-        System.out.println("show");
-
-        // Création des conteneurs pour les tâches des statuts (à faire, en cours, terminées)
-        VBox toDovBox = new VBox();
-        toDovBox.setSpacing(10);
-        toDovBox.setAlignment(Pos.CENTER);
-        toDovBox.setPrefWidth(230);
-        toDovBox.setMaxHeight(100);
-
-        VBox inProgressvBox = new VBox();
-        inProgressvBox.setSpacing(10);
-        inProgressvBox.setAlignment(Pos.CENTER);
-        inProgressvBox.setPrefWidth(230);
-        inProgressvBox.setMaxHeight(100);
-
-        VBox donevBox = new VBox();
-        donevBox.setSpacing(10);
-        donevBox.setAlignment(Pos.CENTER);
-        donevBox.setPrefWidth(230);
-        donevBox.setMaxHeight(100);
-
-        try {
-            List<ProjectTask> tasks = projectTaskService.getTasksByUser(user_select.getSelectionModel().getSelectedItem().getActualValue());
-
-            for (ProjectTask task : tasks) {
-                FXMLLoader loader = new FXMLLoader(Main.class.getResource("/project/task.fxml"));
-                Parent taskLoader = loader.load();
-                TaskController taskController = loader.getController();
-
-                taskController.setTask(task);
-                taskController.setUpdateListener(this);
-
-                // Ajoute la tâche au conteneur approprié
-                switch (task.getStatut()) {
-                    case TODO:
-                        toDovBox.getChildren().add(taskLoader);
-                        break;
-                    case IN_PROGRESS:
-                        inProgressvBox.getChildren().add(taskLoader);
-                        break;
-                    case DONE:
-                        donevBox.getChildren().add(taskLoader);
-                        break;
-                }
-            }
-
-            // Ajoute le contenu à la vue correspondante
-            todo_tasks.setContent(toDovBox);
-            inprogress_tasks.setContent(inProgressvBox);
-            done_tasks.setContent(donevBox);
-        } catch (Exception e) {
-            System.err.println("error: " + e.getMessage());
-        }
-    }
-
-    public void changeStatut(ActionEvent actionEvent) {
-    }
-
     public void initialize() throws Exception {
+        User currentUser = User.CURRENT_USER;
+
+        // If user is not admin, redirect to Tasks tab
+        if (!currentUser.isAdmin()) {
+            // Wait for the FXML to fully load, then select the Tasks tab (index 1)
+            Platform.runLater(() -> {
+                // Select the Tasks tab (assuming it's the second tab with index 1)
+                projectTabPane.getSelectionModel().select(1);
+
+                // Optionally, disable the Projects tab for non-admin users
+                projectTabPane.getTabs().get(0).setDisable(true);
+            });
+        }
         List<User> users = userService.getAll();
         for (User user : users) {
             user_select.getItems().addAll(new KeyValuePair<>(user.getNom(), user.getId()));
         }
+        numOfProjects.setText(String.valueOf(projectService.getAll().size()));
         showProjects();
-
     }
+
     @FXML
     void onUpdateProject(ActionEvent event) throws Exception {
         if (selectedProject == null) {
@@ -253,7 +240,6 @@ public class Projects  implements TaskUpdateListener {
         BoxBlur blur = new BoxBlur(3, 3, 3);
         Node source = (Node) event.getSource();
         Stage primaryStage = (Stage) source.getScene().getWindow();
-
         primaryStage.getScene().getRoot().setEffect(blur);
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/project/editProject.fxml"));
@@ -284,6 +270,10 @@ public class Projects  implements TaskUpdateListener {
         description_col.setCellValueFactory(new PropertyValueFactory<>("description"));
         date_fin_col.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
         statut_col.setCellValueFactory(new PropertyValueFactory<>("statut"));
+        // Mise à jour du nombre de projets
+        numOfProjects.setText(String.valueOf(projects.size()));
+        numOfActiveProjects.setText(String.valueOf(projectService.readActiveProjects().size()));
+        numOfInactiveProjects.setText(String.valueOf(projectService.readInactiveProjects().size()));
     }
     @Override
     public void onTaskUpdated(ProjectTask task) {
@@ -304,4 +294,192 @@ public class Projects  implements TaskUpdateListener {
             e.printStackTrace();
         }
     }
+
+
+    private void setupDragAndDropForColumn(MFXScrollPane scrollPane, ProjectTask.Statut targetStatus) {
+        // Get or create the VBox content
+        VBox content;
+        if (scrollPane.getContent() instanceof VBox) {
+            content = (VBox) scrollPane.getContent();
+        } else {
+            // If for some reason the content is not a VBox, create one
+            content = new VBox();
+            content.setSpacing(10);
+            content.setAlignment(Pos.CENTER);
+            content.setPrefWidth(230);
+            scrollPane.setContent(content);
+        }
+
+        // First, make the ScrollPane itself a drop target
+        scrollPane.setOnDragOver(event -> {
+            if (event.getDragboard().hasContent(TASK_FORMAT)) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+            event.consume();
+        });
+
+        scrollPane.setOnDragEntered(event -> {
+            if (event.getDragboard().hasContent(TASK_FORMAT)) {
+                scrollPane.setStyle("-fx-background-color: rgba(0, 191, 255, 0.1); -fx-border-color: #00BFFF; -fx-border-width: 2; -fx-border-style: dashed;");
+            }
+            event.consume();
+        });
+
+        scrollPane.setOnDragExited(event -> {
+            scrollPane.setStyle("");
+            event.consume();
+        });
+
+        scrollPane.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+
+            if (db.hasContent(TASK_FORMAT)) {
+                Integer taskId = (Integer) db.getContent(TASK_FORMAT);
+                try {
+                    projectTaskService.updateTaskStatus(taskId, targetStatus);
+                    showTasks();
+                    success = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Modals.displayError("Error", "Failed to update task status: " + e.getMessage());
+                }
+            }
+
+            event.setDropCompleted(success);
+            event.consume();
+        });
+
+        // Then also set up the VBox content as a drop target (for completeness)
+        content.setOnDragOver(event -> {
+            if (event.getDragboard().hasContent(TASK_FORMAT)) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+            event.consume();
+        });
+
+        content.setOnDragEntered(event -> {
+            if (event.getDragboard().hasContent(TASK_FORMAT)) {
+                content.setStyle("-fx-background-color: rgba(0, 191, 255, 0.1); -fx-border-color: #00BFFF; -fx-border-width: 2; -fx-border-style: dashed;");
+            }
+            event.consume();
+        });
+
+        content.setOnDragExited(event -> {
+            content.setStyle("");
+            event.consume();
+        });
+
+        content.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+
+            if (db.hasContent(TASK_FORMAT)) {
+                Integer taskId = (Integer) db.getContent(TASK_FORMAT);
+                try {
+                    projectTaskService.updateTaskStatus(taskId, targetStatus);
+                    showTasks();
+                    success = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Modals.displayError("Error", "Failed to update task status: " + e.getMessage());
+                }
+            }
+
+            event.setDropCompleted(success);
+            event.consume();
+        });
+    }
+    // Add a DataFormat constant at the class level
+
+
+    // Update the showTasks method to set up drag-and-drop for each column
+    @FXML
+    public void showTasks() {
+        System.out.println("show");
+
+
+        VBox toDovBox = new VBox();
+        toDovBox.setSpacing(10);
+        toDovBox.setAlignment(Pos.CENTER);
+        toDovBox.setPrefWidth(230);
+        toDovBox.setMinHeight(300);
+
+        VBox inProgressvBox = new VBox();
+        inProgressvBox.setSpacing(10);
+        inProgressvBox.setAlignment(Pos.CENTER);
+        inProgressvBox.setPrefWidth(230);
+        inProgressvBox.setMinHeight(300);
+
+        VBox donevBox = new VBox();
+        donevBox.setSpacing(10);
+        donevBox.setAlignment(Pos.CENTER);
+        donevBox.setPrefWidth(230);
+        donevBox.setMinHeight(300);
+
+        try {
+
+            KeyValuePair<Integer> selectedUser = user_select.getSelectionModel().getSelectedItem();
+            if (selectedUser == null) {
+                Modals.displayInfo("No User Selected", "Please select a user to view their tasks.");
+                return;
+            }
+
+            List<ProjectTask> tasks = projectTaskService.getTasksByUser(selectedUser.getActualValue());
+
+            for (ProjectTask task : tasks) {
+                FXMLLoader loader = new FXMLLoader(Main.class.getResource("/project/task.fxml"));
+                Parent taskLoader = loader.load();
+                TaskController taskController = loader.getController();
+
+                taskController.setTask(task);
+                taskController.setUpdateListener(this);
+
+                // Ajoute la tâche au conteneur approprié
+                switch (task.getStatut()) {
+                    case TODO:
+                        toDovBox.getChildren().add(taskLoader);
+                        break;
+                    case IN_PROGRESS:
+                        inProgressvBox.getChildren().add(taskLoader);
+                        break;
+                    case DONE:
+                        donevBox.getChildren().add(taskLoader);
+                        break;
+                }
+            }
+
+            // Add placeholder messages for empty columns
+            if (toDovBox.getChildren().isEmpty()) {
+                Label placeholder = new Label("Drop tasks here");
+                placeholder.setStyle("-fx-text-fill: #888888; -fx-font-style: italic;");
+                toDovBox.getChildren().add(placeholder);
+            }
+
+            if (inProgressvBox.getChildren().isEmpty()) {
+                Label placeholder = new Label("Drop tasks here");
+                placeholder.setStyle("-fx-text-fill: #888888; -fx-font-style: italic;");
+                inProgressvBox.getChildren().add(placeholder);
+            }
+
+            if (donevBox.getChildren().isEmpty()) {
+                Label placeholder = new Label("Drop tasks here");
+                placeholder.setStyle("-fx-text-fill: #888888; -fx-font-style: italic;");
+                donevBox.getChildren().add(placeholder);
+            }
+
+            todo_tasks.setContent(toDovBox);
+            inprogress_tasks.setContent(inProgressvBox);
+            done_tasks.setContent(donevBox);
+
+            setupDragAndDropForColumn(todo_tasks, ProjectTask.Statut.TODO);
+            setupDragAndDropForColumn(inprogress_tasks, ProjectTask.Statut.IN_PROGRESS);
+            setupDragAndDropForColumn(done_tasks, ProjectTask.Statut.DONE);
+
+        } catch (Exception e) {
+            System.err.println("error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+   
     }
