@@ -77,8 +77,6 @@ public class AfficherUser {
         if (!"RHR".equals(userRole)) { // Si ce n'est pas un Responsable RH
             tableView.setVisible(false); // Masquer la table des utilisateurs
             button_ajouter.setVisible(false);
-
-
             return;
         }
 

@@ -14,7 +14,6 @@
             fx:controller="controllers.AddProject"
             prefHeight="400.0" prefWidth="600.0">
 
-
     <MFXGenericDialog onClose="#onClose" onMinimize="#onMinimize" stylesheets="@../project.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" >
         <center>
             <VBox alignment="TOP_CENTER" prefHeight="518.0" prefWidth="400.0" spacing="20.0" BorderPane.alignment="CENTER">

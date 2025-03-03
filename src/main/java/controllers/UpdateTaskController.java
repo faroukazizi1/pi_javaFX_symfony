@@ -19,28 +19,21 @@ import java.util.List;
 
 public class UpdateTaskController {
 
-    @FXML
-    private TextField titreField;
-    @FXML
-    private Label titre_task_error;
+    @FXML private TextField titreField;
+    @FXML private Label titre_task_error;
 
-    @FXML
-    private MFXTextField descriptionField;
-    @FXML
-    private Label description_error;
+    @FXML private MFXTextField descriptionField;
+    @FXML private Label description_error;
 
-    @FXML
-    private MFXDatePicker dateField;
-    @FXML
-    private Label datefield_error;
+    @FXML private MFXDatePicker dateField;
+    @FXML private Label datefield_error;
 
     @FXML private MFXComboBox<String> projectComboBox;
     @FXML private MFXComboBox<String> userComboBox;
 
-    private ProjectServices x = new ProjectServices();
-    private userService u = new userService();
 
-
+    private final ProjectServices x = new ProjectServices();
+    private final userService y = new userService();
 
     private ProjectTask selectedTask;
 
@@ -115,7 +108,7 @@ public class UpdateTaskController {
                 taskService.update(selectedTask);
 
                 // Show success alert
-                showAlert("Success", "Task updated successfully!", Alert.AlertType.INFORMATION);
+                showAlert("Success", "Task '" + selectedTask.getTitre() + "' updated successfully!", Alert.AlertType.INFORMATION);
 
                 // Close the update window (optional)
                 Stage stage = (Stage) titreField.getScene().getWindow();
@@ -140,21 +133,16 @@ public class UpdateTaskController {
         alert.showAndWait();
     }
 
-    public void initialize() {
-        // Remplir le comboBox des projets
-        List<Project> projects = x.getAll();
-        projectComboBox.getItems().addAll(
-                projects.stream().map(Project::getTitre).toList()
-        );
-
-        // Remplir le comboBox des utilisateurs
-        List<user> users = u.getAll();
-        System.out.println("Users found: " + users.size());
-        userComboBox.getItems().addAll(
-                users.stream().map(user::getUsername).toList()
-        );
+    public void initialize(){
+        List<Project> projectNames = x.getAll(); // Get all projects
+        for (Project project : projectNames) {
+            projectComboBox.getItems().add(project.getTitre()); // Add project titles to the combo box
+        }
+        List<user> users = y.getAll(); // Get all users
+        for (user user : users) {
+            userComboBox.getItems().add(user.getNom()); // Add user_names to the combo box
+        }
     }
-
 
     public void onClose(MouseEvent mouseEvent) {
     }

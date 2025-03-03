@@ -55,6 +55,20 @@ public class ProjectTaskService {
         }
         return projectTasks;
     }
+    public void updateTaskStatus(int taskId, ProjectTask.Statut targetedStatut) throws SQLException {
+        String query = "UPDATE project_task SET statut = ? WHERE id = ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, targetedStatut.toString());
+            preparedStatement.setInt(2, taskId);
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Aucune tâche trouvée avec l'ID : " + taskId);
+            } else {
+                System.out.println("Statut mis à jour avec succès.");
+            }
+        }
+    }
+
 
     public void delete(int taskId) throws SQLException {
         String query = "DELETE FROM project_task WHERE id = ?";

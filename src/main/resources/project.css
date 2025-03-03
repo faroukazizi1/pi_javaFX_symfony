@@ -215,3 +215,39 @@
     -fx-border-radius: 5px;
     /*-fx-border-width: 1px;*/
 }
+/* Add these styles to your project.css file */
+
+/* Task card styling */
+.task-card {
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.task-card:hover {
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 5);
+}
+
+/* Styling for the task columns during drag-over */
+.drop-target-hover {
+    -fx-border-color: #3498db;
+    -fx-border-width: 2px;
+    -fx-border-style: dashed;
+    -fx-border-radius: 5px;
+}
+
+/* Status colors */
+.todo-status {
+    -fx-fill: #e74c3c; /* Red for TODO */
+}
+
+.in-progress-status {
+    -fx-fill: #f39c12; /* Orange for IN_PROGRESS */
+}
+
+.done-status {
+    -fx-fill: #2ecc71; /* Green for DONE */
+}

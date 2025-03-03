@@ -6,44 +6,36 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import models.Project;
 import services.ProjectServices;
 
 import java.sql.Date;
+import java.time.LocalDate;
 //import java.time.LocalDate;
 
 public class AddProject {
 
     ProjectServices projectService = new ProjectServices();
 
-    @FXML
-    private MFXTextField nom_projet;
-    @FXML
-    private Label nom_projet_error;
+    @FXML private MFXTextField nom_projet;
+    @FXML private Label nom_projet_error;
 
-    @FXML
-    private MFXTextField description_projet;
-    @FXML
-    private Label description_projet_error;
+    @FXML private MFXTextField description_projet;
+    @FXML private Label description_projet_error;
 
-    @FXML
-    private MFXDatePicker date_debut_projet;
-    @FXML
-    private Label date_debut_projet_error;
+    @FXML private MFXDatePicker date_debut_projet;
+    @FXML private Label date_debut_projet_error;
 
-    @FXML
-    private MFXDatePicker date_fin_projet;
-    @FXML
-    private Label date_fin_projet_error;
+    @FXML private MFXDatePicker date_fin_projet;
+    @FXML private Label date_fin_projet_error;
 
-    @FXML
-    public MFXButton add_project_btn;
+    @FXML public MFXButton add_project_btn;
 
     public void onClose() {
         add_project_btn.getScene().getWindow().hide();
     }
-    public void onMinimize() {}
-    public void initialize() {}
+    public void onMinimize() { ((Stage) add_project_btn.getScene().getWindow()).setIconified(true);}
 
     private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
@@ -65,56 +57,56 @@ public class AddProject {
         boolean isError = false;
         resetInputsErrors();
 
-        if (nom_projet.getText().isEmpty()) {
+        String titre = nom_projet.getText().trim();
+        String description = description_projet.getText().trim();
+        LocalDate dateDebut = date_debut_projet.getValue();
+        LocalDate dateFin = date_fin_projet.getValue();
+
+        // Vérifier si le champ est vide ou contient seulement des espaces
+        if (titre.isEmpty()) {
             nom_projet_error.setText("This field is required");
             isError = true;
-        }
-        if (nom_projet.getText().matches("\\d+")) {
+        } else if (titre.matches("\\d+")) { // Vérifier si c'est uniquement des chiffres
             nom_projet_error.setText("Project name cannot be only numbers.");
             isError = true;
         }
 
-        if (description_projet.getText().isEmpty()) {
+        if (description.isEmpty()) {
             description_projet_error.setText("This field is required");
             isError = true;
-        }
-        if (description_projet.getText().matches("\\d+")) {
+        } else if (description.matches("\\d+")) { // Vérifier si c'est uniquement des chiffres
             description_projet_error.setText("Description cannot be only numbers.");
             isError = true;
         }
 
-        if (date_debut_projet.getValue() == null) {
+        if (dateDebut == null) {
             date_debut_projet_error.setText("This field is required");
             isError = true;
         }
 
-        if (date_fin_projet.getValue() == null) {
+        if (dateFin == null) {
             date_fin_projet_error.setText("This field is required");
+            isError = true;
+        } else if (dateDebut != null && dateFin.isBefore(dateDebut)) {
+            date_fin_projet_error.setText("End date should be after start date");
             isError = true;
         }
 
-        if (date_debut_projet.getValue() != null && date_fin_projet.getValue() != null) {
-            if (date_fin_projet.getValue().isBefore(date_debut_projet.getValue())) {
-                date_fin_projet_error.setText("This field should be after date debut");
-                isError = true;
-            }
-        }
+        // Stopper l'exécution si une erreur est détectée
+        if (isError) return;
 
-        if (isError)
-            return;
-
-        String titre = nom_projet.getText();
-        String description = description_projet.getText();
-        Date date_debut = Date.valueOf(date_debut_projet.getValue());
-        Date date_fin = Date.valueOf(date_fin_projet.getValue());
+        // Conversion des dates pour l'insertion
+        Date sqlDateDebut = Date.valueOf(dateDebut);
+        Date sqlDateFin = Date.valueOf(dateFin);
 
         try {
-            projectService.add(new Project(titre, description, "inactve", date_debut, date_fin));
+            projectService.add(new Project(titre, description, "inactive", sqlDateDebut, sqlDateFin));
             showAlert("Success", "Project added successfully!", Alert.AlertType.INFORMATION);
+            add_project_btn.getScene().getWindow().hide();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             showAlert("Error", "An error occurred while adding the project: " + e.getMessage(), Alert.AlertType.ERROR);
         }
-        add_project_btn.getScene().getWindow().hide();
     }
+
 }

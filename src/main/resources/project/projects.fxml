@@ -121,7 +121,7 @@
                     <padding>
                         <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
                     </padding>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back, User!">
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back, RH!">
                         <font>
                             <Font size="24.0" />
                         </font>
@@ -136,7 +136,7 @@
                         </ImageView>
                     </HBox>
                 </HBox>
-                <TabPane prefHeight="582.0" prefWidth="918.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                <TabPane fx:id="projectTabPane" prefHeight="582.0" prefWidth="918.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                     <Tab text="Project">
                         <VBox prefHeight="525.0" prefWidth="918.0" spacing="20.0" styleClass="body" VBox.vgrow="ALWAYS">
                             <opaqueInsets>
@@ -203,7 +203,7 @@
                             </HBox>
                             <VBox alignment="TOP_RIGHT" prefHeight="342.0" prefWidth="817.0" spacing="20.0">
                                 <HBox prefHeight="20.0" prefWidth="817.0">
-                                    <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="234.0">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="300.0">
                                         <Text fx:id="statut_txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Statut:" />
                                         <Pane prefHeight="38.0" prefWidth="36.0" HBox.hgrow="ALWAYS" />
                                         <Button fx:id="statut_btn" mnemonicParsing="false" onAction="#changeStatut" prefHeight="34.0" prefWidth="81.0" styleClass="button-statut" text="Statut" HBox.hgrow="ALWAYS" />
@@ -222,7 +222,6 @@
                                         <TableColumn fx:id="date_debut_col" prefWidth="100.0" text="Start Date" />
                                         <TableColumn fx:id="date_fin_col" prefWidth="100.0" text="End Date" />
                                         <TableColumn fx:id="statut_col" prefWidth="100.0" text="Statut" />
-
                                     </columns>
                                 </TableView>
                             </VBox>
