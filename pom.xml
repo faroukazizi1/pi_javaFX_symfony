@@ -126,11 +126,7 @@
 
 
 
-        <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
-            <version>1.6.2</version>
-        </dependency>
+
 
         <dependency>
             <groupId>javax.mail</groupId>
@@ -138,11 +134,7 @@
             <version>1.6.2</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>21</version>
-        </dependency>
+
 
         <dependency>
             <groupId>org.openjfx</groupId>

@@ -1,8 +1,7 @@
-package gui;
+package Gui;
 
 import Model.Formateur;
 import Service.FormateurService;
-import Service.MailService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

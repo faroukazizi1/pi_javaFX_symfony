@@ -84,4 +84,11 @@ public class FormateurService implements IService<Formateur> {
         }
         return formateurs;
     }
+    public List<Formateur> getPromotionsByUserId(int id){
+        List<Formateur> Formateur = new ArrayList<>();
+        return Formateur;
+    }
+    public boolean authenticateUser(String username, String password){
+        return true ;
+    }
 }

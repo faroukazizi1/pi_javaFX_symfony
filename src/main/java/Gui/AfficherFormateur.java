@@ -1,4 +1,4 @@
-package gui;
+package Gui;
 
 import Model.Formateur;
 import Service.FormateurService;

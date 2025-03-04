@@ -1,4 +1,4 @@
-package gui;
+package Gui;
 
 import Model.Formation;
 import Service.FormationService;
@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
-import javafx.scene.image.Image;
+
 import javafx.scene.image.ImageView;
 
 

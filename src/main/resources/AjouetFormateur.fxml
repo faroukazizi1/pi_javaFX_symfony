@@ -10,7 +10,7 @@
 <?import javafx.scene.control.ComboBox?>
 <AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css"
             xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="gui.AjouterFormateur">
+            fx:controller="Gui.AjouterFormateur">
 
     <!-- Sidebar -->
     <VBox fx:id="sidebar" alignment="CENTER" prefHeight="500" prefWidth="250" styleClass="sidebar">

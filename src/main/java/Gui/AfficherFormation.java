@@ -1,4 +1,4 @@
-package gui;
+package Gui;
 
 import Model.Formation;
 import Service.FormationService;

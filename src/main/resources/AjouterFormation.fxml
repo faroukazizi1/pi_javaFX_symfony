@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 
 <AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="gui.AjouterFormation"
+            fx:controller="Gui.AjouterFormation"
             prefHeight="500.0" prefWidth="800.0"
             stylesheets="@style.css">
 

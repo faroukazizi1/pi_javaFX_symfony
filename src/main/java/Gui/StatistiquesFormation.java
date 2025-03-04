@@ -1,4 +1,4 @@
-package gui;
+package Gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,13 +11,9 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import Service.FormationService;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;  // Correct import
 import javafx.stage.Stage;
 
 
-import java.awt.*;
 import java.io.IOException;
 
 public class StatistiquesFormation {

@@ -1,5 +1,6 @@
 package Service;
 
+import Model.Formateur;
 import Model.Formation;
 import Util.DBconnection;
 
@@ -169,5 +170,12 @@ public class FormationService implements IService<Formation> {
             System.out.println("Erreur lors de la récupération des formations : " + e.getMessage());
         }
         return formations;
+    }
+    public List<Formation> getPromotionsByUserId(int id){
+        List<Formation> Formation = new ArrayList<>();
+        return Formation;
+    }
+    public boolean authenticateUser(String username, String password){
+        return true ;
     }
 }
