@@ -14,7 +14,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 //import java.time.LocalDate;
 
-public class AddProject {
+public class    AddProject {
 
     ProjectServices projectService = new ProjectServices();
 
@@ -63,18 +63,25 @@ public class AddProject {
         LocalDate dateFin = date_fin_projet.getValue();
 
         // Vérifier si le champ est vide ou contient seulement des espaces
-        if (titre.isEmpty()) {
+        if (titre.trim().isEmpty()) {
             nom_projet_error.setText("This field is required");
             isError = true;
-        } else if (titre.matches("\\d+")) { // Vérifier si c'est uniquement des chiffres
+        } else if (titre.matches("^[\\d\\s]+$")) { // Vérifier si c'est uniquement des chiffres
             nom_projet_error.setText("Project name cannot be only numbers.");
+            isError = true;
+        }else if (nom_projet.getText().matches("^[\\p{P}\\s]+$")) { // Vérifie si le nom est uniquement constitué de ponctuations et d'espaces
+            nom_projet_error.setText("Project name cannot be only punctuation marks.");
+            isError = true;
+        } else if (!nom_projet.getText().matches("^[a-zA-Z].*")) { // Vérifie que le nom commence par une lettre
+            nom_projet_error.setText("Project name must start with a letter.");
             isError = true;
         }
 
-        if (description.isEmpty()) {
+        if (description_projet.getText().trim().isEmpty()) {
             description_projet_error.setText("This field is required");
             isError = true;
-        } else if (description.matches("\\d+")) { // Vérifier si c'est uniquement des chiffres
+        }
+        if (description_projet.getText().matches("\\d+")) {
             description_projet_error.setText("Description cannot be only numbers.");
             isError = true;
         }

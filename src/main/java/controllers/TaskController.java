@@ -30,6 +30,7 @@ public class TaskController {
         // Initialize drag source
         setupDragAndDrop();
     }
+
     private void setupDragAndDrop() {
         // Make task draggable
         taskRoot.setOnDragDetected(event -> {
@@ -40,16 +41,13 @@ public class TaskController {
             db.setContent(content);
 
             taskRoot.setOpacity(0.7);
-
             event.consume();
         });
 
         taskRoot.setOnDragDone(event -> {
             taskRoot.setOpacity(1.0); // Restore opacity
 
-            if (event.getTransferMode() == TransferMode.MOVE) {
-
-            }
+            if (event.getTransferMode() == TransferMode.MOVE) {}
             event.consume();
         });
     }
@@ -57,7 +55,6 @@ public class TaskController {
     public void setUpdateListener(TaskUpdateListener updateListener) {
         this.updateListener = updateListener;
     }
-
     public ProjectTask getTask() {
         return task;
     }

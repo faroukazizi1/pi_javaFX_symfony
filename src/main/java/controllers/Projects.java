@@ -33,7 +33,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.Project;
 import models.ProjectTask;
-import models.User;
 import services.ProjectServices;
 import services.ProjectTaskService;
 
@@ -217,7 +216,6 @@ public class Projects  implements TaskUpdateListener {
 
     public void initialize() throws Exception {
 
-       // User currentUser = User.CURRENT_USER;
         UserSession session = UserSession.getInstance();
         String userRole = session.getRole();
 

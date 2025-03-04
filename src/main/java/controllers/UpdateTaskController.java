@@ -11,9 +11,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Project;
 import models.ProjectTask;
+import Model.user;
 import services.ProjectServices;
 import services.ProjectTaskService;
-
+import Service.userService;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,8 +33,8 @@ public class UpdateTaskController {
     @FXML private MFXComboBox<String> userComboBox;
 
 
-    private final ProjectServices x = new ProjectServices();
-    private final userService y = new userService();
+    private ProjectServices x = new ProjectServices();
+    private userService y = new userService();
 
     private ProjectTask selectedTask;
 
@@ -47,7 +48,8 @@ public class UpdateTaskController {
 
         Project project = x.getProjectById(task.getProject_id());
         projectComboBox.selectItem(project.getTitre());
-
+        user user = y.getUserById(task.getUser_test_id());
+        userComboBox.selectItem(user.getNom());
     }
 
     private void resetInputsErrors() {
@@ -62,20 +64,19 @@ public class UpdateTaskController {
         boolean isError = false;
         resetInputsErrors();
 
-
-        if (titreField.getText().isEmpty()) {
+        if (titreField.getText().trim().isEmpty()) {
             titre_task_error.setText("Title is required");
             isError = true;
         }
-        if (titreField.getText().matches("\\d+")) {
+        if (titreField.getText().trim().matches("\\d+")) {
             titre_task_error.setText("Task name cannot be only numbers.");
             isError = true;
         }
-        if (descriptionField.getText().isEmpty()) {
+        if (descriptionField.getText().trim().isEmpty()) {
             description_error.setText("Description is required");
             isError = true;
         }
-        if (descriptionField.getText().matches("\\d+")) {
+        if (descriptionField.getText().trim().matches("\\d+")) {
             description_error.setText("Description cannot be only numbers.");
             isError = true;
         }
@@ -101,7 +102,7 @@ public class UpdateTaskController {
                 selectedTask.setDescription(descriptionField.getText());
                 selectedTask.setDate(java.sql.Date.valueOf(dateField.getValue())); // Convert LocalDate to java.sql.Date
                 selectedTask.setProject_id(x.getProjectIdByTitre(projectComboBox.getValue()));
-
+                selectedTask.setUser_test_id(y.getUserIdByName(userComboBox.getValue()));
 
                 // Update the task in the database
                 ProjectTaskService taskService = new ProjectTaskService();

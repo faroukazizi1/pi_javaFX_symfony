@@ -1,5 +1,6 @@
 package controllers;
 
+import Model.user;
 import Util.KeyValuePair;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
@@ -11,8 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import models.ProjectTask;
 import services.ProjectTaskService;
-
-
+import Service.userService;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -41,8 +41,14 @@ public class AddTask {
     }
     public void onMinimize(MouseEvent mouseEvent) {}
     public void initialize() throws SQLException {
+        userService userService = new userService();
 
+        List<user> users = userService.getAll();
+        for (user user : users) {
+            user_input.getItems().add(new KeyValuePair<>(user.getNom(), user.getId()));
+        }
     }
+
     private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -50,6 +56,7 @@ public class AddTask {
         alert.setContentText(message);
         alert.show();
     }
+
     private void resetInputsErrors() {
         titre_error.setText("");
         description_error.setText("");
@@ -57,27 +64,33 @@ public class AddTask {
         user_error.setText("");
     }
 
-
-
     @FXML
     void addTask() {
         boolean isError = false;
         resetInputsErrors();
 
-        if (titre_input.getText().isEmpty()) {
-            titre_error.setText("Title is required");
+        if (titre_input.getText().trim().isEmpty()) {
+            titre_error.setText("This field is required");
             isError = true;
         }
-        if (titre_input.getText().matches("\\d+")) {
-            titre_error.setText("Title cannot be only numbers.");
+        if (titre_input.getText().matches("^[\\d\\s]+$")) {
+            titre_error.setText("Task name cannot be only numbers.");
+            isError = true;
+
+        } else if (titre_input.getText().matches("^[\\p{P}\\s]+$")) { // Vérifie si le nom est uniquement constitué de ponctuations et d'espaces
+         titre_error.setText("Task name cannot be only punctuation marks.");
+         isError = true;
+
+        } else if (!titre_input.getText().matches("^[a-zA-Z].*")) { // Vérifie que le nom commence par une lettre
+            titre_error.setText("Task name must start with a letter.");
             isError = true;
         }
 
-        if (description_input.getText().isEmpty()) {
+        if (description_input.getText().trim().isEmpty()) {
             description_error.setText("Description is required");
             isError = true;
         }
-        if (description_input.getText().matches("\\d+")) {
+        if (description_input.getText().matches("^[\\d\\s]+$")) {
             description_error.setText("Description cannot be only numbers.");
             isError = true;
         }

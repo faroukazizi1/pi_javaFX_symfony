@@ -66,23 +66,30 @@ public class EditProjectController {
         boolean isError = false;
         resetInputsErrors();
 
+        // Vérification du nom du projet
         if (nom_projet.getText().isEmpty()) {
             nom_projet_error.setText("This field is required");
             isError = true;
-        }
-        if (nom_projet.getText().matches("\\d+")) {
-            nom_projet_error.setText("Project name cannot be only numbers.");
+        } else if (nom_projet.getText().matches("^[\\d\\s]+$")) { // Vérifie si le nom est uniquement constitué de chiffres et d'espaces
+            nom_projet_error.setText("Project name cannot be only numbers or spaces.");
+            isError = true;
+        } else if (nom_projet.getText().matches("^[\\p{P}\\s]+$")) { // Vérifie si le nom est uniquement constitué de ponctuations et d'espaces
+            nom_projet_error.setText("Project name cannot be only punctuation marks.");
+            isError = true;
+        } else if (!nom_projet.getText().matches("^[a-zA-Z].*")) { // Vérifie que le nom commence par une lettre
+            nom_projet_error.setText("Project name must start with a letter.");
             isError = true;
         }
 
-        if (description_projet.getText().isEmpty()) {
+        if (description_projet.getText().trim().isEmpty()) {
             description_projet_error.setText("This field is required");
             isError = true;
         }
-        if (description_projet.getText().matches("\\d+")) {
+        if (description_projet.getText().matches("^[\\d\\s]+$")) {
             description_projet_error.setText("Description cannot be only numbers.");
             isError = true;
         }
+
         if (date_debut_projet.getValue() == null) {
             date_debut_projet_error.setText("This field is required");
             isError = true;
