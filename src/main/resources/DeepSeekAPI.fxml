@@ -7,26 +7,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: white;"
-            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Gui.DeepSeekAPI">
+<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.DeepSeekAPI">
     <children>
-        <VBox layoutX="100.0" layoutY="50.0" spacing="10.0">
+        <VBox layoutX="103.0" layoutY="73.0" prefHeight="465.0" prefWidth="971.0" spacing="10.0">
             <ImageView fitHeight="100.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                 <image>
                     <Image url="@assets/deepseeklogo.png" />
                 </image>
             </ImageView>
 
-            <TextArea fx:id="promptInput" prefHeight="100.0" prefWidth="700.0"
-                      promptText="Enter your prompt here..." wrapText="true" />
+            <TextArea fx:id="promptInput" prefHeight="100.0" prefWidth="700.0" promptText="Enter your prompt here..." wrapText="true" />
 
-            <Button text="Ask DeepSeek" fx:id="askButton" onAction="#handleAskAI"
-                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px;"/>
+            <Button fx:id="askButton" onAction="#handleAskAI" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px;" text="Ask DeepSeek" />
 
-            <TextArea fx:id="responseOutput" prefHeight="200.0" prefWidth="700.0"
-                      wrapText="true" editable="false"
-                      style="-fx-background-color: #f4f4f4;" />
+            <TextArea fx:id="responseOutput" editable="false" prefHeight="200.0" prefWidth="700.0" style="-fx-background-color: #f4f4f4;" wrapText="true" />
         </VBox>
+      <Button layoutX="1137.0" layoutY="25.0" mnemonicParsing="false" onAction="#openEmployeeListView" prefHeight="42.0" prefWidth="34.0" style="-fx-background-color: white;">
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/backbutton.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
     </children>
 </AnchorPane>

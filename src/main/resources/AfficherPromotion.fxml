@@ -34,6 +34,8 @@
                         <TableColumn fx:id="Coldelete" prefWidth="80.0" text="Supprimer" />
                         <TableColumn fx:id="Colmodifier" prefWidth="80.0" text="Modifier" />
             <TableColumn fx:id="ColQr" prefWidth="75.0" text="Qr Code" />
+            <TableColumn fx:id="ColSign" prefWidth="75.0" text="Signer" />
+            <TableColumn fx:id="ColPdf" prefWidth="75.0" text="PDF" />
                     </columns>
                 </TableView>
 

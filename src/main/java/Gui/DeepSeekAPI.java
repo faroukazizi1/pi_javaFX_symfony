@@ -1,8 +1,15 @@
 package Gui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+
+import java.io.IOException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -11,6 +18,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
+import javafx.stage.Stage;
+
 import java.io.StringReader;
 
 public class DeepSeekAPI {
@@ -85,5 +94,26 @@ public class DeepSeekAPI {
         }
 
         return fullResponse.toString();
+    }
+
+    @FXML
+    private void openEmployeeListView(ActionEvent event) {
+        try {
+            // Charger la vue des employés
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherUser.fxml"));  // Assurez-vous que le chemin est correct
+            Parent root = loader.load();
+
+            // Récupérer la scène actuelle et la mettre à jour avec la vue des employés
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));  // Change la scène
+            stage.setTitle("Liste des Employés");  // Vous pouvez définir un titre approprié
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setTitle("Erreur de chargement");
+            error.setContentText("Échec du chargement de la vue des employés : " + e.getMessage());
+            error.showAndWait();
+        }
     }
 }

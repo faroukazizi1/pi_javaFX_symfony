@@ -10,20 +10,36 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import Service.promotionService;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+
+import com.docusign.esign.api.EnvelopesApi;
+import com.docusign.esign.client.ApiClient;
+import com.docusign.esign.client.auth.OAuth;
+import com.docusign.esign.model.*;
+
+import java.util.Collections;
+;
 
 public class AfficherPromotion {
 
@@ -65,6 +81,13 @@ public class AfficherPromotion {
 
     @FXML
     private Button button_back_employe;
+
+
+    @FXML
+    private TableColumn<promotion, Void> ColSign;
+
+    @FXML
+    private TableColumn<promotion, Void> ColPdf;
 
     @FXML
     private Button button_ajoutPro;
@@ -205,6 +228,62 @@ public class AfficherPromotion {
                     };
                 }
             });
+
+            ColSign.setCellFactory(new Callback<TableColumn<promotion, Void>, TableCell<promotion, Void>>() {
+                @Override
+                public TableCell<promotion, Void> call(TableColumn<promotion, Void> param) {
+                    return new TableCell<promotion, Void>() {
+                        private final Button btnSign = new Button("Signer");
+
+                        {
+                            btnSign.setOnAction(event -> {
+                                promotion selectedPromotion = getTableView().getItems().get(getIndex());
+                                if (selectedPromotion != null) {
+                                  //  sendDocuSignRequest(selectedPromotion);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void updateItem(Void item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if (empty) {
+                                setGraphic(null);
+                            } else {
+                                setGraphic(btnSign);
+                            }
+                        }
+                    };
+                }
+            });
+
+            ColPdf.setCellFactory(new Callback<TableColumn<promotion, Void>, TableCell<promotion, Void>>() {
+                @Override
+                public TableCell<promotion, Void> call(TableColumn<promotion, Void> param) {
+                    return new TableCell<promotion, Void>() {
+                        private final Button btnPdf = new Button("PDF");
+
+                        {
+                            btnPdf.setOnAction(event -> {
+                                promotion selectedPromotion = getTableView().getItems().get(getIndex());
+                                if (selectedPromotion != null) {
+                                    generatePdf(selectedPromotion);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void updateItem(Void item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if (empty) {
+                                setGraphic(null);
+                            } else {
+                                setGraphic(btnPdf);
+                            }
+                        }
+                    };
+                }
+            });
         }
 
     }
@@ -294,26 +373,39 @@ public class AfficherPromotion {
                 "\nSalaire: " + promo.getNouv_sal() +
                 "\nDate: " + promo.getDate_prom();
 
-        String filePath = "qr_promotion.png";
         int width = 300;
         int height = 300;
-
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
+
         try {
             BitMatrix bitMatrix = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, width, height);
-            Path path = FileSystems.getDefault().getPath(filePath);
+            Path path = FileSystems.getDefault().getPath("qr_promotion.png");
             MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
 
-            Alert info = new Alert(Alert.AlertType.INFORMATION);
-            info.setTitle("QR Code généré");
-            info.setHeaderText("Le QR Code a été généré !");
-            info.setContentText("Vous pouvez scanner le fichier 'qr_promotion.png'.");
-            info.showAndWait();
+            // Display in a new window
+            Image qrImage = new Image("file:qr_promotion.png");
+            ImageView imageView = new ImageView(qrImage);
+            imageView.setFitWidth(300);
+            imageView.setFitHeight(300);
+
+            Button closeButton = new Button("Close");
+            closeButton.setOnAction(e -> ((Stage) closeButton.getScene().getWindow()).close());
+
+            VBox vbox = new VBox(10, imageView, closeButton);
+            vbox.setAlignment(Pos.CENTER);
+            vbox.setPadding(new Insets(10));
+
+            Stage qrStage = new Stage();
+            qrStage.setTitle("QR Code Viewer");
+            qrStage.setScene(new Scene(vbox, 350, 400));
+            qrStage.initModality(Modality.APPLICATION_MODAL);
+            qrStage.showAndWait();
 
         } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     private void Logout(ActionEvent event) {
@@ -361,6 +453,31 @@ public class AfficherPromotion {
         error.showAndWait();
     }
 
+    private void generatePdf(promotion promo) {
+        String filePath = "promotion_" + promo.getId() + ".pdf";
+        try (FileOutputStream fos = new FileOutputStream(filePath);
+             PdfWriter writer = new PdfWriter(fos);
+             PdfDocument pdfDoc = new PdfDocument(writer);
+             Document document = new Document(pdfDoc)) {
+
+            document.add(new Paragraph("Promotion Details"));
+            document.add(new Paragraph("Type: " + promo.getType_promo()));
+            document.add(new Paragraph("Poste: " + promo.getPoste_promo()));
+            document.add(new Paragraph("Salaire: " + promo.getNouv_sal()));
+            document.add(new Paragraph("Date: " + promo.getDate_prom()));
+            document.add(new Paragraph("Raison: " + promo.getRaison()));
+            document.add(new Paragraph("Avantages: " + promo.getAvs()));
+
+            document.close();
+
+            // Ouvrir le fichier PDF après la génération
+            java.awt.Desktop.getDesktop().open(new java.io.File(filePath));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorDialog("Failed to generate PDF: " + e.getMessage());
+        }
+    }
 
 
 }
