@@ -1,6 +1,8 @@
 package GroupSuccess.esprit;
 
-import Util.DBconnection;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -17,10 +19,11 @@ import java.sql.Date;
 
 
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+public class Main extends Application {
+
+
     public static void main(String[] args) {
+
         FormationService fo=new FormationService();
         Date Date_D = Date.valueOf("2025-04-01");  // Format yyyy-mm-dd
         Date Date_F = Date.valueOf("2025-04-10");
@@ -36,6 +39,18 @@ public class Main {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
         Connection conn = DBconnection.getInstance().getConn();
+
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+
+
+
+
+
+
 
     }
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: #001F3F;" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AjouterUser">
+   <children>
+      <Pane layoutX="104.0" layoutY="108.0" prefHeight="475.0" prefWidth="992.0" style="-fx-background-color: #4A5568;">
+         <children>
+            <VBox alignment="CENTER" layoutX="41.0" layoutY="25.0" prefHeight="445.0" prefWidth="298.0" spacing="20.0">
+               <children>
+                  <TextField id="TFnom" fx:id="TFnom" prefHeight="63.0" prefWidth="211.0" promptText="NOM" />
+                  <TextField id="TFusername" fx:id="TFusername" prefHeight="63.0" prefWidth="211.0" promptText="USERNAME" />
+                  <TextField id="TFemail" fx:id="TFemail" prefHeight="63.0" prefWidth="211.0" promptText="EMAIL" />
+                  <TextField id="TFadresse" fx:id="TFadresse" prefHeight="63.0" prefWidth="211.0" promptText="ADRESSE" />
+                  <TextField id="TFnumero" fx:id="TFnumero" prefHeight="63.0" prefWidth="211.0" promptText="NUMERO" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="623.0" layoutY="43.0" prefHeight="411.0" prefWidth="298.0" spacing="20.0">
+               <children>
+                  <TextField id="TFprenom" fx:id="TFprenom" prefHeight="63.0" prefWidth="211.0" promptText="PRENOM" />
+                  <PasswordField fx:id="TFpassword" prefHeight="63.0" prefWidth="211.0" />
+                  <ComboBox id="TFrole" fx:id="TFrole" prefHeight="63.0" prefWidth="211.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <CheckBox id="TFhomme" fx:id="TFhomme" mnemonicParsing="false" prefHeight="18.0" prefWidth="100.0" text="HOMME" />
+                        <CheckBox id="TFfemme" fx:id="TFfemme" mnemonicParsing="false" prefHeight="18.0" prefWidth="100.0" text="FEMME" />
+                     </children>
+                  </HBox>
+                  <TextField id="TFcin" fx:id="TFcin" prefHeight="63.0" prefWidth="211.0" promptText="CIN" />
+               </children>
+            </VBox>
+            <Button layoutX="405.0" layoutY="414.0" mnemonicParsing="false" onAction="#ajouterUser" prefHeight="35.0" prefWidth="150.0" stylesheets="@css/style.css" text="AJOUTER">
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Button>
+         </children>
+      </Pane>
+      <Label layoutX="391.0" layoutY="30.0" prefHeight="54.0" prefWidth="418.0" style="-fx-background-color: wh;" text="AJOUTER EMPLOYE" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="36.0" />
+         </font>
+      </Label>
+      <Button layoutX="104.0" layoutY="37.0" mnemonicParsing="false" onAction="#openEmployeeListView" text="ANNULER">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>

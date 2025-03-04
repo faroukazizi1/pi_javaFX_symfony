@@ -1,0 +1,255 @@
+/* styles.css */
+.root {
+    -fx-background-color: #f4f4f4;
+    -fx-padding: 20;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 5px;
+}
+
+.text-field, .text-area, .combo-box {
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, #888, 10, 0.5, 0, 1);
+}
+
+.text-field:focused, .text-area:focused, .combo-box:focused {
+    -fx-border-color: #66aaff;
+}
+
+.button {
+    -fx-background-color: #66aaff;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 16px;
+    -fx-border-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #5599e6;
+}
+.sidebar {
+    -fx-padding: 20px 30px;
+    -fx-background-color: rgba(12, 22, 44, 1);
+}
+
+.sidebar-link {
+    -fx-background-color: transparent;
+    -fx-padding: 10px 50px 10px 20px;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+
+}
+
+.sidebar-link-active {
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 50px 10px 20px;
+    -fx-background-color: #0066FF;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-logout{
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 50px 10px 20px;
+    -fx-opacity: 0.5;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+.sidebar-logout:hover {
+    -fx-opacity: 1;
+}
+.body{
+    -fx-background-color: #f4f4f4;
+}
+.card{
+    -fx-background-color: #fff;
+    -fx-background-radius: 10px;
+    -fx-pref-width: 300px;
+}
+
+.button-delete{
+    -fx-background-color: #8E1212;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+}
+
+.button-edit{
+    -fx-background-color: #CD9400;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+}
+
+.button-add{
+    -fx-background-color: "#624DE3";
+    -fx-text-fill: #fff;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 30px;
+}
+
+.show-task-button {
+    -fx-background-color: #2e53a0;  /* Green background */
+    -fx-text-fill: white;            /* White text */
+    -fx-font-size: 14px;             /* Font size */
+    -fx-font-weight: bold;           /* Bold text */
+    -fx-padding: 10px 20px;          /* Padding inside the button */
+    -fx-border-radius: 20px;         /* Rounded corners */
+    -fx-background-radius: 20px;     /* Rounded corners */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 2, 2); /* Drop shadow effect */
+    -fx-margin: 100px;
+    -fx-min-width: 150px;            /* Minimum width */
+    -fx-min-height: 50px;            /* Minimum height */
+    -fx-pref-width: 200px;           /* Preferred width */
+    -fx-pref-height: 60px;
+    -fx-translate-x: -70px; /* Déplace le bouton vers la gauche */
+    /* Preferred height *//* Margin around the button */
+
+}
+
+/* On hover, change background color */
+.show-task-button:hover {
+    -fx-background-color: #0864fc;  /* Darker green when hovered */
+    -fx-cursor: hand;                /* Change cursor to hand when hovered */
+}
+
+/* On pressed, change background color */
+.show-task-button:pressed {
+    -fx-background-color: #5795f0;  /* Even darker green when pressed */
+}
+
+.button-add-inline{
+    -fx-border-color: "#624DE3";
+    -fx-background-color: transparent;
+    -fx-text-fill: #624DE3;
+    -fx-border-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+}
+
+.button-details{
+    -fx-background-color: #0C162C;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+
+}
+
+.button-statut{
+    -fx-background-color: #0C162C;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+}
+
+.alert-error{
+    -fx-background-color: #FBEDED;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+}
+
+.statut-col{
+    -fx-alignment: CENTER;
+    -fx-background-color: #baf5b8;
+    -fx-background-radius: 10px;
+}
+
+.label-error{
+    -fx-text-fill: #c72e2e;
+}
+
+/* General styling */
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view:focused {
+    -fx-background-color: transparent;
+}
+
+/* Column headers */
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(#2a6ea6, #1a426d);
+}
+
+#user_select {
+    -fx-translate-x: -50px; /* Déplace le ComboBox vers la gauche */
+}
+
+.table-view .column-header-background .label {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+/* Table cells */
+.table-view .table-cell {
+
+}
+
+/* Table rows */
+.table-row-cell {
+    /*-fx-background-color: #2a6ea6;*/
+    -fx-background-insets: 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:odd {
+    /*-fx-background-color: #1a426d;*/
+    -fx-background-insets: 0;
+    -fx-padding: 0.0em;
+}
+
+/* Selected row */
+.table-row-cell:selected {
+    -fx-background-color: #0078d4;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+/* Scroll bars */
+.table-view > .virtual-flow > .scroll-bar:vertical,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track-background,
+.table-view > .virtual-flow > .scroll-bar:horizontal,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
+    -fx-background-color: transparent;
+}
+
+/* Hide scroll bar buttons */
+.table-view > .virtual-flow > .scroll-bar > .increment-button,
+.table-view > .virtual-flow > .scroll-bar > .decrement-button {
+    -fx-opacity: 0;
+}
+
+.task-status {
+    -fx-background-color: #baf5b8;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 16px;
+}
+
+.task-card{
+    -fx-background-color: #f4f4f4;
+    -fx-background-radius: 5px;
+    /*-fx-border-color: #c7c7c7;*/
+    -fx-border-radius: 5px;
+    /*-fx-border-width: 1px;*/
+}

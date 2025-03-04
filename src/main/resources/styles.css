@@ -1,0 +1,91 @@
+/* Style général */
+.anchor-pane {
+    -fx-background-color: #E0F2FF; /* Bleu très clair */
+    -fx-padding: 20px;
+}
+
+/* Style des onglets */
+.tab-pane {
+    -fx-background-color: #E0F2FF;
+    -fx-font-family: Arial, sans-serif;
+}
+
+.tab {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+}
+
+.tab:selected {
+    -fx-background-color: #005f8a;
+}
+
+/* Style des labels */
+.label {
+    -fx-text-fill: #333;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Style des champs de texte */
+.text-field, .date-picker {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #007acc;
+    -fx-border-radius: 10px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", "Arial", sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.0, 2, 2);
+}
+
+.text-field:hover, .date-picker:hover {
+    -fx-border-color: #005f8a;
+}
+
+/* Style des ComboBox */
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #007acc;
+    -fx-border-radius: 10px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+}
+
+/* Style des boutons */
+.button {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 30px;
+    -fx-border-radius: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0.0, 2, 2);
+}
+
+.button:hover {
+    -fx-background-color: #005f8a;
+}
+
+/* Style des TableView */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #007acc;
+    -fx-border-radius: 5px;
+    -fx-font-size: 14px;
+}
+
+/* Style des colonnes de TableView */
+.table-column {
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+}
+
+/* Espacement autour des éléments */
+.vbox {
+    -fx-spacing: 15px;
+}
+
+.hbox {
+    -fx-spacing: 10px;
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Gui.GestionPaieController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <TableView fx:id="tablePaie" layoutX="50" layoutY="50" prefWidth="500" prefHeight="200">
+        <columns>
+            <TableColumn text="Mois" fx:id="moisColumn" prefWidth="100"/>
+            <TableColumn text="Année" fx:id="anneeColumn" prefWidth="100"/>
+            <TableColumn text="Salaire Brut" fx:id="salaireBrutColumn" prefWidth="100"/>
+            <TableColumn text="Deductions" fx:id="deductionsColumn" prefWidth="100"/>
+            <TableColumn text="Salaire Net" fx:id="salaireNetColumn" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <DatePicker fx:id="datePicker" layoutX="50" layoutY="270" prefWidth="150"/>
+    <Button text="Afficher" layoutX="220" layoutY="270" fx:id="btnAfficher" onAction="#handleAfficherAction"/>
+    <Button text="Retour" layoutX="500" layoutY="350" fx:id="btnRetour" onAction="#handleRetourAction"/>
+
+</AnchorPane>

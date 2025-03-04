@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.Taskmanager"
+            prefHeight="400.0" prefWidth="600.0" stylesheets="@../project.css" >
+    <TableView fx:id="taskTable" layoutX="20.0" layoutY="20.0" prefHeight="300" prefWidth="560">
+        <columns>
+            <TableColumn fx:id="titreColumn" text="Title" />
+            <TableColumn fx:id="descriptionColumn" text="Description" />
+            <TableColumn fx:id="dateColumn" text="Date" />
+            <TableColumn fx:id="statutColumn" text="Status" />
+        </columns>
+    </TableView>
+    <HBox alignment="CENTER" spacing="20.0" layoutX="160.0" layoutY="340.0">
+        <Button styleClass="button-edit" text="Update" onAction="#onUpdateTask" />
+        <Button styleClass="button-delete" text="Delete" onAction="#onDeleteTask" />
+    </HBox>
+
+</AnchorPane>

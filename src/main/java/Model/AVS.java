@@ -1,0 +1,8 @@
+package Model;
+
+public enum AVS {
+    STOCK_OPTIONS,
+    VOITURE_DE_FONCTION,
+    LOGEMENT_DE_FONCTION,
+    TELE_TRAVAIL
+}
