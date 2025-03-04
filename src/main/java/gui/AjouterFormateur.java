@@ -2,6 +2,7 @@ package gui;
 
 import Model.Formateur;
 import Service.FormateurService;
+import Service.MailService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -125,4 +126,5 @@ public class AjouterFormateur {
         txtEmail.clear();
         cmbSpecialite.getSelectionModel().clearSelection();  // Réinitialise la sélection de la ComboBox
     }
-}
+
+            }

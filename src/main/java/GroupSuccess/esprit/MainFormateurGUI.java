@@ -19,7 +19,7 @@ public class MainFormateurGUI extends Application {
     public void start(Stage primaryStage) {
         try {
             // Charger le fichier FXML (assurez-vous que le fichier est dans src/main/resources/gui)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherFormateur.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherFormation.fxml"));
             Parent root = loader.load();
 
             // Créer une scène

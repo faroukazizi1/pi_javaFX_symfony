@@ -16,6 +16,8 @@
         <Button styleClass="sidebar-link" text="Accueil" />
         <Button styleClass="sidebar-link-active" text="Formations" />
         <Button styleClass="sidebar-link" text="Formateurs" />
+        <Button fx:id="btnCertificat" styleClass="sidebar-link" text="Certificats" />
+
         <Button styleClass="sidebar-logout" text="Déconnexion" />
     </VBox>
 

@@ -143,7 +143,7 @@ public class AfficherFormateur implements Initializable {
     @FXML
     private void handleAjouterFormateur(ActionEvent event) {
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/AjoutFormateur.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/AjouetFormateur.fxml"));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -221,6 +221,21 @@ public class AfficherFormateur implements Initializable {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    @FXML
+    private void handleBtnCertif(ActionEvent event) {
+        try {
+            // Charger la nouvelle interface FXML pour les certificats
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GenererCertification.fxml"));
+            Parent root = loader.load();
+
+            // Obtenir la scène actuelle et mettre à jour son contenu
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace(); // Gérer l'exception en affichant l'erreur dans la console
         }
     }
 

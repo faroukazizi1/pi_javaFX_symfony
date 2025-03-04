@@ -78,4 +78,20 @@ public class StatistiquesFormation {
             e.printStackTrace(); // Gérer l'erreur en affichant la trace
         }
     }
+    @FXML
+    private void handleBtnCertif(ActionEvent event) {
+        try {
+            // Charger la nouvelle interface FXML pour les certificats
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GenererCertification.fxml"));
+            Parent root = loader.load();
+
+            // Obtenir la scène actuelle et mettre à jour son contenu
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace(); // Gérer l'exception en affichant l'erreur dans la console
+        }
+    }
+
 }

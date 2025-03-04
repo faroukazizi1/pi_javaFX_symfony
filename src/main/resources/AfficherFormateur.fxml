@@ -20,6 +20,8 @@
         <Button fx:id="btnFormateurs" styleClass="sidebar-link-active" text="Formateurs" />
         <Button fx:id="btnFormations" styleClass="sidebar-link" text="Formations" onAction="#handleAfficherFormation" />
         <Button fx:id="btnStatistiques" styleClass="sidebar-link" text="Statistiques" onAction="#handleAfficherStatistiques" />
+        <Button fx:id="btnCertificat" styleClass="sidebar-link" text="Certificats" />
+
 
         <Button styleClass="sidebar-logout" text="Déconnexion" />
     </VBox>

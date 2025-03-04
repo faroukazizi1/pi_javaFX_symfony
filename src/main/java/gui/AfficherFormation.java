@@ -11,18 +11,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.util.Callback;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class AfficherFormation implements Initializable {
 
@@ -49,10 +48,6 @@ public class AfficherFormation implements Initializable {
     @FXML
     private TableColumn<Formation, Void> colDelete;
     @FXML
-    private Button btnAjouterFormation;
-    @FXML
-    private Button btnListeFormations;
-    @FXML
     private TextField searchField;
     @FXML
     private DatePicker searchDateField;
@@ -63,7 +58,6 @@ public class AfficherFormation implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Lier les colonnes aux bonnes propriétés
         colId.setCellValueFactory(new PropertyValueFactory<>("id_form"));
         colTitre.setCellValueFactory(new PropertyValueFactory<>("Titre"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
@@ -72,83 +66,94 @@ public class AfficherFormation implements Initializable {
         colDuree.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getDuree()));
         colIdFormateur.setCellValueFactory(new PropertyValueFactory<>("id_Formateur"));
 
-        // Pour la colonne Modifier
-        colUpdate.setCellFactory(col -> {
-            return new TableCell<Formation, Void>() {
-                private final Button btnModifier = new Button("Modifier");
-
-                {
-                    btnModifier.getStyleClass().add("button-modifier");
-                    btnModifier.setOnAction(event -> {
-                        Formation formation = getTableRow().getItem();
-                        if (formation != null) {
-                            handleModifier(formation);
-                        }
-                    });
+        colImage.setCellFactory(col -> new TableCell<Formation, String>() {
+            private final ImageView imageView = new ImageView();
+            @Override
+            protected void updateItem(String imageUrl, boolean empty) {
+                super.updateItem(imageUrl, empty);
+                if (empty || imageUrl == null) {
+                    setGraphic(null);
+                } else {
+                    try {
+                        Image image = new Image(imageUrl);
+                        imageView.setImage(image);
+                        imageView.setFitHeight(50);
+                        imageView.setFitWidth(50);
+                        setGraphic(imageView);
+                    } catch (Exception e) {
+                        setGraphic(null);
+                    }
                 }
-
-                @Override
-                protected void updateItem(Void item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setGraphic(empty ? null : btnModifier);
-                }
-            };
+            }
         });
 
-        // Pour la colonne Supprimer
-        colDelete.setCellFactory(col -> {
-            return new TableCell<Formation, Void>() {
-                private final Button btnSupprimer = new Button("Supprimer");
-
-                {
-                    btnSupprimer.getStyleClass().add("button-supprimer");
-                    btnSupprimer.setOnAction(event -> {
-                        Formation formation = getTableRow().getItem();
-                        if (formation != null) {
-                            handleSupprimer(formation);
-                        }
-                    });
-                }
-
-                @Override
-                protected void updateItem(Void item, boolean empty) {
-                    super.updateItem(item, empty);
-                    setGraphic(empty ? null : btnSupprimer);
-                }
-            };
+        colUpdate.setCellFactory(col -> new TableCell<Formation, Void>() {
+            private final Button btnModifier = new Button("Modifier");
+            {
+                btnModifier.setOnAction(event -> handleModifier(getTableRow().getItem()));
+            }
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : btnModifier);
+            }
         });
 
-        // Lier le champ de recherche par texte et date
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> handleSearch());  // Garder seulement une seule occurrence
+        colDelete.setCellFactory(col -> new TableCell<Formation, Void>() {
+            private final Button btnSupprimer = new Button("Supprimer");
+            {
+                btnSupprimer.setOnAction(event -> handleSupprimer(getTableRow().getItem()));
+            }
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : btnSupprimer);
+            }
+        });
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> handleSearch());
         searchDateField.valueProperty().addListener((observable, oldValue, newValue) -> handleSearch());
         sortComboBox.setOnAction(event -> handleSort());
-
 
         loadFormations();
     }
 
     private void loadFormations() {
-        List<Formation> formations = formationService.getAll();
-        ObservableList<Formation> observableList = FXCollections.observableArrayList(formations);
-        tableFormations.setItems(observableList);
+        ObservableList<Formation> formations = FXCollections.observableArrayList(formationService.getAll());
+        tableFormations.setItems(formations);
     }
 
-    private void openModifierPage(Formation formation) {
+    private void handleModifier(Formation formation) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifFormation.fxml"));
+            System.out.println("Chargement du fichier FXML pour modifier la formation...");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifFormation.fxml")); // Fichier FXML pour la modification de formation
             Parent root = loader.load();
+            System.out.println("FXML chargé avec succès");
+
             ModifFormation controller = loader.getController();
-            controller.setFormation(formation);
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) tableFormations.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+            if (controller == null) {
+                System.out.println("Erreur : Le contrôleur est null !");
+                return;
+            }
+
+            controller.setFormation(formation); // Passer la formation au contrôleur
+            System.out.println("Données de la formation envoyées au contrôleur");
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL); // Pour bloquer l'accès à la fenêtre principale jusqu'à la fermeture
+            stage.setScene(new Scene(root));
+            stage.setTitle("Modifier Formation");
+            stage.showAndWait(); // Afficher la fenêtre de modification en mode modal
+
+            loadFormations(); // Recharger la liste des formations après modification
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Erreur lors du chargement du fichier FXML pour la modification de la formation !");
         }
     }
 
-    private void supprimerFormation(Formation formation) {
+
+    private void handleSupprimer(Formation formation) {
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION, "Voulez-vous vraiment supprimer cette formation?", ButtonType.YES, ButtonType.NO);
         confirmation.showAndWait().ifPresent(response -> {
             if (response == ButtonType.YES) {
@@ -157,124 +162,38 @@ public class AfficherFormation implements Initializable {
             }
         });
     }
-
     @FXML
-    private void handleListeFormations(ActionEvent event) {
-        switchScene(event, "AfficherFormation.fxml");
-    }
 
-    @FXML
-    private void handleAjouterFormation(ActionEvent event) {
-        switchScene(event, "/AjouterFormation.fxml");
-    }
-
-    private void switchScene(ActionEvent event, String fxmlFile) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Gérer la recherche par texte et date
-    @FXML
     private void handleSearch() {
-        final String searchText = searchField.getText().toLowerCase();  // Recherche insensible à la casse
-        final String dateText = (searchDateField.getValue() != null) ? searchDateField.getValue().toString() : null;
-
-        // Récupérer toutes les formations
+        String searchText = searchField.getText().toLowerCase();
+        String dateText = (searchDateField.getValue() != null) ? searchDateField.getValue().toString() : null;
         List<Formation> formations = formationService.getAll();
-
-        // Filtrer les formations en fonction du titre et de la date
         List<Formation> filteredFormations = formations.stream()
                 .filter(f -> f.getTitre().toLowerCase().contains(searchText))
-                .filter(f -> {
-                    if (dateText != null) {
-                        return f.getDate_D().toString().contains(dateText);  // Comparer la date
-                    }
-                    return true;
-                })
+                .filter(f -> dateText == null || f.getDate_D().toString().contains(dateText))
                 .toList();
-
-        ObservableList<Formation> observableList = FXCollections.observableArrayList(filteredFormations);
-        tableFormations.setItems(observableList);
-    }
-
-    public void handleModifier(Formation formation) {
-        System.out.println("Modification de la formation : " + formation);
-        openModifierPage(formation);
-    }
-
-    public void handleSupprimer(Formation formation) {
-        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION, "Voulez-vous vraiment supprimer cette formation?", ButtonType.YES, ButtonType.NO);
-        confirmation.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.YES) {
-                formationService.delete(formation);
-                tableFormations.getItems().remove(formation);
-                tableFormations.refresh();
-            }
-        });
+        tableFormations.setItems(FXCollections.observableArrayList(filteredFormations));
     }
     @FXML
-    private void handleSearch2() {
-        final String searchText = searchField.getText().toLowerCase();  // Recherche insensible à la casse
-        final String dateText = (searchDateField.getValue() != null) ? searchDateField.getValue().toString() : null;
 
-        // Récupérer toutes les formations
-        List<Formation> formations = formationService.getAll();
-
-        // Filtrer les formations en fonction du titre et de la date
-        List<Formation> filteredFormations = formations.stream()
-                .filter(f -> f.getTitre().toLowerCase().contains(searchText))
-                .filter(f -> {
-                    if (dateText != null) {
-                        return f.getDate_D().toString().contains(dateText);  // Comparer la date
-                    }
-                    return true;
-                })
-                .toList();
-
-        ObservableList<Formation> observableList = FXCollections.observableArrayList(filteredFormations);
-        tableFormations.setItems(observableList);  // Mettre à jour la TableView
-    }
-    public void handleSort() {
+    private void handleSort() {
         String selectedSortOption = sortComboBox.getValue();
-
-        // Filtrer et trier les formations en fonction de la sélection dans le ComboBox
         List<Formation> formations = formationService.getAll();
-
         if (selectedSortOption != null) {
             switch (selectedSortOption) {
                 case "Trier par date (plus proche)":
-                    formations.sort((f1, f2) -> f1.getDate_D().compareTo(f2.getDate_D()));  // Trier par date de début
+                    formations.sort((f1, f2) -> f1.getDate_D().compareTo(f2.getDate_D()));
                     break;
                 case "Trier par ID Formateur":
-                    formations.sort((f1, f2) -> Integer.compare(f1.getId_Formateur(), f2.getId_Formateur()));  // Trier par ID du formateur
+                    formations.sort((f1, f2) -> Integer.compare(f1.getId_Formateur(), f2.getId_Formateur()));
                     break;
             }
         }
-
-        // Mettre à jour la TableView
-        ObservableList<Formation> observableList = FXCollections.observableArrayList(formations);
-        tableFormations.setItems(observableList);
+        tableFormations.setItems(FXCollections.observableArrayList(formations));
     }
-    @FXML
-    private void handleAfficherFormateur(ActionEvent event) {
-        try {
-            // Charger le fichier FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherFormateur.fxml"));
-            Parent root = loader.load();
-
-            // Obtenir la scène actuelle et changer de scène
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace(); // Gérer l'erreur en affichant la trace
-        }
+    public void handleAfficherFormateur(ActionEvent event) {
+        // Logic to show the formateur page, or open a new window
+        System.out.println("Afficher Formateur clicked");
     }
     @FXML
     private void handleAfficherStatistiques(ActionEvent event) {
@@ -289,8 +208,22 @@ public class AfficherFormation implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void handleAjouterFormation(ActionEvent event) {
+        try {
+            // Charger le fichier FXML pour ajouter une formation
+            Parent parent = FXMLLoader.load(getClass().getResource("/AjouterFormation.fxml")); // Assurez-vous que le chemin du fichier FXML est correct
+            Scene scene = new Scene(parent);
 
-
+            // Obtenir la scène actuelle et changer la scène pour la nouvelle
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show(); // Afficher la fenêtre pour ajouter une formation
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors du chargement de la fenêtre d'ajout de formation.");
+        }
+    }
 
 
 }
