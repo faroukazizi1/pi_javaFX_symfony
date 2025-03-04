@@ -165,4 +165,11 @@ public class absenceService implements IService<absence> {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public List<absence> getPromotionsByUserId(int id){
+        List<absence> absences = new ArrayList<>();
+        return absences;
+    }
+>>>>>>> 0542470027de48c818e3792b43273f5b8dd31e9b
 }

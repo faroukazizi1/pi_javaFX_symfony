@@ -16,9 +16,8 @@ public class TestFX extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Ajouterabsence.fxml"));
 
+<<<<<<< HEAD
 
 
             Parent root = loader.load();
@@ -30,5 +29,8 @@ public class TestFX extends Application {
         } catch (IOException e) {
             e.printStackTrace(); // Affiche l'erreur dans la console pour un meilleur débogage
         }
+=======
+>>>>>>> 0542470027de48c818e3792b43273f5b8dd31e9b
     }
 }
+
