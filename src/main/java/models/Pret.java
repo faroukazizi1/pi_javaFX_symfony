@@ -15,6 +15,7 @@ public class Pret {
     private float taux;
     private int dureeRemboursement;
 
+
     // ✅ Constructeur par défaut (utile pour Hibernate/JPA)
     public Pret() {
     }
@@ -149,3 +150,6 @@ public class Pret {
 
 
 }
+
+
+// --module-path "C:\Users\loq\Desktop\sdk\openjfx-22.0.2_windows-x64_bin-sdk\javafx-sdk-22.0.2\lib" --add-modules javafx.controls,javafx.fxml

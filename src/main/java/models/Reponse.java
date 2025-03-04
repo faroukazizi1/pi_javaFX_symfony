@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Reponse {
     private int idReponse;
+    private int idPret; // Add this field to link to Pret
     private Date dateReponse;
     private double montantDemande;
     private double revenusBruts;
@@ -101,6 +102,12 @@ public class Reponse {
     public double getTauxMensuel() {
         return this.tauxInteret / 12 / 100;
     }
+    public int getIdPret() {
+        return idPret;
+    }
 
+    public void setIdPret(int idPret) {
+        this.idPret = idPret;
+    }
 
 }

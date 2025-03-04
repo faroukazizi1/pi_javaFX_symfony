@@ -37,6 +37,14 @@ public class PretService implements IService<Pret> {
                     }
                 }
                 System.out.println("✅ Prêt ajouté avec succès : " + pret);
+
+                // Envoi du SMS après ajout du prêt
+                String numeroTelephone = "+21650856254"; // Remplace par le numéro de l'employé
+                String message = "Votre demande de prêt a été soumise. Consultez votre réponse dès qu'elle est disponible.";
+
+                System.out.println("🔍 Tentative d'envoi du SMS à : " + numeroTelephone); // DEBUG
+
+                SmsService.envoyerSms(numeroTelephone, message);
             }
         } catch (SQLException e) {
             System.err.println("❌ Erreur lors de l'ajout du prêt : " + e.getMessage());
@@ -146,9 +154,7 @@ public class PretService implements IService<Pret> {
     }
 
     public List<Integer> getAllPretIds() {
-        List<Pret> prets = getAll(); // Assuming this method fetches all Pret objects
+        List<Pret> prets = getAll();
         return prets.stream().map(Pret::getIdPret).collect(Collectors.toList());
     }
-
-
 }
