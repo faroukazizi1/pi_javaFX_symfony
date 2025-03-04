@@ -1,157 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.Node?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<VBox prefHeight="495.0" prefWidth="628.0" spacing="20" stylesheets="style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="Controller.PenaliteController">
-    <!-- Titre -->
-    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Gestion des Pénalités" />
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="Controller.PenaliteController">
 
-    <!-- TabPane pour gérer les opérations CRUD -->
-    <TabPane>
-        <!-- Onglet Ajouter Pénalité -->
-        <Tab text="Ajouter Pénalité">
-            <AnchorPane>
-                <children>
-                    <!-- Logo en haut à droite -->
-                    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="520.0" layoutY="10.0">
-                        <image>
-                            <Image url="java-logo.png" />
-                        </image>
-                    </ImageView>
-                    <GridPane hgap="10" style="-fx-padding: 10;" vgap="10">
-                        <Label text="Type de pénalité" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                        <ComboBox fx:id="typeComboBoxAdd" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <!-- Sidebar à gauche -->
+    <left>
+        <VBox prefHeight="731.0" prefWidth="282.0" styleClass="sidebar" stylesheets="style.css">
+            <GridPane hgap="10" vgap="10" style="-fx-padding: 10;">
+                <!-- Logo en haut à gauche -->
+                <ImageView fitHeight="149.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <image>
+                        <Image url="java-logo.png" />
+                    </image>
+                </ImageView>
 
-                        <Label text="Seuil d'absence" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                        <TextField fx:id="seuilAbsFieldAdd" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </GridPane>
+            <VBox spacing="20.0" VBox.vgrow="ALWAYS">
+                <Button fx:id="Home_Btn" text="Home" textFill="WHITE" styleClass="sidebar-link" />
+                <Button fx:id="User_Btn" text="Users" textFill="WHITE" styleClass="sidebar-link" />
+                <Button text="Absence" textFill="WHITE" styleClass="sidebar-link-active" />
+                <Button fx:id="Document_Btn" text="Congés" textFill="WHITE" styleClass="sidebar-link" />
+                <Button fx:id="Event_Btn" text="Formations" textFill="WHITE" styleClass="sidebar-link" />
+                <Button fx:id="Reclamation_Btn" text="Projects" textFill="WHITE" styleClass="sidebar-link" />
+            </VBox>
+            <HBox alignment="TOP_CENTER" prefHeight="57.0" prefWidth="279.0">
+                <Button fx:id="Logout_Btn" text="Logout" textFill="WHITE" styleClass="sidebar-logout" />
+            </HBox>
+        </VBox>
+    </left>
 
-                        <Label text="Absence associée" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                        <ComboBox fx:id="absenceComboBoxAdd" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <!-- Contenu principal (TabPane) à droite -->
+    <center>
+        <VBox prefHeight="495.0" prefWidth="628.0" spacing="20" stylesheets="style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1">
+            <TabPane>
+                <Tab text="Ajouter Pénalité">
+                    <AnchorPane>
+                        <children>
+                            <GridPane hgap="10" style="-fx-padding: 10;" vgap="10">
+                                <Label text="Type de pénalité" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <ComboBox fx:id="typeComboBoxAdd" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200.0" />
 
-                        <Button onAction="#handleAddPenalite" text="Ajouter Pénalité" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <columnConstraints>
-                            <ColumnConstraints />
-                            <ColumnConstraints />
-                        </columnConstraints>
-                        <rowConstraints>
-                            <RowConstraints />
-                            <RowConstraints />
-                            <RowConstraints />
-                            <RowConstraints />
-                        </rowConstraints>
-                    </GridPane>
-                </children>
-            </AnchorPane>
-        </Tab>
+                                <Label text="Seuil d'absence" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                <TextField fx:id="seuilAbsFieldAdd" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="180.0" />
 
-        <!-- Onglet Mettre à jour Pénalité -->
-        <Tab text="Mettre à jour Pénalité">
-            <AnchorPane>
-                <children>
-                    <!-- Logo en haut à droite -->
-                    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="520.0" layoutY="10.0">
-                        <image>
-                            <Image url="java-logo.png" />
-                        </image>
-                    </ImageView>
-                    <GridPane hgap="10" style="-fx-padding: 10;" vgap="10">
-                        <Label text="ID Pénalité" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                        <TextField fx:id="idFieldUpdate" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                <Label text="Absence associée" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                <ComboBox fx:id="absenceComboBoxAdd" onAction="#handleAbsenceSelection" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200.0" />
 
-                        <Label text="Type de pénalité" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                        <ComboBox fx:id="typeComboBoxUpdate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Button onAction="#handleAddPenalite" styleClass="button-action" text="Ajouter Pénalité" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200.0" />
+                            </GridPane>
+                        </children>
+                    </AnchorPane>
+                </Tab>
 
-                        <Label text="Seuil d'absence" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                        <TextField fx:id="seuilAbsFieldUpdate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Tab text="Mettre à jour Pénalité">
+                    <AnchorPane>
+                        <children>
+                            <GridPane hgap="10" style="-fx-padding: 10;" vgap="10">
+                                <Label text="CIN Pénalité" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <TextField fx:id="cinFieldUpdate" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                        <Button onAction="#handleUpdatePenalite" text="Mettre à jour Pénalité" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <columnConstraints>
-                            <ColumnConstraints />
-                            <ColumnConstraints />
-                        </columnConstraints>
-                        <rowConstraints>
-                            <RowConstraints />
-                            <RowConstraints />
-                            <RowConstraints />
-                            <RowConstraints />
-                        </rowConstraints>
-                    </GridPane>
-                </children>
-            </AnchorPane>
-        </Tab>
+                                <Label text="Type de pénalité" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                <ComboBox fx:id="typeComboBoxUpdate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-        <!-- Onglet Supprimer Pénalité -->
-        <Tab text="Supprimer Pénalité">
-            <AnchorPane>
-                <children>
-                    <!-- Logo en haut à droite -->
-                    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="520.0" layoutY="10.0">
-                        <image>
-                            <Image url="java-logo.png" />
-                        </image>
-                    </ImageView>
-                    <GridPane hgap="10" style="-fx-padding: 10;" vgap="10">
-                        <Label text="ID Pénalité à supprimer" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                        <TextField fx:id="idFieldDelete" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                <Label text="Seuil d'absence" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                <TextField fx:id="seuilAbsFieldUpdate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                        <Button onAction="#handleDeletePenalite" text="Supprimer Pénalité" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <columnConstraints>
-                            <ColumnConstraints />
-                            <ColumnConstraints />
-                        </columnConstraints>
-                        <rowConstraints>
-                            <RowConstraints />
-                            <RowConstraints />
-                        </rowConstraints>
-                    </GridPane>
-                </children>
-            </AnchorPane>
-        </Tab>
+                                <Button onAction="#handleUpdatePenalite" styleClass="button-action" text="Mettre à jour Pénalité" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                            </GridPane>
+                        </children>
+                    </AnchorPane>
+                </Tab>
 
-        <!-- Onglet Voir les Pénalités -->
-        <Tab text="Voir les Pénalités">
-            <AnchorPane prefHeight="428.0" prefWidth="654.0">
-                <children>
-                    <!-- Logo en haut à droite -->
-                    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="520.0" layoutY="10.0">
-                        <image>
-                            <Image url="java-logo.png" />
-                        </image>
-                    </ImageView>
+                <Tab text="Supprimer Pénalité">
+                    <AnchorPane>
+                        <children>
+                            <GridPane hgap="10" style="-fx-padding: 10;" vgap="10">
+                                <Label text="CIN Pénalité à supprimer" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <TextField fx:id="cinFieldDelete" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                    <!-- GridView pour afficher les pénalités -->
-                    <GridPane fx:id="penaliteGridView" hgap="10" layoutX="30.0" layoutY="9.0" prefHeight="298.0" prefWidth="540.0" vgap="10">
-                        <!-- Titres des colonnes -->
-                        <Label text="ID Pénalité" GridPane.columnIndex="0" />
-                        <Label text="Type de Pénalité" GridPane.columnIndex="1" />
-                        <Label text="Seuil d'Absence" GridPane.columnIndex="2" />
-                        <Label text="Absence Associée" GridPane.columnIndex="3" />
-                        <columnConstraints>
-                            <ColumnConstraints />
-                            <ColumnConstraints />
-                            <ColumnConstraints />
-                            <ColumnConstraints />
-                        </columnConstraints>
-                        <rowConstraints>
-                            <RowConstraints />
-                        </rowConstraints>
-                    </GridPane>
-                    <Button layoutX="30.0" layoutY="311.0" onAction="#handleViewPenalites" prefHeight="37.0" prefWidth="235.0" text="VOIR LES PENALITES" />
-                </children>
-            </AnchorPane>
-        </Tab>
+                                <Button onAction="#handleDeletePenalite" text="Supprimer Pénalité" styleClass="button-action" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            </GridPane>
+                        </children>
+                    </AnchorPane>
+                </Tab>
 
-    </TabPane>
-</VBox>
+                <Tab text="Voir les Pénalités">
+                    <AnchorPane>
+                        <children>
+                            <GridPane fx:id="penaliteGridView" hgap="10" layoutX="30.0" layoutY="9.0" prefHeight="898.0" prefWidth="540.0" vgap="10">
+                                <Label text="CIN" GridPane.columnIndex="0" visible="false"/>
+                                <Label text="Type de Pénalité" GridPane.columnIndex="1" />
+                                <Label text="Seuil d'Absence" GridPane.columnIndex="2" />
+                                <Label text="CIN Associé" GridPane.columnIndex="3" />
+                            </GridPane>
+                            <Button layoutX="100.0" layoutY="511.0" onAction="#handleViewPenalites" styleClass="button-action" prefHeight="37.0" prefWidth="235.0" text="VOIR LES PENALITES" />
+                        </children>
+                    </AnchorPane>
+                </Tab>
+            </TabPane>
+        </VBox>
+    </center>
+
+</BorderPane>
