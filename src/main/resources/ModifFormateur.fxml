@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.ModifFormateur">
+
+    <!-- Sidebar -->
+    <VBox fx:id="sidebar" alignment="CENTER" prefHeight="500" prefWidth="250" styleClass="sidebar">
+
+        <Button styleClass="sidebar-link" text="Accueil" />
+        <Button styleClass="sidebar-link-active" text="Formations" />
+        <Button styleClass="sidebar-link" text="Formateurs" />
+        <Button fx:id="btnCertificat" styleClass="sidebar-link" text="Certificats" />
+
+        <Button styleClass="sidebar-logout" text="Déconnexion" />
+    </VBox>
+
+    <!-- Contenu principal -->
+    <VBox layoutX="267.0" layoutY="50.0" prefHeight="292.0" prefWidth="503.0" spacing="20" styleClass="body">
+        <!-- Titre -->
+        <Label alignment="CENTER" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #0C162C;" text="Modifier Formateur" textAlignment="CENTER" />
+
+        <!-- Formulaire -->
+        <VBox alignment="CENTER" spacing="15">
+            <HBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="Numéro" />
+                <TextField fx:id="tfNumero" promptText="Entrez le numéro" styleClass="card" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="Nom" />
+                <TextField fx:id="tfNom" promptText="Entrez le nom" styleClass="card" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="Prénom" />
+                <TextField fx:id="tfPrenom" promptText="Entrez le prénom" styleClass="card" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="Email" />
+                <TextField fx:id="tfEmail" promptText="Entrez l'email" styleClass="card" />
+            </HBox>
+
+            <!-- ComboBox pour la spécialité -->
+            <HBox spacing="10">
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #0C162C;" text="Spécialité" />
+                <ComboBox fx:id="cmbSpecialite" promptText="Sélectionnez la spécialité" styleClass="card" />
+            </HBox>
+
+            <!-- Boutons -->
+            <HBox alignment="CENTER" spacing="20">
+                <Button onAction="#handleSave" styleClass="button-add" text="Enregistrer" />
+                <Button onAction="#handleRetour" styleClass="button-delete" text="Retour" />
+            </HBox>
+        </VBox>
+    </VBox>
+
+</AnchorPane>

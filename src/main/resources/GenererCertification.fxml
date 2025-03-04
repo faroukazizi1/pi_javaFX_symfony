@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.GenererCertificationController">
+
+    <!-- Sidebar -->
+    <VBox fx:id="sidebar" alignment="CENTER" prefHeight="700" prefWidth="250" styleClass="sidebar">
+        <Button styleClass="sidebar-link" text="Accueil" />
+        <Button fx:id="btnFormateurs" styleClass="sidebar-link" text="Formateurs" onAction="#handleAfficherFormateur" />
+        <Button fx:id="btnFormations" styleClass="sidebar-link" text="Formations" onAction="#handleAfficherFormation" />
+        <Button fx:id="btnStatistiques" styleClass="sidebar-link" text="Statistiques" onAction="#handleAfficherStatistiques" />
+        <Button fx:id="btnCertificat" styleClass="sidebar-link-active" text="Certificats" onAction="#handleBtnCertif" />
+        <Button styleClass="sidebar-logout" text="Déconnexion" />
+    </VBox>
+
+    <!-- Conteneur principal -->
+    <VBox layoutX="267.0" layoutY="30.0" prefHeight="640.0" prefWidth="700.0" spacing="20" styleClass="body">
+
+        <!-- Titre -->
+        <Label alignment="CENTER" styleClass="title" text="Génération de Certification" />
+
+        <!-- Formulaire -->
+        <GridPane alignment="CENTER" hgap="10" vgap="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- ID Utilisateur -->
+            <Label text="ID Utilisateur" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtUserId" GridPane.rowIndex="0" GridPane.columnIndex="1" promptText="Entrez l'ID utilisateur"/>
+
+            <!-- ID Formation -->
+            <Label text="ID Formation" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtFormationId" GridPane.rowIndex="1" GridPane.columnIndex="1" promptText="Entrez l'ID formation"/>
+
+            <!-- Bouton Générer Certification -->
+            <Button text="Générer Certification" onAction="#genererCertification" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+
+            <!-- Bouton Télécharger Certification -->
+            <Button text="Télécharger Certification" onAction="#telechargerCertification" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+
+            <!-- Message de confirmation/erreur -->
+            <Label fx:id="lblMessage" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2" textFill="red"/>
+        </GridPane>
+    </VBox>
+</AnchorPane>

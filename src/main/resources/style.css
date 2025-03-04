@@ -1,3 +1,562 @@
+<<<<<<< HEAD
+.sidebar {
+    -fx-padding: 20px 30px;
+    -fx-background-color: rgba(12, 22, 44, 1);
+}
+
+.sidebar-link {
+    -fx-background-color: transparent;
+    -fx-padding: 10px 50px 10px 20px;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+
+}
+
+.sidebar-link-active {
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 50px 10px 20px;
+    -fx-background-color: #0066FF;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-logout{
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 50px 10px 20px;
+    -fx-opacity: 0.5;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+.sidebar-logout:hover {
+    -fx-opacity: 1;
+}
+.body{
+    -fx-background-color: #f4f4f4;
+}
+.card{
+    -fx-background-color: #fff;
+    -fx-background-radius: 10px;
+    -fx-pref-width: 300px;
+}
+
+.button-delete{
+    -fx-background-color: #8E1212;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+}
+
+.button-edit{
+    -fx-background-color: #CD9400;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+}
+
+.button-add{
+    -fx-background-color: "#624DE3";
+    -fx-text-fill: #fff;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+}
+
+.show-task-button {
+    -fx-background-color: #2e53a0;  /* Green background */
+    -fx-text-fill: white;            /* White text */
+    -fx-font-size: 14px;             /* Font size */
+    -fx-font-weight: bold;           /* Bold text */
+    -fx-padding: 10px 20px;          /* Padding inside the button */
+    -fx-border-radius: 20px;         /* Rounded corners */
+    -fx-background-radius: 20px;     /* Rounded corners */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 2, 2); /* Drop shadow effect */
+    -fx-margin: 100px;
+    -fx-min-width: 150px;            /* Minimum width */
+    -fx-min-height: 50px;            /* Minimum height */
+    -fx-pref-width: 200px;           /* Preferred width */
+    -fx-pref-height: 60px;
+    -fx-translate-x: -70px; /* Déplace le bouton vers la gauche */
+    /* Preferred height *//* Margin around the button */
+
+}
+
+/* On hover, change background color */
+.show-task-button:hover {
+    -fx-background-color: #0864fc;  /* Darker green when hovered */
+    -fx-cursor: hand;                /* Change cursor to hand when hovered */
+}
+
+/* On pressed, change background color */
+.show-task-button:pressed {
+    -fx-background-color: #5795f0;  /* Even darker green when pressed */
+}
+
+.button-add-inline{
+    -fx-background-color: #007BFF;  /* Bleu */
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-width: 2px;
+    -fx-border-color: #007BFF;
+    -fx-effect: innershadow( gaussian , rgba(0,0,0,0.5) , 10, 0.0 , 0 , 2 );
+    -fx-min-width: 200px;  /* Largeur minimale pour uniformité */
+    -fx-pref-width: 200px;
+}
+
+.button-details{
+    -fx-background-color: #0C162C;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+
+}
+
+.button-statut{
+    -fx-background-color: #0C162C;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+}
+
+.alert-error{
+    -fx-background-color: #FBEDED;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+}
+
+.statut-col{
+    -fx-alignment: CENTER;
+    -fx-background-color: #baf5b8;
+    -fx-background-radius: 10px;
+}
+
+.label-error{
+    -fx-text-fill: #c72e2e;
+}
+
+/* General styling */
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view:focused {
+    -fx-background-color: transparent;
+}
+
+/* Column headers */
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(#2a6ea6, #1a426d);
+}
+
+#user_select {
+    -fx-translate-x: -50px; /* Déplace le ComboBox vers la gauche */
+}
+
+.table-view .column-header-background .label {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+/* Table cells */
+.table-view .table-cell {
+
+}
+
+/* Table rows */
+.table-row-cell {
+    /*-fx-background-color: #2a6ea6;*/
+    -fx-background-insets: 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:odd {
+    /*-fx-background-color: #1a426d;*/
+    -fx-background-insets: 0;
+    -fx-padding: 0.0em;
+}
+
+/* Selected row */
+.table-row-cell:selected {
+    -fx-background-color: #0078d4;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+/* Scroll bars */
+.table-view > .virtual-flow > .scroll-bar:vertical,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track-background,
+.table-view > .virtual-flow > .scroll-bar:horizontal,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
+    -fx-background-color: transparent;
+}
+
+/* Hide scroll bar buttons */
+.table-view > .virtual-flow > .scroll-bar > .increment-button,
+.table-view > .virtual-flow > .scroll-bar > .decrement-button {
+    -fx-opacity: 0;
+}
+
+.task-status {
+    -fx-background-color: #baf5b8;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 16px;
+}
+
+.task-card{
+    -fx-background-color: #f4f4f4;
+    -fx-background-radius: 5px;
+    /*-fx-border-color: #c7c7c7;*/
+    -fx-border-radius: 5px;
+    /*-fx-border-width: 1px;*/
+}
+.title {
+    -fx-font-size: 24px; /* Taille du texte */
+    -fx-font-weight: bold; /* Mettre le texte en gras */
+    -fx-text-fill: #000000; /* Couleur du texte */
+    -fx-alignment: center; /* Centrer le texte */
+    -fx-padding: 20px; /* Espacement autour du texte */
+}
+.button-view {
+    -fx-background-color: #0078D7;  /* Bleu */
+    -fx-text-fill: white;           /* Texte blanc */
+    -fx-font-size: 14px;            /* Taille du texte */
+    -fx-font-weight: bold;          /* Texte en gras */
+    -fx-padding: 10px 30px;         /* Padding */
+    -fx-background-radius: 10px;    /* Coins arrondis */
+    -fx-border-radius: 10px;        /* Bordures arrondies */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 2, 2); /* Effet d'ombre */
+}
+
+/* Effet au survol */
+.button-view:hover {
+    -fx-background-color: #005A9E; /* Bleu plus foncé */
+    -fx-cursor: hand; /* Curseur pointer */
+}
+
+/* Effet au clic */
+.button-view:pressed {
+    -fx-background-color: #004A87; /* Encore plus foncé */
+}
+/* Style pour le bouton d'ajout de formateur */
+/* Style pour le bouton d'ajout de formateur */
+.btn-ajouter-formateur {
+    -fx-background-color: #007BFF; /* Couleur de fond bleu */
+    -fx-text-fill: white; /* Couleur du texte */
+    -fx-font-size: 14px; /* Taille de la police */
+    -fx-padding: 10px 20px; /* Espacement intérieur */
+    -fx-border-radius: 5px; /* Arrondi des coins */
+    -fx-cursor: hand; /* Curseur de main au survol */
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.5) , 5, 0, 0 , 1 ); /* Ombre portée */
+}
+
+/* Style au survol du bouton */
+.btn-ajouter-formateur:hover {
+    -fx-background-color: #0056b3; /* Couleur bleu plus foncé au survol */
+}
+
+/* Style au clic du bouton */
+.btn-ajouter-formateur:pressed {
+    -fx-background-color: #004085; /* Couleur bleu très foncé lorsqu'il est cliqué */
+}
+/* Style pour le bouton Modifier */
+/* Style pour les boutons "Modifier" */
+.btn-modifier {
+    -fx-background-color: #4CAF50;  /* Vert */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.btn-modifier:hover {
+    -fx-background-color: #45a049;  /* Vert foncé */
+}
+
+/* Style pour les boutons "Supprimer" */
+.btn-supprimer {
+    -fx-background-color: #f44336;  /* Rouge */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.btn-supprimer:hover {
+    -fx-background-color: #e53935;  /* Rouge foncé */
+}
+/* Style des boutons Modifier et Supprimer */
+.btn-modifier {
+    -fx-background-color: #4CAF50; /* Vert */
+    -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+    -fx-font-weight: bold;
+}
+
+.btn-modifier:hover {
+    -fx-background-color: #45a049;
+}
+
+.btn-supprimer {
+    -fx-background-color: #f44336; /* Rouge */
+    -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+    -fx-font-weight: bold;
+}
+
+.btn-supprimer:hover {
+    -fx-background-color: #e53935;
+}
+
+/* Style des autres boutons */
+.btn-ajouter-formation, .btn-liste-formations {
+    -fx-background-color: #008CBA; /* Bleu */
+    -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+    -fx-font-weight: bold;
+}
+
+.btn-ajouter-formation:hover, .btn-liste-formations:hover {
+    -fx-background-color: #007B9E;
+}
+/* Style de base pour les boutons */
+/* Style commun pour les boutons */
+.button-commun {
+    -fx-background-color: #007BFF;  /* Bleu */
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-width: 2px;
+    -fx-border-color: #007BFF;
+    -fx-effect: innershadow( gaussian , rgba(0,0,0,0.5) , 10, 0.0 , 0 , 2 );
+    -fx-min-width: 200px;  /* Largeur minimale pour uniformité */
+    -fx-pref-width: 200px; /* Largeur préférée pour la taille uniforme */
+}
+
+/* Style au survol (hover) */
+.button-commun:hover {
+    -fx-background-color: #0056b3;  /* Bleu foncé */
+    -fx-cursor: hand;
+}
+
+/* Style lorsque le bouton est pressé */
+.button-commun:pressed {
+    -fx-background-color: #004085;  /* Bleu très foncé */
+    -fx-border-color: #004085;
+}
+/* Style pour les boutons "Modifier" */
+.btn-modifier {
+    -fx-background-color: #4CAF50;  /* Vert */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.btn-modifier:hover {
+    -fx-background-color: #45a049;  /* Vert foncé */
+}
+
+/* Style pour les boutons "Supprimer" */
+.btn-supprimer {
+    -fx-background-color: #f44336;  /* Rouge */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.btn-supprimer:hover {
+    -fx-background-color: #e53935;  /* Rouge foncé */
+}
+
+.btn-modifier1 {
+    -fx-background-color: #4CAF50;  /* Vert */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.btn-modifier1:hover {
+    -fx-background-color: #45a049;  /* Vert foncé */
+}
+
+/* Style pour les boutons "Supprimer" */
+.btn-supprimer {
+    -fx-background-color: #f44336;  /* Rouge */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.btn-supprimer:hover {
+    -fx-background-color: #e53935;  /* Rouge foncé */
+}
+/* Style pour le bouton Modifier */
+.table-view .button-modifier {
+    -fx-background-color: #4CAF50; /* Vert */
+    -fx-text-fill: white;
+    -fx-padding: 5 15;
+    -fx-border-radius: 5;
+    -fx-font-size: 14px;
+}
+
+.table-view .button-modifier:hover {
+    -fx-background-color: #45a049; /* Vert plus foncé au survol */
+}
+
+/* Style pour le bouton Supprimer */
+.table-view .button-supprimer {
+    -fx-background-color: #F44336; /* Rouge */
+    -fx-text-fill: white;
+    -fx-padding: 5 15;
+    -fx-border-radius: 5;
+    -fx-font-size: 14px;
+}
+
+.table-view .button-supprimer:hover {
+    -fx-background-color: #e53935; /* Rouge plus foncé au survol */
+}
+/* Style pour le bouton Modifier */
+.button-modifier {
+    -fx-background-color: #4CAF50; /* Couleur de fond (vert) */
+    -fx-text-fill: white; /* Couleur du texte */
+    -fx-font-weight: bold; /* Texte en gras */
+    -fx-border-radius: 5px; /* Coins arrondis */
+    -fx-padding: 10px 20px; /* Espacement interne */
+}
+
+/* Style pour le bouton Supprimer */
+.button-supprimer {
+    -fx-background-color: #f44336; /* Couleur de fond (rouge) */
+    -fx-text-fill: white; /* Couleur du texte */
+    -fx-font-weight: bold; /* Texte en gras */
+    -fx-border-radius: 5px; /* Coins arrondis */
+    -fx-padding: 10px 20px; /* Espacement interne */
+}
+.search-button {
+    padding: 10px 20px;
+    background-color: #007BFF; /* Couleur de fond bleue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    transform: scale(1.05); /* Correcte */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Correcte */
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.1); /* Correcte */
+}
+
+
+
+.search-button:disabled {
+    background-color: #e0e0e0;
+    color: #a0a0a0;
+    cursor: not-allowed;
+}
+/* Sidebar */
+.sidebar {
+    -fx-padding: 20px 30px;
+    -fx-background-color: rgba(12, 22, 44, 1);
+}
+
+.sidebar-link {
+    -fx-background-color: transparent;
+    -fx-padding: 10px 50px 10px 20px;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-link-active {
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 50px 10px 20px;
+    -fx-background-color: #0066FF;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-logout {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 50px 10px 20px;
+    -fx-opacity: 0.5;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-logout:hover {
+    -fx-opacity: 1;
+}
+
+.body {
+    -fx-background-color: #f4f4f4;
+}
+
+/* Style de la table */
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(#2a6ea6, #1a426d);
+}
+
+.table-view .column-header-background .label {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #0078d4;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+/* Boutons */
+.button-add {
+    -fx-background-color: #624DE3;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+}
+
+.button-add:hover {
+    -fx-background-color: #5c41c2;
+}
+
+.button-view {
+    -fx-background-color: #0078D7;
+=======
+<<<<<<< HEAD
 /* Style général de l'application */
 .tab-pane {
     -fx-background-color: #E0F2FF; /* Bleu très clair */
@@ -52,10 +611,204 @@
 /* Style des boutons */
 .button {
     -fx-background-color: #007acc;
+>>>>>>> cc574a6dbac8eabfe1322030c1d01ddbe82b0cff
     -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-padding: 10px 30px;
+<<<<<<< HEAD
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+.button-view:hover {
+    -fx-background-color: #005A9E;
+    -fx-cursor: hand;
+}
+
+.button-view:pressed {
+    -fx-background-color: #004A87;
+}
+
+.search-box {
+    -fx-background-color: transparent;
+}
+
+/* Autres styles */
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+    -fx-alignment: center;
+    -fx-padding: 20px;
+}
+
+.search-field {
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+}
+
+.search-button {
+    -fx-background-color: #5c41c2;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+}
+
+.search-button:hover {
+    -fx-background-color: #5c41c2;
+}
+/* Style pour le DatePicker */
+.date-picker {
+    -fx-background-color: #f4f4f4; /* Couleur de fond */
+    -fx-border-color: #cccccc; /* Bordure */
+    -fx-border-radius: 5; /* Arrondir les bords */
+    -fx-padding: 5px; /* Espacement interne */
+    -fx-font-size: 14px; /* Taille de police */
+    -fx-pref-width: 180px; /* Largeur préférée */
+    -fx-pref-height: 30px; /* Hauteur préférée */
+}
+
+/* Ajouter un style au champ de texte de la date (pour le calendrier) */
+.date-picker .text-field {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+}
+
+/* Ajouter un style au bouton de calendrier */
+.date-picker .arrow-button {
+    -fx-background-color: #cccccc; /* Couleur du bouton */
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+/* Style pour le ComboBox */
+.sort-combo-box {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #b0b0b0;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+/* Style pour l'élément sélectionné dans le ComboBox */
+.sort-combo-box .list-cell {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #333;
+}
+
+/* Style au survol de l'élément dans le ComboBox */
+.sort-combo-box .list-cell:hover {
+    -fx-background-color: #c6c6c6;
+}
+
+/* Style pour la flèche déroulante */
+.sort-combo-box .arrow {
+    -fx-background-color: #4caf50;
+    -fx-background-radius: 5px;
+}
+
+.search-field {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+
+
+    -fx-font-family: "Arial";
+    -fx-pref-height: 30px;
+    -fx-pref-width: 600px;
+
+
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+}
+.search-field {
+    -fx-font-size: 12px;  /* Réduire la taille de la police */
+    -fx-padding: 5px;  /* Réduire l'espacement intérieur */
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-font-family: "Arial";
+    -fx-pref-height: 40px;  /* Réduire la hauteur */
+    -fx-pref-width: 200px;  /* Réduire la largeur */
+}
+
+.search-box {
+    width: 50%;  /* Réduire encore la largeur de la barre de recherche */
+    padding: 3px;  /* Réduire l'espacement autour de la barre de recherche */
+}
+
+.search-field, .search-combo-box, .sort-combo-box {
+    min-width: 80px;  /* Réduire la largeur minimale */
+    max-width: 120px;  /* Limiter encore la largeur maximale */
+    height: 80px;  /* Réduire la hauteur */
+}
+
+.search-combo-box {
+    margin-right: 5px;  /* Espace entre les éléments */
+}
+.search-combo-box {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-font-size: 12px;
+    -fx-font-family: "Arial";
+    -fx-pref-height: 25px;
+    -fx-pref-width: 120px;
+    -fx-padding: 5px;
+    -fx-min-width: 100px;
+    -fx-max-width: 150px;
+    -fx-background-radius: 5;
+}
+
+.search-combo-box {
+    margin-right: 10px; /* Ajoute un espace entre les éléments de la barre de recherche */
+}
+
+/* Style du titre */
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000; /* Bleu */
+    -fx-alignment: center;
+}
+
+/* Style pour le graphique */
+.chart {
+    -fx-background-color: #f4f4f4; /* Gris clair pour l'arrière-plan */
+}
+
+/* Style des barres du graphique */
+.chart-bar {
+    -fx-bar-fill: #1E90FF; /* Bleu pour les barres */
+}
+
+/* Style des axes */
+.axis {
+    -fx-tick-label-fill: #1E90FF; /* Couleur bleu des étiquettes des axes */
+    -fx-label-fill: #1E90FF; /* Couleur bleu des labels des axes */
+}
+
+/* Style pour l'axe X */
+.category-axis .axis-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E90FF; /* Bleu */
+}
+
+/* Style pour l'axe Y */
+.number-axis .axis-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E90FF; /* Bleu */
+}
+
+=======
     -fx-border-radius: 15px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0.0, 2, 2);
 }
@@ -115,3 +868,75 @@
     -fx-min-width: 150px;
     -fx-min-height: 150px;
 }
+=======
+/* Sidebar - Bleu foncé */
+.sidebar {
+    -fx-background-color: #0A1F44; /* Bleu foncé */
+}
+
+/* Boutons de la sidebar */
+.sidebar-link {
+    -fx-background-color: transparent;
+    -fx-text-fill: white; /* Texte blanc */
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+}
+
+.sidebar-link:hover {
+    -fx-background-color: #162A5D; /* Bleu légèrement plus clair au survol */
+}
+
+.sidebar-link-active {
+    -fx-background-color: #0D2B6B; /* Bleu plus intense pour l'onglet actif */
+    -fx-text-fill: white;
+}
+
+/* Bouton Logout */
+.sidebar-logout {
+    -fx-background-color: #B22222; /* Rouge foncé */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.sidebar-logout:hover {
+    -fx-background-color: #8B0000; /* Rouge plus foncé au survol */
+}
+
+/* Style pour les boutons d'ajout, suppression, modification et consultation */
+.button-action {
+    -fx-background-color: #003366;  /* Bleu foncé */
+    -fx-text-fill: white;            /* Texte en blanc */
+    -fx-font-size: 14px;             /* Taille de police */
+    -fx-padding: 10px 20px;          /* Espacement intérieur */
+    -fx-border-radius: 5px;         /* Coins arrondis */
+    -fx-border-width: 2px;
+    -fx-border-color: #003366;      /* Bordure bleu foncé */
+    -fx-effect: dropshadow(gaussian, #000000, 5, 0.5, 0, 0);
+}
+
+/* Effet au survol des boutons d'ajout, suppression, modification et consultation */
+.button-action:hover {
+    -fx-background-color: #004d99;  /* Bleu clair au survol */
+    -fx-border-color: #004d99;      /* Bordure bleu clair */
+}
+
+/* Style pour le bouton "Envoyer" */
+.button-envoyer {
+    -fx-background-color: #003366;  /* Bleu foncé */
+    -fx-text-fill: white;            /* Texte en blanc */
+    -fx-font-size: 12px;             /* Taille de police plus petite */
+    -fx-padding: 5px 10px;          /* Espacement intérieur plus petit */
+    -fx-border-radius: 5px;         /* Coins arrondis */
+    -fx-border-width: 2px;
+    -fx-border-color: #003366;      /* Bordure bleu foncé */
+    -fx-effect: dropshadow(gaussian, #000000, 5, 0.5, 0, 0);
+}
+
+/* Effet au survol du bouton "Envoyer" */
+.button-envoyer:hover {
+    -fx-background-color: #004d99;  /* Bleu clair au survol */
+    -fx-border-color: #004d99;      /* Bordure bleu clair */
+}
+
+>>>>>>> Gestion_absence
+>>>>>>> cc574a6dbac8eabfe1322030c1d01ddbe82b0cff

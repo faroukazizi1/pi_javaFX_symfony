@@ -4,14 +4,21 @@ public class penalite {
     private int id_pen;
     private String type;
     private int seuil_abs;
-    private int id_absence; // Ajout de l'ID de l'absence
+    private int cin;  // Remplacer l'id_absence par cin
 
-    // Constructeur avec id_absence
-    public penalite(int id_pen, String type, int seuil_abs, int id_absence) {
+    // Constructeur avec cin
+    public penalite(int id_pen, String type, int seuil_abs, int cin) {
         this.id_pen = id_pen;
         this.type = type;
         this.seuil_abs = seuil_abs;
-        this.id_absence = id_absence;
+        this.cin = cin;
+    }
+    // Nouveau constructeur sans id_pen
+    public penalite(String type, int seuil_abs, int cin) {
+        this.type = type;
+        this.seuil_abs = seuil_abs;
+        this.cin = cin;
+        this.id_pen = 0;  // Ou n'importe quelle valeur par défaut, si nécessaire
     }
 
     // Getters et Setters
@@ -39,22 +46,21 @@ public class penalite {
         this.seuil_abs = seuil_abs;
     }
 
-    public int getId_absence() {
-        return id_absence;
+    public int getCin() {
+        return cin;
     }
 
-    public void setId_absence(int id_absence) {
-        this.id_absence = id_absence;
+    public void setCin(int cin) {
+        this.cin = cin;
     }
 
-    // Méthode toString mise à jour
     @Override
     public String toString() {
         return "Penalite{" +
                 "id_pen=" + id_pen +
                 ", type='" + type + '\'' +
                 ", seuil_abs=" + seuil_abs +
-                ", id_absence=" + id_absence +
+                ", cin=" + cin +
                 '}';
     }
 }

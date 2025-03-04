@@ -134,7 +134,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                        <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="293.0" style="-fx-background-color: #007BFF;" text="FORMATION">
+                        <Button mnemonicParsing="false" onAction="#OuvrirFormation" prefHeight="57.0" prefWidth="293.0" style="-fx-background-color: #007BFF;" text="FORMATION">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>

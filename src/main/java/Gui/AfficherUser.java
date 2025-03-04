@@ -12,7 +12,6 @@ import Model.user;
 import Service.userService;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import Gui.UserSession;
 import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.util.List;
@@ -323,7 +322,18 @@ public class AfficherUser {
         }
     }
 
+    @FXML
+    private void OuvrirFormation(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherFormation.fxml"));
+            Parent root = loader.load();
 
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
