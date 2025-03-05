@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Style général de l'application */
 .tab-pane {
     -fx-background-color: #E0F2FF; /* Bleu très clair */
@@ -115,3 +116,74 @@
     -fx-min-width: 150px;
     -fx-min-height: 150px;
 }
+=======
+/* Sidebar - Bleu foncé */
+.sidebar {
+    -fx-background-color: #0A1F44; /* Bleu foncé */
+}
+
+/* Boutons de la sidebar */
+.sidebar-link {
+    -fx-background-color: transparent;
+    -fx-text-fill: white; /* Texte blanc */
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+}
+
+.sidebar-link:hover {
+    -fx-background-color: #162A5D; /* Bleu légèrement plus clair au survol */
+}
+
+.sidebar-link-active {
+    -fx-background-color: #0D2B6B; /* Bleu plus intense pour l'onglet actif */
+    -fx-text-fill: white;
+}
+
+/* Bouton Logout */
+.sidebar-logout {
+    -fx-background-color: #B22222; /* Rouge foncé */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.sidebar-logout:hover {
+    -fx-background-color: #8B0000; /* Rouge plus foncé au survol */
+}
+
+/* Style pour les boutons d'ajout, suppression, modification et consultation */
+.button-action {
+    -fx-background-color: #003366;  /* Bleu foncé */
+    -fx-text-fill: white;            /* Texte en blanc */
+    -fx-font-size: 14px;             /* Taille de police */
+    -fx-padding: 10px 20px;          /* Espacement intérieur */
+    -fx-border-radius: 5px;         /* Coins arrondis */
+    -fx-border-width: 2px;
+    -fx-border-color: #003366;      /* Bordure bleu foncé */
+    -fx-effect: dropshadow(gaussian, #000000, 5, 0.5, 0, 0);
+}
+
+/* Effet au survol des boutons d'ajout, suppression, modification et consultation */
+.button-action:hover {
+    -fx-background-color: #004d99;  /* Bleu clair au survol */
+    -fx-border-color: #004d99;      /* Bordure bleu clair */
+}
+
+/* Style pour le bouton "Envoyer" */
+.button-envoyer {
+    -fx-background-color: #003366;  /* Bleu foncé */
+    -fx-text-fill: white;            /* Texte en blanc */
+    -fx-font-size: 12px;             /* Taille de police plus petite */
+    -fx-padding: 5px 10px;          /* Espacement intérieur plus petit */
+    -fx-border-radius: 5px;         /* Coins arrondis */
+    -fx-border-width: 2px;
+    -fx-border-color: #003366;      /* Bordure bleu foncé */
+    -fx-effect: dropshadow(gaussian, #000000, 5, 0.5, 0, 0);
+}
+
+/* Effet au survol du bouton "Envoyer" */
+.button-envoyer:hover {
+    -fx-background-color: #004d99;  /* Bleu clair au survol */
+    -fx-border-color: #004d99;      /* Bordure bleu clair */
+}
+
+>>>>>>> Gestion_absence

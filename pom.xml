@@ -45,6 +45,16 @@
             <artifactId>javafx-graphics</artifactId>
             <version>23.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.twilio.sdk</groupId>
+            <artifactId>twilio</artifactId>
+            <version>9.0.0</version>
+        </dependency>
+
+
+
+
+
 
         <dependency>
             <groupId>io.github.palexdev</groupId>
@@ -58,6 +68,7 @@
             <artifactId>itextpdf</artifactId>
             <version>5.5.13</version>
         </dependency>
+
 
         <dependency>
             <groupId>com.sun.mail</groupId>
@@ -100,6 +111,7 @@
             <artifactId>view</artifactId>
             <version>11.12.6</version>
         </dependency>
+
 
     </dependencies>
 

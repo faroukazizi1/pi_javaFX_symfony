@@ -1,6 +1,8 @@
 package GroupSuccess.esprit;
 
+
 import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,10 +16,12 @@ public class TestFX extends Application {
 
     public static void main(MysqlxDatatypes.Scalar.String[] args) {
         launch(Arrays.toString(args));
+
     }
 
     @Override
     public void start(Stage primaryStage) {
+
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
         if (loader.getLocation() == null) {
@@ -41,6 +45,7 @@ public class TestFX extends Application {
     }
 
     }
+
 
 
 

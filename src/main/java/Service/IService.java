@@ -1,5 +1,8 @@
 package Service;
 
+
+import models.absence;
+
 import java.util.List;
 
 public interface IService <T>{
@@ -9,4 +12,5 @@ public interface IService <T>{
     List<T> getAll();
     List<T> getPromotionsByUserId(int id);
     public boolean authenticateUser(String username, String password);
+
 }
