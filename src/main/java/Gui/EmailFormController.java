@@ -25,6 +25,8 @@ public class EmailFormController {
     @FXML
     private TextArea txtMsgArea;
 
+    private final String senderEmail = "flexirh.equipe@gmail.com";  // Updated sender email
+
     @FXML
     void sendBtnOnAction(ActionEvent event) {
         String recipientEmail = txtEmail.getText();
@@ -34,7 +36,7 @@ public class EmailFormController {
         }
 
         try {
-            sendEmail(recipientEmail);
+            sendEmail(senderEmail, recipientEmail, txtMsgArea.getText());
             new Alert(Alert.AlertType.INFORMATION, "Email envoyé avec succès !").show();
         } catch (MessagingException e) {
             Logger.getLogger(EmailFormController.class.getName()).log(Level.SEVERE, "Erreur lors de l'envoi de l'email", e);
@@ -42,24 +44,23 @@ public class EmailFormController {
         }
     }
 
-    private void sendEmail(String recipientEmail) throws MessagingException {
+    private void sendEmail(String senderEmail, String recipientEmail, String msg) throws MessagingException {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
 
-        String myAccountEmail = "laribiaziz092@gmail.com";
-        String password = "vedy qedu qkcs cwgb";
+        String password = "dflq fhuu gpsc rbzb";  // Sender email password
 
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(myAccountEmail, password);
+                return new PasswordAuthentication(senderEmail, password);
             }
         });
 
-        Message message = prepareMessage(session, myAccountEmail, recipientEmail, txtMsgArea.getText());
+        Message message = prepareMessage(session, senderEmail, recipientEmail, msg);
         if (message != null) {
             Transport.send(message);
         } else {
@@ -67,13 +68,12 @@ public class EmailFormController {
         }
     }
 
-    private Message prepareMessage(Session session, String myAccountEmail, String recipientEmail, String msg) {
+    private Message prepareMessage(Session session, String senderEmail, String recipientEmail, String msg) {
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(myAccountEmail));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail)); // Corrected
-
-            message.setSubject("Message important"); // Fixed method name
+            message.setFrom(new InternetAddress(senderEmail));  // Updated sender
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));  // Employee's email as recipient
+            message.setSubject("Message important");
             message.setText(msg);
             return message;
         } catch (MessagingException e) {

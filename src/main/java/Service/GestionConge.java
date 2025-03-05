@@ -43,7 +43,7 @@
             String query = "INSERT INTO DemandeConge (employe_id, date_debut, date_fin, type_conge) " +
                     "VALUES (?, ?, ?, ?)";
 
-            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/management_user", "root", "");
+            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/user_management", "root", "");
                  PreparedStatement stmt = connection.prepareStatement(query)) {
 
                 stmt.setInt(1, employeId);
@@ -115,7 +115,7 @@
             ObservableList<DemandeConge> demandes = FXCollections.observableArrayList();
 
             String query = "SELECT * FROM demandeConge WHERE employe_id = ?"; // Corrected table name
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/management_user", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/user_management", "root", "");
                  PreparedStatement stmt = conn.prepareStatement(query)) {
 
                 stmt.setInt(1, userId);

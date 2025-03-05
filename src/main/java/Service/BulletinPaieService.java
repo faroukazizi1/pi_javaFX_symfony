@@ -12,24 +12,25 @@ import java.util.LinkedHashMap;
 public class BulletinPaieService {
     private static Connection conn = DBconnection.getInstance().getConn();
 
+    // Create Bulletin Paie (with cin)
     public static int createBulletinPaie(BulletinPaie bulletin) {
-        String query = "INSERT INTO BulletinPaie (employe_id, mois, annee, salaire_brut, deductions, salaire_net) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO BulletinPaie (employe_id, cin, mois, annee, salaire_brut, deductions, salaire_net) VALUES (?, ?, ?, ?, ?, ?, ?)";
         int generatedId = -1;
         try (PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, bulletin.getEmployeId());
-            stmt.setString(2, bulletin.getMois());
-            stmt.setInt(3, bulletin.getAnnee());
-            stmt.setBigDecimal(4, bulletin.getSalaireBrut());
-            stmt.setBigDecimal(5, bulletin.getDeductions());
-            stmt.setBigDecimal(6, bulletin.getSalaireNet());
+            stmt.setInt(2, bulletin.getCin());  // Set cin
+            stmt.setString(3, bulletin.getMois());
+            stmt.setInt(4, bulletin.getAnnee());
+            stmt.setBigDecimal(5, bulletin.getSalaireBrut());
+            stmt.setBigDecimal(6, bulletin.getDeductions());
+            stmt.setBigDecimal(7, bulletin.getSalaireNet());
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 generatedId = rs.getInt(1);  // Get generated ID
 
-
-                String email = getEmailByUserId(bulletin.getEmployeId());
+                String email = getEmailByUserCin(bulletin.getCin());  // Get email by cin
 
                 if (email != null) {
                     String subject = "Votre bulletin de paie - " + bulletin.getMois() + " " + bulletin.getAnnee();
@@ -50,7 +51,7 @@ public class BulletinPaieService {
         return generatedId;
     }
 
-
+    // Get Bulletin Paie by ID (with cin)
     public static BulletinPaie getBulletinPaieById(int id) {
         String query = "SELECT * FROM BulletinPaie WHERE id = ?";
         BulletinPaie bulletin = null;
@@ -62,6 +63,7 @@ public class BulletinPaieService {
             if (rs.next()) {
                 bulletin = new BulletinPaie();
                 bulletin.setId(rs.getInt("id"));
+                bulletin.setCin(rs.getInt("cin"));  // Get cin
                 bulletin.setEmployeId(rs.getInt("employe_id"));
                 bulletin.setMois(rs.getString("mois"));
                 bulletin.setAnnee(rs.getInt("annee"));
@@ -76,8 +78,9 @@ public class BulletinPaieService {
         return bulletin;
     }
 
+    // Get Bulletins Paie by Month and Year (with cin)
     public static List<BulletinPaie> getBulletinsPaieByMonthAndYear(int month, int year) {
-        String query = "SELECT * FROM bulletinpaie WHERE mois = ? AND annee = ?";
+        String query = "SELECT * FROM BulletinPaie WHERE mois = ? AND annee = ?";
         List<BulletinPaie> bulletins = new ArrayList<>();
 
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -89,6 +92,7 @@ public class BulletinPaieService {
             while (rs.next()) {
                 BulletinPaie bulletin = new BulletinPaie();
                 bulletin.setId(rs.getInt("id"));
+                bulletin.setCin(rs.getInt("cin"));  // Get cin
                 bulletin.setEmployeId(rs.getInt("employe_id"));
                 bulletin.setMois(rs.getString("mois"));
                 bulletin.setAnnee(rs.getInt("annee"));
@@ -105,8 +109,9 @@ public class BulletinPaieService {
         return bulletins;
     }
 
+    // Update Bulletin Paie (with cin)
     public static void updateBulletinPaie(BulletinPaie bulletin) {
-        String query = "UPDATE BulletinPaie SET mois = ?, annee = ?, salaire_brut = ?, deductions = ?, salaire_net = ? WHERE id = ?";
+        String query = "UPDATE BulletinPaie SET mois = ?, annee = ?, salaire_brut = ?, deductions = ?, salaire_net = ?, cin = ? WHERE id = ?";
 
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, bulletin.getMois());
@@ -114,13 +119,15 @@ public class BulletinPaieService {
             stmt.setBigDecimal(3, bulletin.getSalaireBrut());
             stmt.setBigDecimal(4, bulletin.getDeductions());
             stmt.setBigDecimal(5, bulletin.getSalaireNet());
-            stmt.setInt(6, bulletin.getId());
+            stmt.setInt(6, bulletin.getCin());  // Set cin
+            stmt.setInt(7, bulletin.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    // Calculate Net Salary (no changes for CIN here)
     public static BigDecimal calculerSalaireNet(BigDecimal salaireBrut, BigDecimal deductions) {
         Map<BigDecimal, BigDecimal> tranches = new LinkedHashMap<>();
         tranches.put(new BigDecimal("416"), new BigDecimal("0.00"));
@@ -149,12 +156,14 @@ public class BulletinPaieService {
         BigDecimal salaireNet = salaireBrut.subtract(impots).subtract(deductions).add(prime);
         return salaireNet.compareTo(BigDecimal.ZERO) > 0 ? salaireNet : BigDecimal.ZERO;
     }
-    public static String getEmailByUserId(int userId) {
-        String query = "SELECT email FROM user WHERE id = ?";
+
+    // Get Email by User CIN
+    public static String getEmailByUserCin(int cin) {
+        String query = "SELECT email FROM user WHERE cin = ?";
         String email = null;
 
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, userId);
+            stmt.setInt(1, cin);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -166,5 +175,4 @@ public class BulletinPaieService {
 
         return email;
     }
-
 }

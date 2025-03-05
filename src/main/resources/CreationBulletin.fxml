@@ -8,8 +8,8 @@
           fx:controller="Gui.CreationBulletinPaieController"
           alignment="center" hgap="10" vgap="10">
 
-    <Label text="Employe ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-    <TextField fx:id="employeIdField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    <Label text="cin:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <TextField fx:id="cinField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
     <Label text="Mois:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
     <TextField fx:id="moisField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>

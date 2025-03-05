@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class CreationBulletinPaieController {
 
     @FXML
-    private TextField employeIdField;
+    private TextField cinField;  // Changed field name to 'cinField'
     @FXML
     private TextField moisField;
     @FXML
@@ -37,12 +37,14 @@ public class CreationBulletinPaieController {
     @FXML
     private void createBulletin() {
         try {
-            if (!isValidInteger(employeIdField.getText())) {
-                showAlert("Erreur", "L'ID de l'employé doit être un entier valide.");
+            // Validate CIN (id is now cin)
+            if (!isValidInteger(cinField.getText())) {
+                showAlert("Erreur", "Le CIN doit être un entier valide.");
                 return;
             }
-            int employeId = Integer.parseInt(employeIdField.getText());
+            int cin = Integer.parseInt(cinField.getText());
 
+            // Validate Mois
             if (!isValidInteger(moisField.getText())) {
                 showAlert("Erreur", "Le mois doit être un nombre entre 1 et 12.");
                 return;
@@ -53,6 +55,7 @@ public class CreationBulletinPaieController {
                 return;
             }
 
+            // Validate Annee
             if (!isValidInteger(anneeField.getText())) {
                 showAlert("Erreur", "L'année doit être un nombre entier valide.");
                 return;
@@ -63,6 +66,7 @@ public class CreationBulletinPaieController {
                 return;
             }
 
+            // Validate Salaires
             if (!isValidBigDecimal(salaireBrutField.getText()) || !isValidBigDecimal(deductionsField.getText())) {
                 showAlert("Erreur", "Les montants doivent être des nombres valides.");
                 return;
@@ -76,7 +80,7 @@ public class CreationBulletinPaieController {
 
             // Création du bulletin de paie
             BulletinPaie bulletin = new BulletinPaie();
-            bulletin.setEmployeId(employeId);
+            bulletin.setCin(cin);  // Set cin instead of employeId
             bulletin.setMois(String.valueOf(mois)); // Convertir le mois en String
             bulletin.setAnnee(annee);
             bulletin.setSalaireBrut(salaireBrut);
@@ -99,7 +103,7 @@ public class CreationBulletinPaieController {
 
     @FXML
     private void clearFields() {
-        employeIdField.clear();
+        cinField.clear();  // Clear the cin field
         moisField.clear();
         anneeField.clear();
         salaireBrutField.clear();
@@ -144,5 +148,4 @@ public class CreationBulletinPaieController {
             salaireNetLabel.setText("Erreur");
         }
     }
-
 }

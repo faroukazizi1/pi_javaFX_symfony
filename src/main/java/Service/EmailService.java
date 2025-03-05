@@ -7,8 +7,8 @@ import java.util.Properties;
 public class EmailService {
 
     public static void sendEmail(String recipient, String subject, String body) {
-        final String username = "laribiaziz092@gmail.com";
-        final String password = "ofxf fcyu kfpc lgct";
+        final String senderEmail = "flexirh.equipe@gmail.com";  // Updated sender email
+        final String password = "dflq fhuu gpsc rbzb";  // Sender email password
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -18,13 +18,13 @@ public class EmailService {
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+                return new PasswordAuthentication(senderEmail, password);
             }
         });
 
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
+            message.setFrom(new InternetAddress(senderEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
             message.setSubject(subject);
             message.setText(body);

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class BulletinPaie {
 
     private SimpleIntegerProperty id;
+    private SimpleIntegerProperty cin;  // Added CIN field
     private SimpleIntegerProperty employeId;
     private SimpleStringProperty mois;
     private SimpleIntegerProperty annee;
@@ -18,8 +19,10 @@ public class BulletinPaie {
     private SimpleObjectProperty<BigDecimal> salaireNet;
     private SimpleObjectProperty<LocalDateTime> dateGeneration;
 
-    public BulletinPaie(int id, int employeId, String mois, int annee, BigDecimal salaireBrut, BigDecimal deductions, BigDecimal salaireNet, LocalDateTime dateGeneration) {
+    // Constructor with parameters
+    public BulletinPaie(int id, int cin, int employeId, String mois, int annee, BigDecimal salaireBrut, BigDecimal deductions, BigDecimal salaireNet, LocalDateTime dateGeneration) {
         this.id = new SimpleIntegerProperty(id);
+        this.cin = new SimpleIntegerProperty(cin);  // Initialize CIN
         this.employeId = new SimpleIntegerProperty(employeId);
         this.mois = new SimpleStringProperty(mois);
         this.annee = new SimpleIntegerProperty(annee);
@@ -29,8 +32,10 @@ public class BulletinPaie {
         this.dateGeneration = new SimpleObjectProperty<>(dateGeneration);
     }
 
+    // Default constructor
     public BulletinPaie() {
         this.id = new SimpleIntegerProperty(0);
+        this.cin = new SimpleIntegerProperty(0);  // Default CIN value
         this.employeId = new SimpleIntegerProperty(0);
         this.mois = new SimpleStringProperty("");
         this.annee = new SimpleIntegerProperty(0);
@@ -40,38 +45,16 @@ public class BulletinPaie {
         this.dateGeneration = new SimpleObjectProperty<>(LocalDateTime.now());
     }
 
-    public SimpleIntegerProperty idProperty() {
-        return id;
+    // Getters and Setters for CIN
+    public int getCin() {
+        return cin.get();
     }
 
-    public SimpleIntegerProperty employeIdProperty() {
-        return employeId;
+    public void setCin(int cin) {
+        this.cin.set(cin);
     }
 
-    public SimpleStringProperty moisProperty() {
-        return mois;
-    }
-
-    public SimpleIntegerProperty anneeProperty() {
-        return annee;
-    }
-
-    public SimpleObjectProperty<BigDecimal> salaireBrutProperty() {
-        return salaireBrut;
-    }
-
-    public SimpleObjectProperty<BigDecimal> deductionsProperty() {
-        return deductions;
-    }
-
-    public SimpleObjectProperty<BigDecimal> salaireNetProperty() {
-        return salaireNet;
-    }
-
-    public SimpleObjectProperty<LocalDateTime> dateGenerationProperty() {
-        return dateGeneration;
-    }
-
+    // Getters and Setters for other fields
     public int getId() {
         return id.get();
     }
@@ -134,5 +117,42 @@ public class BulletinPaie {
 
     public void setDateGeneration(LocalDateTime dateGeneration) {
         this.dateGeneration.set(dateGeneration);
+    }
+
+    // Properties for binding (useful for JavaFX UI)
+    public SimpleIntegerProperty idProperty() {
+        return id;
+    }
+
+    public SimpleIntegerProperty cinProperty() {  // Property for CIN
+        return cin;
+    }
+
+    public SimpleIntegerProperty employeIdProperty() {
+        return employeId;
+    }
+
+    public SimpleStringProperty moisProperty() {
+        return mois;
+    }
+
+    public SimpleIntegerProperty anneeProperty() {
+        return annee;
+    }
+
+    public SimpleObjectProperty<BigDecimal> salaireBrutProperty() {
+        return salaireBrut;
+    }
+
+    public SimpleObjectProperty<BigDecimal> deductionsProperty() {
+        return deductions;
+    }
+
+    public SimpleObjectProperty<BigDecimal> salaireNetProperty() {
+        return salaireNet;
+    }
+
+    public SimpleObjectProperty<LocalDateTime> dateGenerationProperty() {
+        return dateGeneration;
     }
 }

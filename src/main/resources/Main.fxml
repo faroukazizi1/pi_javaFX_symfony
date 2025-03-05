@@ -11,25 +11,25 @@
 
         <Tab fx:id="tabConge" text="Congé">
             <VBox>
-                <fx:include source="AjouterConge.fxml" />
+                <fx:include source="/AjouterConge.fxml" />
             </VBox>
         </Tab>
 
         <Tab fx:id="tabBulletinPaie" text="Bulletin de Paie">
             <VBox>
-                <fx:include source="BulletinPaie.fxml" />
+                <fx:include source="/BulletinPaie.fxml" />
             </VBox>
         </Tab>
 
         <Tab fx:id="tabTraitement" text="Traitement de demandes">
             <VBox>
-                <fx:include source="Traitement.fxml" />
+                <fx:include source="/Traitement.fxml" />
             </VBox>
         </Tab>
 
         <Tab fx:id="tabCreationBulletin" text="Création Bulletin de Paie">
             <VBox>
-                <fx:include source="CreationBulletin.fxml" />
+                <fx:include source="/CreationBulletin.fxml" />
             </VBox>
         </Tab>
 

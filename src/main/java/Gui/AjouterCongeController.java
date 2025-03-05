@@ -60,9 +60,18 @@ public class AjouterCongeController {
 
         if (isAdded) {
             showAlert(AlertType.INFORMATION, "Succès", "Le congé a été ajouté avec succès.");
+
+            // Reset the fields after successful addition
+            resetFields();
         } else {
             showAlert(AlertType.ERROR, "Erreur", "Erreur lors de l'ajout du congé.");
         }
+    }
+
+    private void resetFields() {
+        typeCongeComboBox.setValue(null);
+        debutDatePicker.setValue(null);
+        finDatePicker.setValue(null);
     }
 
     private void showAlert(AlertType alertType, String title, String message) {

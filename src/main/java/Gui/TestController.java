@@ -49,25 +49,31 @@ public class TestController {
 
     @FXML
     public void initialize() {
-        // Existing initialization logic...
+        // Ensure that tabPane is not null
+        if (tabPane != null) {
+            // Get the user session and adjust the tab visibility based on role
+            UserSession session = UserSession.getInstance();
+            if (session != null) {
+                String role = session.getRole();
 
-        // Get the user session
-        UserSession session = UserSession.getInstance();
-        if (session != null) {
-            String role = session.getRole();
-
-            if ("RHR".equals(role)) {
-                // Show only Traitement de demandes & Création Bulletin de Paie
-                tabPane.getTabs().remove(tabConge);
-                tabPane.getTabs().remove(tabBulletinPaie);
-            } else if ("Employé".equals(role)) {
-                // Show only Congé & Bulletin de Paie
-                tabPane.getTabs().remove(tabTraitement);
-                tabPane.getTabs().remove(tabCreationBulletin);
+                if ("RHR".equals(role)) {
+                    // Show only Traitement de demandes & Création Bulletin de Paie
+                    tabPane.getTabs().remove(tabConge);
+                    tabPane.getTabs().remove(tabBulletinPaie);
+                } else if ("Employé".equals(role)) {
+                    // Show only Congé & Bulletin de Paie
+                    tabPane.getTabs().remove(tabTraitement);
+                    tabPane.getTabs().remove(tabCreationBulletin);
+                }
             }
+        } else {
+            // Handle the case where tabPane is null (perhaps log an error or handle gracefully)
+            System.err.println("Error: tabPane is null. Ensure the FXML is properly loaded.");
         }
 
-        // Configure ComboBox for Type de Congé
+
+
+    // Configure ComboBox for Type de Congé
         if (typeCongeComboBox != null) {
             ObservableList<TypeConge> typesConges = FXCollections.observableArrayList(TypeConge.values());
             typeCongeComboBox.setItems(typesConges);
