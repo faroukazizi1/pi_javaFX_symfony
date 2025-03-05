@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DBconnection {
 
 
-    private String url = "jdbc:mysql://localhost:3306/3a20";
+    private String url = "jdbc:mysql://localhost:3306/management_user";
 
     private String user = "root";
     private String password = "";
@@ -36,36 +36,7 @@ public class DBconnection {
 
 
     }
-    public class Myconnection {
-
-        private String url = "jdbc:mysql://localhost:3306/absence";
-        private String user = "root";
-        private String password = "";
-        private Connection conn;
-        private static DBconnection instance;
-
-        public static DBconnection getInstance() {
-            if (instance == null) {
-                instance = new DBconnection();
-            }
-            return instance;
-        }
-
-        public Connection getConn() {
-            return conn;
-        }
-
-        private Myconnection() {
-            try {
-                this.conn = DriverManager.getConnection(url, user, password);
-                System.out.println("Connection established");
-
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
 
 
-        }
+}
 
-
-    }}
