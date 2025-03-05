@@ -12,7 +12,7 @@ import java.util.Date;  // Import java.sql.Date
 
 public class Main {
     public static void main(String[] args) {
-<<<<<<< HEAD
+
         // Vérification de la connexion à la base de données
         Connection connection = DBconnection.getInstance().getConn();
         if (connection != null) {
@@ -87,7 +87,6 @@ public class Main {
         } catch (Exception e) {
             System.err.println("Erreur lors de l'affichage des pénalités : " + e.getMessage());
         }
-=======
->>>>>>> 0542470027de48c818e3792b43273f5b8dd31e9b
+
     }
 }

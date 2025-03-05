@@ -6,9 +6,7 @@ import models.penalite;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class absenceService implements IService<absence> {
     Connection conn;
@@ -19,60 +17,32 @@ public class absenceService implements IService<absence> {
 
     @Override
     public void add(absence absence) {
-        String SQL;
-        boolean hasImage = absence.getImagePath() != null && !absence.getImagePath().isEmpty();
-
-        // Vérification du type d'absence
-        System.out.println("Ajout de l'absence - Type: " + absence.getType() + ", Image: " + (hasImage ? "Oui" : "Non"));
-
-        // Choisir la requête SQL en fonction de la présence d'une image
-        if (hasImage) {
-            SQL = "INSERT INTO absence (date, nbr_abs, type, cin, image_path) VALUES (?, ?, ?, ?, ?)";
-        } else {
-            SQL = "INSERT INTO absence (date, nbr_abs, type, cin) VALUES (?, ?, ?, ?)";
-        }
+        String SQL = "INSERT INTO absence (id_abs, date, nbr_abs, type, cin) VALUES (?, ?, ?, ?, ?)"; // Le CIN est à la fin dans la base
 
         try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-            pstmt.setDate(1, new java.sql.Date(absence.getDate().getTime())); // Date
-            pstmt.setInt(2, absence.getNbr_abs()); // Nombre d'absences
-            pstmt.setString(3, absence.getType()); // Type
-            pstmt.setInt(4, absence.getCin()); // CIN
+            pstmt.setInt(1, absence.getId_abs());  // id_abs
+            pstmt.setDate(2, new java.sql.Date(absence.getDate().getTime()));  // date
+            pstmt.setInt(3, absence.getNbr_abs());  // nbr_abs
+            pstmt.setString(4, absence.getType());  // type
+            pstmt.setInt(5, absence.getCin());  // cin
 
-            if (hasImage) {
-                pstmt.setString(5, absence.getImagePath()); // Ajouter le chemin de l'image
-            }
-
-            int rowsAffected = pstmt.executeUpdate();
-            if (rowsAffected == 0) {
-                throw new SQLException("L'ajout de l'absence a échoué, aucune ligne affectée.");
-            } else {
-                System.out.println("Absence ajoutée avec succès.");
-            }
+            pstmt.executeUpdate();
+            System.out.println("Absence ajoutée à la base de données : " + absence);
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'ajout : " + e.getMessage());
         }
     }
 
-
-
     @Override
     public void update(absence absence) {
-        String SQL = "UPDATE absence SET date = ?, nbr_abs = ?, type = ?, cin = ?, image_path = ? WHERE id_abs = ?"; // Mise à jour avec CIN
+        String SQL = "UPDATE absence SET date = ?, nbr_abs = ?, type = ?, cin = ? WHERE id_abs = ?"; // Mise à jour avec CIN
 
         try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
             pstmt.setDate(1, new java.sql.Date(absence.getDate().getTime()));  // date
             pstmt.setInt(2, absence.getNbr_abs());  // nbr_abs
             pstmt.setString(3, absence.getType());  // type
             pstmt.setInt(4, absence.getCin());  // cin
-
-            // Mettre à jour l'image si nécessaire
-            if ("Justifiée".equals(absence.getType()) && absence.getImagePath() != null && !absence.getImagePath().isEmpty()) {
-                pstmt.setString(5, absence.getImagePath());  // image_path
-            } else {
-                pstmt.setNull(5, Types.VARCHAR);  // Pas d'image si "Non justifiée"
-            }
-
-            pstmt.setInt(6, absence.getId_abs());  // id_abs
+            pstmt.setInt(5, absence.getId_abs());  // id_abs
 
             int rowsUpdated = pstmt.executeUpdate();
             if (rowsUpdated > 0) {
@@ -99,9 +69,8 @@ public class absenceService implements IService<absence> {
                 Date date = rs.getDate("date");
                 int nbr_abs = rs.getInt("nbr_abs");
                 String type = rs.getString("type");
-                String imagePath = rs.getString("image_path"); // Récupération du chemin de l'image
 
-                absence abs = new absence(id_abs, cin, date, nbr_abs, type, imagePath);
+                absence abs = new absence(id_abs, cin, date, nbr_abs, type);
                 absences.add(abs);
             }
         } catch (SQLException e) {
@@ -111,29 +80,23 @@ public class absenceService implements IService<absence> {
         return absences;
     }
 
-    public List<absence> getByCin(int cin) {
-        String SQL = "SELECT * FROM absence WHERE cin = ?"; // Requête pour récupérer toutes les absences d'un cin
-        List<absence> absences = new ArrayList<>();  // Liste pour stocker toutes les absences
-
+    public absence getByCin(int cin) {
+        String SQL = "SELECT * FROM absence WHERE cin = ?"; // Requête par CIN
         try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-            pstmt.setInt(1, cin);  // On remplace le '?' par le cin
+            pstmt.setInt(1, cin);
             ResultSet rs = pstmt.executeQuery();
-
-            // On ajoute toutes les absences associées à ce cin
-            while (rs.next()) {
+            if (rs.next()) {
                 int id_abs = rs.getInt("id_abs");
                 Date date = rs.getDate("date");
                 int nbr_abs = rs.getInt("nbr_abs");
                 String type = rs.getString("type");
-                String imagePath = rs.getString("image_path"); // Récupération du chemin de l'image
-                absences.add(new absence(id_abs, cin, date, nbr_abs, type, imagePath));  // Ajout à la liste
+                return new absence(id_abs, cin, date, nbr_abs, type);
             }
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la récupération des absences : " + e.getMessage());
+            System.out.println("Erreur lors de la récupération de l'absence : " + e.getMessage());
         }
-        return absences;  // Retourne la liste d'absences
+        return null;
     }
-
 
     @Override
     public void delete(absence absence) {
@@ -164,12 +127,4 @@ public class absenceService implements IService<absence> {
             e.printStackTrace();
         }
     }
-
-<<<<<<< HEAD
-=======
-    public List<absence> getPromotionsByUserId(int id){
-        List<absence> absences = new ArrayList<>();
-        return absences;
-    }
->>>>>>> 0542470027de48c818e3792b43273f5b8dd31e9b
 }
