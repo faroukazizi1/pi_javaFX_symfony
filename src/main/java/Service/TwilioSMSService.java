@@ -6,7 +6,7 @@ import com.twilio.rest.api.v2010.account.Message;
 public class TwilioSMSService {
     private static final String ACCOUNT_SID = "";
     private static final String AUTH_TOKEN = "";
-    private static final String FROM_NUMBER = "+15737474358"; // Numéro Twilio
+    private static final String FROM_NUMBER = "";
 
     static {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
