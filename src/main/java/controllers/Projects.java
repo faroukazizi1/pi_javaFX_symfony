@@ -1,5 +1,6 @@
 package controllers;
 
+import GroupSuccess.esprit.MainFormateurGUI;
 import Gui.UserSession;
 import Model.user;
 import Service.userService;
@@ -84,7 +85,28 @@ public class Projects  implements TaskUpdateListener {
     }
 
     public void onUserButtonClick(ActionEvent actionEvent) {
+        try {
+            // Charger le fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherUser.fxml"));
+            Parent root = loader.load();
+
+            // Récupérer la fenêtre actuelle
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+            // Définir la nouvelle scène sur le stage
+            stage.setScene(new Scene(root));
+
+            // Définir le titre de la fenêtre
+            stage.setTitle("Gestion des Absences");
+
+            // Afficher la nouvelle scène
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     public void onReclamationButtonClick(ActionEvent actionEvent) {
     }
@@ -106,7 +128,7 @@ public class Projects  implements TaskUpdateListener {
         Stage primaryStage = (Stage) source.getScene().getWindow();
         primaryStage.getScene().getRoot().setEffect(blur);
 
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/project/addProject.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainFormateurGUI.class.getResource("/project/addProject.fxml"));
         Parent root = loader.load();
 
         Stage stage = new Stage();
@@ -131,7 +153,7 @@ public class Projects  implements TaskUpdateListener {
 
         primaryStage.getScene().getRoot().setEffect(blur);
 
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/project/addTask.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainFormateurGUI.class.getResource("/project/addTask.fxml"));
         Parent root = loader.load();
         AddTask addTaskController = loader.getController();
         addTaskController.setProjectId(selectedProject.getId());
@@ -250,7 +272,7 @@ public class Projects  implements TaskUpdateListener {
         Stage primaryStage = (Stage) source.getScene().getWindow();
         primaryStage.getScene().getRoot().setEffect(blur);
 
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/project/editProject.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainFormateurGUI.class.getResource("/project/editProject.fxml"));
 
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -436,7 +458,7 @@ public class Projects  implements TaskUpdateListener {
             List<ProjectTask> tasks = projectTaskService.getTasksByUser(selectedUser.getActualValue());
 
             for (ProjectTask task : tasks) {
-                FXMLLoader loader = new FXMLLoader(Main.class.getResource("/project/task.fxml"));
+                FXMLLoader loader = new FXMLLoader(MainFormateurGUI.class.getResource("/project/task.fxml"));
                 Parent taskLoader = loader.load();
                 TaskController taskController = loader.getController();
 
@@ -489,5 +511,5 @@ public class Projects  implements TaskUpdateListener {
             e.printStackTrace();
         }
     }
-   
+
     }
