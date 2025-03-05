@@ -251,10 +251,22 @@
                                     </font>
                                 </Text>
                                 <Pane prefHeight="0.0" prefWidth="482.0" HBox.hgrow="ALWAYS" />
+                                <!-- Modify the HBox containing the MFXComboBox in the Task tab -->
                                 <HBox alignment="CENTER" prefHeight="47.0" prefWidth="392.0" spacing="5.0">
-                                    <Button mnemonicParsing="false" onAction="#onOpenTask" styleClass="show-task-button" text="Show all tasks" />
-                                    <MFXComboBox fx:id="user_select" floatingText="Users" prefHeight="40.0" prefWidth="166.0" />
-                                    <Button mnemonicParsing="false" onAction="#showTasks" prefHeight="70.0" prefWidth="200"  styleClass="button-add-inline" text="Show" />
+                                    <Button fx:id="showTaskButton" mnemonicParsing="false" onAction="#onOpenTask" styleClass="show-task-button" text="Show all tasks" />
+
+                                    <!-- Wrap the ComboBox in a container we can show/hide -->
+                                    <HBox fx:id="userSelectionContainer" alignment="CENTER" spacing="5.0">
+                                        <MFXComboBox fx:id="user_select" floatingText="Users" prefHeight="40.0" prefWidth="166.0" />
+                                        <Button mnemonicParsing="false" onAction="#showTasks" prefHeight="70.0" prefWidth="200" styleClass="button-add-inline" text="Show" />
+                                    </HBox>
+
+                                    <!-- Add a text element to display employee name -->
+                                    <Text fx:id="employeeNameText" visible="false" fill="#e07564" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 16px; -fx-font-weight: bold;">
+                                        <font>
+                                            <Font name="System Bold" size="16.0" />
+                                        </font>
+                                    </Text>
                                 </HBox>
                             </HBox>
                             <HBox spacing="50.0" VBox.vgrow="ALWAYS">

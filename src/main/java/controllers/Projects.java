@@ -26,6 +26,7 @@ import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -45,7 +46,7 @@ import java.util.List;
 public class Projects  implements TaskUpdateListener {
 
 
-
+    public Button showTaskButton;
     @FXML
     private Button Association_Btn, Event_Btn, Logout_Btn, Reclamation_Btn, User_Btn, Document_Btn;
     public Button participate_btn;
@@ -75,6 +76,11 @@ public class Projects  implements TaskUpdateListener {
     @FXML private Button Home_Btn, statut_btn;
 
     @FXML private MFXComboBox<KeyValuePair<Integer>> user_select;
+
+    @FXML
+    private HBox userSelectionContainer; // We'll create this in FXML
+    @FXML
+    private Text employeeNameText; // We'll create this in FXML
 
     @FXML
     private TabPane projectTabPane;
@@ -257,27 +263,155 @@ public class Projects  implements TaskUpdateListener {
     }
 
     public void initialize() throws Exception {
-
         UserSession session = UserSession.getInstance();
         String userRole = session.getRole();
+        String userName = session.getUserName();
+        int userId = session.getUserId();
 
-        // If user is not admin, redirect to Tasks tab
-        if (!"RHR".equals(userRole)) {
-            // Wait for the FXML to fully load, then select the Tasks tab (index 1)
-            Platform.runLater(() -> {
-                // Select the Tasks tab (assuming it's the second tab with index 1)
-                projectTabPane.getSelectionModel().select(1);
+        // Set up UI components that need to be modified based on user role
+        setupUserInterface(userRole, userName, userId);
 
-                // Optionally, disable the Projects tab for non-admin users
-                projectTabPane.getTabs().getFirst().setDisable(true);
-            });
-        }
-        List<user> users = userService.getAll();
-        for (user user : users) {
-            user_select.getItems().addAll(new KeyValuePair<>(user.getNom(), user.getId()));
-        }
+        // Display the number of projects
         numOfProjects.setText(String.valueOf(projectService.getAll().size()));
-        showProjects();
+
+        // Load projects if the user is allowed to view them
+        if ("RHR".equals(userRole)) {
+            showProjects();
+        }
+    }
+
+    private void setupUserInterface(String userRole, String userName, int userId) {
+        // Ensure the FXML is fully loaded before making UI changes
+        Platform.runLater(() -> {
+            if ("RHR".equals(userRole)) {
+                // RHR users see the Projects tab
+                projectTabPane.getSelectionModel().select(0);
+               // projectTabPane.getTabs().get(1).setDisable(true); // Disable Tasks tab for RHR
+
+                // RHR can see the user selection dropdown
+                userSelectionContainer.setVisible(true);
+                employeeNameText.setVisible(false);
+
+                // Populate the user dropdown for RHR
+                populateUserDropdown();
+            } else {
+                // Other users (employees) see the Tasks tab
+                projectTabPane.getSelectionModel().select(1);
+                projectTabPane.getTabs().get(0).setDisable(true); // Disable Projects tab for employees
+                showTaskButton.setDisable(true); // Désactiver show all tasks pour les employés
+
+                // Employees only see their own tasks - hide dropdown, show name
+                userSelectionContainer.setVisible(false);
+                employeeNameText.setVisible(true);
+                employeeNameText.setText("Tasks for: " + userName);
+
+                // Load tasks for the current employee automatically
+                loadTasksForEmployee(userId);
+            }
+        });
+    }
+    private void populateUserDropdown() {
+        try {
+            // Populate the user dropdown
+            List<user> users = userService.getAll();
+            user_select.getItems().clear();
+
+            for (user user : users) {
+                user_select.getItems().add(new KeyValuePair<>(user.getNom(), user.getId()));
+            }
+        } catch (Exception e) {
+            System.err.println("Error loading users: " + e.getMessage());
+            Modals.displayError("Error", "Failed to load users: " + e.getMessage());
+        }
+    }
+    private void loadTasksForEmployee(int userId) {
+        try {
+            // Simulate the selection in the background
+            KeyValuePair<Integer> userPair = new KeyValuePair<>("", userId);
+            user_select.setValue(userPair);
+
+            // Show the tasks for this employee
+            showTasksForUser(userId);
+        } catch (Exception e) {
+            System.err.println("Error loading tasks: " + e.getMessage());
+            Modals.displayError("Error", "Failed to load tasks: " + e.getMessage());
+        }
+    }
+    private void showTasksForUser(int userId) {
+        VBox toDovBox = new VBox();
+        toDovBox.setSpacing(10);
+        toDovBox.setAlignment(Pos.CENTER);
+        toDovBox.setPrefWidth(230);
+        toDovBox.setMinHeight(300);
+
+        VBox inProgressvBox = new VBox();
+        inProgressvBox.setSpacing(10);
+        inProgressvBox.setAlignment(Pos.CENTER);
+        inProgressvBox.setPrefWidth(230);
+        inProgressvBox.setMinHeight(300);
+
+        VBox donevBox = new VBox();
+        donevBox.setSpacing(10);
+        donevBox.setAlignment(Pos.CENTER);
+        donevBox.setPrefWidth(230);
+        donevBox.setMinHeight(300);
+
+        try {
+            List<ProjectTask> tasks = projectTaskService.getTasksByUser(userId);
+
+            for (ProjectTask task : tasks) {
+                FXMLLoader loader = new FXMLLoader(MainFormateurGUI.class.getResource("/project/task.fxml"));
+                Parent taskLoader = loader.load();
+                TaskController taskController = loader.getController();
+
+                taskController.setTask(task);
+                taskController.setUpdateListener(this);
+
+                // Add the task to the appropriate container
+                switch (task.getStatut()) {
+                    case TODO:
+                        toDovBox.getChildren().add(taskLoader);
+                        break;
+                    case IN_PROGRESS:
+                        inProgressvBox.getChildren().add(taskLoader);
+                        break;
+                    case DONE:
+                        donevBox.getChildren().add(taskLoader);
+                        break;
+                }
+            }
+
+            // Add placeholder messages for empty columns
+            if (toDovBox.getChildren().isEmpty()) {
+                Label placeholder = new Label("Drop tasks here");
+                placeholder.setStyle("-fx-text-fill: #888888; -fx-font-style: italic;");
+                toDovBox.getChildren().add(placeholder);
+            }
+
+            if (inProgressvBox.getChildren().isEmpty()) {
+                Label placeholder = new Label("Drop tasks here");
+                placeholder.setStyle("-fx-text-fill: #888888; -fx-font-style: italic;");
+                inProgressvBox.getChildren().add(placeholder);
+            }
+
+            if (donevBox.getChildren().isEmpty()) {
+                Label placeholder = new Label("Drop tasks here");
+                placeholder.setStyle("-fx-text-fill: #888888; -fx-font-style: italic;");
+                donevBox.getChildren().add(placeholder);
+            }
+
+            todo_tasks.setContent(toDovBox);
+            inprogress_tasks.setContent(inProgressvBox);
+            done_tasks.setContent(donevBox);
+
+            setupDragAndDropForColumn(todo_tasks, ProjectTask.Statut.TODO);
+            setupDragAndDropForColumn(inprogress_tasks, ProjectTask.Statut.IN_PROGRESS);
+            setupDragAndDropForColumn(done_tasks, ProjectTask.Statut.DONE);
+
+        } catch (Exception e) {
+            System.err.println("error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -388,7 +522,8 @@ public class Projects  implements TaskUpdateListener {
                 Integer taskId = (Integer) db.getContent(TASK_FORMAT);
                 try {
                     projectTaskService.updateTaskStatus(taskId, targetStatus);
-                    showTasks();
+                    // Instead of calling showTasks(), call refreshTasksDisplay()
+                    refreshTasksDisplay();
                     success = true;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -428,7 +563,8 @@ public class Projects  implements TaskUpdateListener {
                 Integer taskId = (Integer) db.getContent(TASK_FORMAT);
                 try {
                     projectTaskService.updateTaskStatus(taskId, targetStatus);
-                    showTasks();
+                    // Instead of calling showTasks(), call refreshTasksDisplay()
+                    refreshTasksDisplay();
                     success = true;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -440,9 +576,22 @@ public class Projects  implements TaskUpdateListener {
             event.consume();
         });
     }
-    // Add a DataFormat constant at the class level
 
+    // Add this new method to handle refreshing the task display
+    private void refreshTasksDisplay() {
+        // Get the current user's role
+        UserSession session = UserSession.getInstance();
+        String userRole = session.getRole();
 
+        if ("RHR".equals(userRole)) {
+            // If RHR, use the selected user from combobox
+            showTasks();
+        } else {
+            // If employee, use their own ID
+            int userId = session.getUserId();
+            showTasksForUser(userId);
+        }
+    }
     // Update the showTasks method to set up drag-and-drop for each column
     @FXML
     public void showTasks() {

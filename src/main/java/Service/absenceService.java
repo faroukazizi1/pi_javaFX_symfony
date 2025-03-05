@@ -17,14 +17,20 @@ public class absenceService implements IService<absence> {
 
     @Override
     public void add(absence absence) {
-        String SQL = "INSERT INTO absence (id_abs, date, nbr_abs, type, cin) VALUES (?, ?, ?, ?, ?)"; // Le CIN est à la fin dans la base
+        if ("justifiee".equalsIgnoreCase(absence.getType()) && (absence.getImage_path() == null || absence.getImage_path().isEmpty())) {
+            System.out.println("Erreur : Une image est requise pour une absence justifiée.");
+            return;
+        }
+
+        String SQL = "INSERT INTO absence (id_abs, date, nbr_abs, type, cin, image_path) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-            pstmt.setInt(1, absence.getId_abs());  // id_abs
-            pstmt.setDate(2, new java.sql.Date(absence.getDate().getTime()));  // date
-            pstmt.setInt(3, absence.getNbr_abs());  // nbr_abs
-            pstmt.setString(4, absence.getType());  // type
-            pstmt.setInt(5, absence.getCin());  // cin
+            pstmt.setInt(1, absence.getId_abs());
+            pstmt.setDate(2, new java.sql.Date(absence.getDate().getTime()));
+            pstmt.setInt(3, absence.getNbr_abs());
+            pstmt.setString(4, absence.getType());
+            pstmt.setInt(5, absence.getCin());
+            pstmt.setString(6, absence.getImage_path());
 
             pstmt.executeUpdate();
             System.out.println("Absence ajoutée à la base de données : " + absence);
@@ -35,14 +41,20 @@ public class absenceService implements IService<absence> {
 
     @Override
     public void update(absence absence) {
-        String SQL = "UPDATE absence SET date = ?, nbr_abs = ?, type = ?, cin = ? WHERE id_abs = ?"; // Mise à jour avec CIN
+        if ("justifiee".equalsIgnoreCase(absence.getType()) && (absence.getImage_path() == null || absence.getImage_path().isEmpty())) {
+            System.out.println("Erreur : Une image est requise pour une absence justifiée.");
+            return;
+        }
+
+        String SQL = "UPDATE absence SET date = ?, nbr_abs = ?, type = ?, cin = ?, image_path = ? WHERE id_abs = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-            pstmt.setDate(1, new java.sql.Date(absence.getDate().getTime()));  // date
-            pstmt.setInt(2, absence.getNbr_abs());  // nbr_abs
-            pstmt.setString(3, absence.getType());  // type
-            pstmt.setInt(4, absence.getCin());  // cin
-            pstmt.setInt(5, absence.getId_abs());  // id_abs
+            pstmt.setDate(1, new java.sql.Date(absence.getDate().getTime()));
+            pstmt.setInt(2, absence.getNbr_abs());
+            pstmt.setString(3, absence.getType());
+            pstmt.setInt(4, absence.getCin());
+            pstmt.setString(5, absence.getImage_path());
+            pstmt.setInt(6, absence.getId_abs());
 
             int rowsUpdated = pstmt.executeUpdate();
             if (rowsUpdated > 0) {
@@ -69,8 +81,9 @@ public class absenceService implements IService<absence> {
                 Date date = rs.getDate("date");
                 int nbr_abs = rs.getInt("nbr_abs");
                 String type = rs.getString("type");
+                String image_path = rs.getString("image_path");
 
-                absence abs = new absence(id_abs, cin, date, nbr_abs, type);
+                absence abs = new absence(id_abs, cin, date, nbr_abs, type, image_path);
                 absences.add(abs);
             }
         } catch (SQLException e) {
@@ -91,7 +104,7 @@ public class absenceService implements IService<absence> {
     }
 
     public absence getByCin(int cin) {
-        String SQL = "SELECT * FROM absence WHERE cin = ?"; // Requête par CIN
+        String SQL = "SELECT * FROM absence WHERE cin = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
             pstmt.setInt(1, cin);
             ResultSet rs = pstmt.executeQuery();
@@ -100,7 +113,8 @@ public class absenceService implements IService<absence> {
                 Date date = rs.getDate("date");
                 int nbr_abs = rs.getInt("nbr_abs");
                 String type = rs.getString("type");
-                return new absence(id_abs, cin, date, nbr_abs, type);
+                String image_path = rs.getString("image_path");
+                return new absence(id_abs, cin, date, nbr_abs, type, image_path);
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la récupération de l'absence : " + e.getMessage());
@@ -110,10 +124,10 @@ public class absenceService implements IService<absence> {
 
     @Override
     public void delete(absence absence) {
-        String SQL = "DELETE FROM absence WHERE cin = ?"; // Suppression par CIN
+        String SQL = "DELETE FROM absence WHERE cin = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-            pstmt.setInt(1, absence.getCin()); // Suppression par CIN
+            pstmt.setInt(1, absence.getCin());
 
             int rowsDeleted = pstmt.executeUpdate();
             if (rowsDeleted > 0) {
@@ -126,15 +140,14 @@ public class absenceService implements IService<absence> {
         }
     }
 
-    // Exemple de méthode pour associer une pénalité à une absence
     public void applyPenaliteToAbsence(int absenceId, penalite penalite) {
-        String sql = "UPDATE absences SET penalite_id = ? WHERE id_abs = ?";
+        String sql = "UPDATE absence SET penalite_id = ? WHERE id_abs = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, penalite.getId_pen());  // ID de la pénalité
-            stmt.setInt(2, absenceId);             // ID de l'absence
+            stmt.setInt(1, penalite.getId_pen());
+            stmt.setInt(2, absenceId);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erreur lors de l'application de la pénalité : " + e.getMessage());
         }
     }
 }

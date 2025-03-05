@@ -10,6 +10,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
+<?import javafx.scene.text.Font?>
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ChatBotController">
 
     <!-- Barre latérale (Sidebar) -->
@@ -22,7 +23,17 @@
             </HBox>
             <VBox spacing="20.0" VBox.vgrow="ALWAYS">
                 <Button fx:id="Home_Btn" text="Home" textFill="WHITE" styleClass="sidebar-link" />
-                <Button fx:id="User_Btn" text="Users" textFill="WHITE" styleClass="sidebar-link" />
+                <Button fx:id="User_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" lineSpacing="15.0" mnemonicParsing="false" onAction="#onUserButtonClick" prefHeight="48.0" prefWidth="237.0" styleClass="sidebar-link" text="Users" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                    <graphic>
+                        <ImageView>
+                            <Image url="/assets/AiOutlineUser.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+
                 <Button fx:id="Absence_Btn" text="Absence" textFill="WHITE" styleClass="sidebar-link-active" />
                 <Button fx:id="Document_Btn" text="Congés" textFill="WHITE" styleClass="sidebar-link" />
                 <Button fx:id="Event_Btn" text="Formations" textFill="WHITE" styleClass="sidebar-link" />

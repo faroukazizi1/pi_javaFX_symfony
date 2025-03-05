@@ -1,6 +1,8 @@
 package Gui;
 
+import Controller.ChatBotController;
 import Model.promotion;
+import Service.AbsencePenaliteService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -308,8 +310,15 @@ public class AfficherPromotion {
     public void openGestionAbsence(ActionEvent event) {
         try {
             // Charger le fichier FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ajouterabsence.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ChatBotInterface.fxml"));
             Parent root = loader.load();
+
+            // Récupérer le contrôleur du fichier FXML
+            ChatBotController controller = loader.getController();
+
+            // Injecter le service dans le contrôleur
+            AbsencePenaliteService service = new AbsencePenaliteService();  // Créez votre service
+            controller.setService(service);  // Injecter le service dans le contrôleur
 
             // Récupérer la fenêtre actuelle
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

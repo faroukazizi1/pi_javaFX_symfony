@@ -1,5 +1,7 @@
 package Gui;
 
+import Controller.ChatBotController;
+import Service.AbsencePenaliteService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,6 +22,12 @@ import java.util.List;
 public class AfficherUser {
 
     private final userService service = new userService();
+    public Button Home_Btn;
+    public Button Reclamation_Btn;
+    public Button Document_Btn;
+    public Button Event_Btn;
+    public Button Projects_Btn;
+    public Button Logout_Btn;
 
     @FXML
     private TableColumn<user, String> Coladdresse;
@@ -336,7 +344,65 @@ public class AfficherUser {
     }
 
 
+    public void onHomeButtonClick(ActionEvent actionEvent) {
+    }
 
+    public void onReclamationButtonClick(ActionEvent event) {
 
+        try {
+            // Charger le fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ajouterabsence.fxml"));
+            Parent root = loader.load();
 
+            // Récupérer la fenêtre actuelle
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Définir la nouvelle scène sur le stage
+            stage.setScene(new Scene(root));
+
+            // Définir le titre de la fenêtre
+            stage.setTitle("Gestion des Absences");
+
+            // Afficher la nouvelle scène
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onDocumentsButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void onEventButtonClick(ActionEvent actionEvent) {
+
+    }
+
+    public void onLogoutButtonClick(ActionEvent actionEvent) {
+
+    }
+
+    public void onProjectsButtonClick(ActionEvent event) {
+        try {
+            // Charger le fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/projects.fxml"));
+            Parent root = loader.load();
+
+            // Récupérer la fenêtre actuelle
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Définir la nouvelle scène sur le stage
+            stage.setScene(new Scene(root));
+
+            // Définir le titre de la fenêtre
+            stage.setTitle("Gestion des Projets");
+
+            // Afficher la nouvelle scène
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Optionnel : Afficher une alerte en cas d'erreur
+        }
+    }
 }
