@@ -26,6 +26,9 @@ public class UserSession {
         return instance; // Retourne l'instance actuelle (utile pour récupérer les infos ailleurs)
     }
 
+
+
+
     public void cleanUserSession() {
         instance = null; // Supprime l'instance pour déconnecter l'utilisateur
     }

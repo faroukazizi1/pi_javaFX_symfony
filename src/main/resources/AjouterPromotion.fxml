@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: #001F3F;" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AjouterPromotion">
+<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: #001F3F;" stylesheets="@css/ajout_user_promotion.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AjouterPromotion">
    <children>
-      <Pane layoutX="129.0" layoutY="91.0" prefHeight="475.0" prefWidth="992.0" style="-fx-background-color: #4A5568;">
+      <Pane layoutX="129.0" layoutY="91.0" prefHeight="475.0" prefWidth="992.0" style="-fx-background-color: white;">
          <children>
             <VBox alignment="CENTER_LEFT" layoutX="48.0" layoutY="15.0" prefHeight="445.0" prefWidth="298.0" spacing="20.0">
                <children>
@@ -38,7 +38,7 @@
             </Button>
          </children>
       </Pane>
-      <Label layoutX="393.0" layoutY="21.0" prefHeight="54.0" prefWidth="266.0" style="-fx-background-color: wh;" text="AJOUTER PROMOTION" textFill="WHITE">
+      <Label layoutX="393.0" layoutY="21.0" prefHeight="54.0" prefWidth="380.0" style="-fx-background-color: wh;" text="AJOUTER PROMOTION" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="36.0" />
          </font>

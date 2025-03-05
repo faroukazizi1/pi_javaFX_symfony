@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: #4A5568;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AfficherPromotion">
+<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="@css/user_promotion.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AfficherPromotion">
 
             <children>
 
@@ -33,6 +33,9 @@
                         <TableColumn fx:id="Colid_user" prefWidth="120.0" text="Id User" />
                         <TableColumn fx:id="Coldelete" prefWidth="80.0" text="Supprimer" />
                         <TableColumn fx:id="Colmodifier" prefWidth="80.0" text="Modifier" />
+            <TableColumn fx:id="ColQr" prefWidth="75.0" text="Qr Code" />
+            <TableColumn fx:id="ColSign" prefWidth="75.0" text="Signer" />
+            <TableColumn fx:id="ColPdf" prefWidth="75.0" text="PDF" />
                     </columns>
                 </TableView>
 
@@ -75,7 +78,7 @@
             </ImageView>
             <VBox alignment="CENTER" layoutY="163.0" prefHeight="477.0" prefWidth="332.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="USER">
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="USER">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -92,7 +95,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                  <Button mnemonicParsing="false" onAction="#openFinance" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="FINANCE">
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="FINANCE">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -107,7 +110,7 @@
                         </Lighting>
                      </effect>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#openProjects" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="PROJECT">
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="PROJECT">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -121,7 +124,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                  <Button mnemonicParsing="false" onAction="#openGestionAbsence" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="ABSENCE">
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="ABSENCE">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -135,7 +138,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="FORMATION">
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="FORMATION">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -149,7 +152,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="CONGES">
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="RECLAMATION">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -172,5 +175,14 @@
             <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
+      <Button layoutX="1127.0" layoutY="566.0" mnemonicParsing="false" onAction="#Logout" prefHeight="48.0" prefWidth="41.0" style="-fx-background-color: white;">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/logout.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
             </children>
         </AnchorPane>

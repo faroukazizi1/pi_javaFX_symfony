@@ -139,5 +139,13 @@ public class promotionService implements IService<promotion> {
         return promotions;
     }
 
+    public int getUserIdByEmail(String email){
+        return 0;
+    }
+
+    public void modifyPassword(int userId, String newPassword){
+
+    }
+
 
 }

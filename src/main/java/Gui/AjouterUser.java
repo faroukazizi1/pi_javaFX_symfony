@@ -82,25 +82,25 @@ public class AjouterUser implements Initializable {
         String cinStr = TFcin.getText().trim();
         String numeroStr = TFnumero.getText().trim();
 
-        // Vérifier que les champs texte ne sont pas vides
+
         if (username.isEmpty() || password.isEmpty() || email.isEmpty() || nom.isEmpty() || prenom.isEmpty() || adresse.isEmpty() || role == null) {
             afficherAlerte("Erreur", "Champs manquants", "Tous les champs doivent être remplis.");
             return;
         }
 
-        // Vérifier le format du CIN (doit commencer par 0 ou 1 et contenir exactement 8 chiffres)
+
         if (!cinStr.matches("^[01][0-9]{7}$")) {
             afficherAlerte("Erreur", "CIN invalide", "Le CIN doit commencer par 1 ou 0 et contenir exactement 8 chiffres.");
             return;
         }
 
-        // Vérifier le format du numéro de téléphone (8 chiffres)
+
         if (!numeroStr.matches("^[0-9]{8}$")) {
             afficherAlerte("Erreur", "Numéro de téléphone invalide", "Le numéro de téléphone doit contenir exactement 8 chiffres.");
             return;
         }
 
-        // Vérifier que le numéro de téléphone et le CIN sont des nombres valides
+
         int numero = 0, cin = 0;
         try {
             numero = Integer.parseInt(TFnumero.getText());
@@ -110,7 +110,7 @@ public class AjouterUser implements Initializable {
             return;
         }
 
-        // Vérifier que le sexe est sélectionné
+
         String sexe = "";
         if (TFhomme.isSelected()) {
             sexe = "Homme";
@@ -123,17 +123,23 @@ public class AjouterUser implements Initializable {
             return;
         }
 
-        // Vérifier que l'email est valide
+
         if (!email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
             afficherAlerte("Erreur", "Email invalide", "Veuillez entrer un email valide.");
             return;
         }
 
-        // Créer l'objet utilisateur
         user u = new user(cin, nom, email, prenom, username, password, role, sexe, adresse, numero);
 
         try {
-            userService.add(u);  // Ajouter l'utilisateur à la base de données
+            userService.add(u);
+
+            if(isRegistrationMode){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                stage.getScene().setRoot(root);
+            }
 
             // Switch back to the employee list view (afficherUser interface)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherUser.fxml"));
@@ -142,6 +148,7 @@ public class AjouterUser implements Initializable {
             stage.getScene().setRoot(root);
 
         } catch (Exception e) {
+            e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setContentText(e.getMessage());

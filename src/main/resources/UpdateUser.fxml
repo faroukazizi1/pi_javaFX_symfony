@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: #001F3F;" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.UpdateUser">
+<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: #001F3F;" stylesheets="@css/update_user_promotion.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.UpdateUser">
    <children>
-      <Pane layoutX="104.0" layoutY="97.0" prefHeight="475.0" prefWidth="992.0" style="-fx-background-color: #4A5568;">
+      <Pane layoutX="104.0" layoutY="97.0" prefHeight="475.0" prefWidth="992.0" style="-fx-background-color: white;" stylesheets="@css/ajout_user_promotion.css">
          <children>
             <VBox alignment="CENTER" layoutX="60.0" layoutY="15.0" prefHeight="445.0" prefWidth="298.0" spacing="30.0">
                <children>
@@ -52,7 +52,7 @@
             </Button>
          </children>
       </Pane>
-      <Label layoutX="467.0" layoutY="25.0" prefHeight="54.0" prefWidth="162.0" style="-fx-background-color: wh;" text="UPDATE USER" textFill="WHITE">
+      <Label layoutX="467.0" layoutY="25.0" prefHeight="54.0" prefWidth="431.0" text="UPDATE USER" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="36.0" />
          </font>

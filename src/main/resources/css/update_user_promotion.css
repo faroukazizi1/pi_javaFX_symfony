@@ -1,0 +1,98 @@
+/* update-user.css */
+
+AnchorPane {
+    -fx-background-color: #001F3F;
+    -fx-font-family: 'Roboto', sans-serif;
+}
+
+Pane {
+    -fx-background-color: #4A5568;
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+}
+
+VBox {
+    -fx-spacing: 25px;
+}
+
+TextField, PasswordField, ComboBox {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 8px;
+    -fx-padding: 10px 15px;
+    -fx-font-size: 15px;
+    -fx-pref-width: 250px;
+    -fx-prompt-text-fill: #aaa;
+}
+
+TextField:focused, PasswordField:focused, ComboBox:focused {
+    -fx-border-color: #3498db;
+    -fx-effect: dropshadow(gaussian, rgba(52, 152, 219, 0.5), 5, 0, 0, 2);
+}
+
+Button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: 500;
+    -fx-padding: 12px 25px;
+    -fx-border-radius: 8px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0, 0, 2);
+    -fx-transition: 0.3s;
+}
+
+Button:hover {
+    -fx-background-color: #2980b9;
+    -fx-scale-y: 1.05;
+}
+
+Button:pressed {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 3, 0, 0, 1);
+    -fx-scale-y: 1.0;
+}
+
+Label {
+    -fx-font-size: 32px;
+    -fx-font-weight: 600;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 3, 0, 1, 1);
+}
+
+HBox {
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+}
+
+HBox Label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+#LBancienpassword, #LBancienRole{
+    -fx-text-fill: #aaa;
+}
+
+/* Style for the "ANNULER" button */
+Button[text="ANNULER"] {
+    -fx-background-color: #e74c3c; /* Red background */
+}
+
+Button[text="ANNULER"]:hover {
+    -fx-background-color: #c0392b; /* Darker red on hover */
+}
+
+Button[text="ANNULER"]:pressed {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 3, 0, 0, 1);
+    -fx-scale-y: 1.0;
+}
+
+/* Adjusting the height of input fields */
+TextField, PasswordField, ComboBox {
+    -fx-pref-height: 40px;
+}
+
+/* Adjusting the spacing in the left VBox */
+VBox:first-of-type {
+    -fx-spacing: 30px;
+}

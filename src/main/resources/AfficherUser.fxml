@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
@@ -15,16 +16,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: #4A5568;" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AfficherUser">
+<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="@css/user_promotion.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AfficherUser">
 
             <children>
-                <Label layoutX="515.0" layoutY="14.0" prefHeight="54.0" prefWidth="418.0" style="-fx-background-color: wh;" text="AFFICHER EMPLOYE" textFill="WHITE">
+                <Label layoutX="515.0" layoutY="14.0" prefHeight="54.0" prefWidth="563.0" text="AFFICHER EMPLOYE" textFill="WHITE">
                     <font>
                         <Font name="Arial Black" size="36.0" />
                     </font>
                 </Label>
 
-                <TableView fx:id="tableView" layoutX="352.0" layoutY="90.0" prefHeight="458.0" prefWidth="822.0" style="-fx-background-color: #FFFFFF;" styleClass="table-view">
+                <TableView fx:id="tableView" layoutX="352.0" layoutY="147.0" prefHeight="403.0" prefWidth="837.0" style="-fx-background-color: #FFFFFF;" styleClass="table-view">
                     <columns>
                         <TableColumn fx:id="Colid" prefWidth="75.0" text="ID" />
                         <TableColumn fx:id="Colnom" prefWidth="75.0" text="Nom" />
@@ -78,7 +79,7 @@
                </image></ImageView>
                   <VBox alignment="CENTER" layoutX="1.0" layoutY="163.0" prefHeight="477.0" prefWidth="332.0" spacing="20.0">
                      <children>
-                        <Button lineSpacing="20.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="USER" textFill="#001f3f">
+                        <Button lineSpacing="20.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="USER" textFill="#001f3f">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -92,7 +93,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                        <Button mnemonicParsing="false" onAction="#openFinance" prefHeight="57.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="FINANCE">
+                        <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="FINANCE">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -106,7 +107,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                        <Button mnemonicParsing="false" onAction="#openProjects" prefHeight="57.0" prefWidth="295.0" style="-fx-background-color: #007BFF;" text="PROJECT">
+                        <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="295.0" style="-fx-background-color: #001F3F;" text="PROJECT">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -120,7 +121,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                        <Button mnemonicParsing="false" onAction="#openGestionAbsence" prefHeight="57.0" prefWidth="294.0" style="-fx-background-color: #007BFF;" text="ABSENCE">
+                        <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="294.0" style="-fx-background-color: #001F3F;" text="ABSENCE">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -134,7 +135,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                        <Button mnemonicParsing="false" onAction="#OuvrirFormation" prefHeight="57.0" prefWidth="293.0" style="-fx-background-color: #007BFF;" text="FORMATION">
+                        <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="293.0" style="-fx-background-color: #001F3F;" text="FORMATION">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -148,7 +149,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                        <Button mnemonicParsing="false" onAction="#openGestionConges" prefHeight="57.0" prefWidth="293.0" style="-fx-background-color: #007BFF;" text="CONGES">
+                        <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="293.0" style="-fx-background-color: #001F3F;" text="RECLAMATION">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -166,5 +167,53 @@
                   </VBox>
                </children>
             </Pane>
+      <Button layoutX="724.0" layoutY="574.0" mnemonicParsing="false" onAction="#DeepSeekAI" prefHeight="38.0" prefWidth="171.0" style="-fx-background-color: blue;" text="DeepSeek Chatbot" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Button>
+      <Button layoutX="1118.0" layoutY="569.0" mnemonicParsing="false" onAction="#Logout" prefHeight="48.0" prefWidth="41.0" style="-fx-background-color: white;">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/logout.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TextField fx:id="searchField" layoutX="386.0" layoutY="101.0" prefHeight="26.0" prefWidth="154.0" promptText="Filter Employees" />
+      <ImageView fitHeight="26.0" fitWidth="28.0" layoutX="352.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/searchtool_icon.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="pdf_button" layoutX="1123.0" layoutY="95.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="18.0">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/pdf_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="stat_button" layoutX="1039.0" layoutY="95.0" mnemonicParsing="false" onAction="#OpenStatistic" prefHeight="38.0" prefWidth="42.0">
+         <graphic>
+            <ImageView fitHeight="34.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/stats.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
             </children>
         </AnchorPane>
