@@ -1,0 +1,75 @@
+/* login.css */
+
+/* Root styling */
+.root {
+    -fx-font-family: 'Arial', sans-serif;
+    -fx-background-color: #f0f0f0;
+}
+
+/* Pane styling */
+.Pane {
+    -fx-background-color: #001F3F;
+}
+
+/* Label styling */
+.Label {
+    -fx-text-fill: #001F3F;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* TextField and PasswordField styling */
+.TextField,
+.PasswordField {
+    -fx-background-color: white;
+    -fx-border-color: #001F3F;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+}
+
+.TextField:focused,
+.PasswordField:focused {
+    -fx-border-color: #007BFF;
+}
+
+/* Button styling */
+.Button {
+    -fx-background-color: #007BFF;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 2);
+}
+
+.Button:hover {
+    -fx-background-color: #0056b3;
+}
+
+/* Sign-in and sign-up button specific styling */
+#SignIn_Btn {
+    -fx-background-color: #28a745;
+}
+
+#SignIn_Btn:hover {
+    -fx-background-color: #218838;
+}
+
+#SignIn_Btn1,
+#SignIn_Btn2 {
+    -fx-background-color: transparent;
+    -fx-border-color: #001F3F;
+    -fx-text-fill: #001F3F;
+}
+
+#SignIn_Btn1:hover,
+#SignIn_Btn2:hover {
+    -fx-background-color: #001F3F;
+    -fx-text-fill: white;
+}
+

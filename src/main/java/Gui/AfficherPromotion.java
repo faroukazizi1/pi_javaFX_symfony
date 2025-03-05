@@ -24,22 +24,18 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
-import com.docusign.esign.api.EnvelopesApi;
-import com.docusign.esign.client.ApiClient;
-import com.docusign.esign.client.auth.OAuth;
-import com.docusign.esign.model.*;
-
-import java.util.Collections;
-;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import java.io.File;
+import java.io.IOException;
 
 public class AfficherPromotion {
 
@@ -165,6 +161,34 @@ public class AfficherPromotion {
                 }
             });
 
+            ColPdf.setCellFactory(new Callback<TableColumn<promotion, Void>, TableCell<promotion, Void>>() {
+                @Override
+                public TableCell<promotion, Void> call(TableColumn<promotion, Void> param) {
+                    return new TableCell<promotion, Void>() {
+                        private final Button btnPdf = new Button("PDF");
+
+                        {
+                            btnPdf.setOnAction(event -> {
+                                promotion selectedPromotion = getTableView().getItems().get(getIndex());
+                                if (selectedPromotion != null) {
+                                    generatePdf(selectedPromotion);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void updateItem(Void item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if (empty) {
+                                setGraphic(null);
+                            } else {
+                                setGraphic(btnPdf);
+                            }
+                        }
+                    };
+                }
+            });
+
 
         } catch (Exception e) {
             System.out.println( e.getMessage());
@@ -257,35 +281,68 @@ public class AfficherPromotion {
                 }
             });
 
-            ColPdf.setCellFactory(new Callback<TableColumn<promotion, Void>, TableCell<promotion, Void>>() {
-                @Override
-                public TableCell<promotion, Void> call(TableColumn<promotion, Void> param) {
-                    return new TableCell<promotion, Void>() {
-                        private final Button btnPdf = new Button("PDF");
-
-                        {
-                            btnPdf.setOnAction(event -> {
-                                promotion selectedPromotion = getTableView().getItems().get(getIndex());
-                                if (selectedPromotion != null) {
-                                    generatePdf(selectedPromotion);
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void updateItem(Void item, boolean empty) {
-                            super.updateItem(item, empty);
-                            if (empty) {
-                                setGraphic(null);
-                            } else {
-                                setGraphic(btnPdf);
-                            }
-                        }
-                    };
-                }
-            });
         }
 
+    }
+
+    private void generatePdf(promotion selectedPromotion) {
+        try {
+            // Create a new document
+            PDDocument document = new PDDocument();
+
+            // Create a new page
+            PDPage page = new PDPage();
+            document.addPage(page);
+
+            // Create a content stream to write content on the page
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+            // Start the content stream
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+            contentStream.newLineAtOffset(50, 750); // Set the starting position for the text
+
+            // Add promotion details to the PDF
+            contentStream.showText("Promotion Details:");
+            contentStream.newLineAtOffset(0, -15); // Move to next line
+            contentStream.showText("Promotion Type: " + selectedPromotion.getType_promo());
+            contentStream.newLineAtOffset(0, -15); // Move to next line
+            contentStream.showText("Poste: " + selectedPromotion.getPoste_promo());
+            contentStream.newLineAtOffset(0, -15); // Move to next line
+            contentStream.showText("Salary: " + selectedPromotion.getNouv_sal());
+            contentStream.newLineAtOffset(0, -15); // Move to next line
+            contentStream.showText("Date: " + selectedPromotion.getDate_prom().toString());
+            contentStream.newLineAtOffset(0, -15); // Move to next line
+            contentStream.showText("Avantage: " + selectedPromotion.getAvs());
+            contentStream.newLineAtOffset(0, -15); // Move to next line
+            contentStream.showText("Reason: " + selectedPromotion.getRaison());
+            contentStream.newLineAtOffset(0, -15); // Move to next line
+
+            // End the content stream
+            contentStream.endText();
+            contentStream.close();
+
+            // Save the document to a file
+            File file = new File("Promotion_" + selectedPromotion.getId() + ".pdf");
+            document.save(file);
+            document.close();
+
+            // Notify the user that the PDF was generated successfully
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("PDF Generated");
+            alert.setHeaderText("The promotion has been saved as a PDF.");
+            alert.setContentText("The PDF file is saved as: " + file.getAbsolutePath());
+            alert.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Show an error dialog if something goes wrong
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Failed to generate PDF");
+            alert.setContentText("An error occurred while generating the PDF: " + e.getMessage());
+            alert.showAndWait();
+        }
     }
 
 
@@ -453,31 +510,6 @@ public class AfficherPromotion {
         error.showAndWait();
     }
 
-    private void generatePdf(promotion promo) {
-        String filePath = "promotion_" + promo.getId() + ".pdf";
-        try (FileOutputStream fos = new FileOutputStream(filePath);
-             PdfWriter writer = new PdfWriter(fos);
-             PdfDocument pdfDoc = new PdfDocument(writer);
-             Document document = new Document(pdfDoc)) {
-
-            document.add(new Paragraph("Promotion Details"));
-            document.add(new Paragraph("Type: " + promo.getType_promo()));
-            document.add(new Paragraph("Poste: " + promo.getPoste_promo()));
-            document.add(new Paragraph("Salaire: " + promo.getNouv_sal()));
-            document.add(new Paragraph("Date: " + promo.getDate_prom()));
-            document.add(new Paragraph("Raison: " + promo.getRaison()));
-            document.add(new Paragraph("Avantages: " + promo.getAvs()));
-
-            document.close();
-
-            // Ouvrir le fichier PDF après la génération
-            java.awt.Desktop.getDesktop().open(new java.io.File(filePath));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            showErrorDialog("Failed to generate PDF: " + e.getMessage());
-        }
-    }
 
 
 }

@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="614.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.login">
+<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="@css/login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.login">
    <children>
-      <Pane prefHeight="614.0" prefWidth="477.0" style="-fx-background-color: #001F3F;">
+      <Pane prefHeight="614.0" prefWidth="469.0" style="-fx-background-color: #001F3F;">
          <children>
             <ImageView fitHeight="345.0" fitWidth="478.0" layoutX="-7.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -23,24 +23,24 @@
             </ImageView>
          </children>
       </Pane>
-      <Label layoutX="560.0" layoutY="14.0" prefHeight="132.0" prefWidth="587.0" text="SIGN IN TO ACCOUNT">
+      <Label layoutX="628.0" layoutY="14.0" prefHeight="132.0" prefWidth="533.0" text="SIGN IN TO ACCOUNT">
          <font>
-            <Font name="Arial Black" size="48.0" />
+            <Font name="Arial Black" size="36.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" layoutX="636.0" layoutY="195.0" prefHeight="83.0" prefWidth="435.0" spacing="80.0">
+      <HBox alignment="CENTER" layoutX="600.0" layoutY="176.0" prefHeight="83.0" prefWidth="435.0" spacing="80.0">
          <children>
-            <Label prefHeight="18.0" prefWidth="68.0" text="EMAIL :" />
-            <TextField fx:id="tf_CheckEmailUser" prefHeight="26.0" prefWidth="258.0" />
+            <Label prefHeight="71.0" prefWidth="75.0" text="EMAIL :" />
+            <TextField fx:id="tf_CheckEmailUser" prefHeight="34.0" prefWidth="271.0" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="636.0" layoutY="278.0" prefHeight="83.0" prefWidth="435.0" spacing="70.0">
+      <HBox alignment="CENTER" layoutX="600.0" layoutY="265.0" prefHeight="83.0" prefWidth="435.0" spacing="70.0">
          <children>
-            <Label prefHeight="18.0" prefWidth="78.0" text="PASSWORD :" />
-            <PasswordField fx:id="tf_CheckPasswordUser" prefWidth="258.0" />
+            <Label prefHeight="18.0" prefWidth="116.0" text="PASSWORD :" />
+            <PasswordField fx:id="tf_CheckPasswordUser" prefHeight="38.0" prefWidth="301.0" />
          </children>
       </HBox>
-      <Button fx:id="SignIn_Btn1" alignment="CENTER" contentDisplay="CENTER" layoutX="930.0" layoutY="361.0" mnemonicParsing="false" onAction="#ForgetPasswordForm" prefHeight="18.0" prefWidth="130.0" styleClass="left-sidebar-users-link" text="Forget password ?" textAlignment="CENTER">
+      <Button fx:id="SignIn_Btn1" alignment="CENTER" contentDisplay="CENTER" layoutX="995.0" layoutY="367.0" mnemonicParsing="false" onAction="#ForgetPasswordForm" prefHeight="46.0" prefWidth="181.0" styleClass="left-sidebar-users-link" text="Forget password ?" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -48,14 +48,14 @@
             <DropShadow />
          </effect>
       </Button>
-      <HBox alignment="CENTER" layoutX="669.0" layoutY="524.0" prefHeight="40.0" prefWidth="369.0" spacing="50.0">
+      <HBox alignment="CENTER" layoutX="628.0" layoutY="537.0" prefHeight="41.0" prefWidth="442.0" spacing="50.0">
          <children>
-            <Label prefHeight="18.0" prefWidth="182.0" text="if you don t have an account">
+            <Label prefHeight="22.0" prefWidth="286.0" text="if you don t have an account ?">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="SignIn_Btn2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#openRegistrationForm" prefHeight="40.0" prefWidth="84.0" styleClass="left-sidebar-users-link" text="Sign up" textAlignment="CENTER" textFill="#0b0a0a">
+            <Button fx:id="SignIn_Btn2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#openRegistrationForm" prefHeight="41.0" prefWidth="121.0" styleClass="left-sidebar-users-link" text="Sign up" textAlignment="CENTER" textFill="#0b0a0a">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -65,6 +65,6 @@
             </Button>
          </children>
       </HBox>
-      <Button fx:id="SignIn_Btn" layoutX="776.0" layoutY="417.0" mnemonicParsing="false" onAction="#OnSignInClicked" prefHeight="40.0" prefWidth="154.0" text="Sign in" />
+      <Button fx:id="SignIn_Btn" layoutX="690.0" layoutY="414.0" mnemonicParsing="false" onAction="#OnSignInClicked" prefHeight="65.0" prefWidth="254.0" text="Sign in" />
    </children>
 </AnchorPane>

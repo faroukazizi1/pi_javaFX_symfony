@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: #4A5568;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AfficherPromotion">
+<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="@css/user_promotion.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AfficherPromotion">
 
             <children>
 
@@ -78,7 +78,7 @@
             </ImageView>
             <VBox alignment="CENTER" layoutY="163.0" prefHeight="477.0" prefWidth="332.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="USER">
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="USER">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -95,7 +95,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="FINANCE">
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="FINANCE">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -110,7 +110,7 @@
                         </Lighting>
                      </effect>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="PROJECT">
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="PROJECT">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -124,7 +124,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="ABSENCE">
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="ABSENCE">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -138,7 +138,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="FORMATION">
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="FORMATION">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -152,7 +152,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #007BFF;" text="RECLAMATION">
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="RECLAMATION">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>

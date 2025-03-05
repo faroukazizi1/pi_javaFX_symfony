@@ -87,13 +87,24 @@
             <version>6.0.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.itextpdf/itext7-core -->
         <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>itext7-core</artifactId>
-            <version>9.1.0</version>
-            <type>pom</type>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.29</version> <!-- Downgraded version -->
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>  <!-- Use the latest version available -->
+        </dependency>
+
 
 
     </dependencies>
