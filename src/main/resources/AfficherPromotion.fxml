@@ -95,7 +95,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="FINANCE">
+                  <Button mnemonicParsing="false" onAction="#openFinance" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="FINANCE">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -110,7 +110,7 @@
                         </Lighting>
                      </effect>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="PROJECT">
+                  <Button mnemonicParsing="false" onAction="#openProjects" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="PROJECT">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -124,7 +124,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="ABSENCE">
+                  <Button mnemonicParsing="false" onAction="#openGestionAbsence" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="ABSENCE">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -138,7 +138,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="FORMATION">
+                  <Button mnemonicParsing="false" onAction="#OuvrirFormation" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="FORMATION">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -152,7 +152,7 @@
                            </light>
                         </Lighting>
                      </effect></Button>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="RECLAMATION">
+                  <Button mnemonicParsing="false" onAction="#openGestionConges" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="CONGES">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>

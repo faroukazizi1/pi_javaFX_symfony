@@ -1,5 +1,6 @@
 package Service;
 
+import Model.user;
 import Util.DBconnection;
 import models.penalite;
 import java.sql.*;
@@ -140,6 +141,20 @@ public class penaliteService implements IService<penalite> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    public user HetUser(String email){
+        return null;
+    }
+
+    public int getUserIdByEmail(String email){
+        return 0;
+    }
+
+    public void modifyPassword(int userId, String newPassword){
+
     }
 
 

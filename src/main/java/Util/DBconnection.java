@@ -8,7 +8,7 @@ public class DBconnection {
 
 
 
-    private String url = "jdbc:mysql://localhost:3306/user_management";
+    private String url = "jdbc:mysql://localhost:3306/management_user";
 
 
     private String user = "root";

@@ -1,5 +1,6 @@
 package Service;
 
+import Model.user;
 import Util.DBconnection;
 import models.Pret;
 
@@ -158,5 +159,17 @@ public class PretService implements IService<Pret> {
     public boolean authenticateUser(String username, String password){
         return false;
     }
+
+    public user HetUser(String email){
+        return null;
+    }
+
+    public int getUserIdByEmail(String email){
+        return 0;
+    }
+    public void modifyPassword(int userId, String newPassword){
+
+    }
+
 
 }

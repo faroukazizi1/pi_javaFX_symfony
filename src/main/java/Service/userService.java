@@ -224,6 +224,51 @@ public class userService implements IService<user> {
         }
     }
 
+    // Get a user by ID
+    public user getUserById(int id) {
+        String SQL = "SELECT * FROM user WHERE id = ?";
+        user u = null;
+        try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                u = new user();
+                u.setPrenom(rs.getString("prenom"));
+                u.setNom(rs.getString("nom"));
+                u.setCin(rs.getInt("cin"));
+                u.setEmail(rs.getString("email"));
+                u.setUsername(rs.getString("username"));
+                u.setPassword(rs.getString("password"));
+                u.setRole(rs.getString("role"));
+                u.setSexe(rs.getString("sexe"));
+                u.setAdresse(rs.getString("adresse"));
+                u.setNumero(rs.getInt("numero"));
+                u.setId(rs.getInt("id"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error during getUserById operation: " + e.getMessage());
+        }
+        return u;
+    }
+
+    // Get user ID by username (or full name)
+    public int getUserIdByName(String name) {
+        String SQL = "SELECT id FROM user WHERE nom = ?";
+        int userId = -1; // Default to -1 if not found
+        try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+            pstmt.setString(1, name);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                userId = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error during getUserIdByName operation: " + e.getMessage());
+        }
+        return userId;
+    }
+
+
+
 
 
 }

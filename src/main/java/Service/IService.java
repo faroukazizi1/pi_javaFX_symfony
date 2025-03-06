@@ -2,6 +2,8 @@ package Service;
 
 import java.util.List;
 import Model.user;
+import models.penalite;
+
 public interface IService<T> {
 
     void add(T t);
@@ -13,4 +15,5 @@ public interface IService<T> {
     List<T> getPromotionsByUserId(int id);
     public int getUserIdByEmail(String email);
     public void modifyPassword(int userId, String newPassword);
+
 }

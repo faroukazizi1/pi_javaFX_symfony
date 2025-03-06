@@ -1,5 +1,6 @@
 package Service;
 
+import Model.user;
 import Util.DBconnection;
 import models.Reponse;
 
@@ -153,6 +154,20 @@ public class ReponseService implements IService<Reponse> {
     public boolean authenticateUser(String username, String password){
         return false;
     }
+
+    public user HetUser(String email){
+        return null;
+    }
+
+    public int getUserIdByEmail(String email){
+        return 0;
+    }
+
+    public void modifyPassword(int userId, String newPassword){
+
+    }
+
+
 
 
 

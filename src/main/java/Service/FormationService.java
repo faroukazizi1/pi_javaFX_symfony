@@ -2,6 +2,7 @@ package Service;
 
 import Model.Formateur;
 import Model.Formation;
+import Model.user;
 import Util.DBconnection;
 
 import java.sql.*;
@@ -177,5 +178,17 @@ public class FormationService implements IService<Formation> {
     }
     public boolean authenticateUser(String username, String password){
         return true ;
+    }
+
+    public user HetUser(String email){
+        return null;
+    }
+
+    public int getUserIdByEmail(String email){
+        return 0;
+    }
+
+    public void modifyPassword(int userId, String newPassword){
+
     }
 }

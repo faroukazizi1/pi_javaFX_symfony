@@ -1,5 +1,6 @@
 package Service;
 
+import Model.user;
 import Util.DBconnection;
 import models.absence;
 import models.penalite;
@@ -137,4 +138,18 @@ public class absenceService implements IService<absence> {
             e.printStackTrace();
         }
     }
+
+    public void modifyPassword(int userId, String newPassword){
+
+    }
+
+    public int getUserIdByEmail(String email){
+        return 0;
+    }
+
+    public user HetUser(String email){
+        return null;
+    }
+
+
 }
