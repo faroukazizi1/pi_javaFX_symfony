@@ -115,6 +115,26 @@ public class Projects  implements TaskUpdateListener {
 
 
     public void onReclamationButtonClick(ActionEvent actionEvent) {
+        try {
+            // Charger le fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ajouterpret.fxml"));
+            Parent root = loader.load();
+
+            // Récupérer la fenêtre actuelle
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+            // Définir la nouvelle scène sur le stage
+            stage.setScene(new Scene(root));
+
+            // Définir le titre de la fenêtre
+            stage.setTitle("Gestion des Conges");
+
+            // Afficher la nouvelle scène
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onDocumentsButtonClick(ActionEvent actionEvent) {

@@ -41,19 +41,26 @@
     -fx-pref-width: 300px;
 }
 
-.button-delete{
-    -fx-background-color: #8E1212;
-    -fx-text-fill: #fff;
-    -fx-background-radius: 10px;
+.button-delete, .button-edit {
     -fx-font-weight: bold;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px 20px;
+    -fx-min-width: 120px;  /* Min largeur pour les deux boutons */
+    -fx-max-width: 120px;  /* Max largeur pour les deux boutons */
 }
 
-.button-edit{
-    -fx-background-color: #CD9400;
+.button-delete {
+    -fx-border-color: "#624DE3";
+    -fx-background-color: transparent;
+    -fx-text-fill: #624DE3;
+}
+
+.button-edit {
+    -fx-background-color: #624de3; /* Bleu */
     -fx-text-fill: #fff;
     -fx-background-radius: 10px;
-    -fx-font-weight: bold;
 }
+
 
 .button-add{
     -fx-background-color: "#624DE3";

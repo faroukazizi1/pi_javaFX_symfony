@@ -38,6 +38,14 @@ public class PretService implements IService<Pret> {
                     }
                 }
                 System.out.println("✅ Prêt ajouté avec succès : " + pret);
+
+                // Envoi du SMS après ajout du prêt
+                String numeroTelephone = "+21650856254"; // Remplace par le numéro de l'employé
+                String message = "Votre demande de prêt a été soumise. Consultez votre réponse dès qu'elle est disponible.";
+
+                System.out.println("🔍 Tentative d'envoi du SMS à : " + numeroTelephone); // DEBUG
+
+                SmsService.envoyerSms(numeroTelephone, message);
             }
         } catch (SQLException e) {
             System.err.println("❌ Erreur lors de l'ajout du prêt : " + e.getMessage());
@@ -119,6 +127,32 @@ public class PretService implements IService<Pret> {
         }
         return prets;
     }
+
+    @Override
+    public boolean authenticateUser(String username, String password) {
+        return false;
+    }
+
+    @Override
+    public user HetUser(String email) {
+        return null;
+    }
+
+    @Override
+    public List<Pret> getPromotionsByUserId(int id) {
+        return List.of();
+    }
+
+    @Override
+    public int getUserIdByEmail(String email) {
+        return 0;
+    }
+
+    @Override
+    public void modifyPassword(int userId, String newPassword) {
+
+    }
+
     public Pret getById(int id) {
         String SQL = "SELECT * FROM pret WHERE id_pret = ?";
 
@@ -147,29 +181,7 @@ public class PretService implements IService<Pret> {
     }
 
     public List<Integer> getAllPretIds() {
-        List<Pret> prets = getAll(); // Assuming this method fetches all Pret objects
+        List<Pret> prets = getAll();
         return prets.stream().map(Pret::getIdPret).collect(Collectors.toList());
     }
-
-    public List<Pret> getPromotionsByUserId(int id){
-        List<Pret> prets = new ArrayList<>();
-        return prets;
-    }
-
-    public boolean authenticateUser(String username, String password){
-        return false;
-    }
-
-    public user HetUser(String email){
-        return null;
-    }
-
-    public int getUserIdByEmail(String email){
-        return 0;
-    }
-    public void modifyPassword(int userId, String newPassword){
-
-    }
-
-
 }

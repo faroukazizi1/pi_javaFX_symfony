@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 .sidebar {
     -fx-padding: 20px 30px;
     -fx-background-color: rgba(12, 22, 44, 1);
@@ -868,7 +868,7 @@
     -fx-min-width: 150px;
     -fx-min-height: 150px;
 }
-=======
+
 /* Sidebar - Bleu foncé */
 .sidebar {
     -fx-background-color: #0A1F44; /* Bleu foncé */
@@ -938,5 +938,3 @@
     -fx-border-color: #004d99;      /* Bordure bleu clair */
 }
 
->>>>>>> Gestion_absence
->>>>>>> cc574a6dbac8eabfe1322030c1d01ddbe82b0cff

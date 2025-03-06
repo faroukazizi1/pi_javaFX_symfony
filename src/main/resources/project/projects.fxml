@@ -208,11 +208,11 @@
                                         <Pane prefHeight="38.0" prefWidth="36.0" HBox.hgrow="ALWAYS" />
                                         <Button fx:id="statut_btn" mnemonicParsing="false" onAction="#changeStatut" prefHeight="34.0" prefWidth="81.0" styleClass="button-statut" text="Statut" HBox.hgrow="ALWAYS" />
                                     </HBox>
-                                    <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                                    <HBox spacing="5.0">
-                                        <Button fx:id="open_modal_btn" mnemonicParsing="false" onAction="#onOpenAddModal" styleClass="button-add" text="Add Project" />
-                                        <Button fx:id="open_modal_tache_btn" mnemonicParsing="false" onAction="#onOpenAddTacheModal" styleClass="button-add-inline" text="Add Task" />
-                                        <Button mnemonicParsing="false" onAction="#openCalendar" styleClass="button-add-inline" text="Calendar" />
+                                    <Pane prefHeight="200.0" prefWidth="150.0" HBox.hgrow="ALWAYS" />
+                                    <HBox spacing="10.0">
+                                        <Button fx:id="open_modal_btn" mnemonicParsing="false" onAction="#onOpenAddModal" styleClass="button-add" text="Add Project" prefWidth="130.0"/>
+                                        <Button fx:id="open_modal_tache_btn" mnemonicParsing="false" onAction="#onOpenAddTacheModal" styleClass="button-add-inline" text="Add Task" prefWidth="100.0"/>
+                                        <Button mnemonicParsing="false" onAction="#openCalendar" styleClass="button-add-inline" text="Calendar" prefWidth="100.0"/>
                                     </HBox>
                                 </HBox>
                                 <TableView fx:id="Projects_Table" onMouseClicked="#getProjectRow" prefHeight="217.0" prefWidth="817.0" VBox.vgrow="ALWAYS">
@@ -262,7 +262,7 @@
                                     </HBox>
 
                                     <!-- Add a text element to display employee name -->
-                                    <Text fx:id="employeeNameText" visible="false" fill="#e07564" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 16px; -fx-font-weight: bold;">
+                                    <Text fx:id="employeeNameText" visible="false" fill="#2e4cb8" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 16px; -fx-font-weight: bold;">
                                         <font>
                                             <Font name="System Bold" size="16.0" />
                                         </font>

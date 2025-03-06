@@ -1,198 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 
-<TabPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PretController">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controller.PretController">
 
-    <!-- Onglet Ajouter un Prêt -->
-    <Tab text="Ajouter un Prêt">
-        <AnchorPane>
-            <children>
-                <GridPane hgap="10" layoutX="30" layoutY="30" vgap="10">
-                    <Label text="Montant du Prêt:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="montantPretField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-
-                    <Label text="Date du Prêt:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <DatePicker fx:id="datePretPicker" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-                    <Label text="TMM:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <TextField fx:id="tmmField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-                    <Label text="Taux:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <TextField fx:id="tauxField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-                    <Label text="Revenus Bruts:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                    <TextField fx:id="revenusBrutsField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-
-                    <Label text="Âge Employé:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                    <TextField fx:id="ageEmployeField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-
-                    <Label text="Durée de Remboursement:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                    <TextField fx:id="dureeRemboursementField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-
-                    <Label text="Catégorie:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-                    <ComboBox fx:id="categorieField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-
-                    <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="8">
-                        <children>
-                            <Button onAction="#handleAddPret" text="Ajouter Prêt" />
-                            <Button onAction="#handleGoToReponse" text="Voir Réponse" />
-                        </children>
-                    </HBox>
-               <columnConstraints>
-                  <ColumnConstraints />
-                  <ColumnConstraints />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-               </rowConstraints>
-                </GridPane>
-
-                <!-- Logo -->
-                <ImageView fitHeight="100" fitWidth="100" layoutX="750" layoutY="10">
-                    <image>
-                        <Image url="@java-logo.png" />
-                    </image>
+    <!-- Barre latérale (Menu) -->
+    <left>
+        <VBox prefHeight="731.0" prefWidth="282.0" styleClass="sidebar" stylesheets="@style.css">
+            <HBox alignment="TOP_CENTER" prefHeight="147.0" prefWidth="200.0" spacing="100.0">
+                <ImageView fitHeight="149.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@java-logo.png" />
                 </ImageView>
-            <Button layoutX="636.0" layoutY="406.0" mnemonicParsing="false" onAction="#openEmployeeListView" prefHeight="38.0" prefWidth="178.0" text="Gestion User" />
-            </children>
-        </AnchorPane>
-    </Tab>
+            </HBox>
+            <VBox spacing="20.0" VBox.vgrow="ALWAYS">
+                <Button fx:id="Home_Btn" text="Home" textFill="WHITE" styleClass="sidebar-link" />
+                <Button fx:id="User_Btn" text="Users" textFill="WHITE" styleClass="sidebar-link" />
+                <Button text="Absence" textFill="WHITE" styleClass="sidebar-link" />
+                <Button fx:id="Document_Btn" text="Congés" textFill="WHITE" styleClass="sidebar-link" />
+                <Button fx:id="Event_Btn" text="Formations" textFill="WHITE" styleClass="sidebar-link" />
+                <Button fx:id="Reclamation_Btn" text="Projects" textFill="WHITE" styleClass="sidebar-link" />
+                <Button text="Finance" textFill="WHITE" styleClass="sidebar-link-active" />
+            </VBox>
+            <HBox alignment="TOP_CENTER" prefHeight="57.0" prefWidth="279.0">
+                <Button fx:id="Logout_Btn" text="Logout" textFill="WHITE" styleClass="sidebar-logout" />
+            </HBox>
+        </VBox>
+    </left>
 
-    <!-- Onglet Modifier un Prêt -->
-    <Tab text="Modifier un Prêt">
-        <AnchorPane>
-            <children>
-                <GridPane hgap="10" layoutX="30" layoutY="30" vgap="10">
-                    <Label text="ID du Prêt:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="idPretFieldModif" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                    <Button onAction="#handleSearchPret" text="Rechercher" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+    <!-- Contenu principal (TabPane) -->
+    <center>
+        <TabPane stylesheets="@style.css" fx:id="tabPane">
+            <!-- Onglet Ajouter un Prêt -->
+            <Tab text="Ajouter un Prêt">
+                <AnchorPane>
+                    <children>
+                        <GridPane layoutX="30" layoutY="30" hgap="10" vgap="10">
+                            <Label text="Montant du Prêt:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                            <TextField fx:id="montantPretField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                    <Label text="Montant du Prêt:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <TextField fx:id="montantPretFieldModif" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            <Label text="Date du Prêt:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                            <DatePicker fx:id="datePretPicker" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-                    <Label text="Date du Prêt:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <DatePicker fx:id="datePretPickerModif" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                            <Label text="TMM:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                            <TextField fx:id="tmmField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-                    <Label text="TMM:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <TextField fx:id="tmmFieldModif" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                            <Label text="Taux:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                            <TextField fx:id="tauxField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
-                    <Label text="Taux:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                    <TextField fx:id="tauxFieldModif" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                            <Label text="Revenus Bruts:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                            <TextField fx:id="revenusBrutsField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
 
-                    <Label text="Revenus Bruts:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                    <TextField fx:id="revenusBrutsFieldModif" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                            <Label text="Âge Employé:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                            <TextField fx:id="ageEmployeField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
 
-                    <Label text="Âge Employé:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                    <TextField fx:id="ageEmployeFieldModif" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                            <Label text="Durée de Remboursement:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                            <TextField fx:id="dureeRemboursementField" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
 
-                    <Label text="Durée de Remboursement:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-                    <TextField fx:id="dureeRemboursementFieldModif" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                            <Label text="Catégorie:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                            <ComboBox fx:id="categorieField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
 
-                    <Label text="Catégorie:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
-                    <ComboBox fx:id="categorieFieldModif" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                            <HBox spacing="10" GridPane.rowIndex="8" GridPane.columnIndex="1">
+                                <children>
+                                    <Button text="Ajouter Prêt" onAction="#handleAddPret"/>
+                                    <Button text="Voir Réponse" onAction="#handleGoToReponse"/>
+                                </children>
+                            </HBox>
+                        </GridPane>
 
-                    <Button onAction="#handleEditPret" text="Modifier Prêt" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-               <columnConstraints>
-                  <ColumnConstraints />
-                  <ColumnConstraints />
-                  <ColumnConstraints />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-               </rowConstraints>
-                </GridPane>
+                        <!-- Logo -->
+                        <ImageView fitWidth="100" fitHeight="100" layoutX="750" layoutY="10">
+                            <image>
+                                <Image url="@java-logo.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+            </Tab>
 
-                <!-- Logo -->
-                <ImageView fitHeight="100" fitWidth="100" layoutX="750" layoutY="10">
-                    <image>
-                        <Image url="@java-logo.png" />
-                    </image>
-                </ImageView>
-            </children>
-        </AnchorPane>
-    </Tab>
+            <!-- Onglet Modifier un Prêt -->
+            <Tab text="Modifier un Prêt">
+                <AnchorPane>
+                    <children>
+                        <GridPane layoutX="30" layoutY="30" hgap="10" vgap="10">
+                            <Label text="Montant du Prêt:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                            <TextField fx:id="montantPretFieldModif" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-    <!-- Onglet Supprimer un Prêt -->
-    <Tab text="Supprimer un Prêt">
-        <AnchorPane>
-            <children>
-                <GridPane hgap="10" layoutX="30" layoutY="30" vgap="10">
-                    <Label text="ID du Prêt:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="idPretFieldSupprimer" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                    <Button onAction="#handleDeletePret" text="Supprimer Prêt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               <columnConstraints>
-                  <ColumnConstraints />
-                  <ColumnConstraints />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints />
-                  <RowConstraints />
-               </rowConstraints>
-                </GridPane>
+                            <Label text="Date du Prêt:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                            <DatePicker fx:id="datePretPickerModif" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-                <!-- Logo -->
-                <ImageView fitHeight="100" fitWidth="100" layoutX="500" layoutY="10">
-                    <image>
-                        <Image url="@java-logo.png" />
-                    </image>
-                </ImageView>
-            </children>
-        </AnchorPane>
-    </Tab>
+                            <Label text="TMM:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                            <TextField fx:id="tmmFieldModif" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
-    <!-- Onglet Voir les Prêts -->
-    <Tab text="Voir les Prêts">
-        <AnchorPane>
-            <children>
-                <TableView fx:id="pretTableView" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
-                    <columns>
-                        <TableColumn fx:id="colMontant" text="Montant" />
-                        <TableColumn fx:id="colDate" text="Date" />
-                        <TableColumn fx:id="colTmm" text="TMM" />
-                        <TableColumn fx:id="colTaux" text="Taux" />
-                        <TableColumn fx:id="colRevenus" text="Revenus Bruts" />
-                        <TableColumn fx:id="colAge" text="Âge" />
-                        <TableColumn fx:id="colDuree" text="Durée" />
-                        <TableColumn fx:id="colCategorie" text="Catégorie" />
-                    </columns>
-                </TableView>
+                            <Label text="Taux:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                            <TextField fx:id="tauxFieldModif" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
 
-                <Button fx:id="btnActualiser" onAction="#handleViewPrets" text="Actualiser" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" />
-            </children>
-        </AnchorPane>
-    </Tab>
+                            <Label text="Revenus Bruts:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                            <TextField fx:id="revenusBrutsFieldModif" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
 
-</TabPane>
+                            <Label text="Âge Employé:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                            <TextField fx:id="ageEmployeFieldModif" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                            <Label text="Durée de Remboursement:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                            <TextField fx:id="dureeRemboursementFieldModif" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                            <Label text="Catégorie:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                            <ComboBox fx:id="categorieFieldModif" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+                            <Button text="Modifier Prêt" onAction="#handleEditPret" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+                        </GridPane>
+
+                        <!-- Logo -->
+                        <ImageView fitWidth="100" fitHeight="100" layoutX="750" layoutY="10">
+                            <image>
+                                <Image url="@java-logo.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+            </Tab>
+
+            <!-- Onglet Voir les Prêts -->
+            <Tab text="Voir les Prêts">
+                <AnchorPane>
+                    <children>
+                        <TableView fx:id="pretTableView" AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="50"
+                                   AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+                            <columns>
+                                <TableColumn text="Montant" fx:id="colMontant"/>
+                                <TableColumn text="Date" fx:id="colDate"/>
+                                <TableColumn text="TMM" fx:id="colTmm"/>
+                                <TableColumn text="Taux" fx:id="colTaux"/>
+                                <TableColumn text="Revenus Bruts" fx:id="colRevenus"/>
+                                <TableColumn text="Âge" fx:id="colAge"/>
+                                <TableColumn text="Durée" fx:id="colDuree"/>
+                                <TableColumn text="Catégorie" fx:id="colCategorie"/>
+                                <!-- New Action Column -->
+                                <TableColumn text="Actions" fx:id="colActions" minWidth="250"/>
+                            </columns>
+                        </TableView>
+
+                        <Button fx:id="btnActualiser" text="Actualiser" onAction="#handleViewPrets"
+                                AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50"/>
+                    </children>
+                </AnchorPane>
+            </Tab>
+
+            <!-- Onglet Calendrier -->
+            <Tab text="Calendrier" fx:id="calendarTab">
+                <AnchorPane>
+                    <children>
+                        <VBox fx:id="calendarLayout" spacing="10" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
+                            <!-- Header with navigation and year selection -->
+                            <HBox fx:id="calendarHeader" spacing="20" styleClass="calendar-header">
+                                <Button fx:id="prevMonthButton" text="◄" styleClass="nav-button"/>
+                                <HBox spacing="10" style="-fx-alignment: center;">
+                                    <Label fx:id="monthLabel" styleClass="month-label"/>
+                                    <ComboBox fx:id="yearComboBox"/>
+                                </HBox>
+                                <Button fx:id="nextMonthButton" text="►" styleClass="nav-button"/>
+                            </HBox>
+                            <!-- Calendar grid -->
+                            <GridPane fx:id="calendarGrid" hgap="10" vgap="10" styleClass="calendar-grid"/>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>

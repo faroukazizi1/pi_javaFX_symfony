@@ -15,9 +15,9 @@ public class Pret {
     private float taux;
     private int dureeRemboursement;
 
+
     // ✅ Constructeur par défaut (utile pour Hibernate/JPA)
-    public Pret() {
-    }
+    public Pret() {}
 
     public Pret(int idPret, float montantPret, Date datePret, float tmm, float taux, float revenusBruts, int ageEmploye, int dureeRemboursement, String categorie) {
         this.idPret = idPret;
@@ -149,3 +149,6 @@ public class Pret {
 
 
 }
+
+
+// --module-path "C:\Users\loq\Desktop\sdk\openjfx-22.0.2_windows-x64_bin-sdk\javafx-sdk-22.0.2\lib" --add-modules javafx.controls,javafx.fxml

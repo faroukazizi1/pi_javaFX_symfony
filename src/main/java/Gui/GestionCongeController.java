@@ -35,7 +35,6 @@ public class GestionCongeController {
 
     @FXML
     public void initialize() {
-        employeIdColumn.setCellValueFactory(new PropertyValueFactory<>("employeId"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         debutColumn.setCellValueFactory(new PropertyValueFactory<>("debut"));
         finColumn.setCellValueFactory(new PropertyValueFactory<>("fin"));

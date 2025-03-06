@@ -3,143 +3,101 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
 
-<TabPane xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.ReponseController" stylesheets="@style.css">
-    <!-- Onglet Génération de Réponse avec détails et actions -->
-    <Tab text="Génération de Réponse">
-        <AnchorPane>
-            <children>
-                <VBox alignment="CENTER" spacing="15" prefWidth="800" prefHeight="700"
-                      style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 5);">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controller.ReponseController">
 
-                    <Label text="Génération de Réponse" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
-
-                    <HBox spacing="10">
-                        <Label text="ID du prêt:"/>
-                        <ComboBox fx:id="pretIdComboBox" prefWidth="200"/>
-                    </HBox>
-
-                    <Button fx:id="generateButton" text="Générer Réponse" onAction="#generateReponse"
-                            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;"/>
-
-                    <GridPane hgap="15" vgap="10" layoutX="30" layoutY="30">
-                        <columnConstraints>
-                            <ColumnConstraints halignment="RIGHT" prefWidth="150"/>
-                            <ColumnConstraints halignment="LEFT" prefWidth="200"/>
-                        </columnConstraints>
-
-                        <Label text="Montant Demande:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                        <Label fx:id="montantLabel" text="0.0" prefWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-
-                        <Label text="Durée Remboursement:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                        <Label fx:id="dureeLabel" text="0" prefWidth="200" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-
-                        <Label text="Taux Mensuel:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                        <Label fx:id="tauxMensuelLabel" text="0.0" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-
-                        <Label text="Revenus Bruts:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                        <Label fx:id="revenusBrutsLabel" text="0.0" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-
-                        <Label text="Mensualité Crédit:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                        <Label fx:id="mensualiteLabel" text="0.0" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-
-                        <Label text="Potentiel Crédit:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-                        <Label fx:id="potentielCreditLabel" text="0.0" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-
-                        <Label text="Montant Autorisé:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-                        <Label fx:id="montantAutoriseLabel" text="0.0" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
-
-                        <Label text="Assurance:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
-                        <Label fx:id="assuranceLabel" text="0.0" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
-                    </GridPane>
-
-                    <HBox spacing="30" alignment="CENTER">
-                        <Button text="Accepter" fx:id="acceptButton" onAction="#acceptReponse"
-                                style="-fx-background-color: #008CBA; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;"/>
-                        <Button text="Rejeter" fx:id="rejectButton" onAction="#rejectReponse"
-                                style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;"/>
-                    </HBox>
-                </VBox>
-            </children>
-        </AnchorPane>
-    </Tab>
-
-    <!-- Onglet Table des Réponses -->
-    <Tab text="Table des Réponses">
-        <AnchorPane>
-            <children>
-                <VBox spacing="10" alignment="CENTER">
-                    <TableView fx:id="tableView" prefHeight="650" prefWidth="750">
-                        <columns>
-                            <TableColumn text="Date" fx:id="colDate" prefWidth="100"/>
-                            <TableColumn text="Montant" fx:id="colMontant" prefWidth="100"/>
-                            <TableColumn text="Revenus" fx:id="colRevenus" prefWidth="100"/>
-                            <TableColumn text="Taux" fx:id="colTaux" prefWidth="80"/>
-                            <TableColumn text="Mensualité" fx:id="colMensualite" prefWidth="100"/>
-                            <TableColumn text="Potentiel" fx:id="colPotentiel" prefWidth="100"/>
-                            <TableColumn text="Durée" fx:id="colDuree" prefWidth="80"/>
-                            <TableColumn text="Autorisé" fx:id="colAutorise" prefWidth="100"/>
-                            <TableColumn text="Assurance" fx:id="colAssurance" prefWidth="100"/>
-                        </columns>
-                    </TableView>
-                    <Button text="Actualiser" fx:id="refreshButton" onAction="#refreshTable"
-                            style="-fx-background-color: #FFA500; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;"/>
-                </VBox>
-            </children>
-        </AnchorPane>
-    </Tab>
-
-    <!-- Onglet Modification de Réponse -->
-    <Tab text="Modification de Réponse">
-        <AnchorPane>
-            <GridPane layoutX="30" layoutY="30" hgap="10" vgap="10">
-
-                <Label text="ID de la Réponse:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField fx:id="idReponseFieldModif" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-                <Button text="Rechercher" onAction="#handleSearchReponse" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
-
-                <Label text="Montant Demande:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <TextField fx:id="montantReponseFieldModif" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-
-                <Label text="Durée Remboursement:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <TextField fx:id="dureeReponseFieldModif" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-
-                <Label text="Date Réponse:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                <Label fx:id="dateReponseLabelModif" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-
-                <Label text="Taux d'Intérêt:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                <Label fx:id="tauxInteretLabelModif" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-
-                <Label text="Revenus Bruts:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-                <Label fx:id="revenusBrutsLabelModif" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-
-                <Label text="Mensualité Crédit:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-                <Label fx:id="mensualiteLabelModif" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
-
-                <Label text="Potentiel Crédit:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
-                <Label fx:id="potentielCreditLabelModif" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
-
-                <Label text="Montant Autorisé:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
-                <Label fx:id="montantAutoriseLabelModif" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
-
-                <Label text="Assurance:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
-                <Label fx:id="assuranceLabelModif" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
-
-                <Button text="Modifier Réponse" onAction="#handleEditReponse" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
-
-            </GridPane>
-        </AnchorPane>
-    </Tab>
-    <!-- Onglet Suppression de Réponse -->
-    <Tab text="Suppression de Réponse">
-        <AnchorPane>
-            <VBox alignment="CENTER" spacing="15" layoutX="30" layoutY="30">
-                <Label text="ID de la Réponse:"/>
-                <TextField fx:id="idReponseFieldDelete"/>
-                <Button text="Supprimer" onAction="#deleteReponse" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;"/>
+    <!-- Barre latérale (Menu) -->
+    <left>
+        <VBox prefHeight="731.0" prefWidth="282.0" styleClass="sidebar" stylesheets="@style.css">
+            <HBox alignment="TOP_CENTER" prefHeight="147.0" prefWidth="200.0" spacing="100.0">
+                <ImageView fitHeight="149.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@java-logo.png" />
+                </ImageView>
+            </HBox>
+            <VBox spacing="20.0" VBox.vgrow="ALWAYS">
+                <Button fx:id="Home_Btn" text="Home" textFill="WHITE" styleClass="sidebar-link" />
+                <Button fx:id="User_Btn" text="Users" textFill="WHITE" styleClass="sidebar-link" />
+                <Button text="Absence" textFill="WHITE" styleClass="sidebar-link" />
+                <Button fx:id="Document_Btn" text="Congés" textFill="WHITE" styleClass="sidebar-link" />
+                <Button fx:id="Event_Btn" text="Formations" textFill="WHITE" styleClass="sidebar-link" />
+                <Button fx:id="Reclamation_Btn" text="Projects" textFill="WHITE" styleClass="sidebar-link" />
+                <Button text="Finance" textFill="WHITE" styleClass="sidebar-link-active" />
             </VBox>
-        </AnchorPane>
+            <HBox alignment="TOP_CENTER" prefHeight="57.0" prefWidth="279.0">
+                <Button fx:id="Logout_Btn" text="Logout" textFill="WHITE" styleClass="sidebar-logout" />
+            </HBox>
+        </VBox>
+    </left>
 
-    </Tab>
+    <!-- Contenu principal (TabPane) -->
+    <center>
+        <TabPane stylesheets="@style.css" fx:id="tabPane">
+            <!-- Onglet Table des Réponses -->
+            <Tab text="Table des Réponses">
+                <AnchorPane>
+                    <children>
+                        <VBox spacing="10" alignment="CENTER">
+                            <TableView fx:id="tableView" prefHeight="650" prefWidth="1000">
+                                <columns>
+                                    <TableColumn text="Date" fx:id="colDate" prefWidth="100"/>
+                                    <TableColumn text="Montant" fx:id="colMontant" prefWidth="100"/>
+                                    <TableColumn text="Revenus" fx:id="colRevenus" prefWidth="100"/>
+                                    <TableColumn text="Taux" fx:id="colTaux" prefWidth="80"/>
+                                    <TableColumn text="Mensualité" fx:id="colMensualite" prefWidth="100"/>
+                                    <TableColumn text="Potentiel" fx:id="colPotentiel" prefWidth="100"/>
+                                    <TableColumn text="Durée" fx:id="colDuree" prefWidth="80"/>
+                                    <TableColumn text="Autorisé" fx:id="colAutorise" prefWidth="100"/>
+                                    <TableColumn text="Assurance" fx:id="colAssurance" prefWidth="100"/>
+                                    <TableColumn text="Actions" fx:id="colActions" prefWidth="150"/>
+                                </columns>
+                            </TableView>
+                            <Button text="Actualiser" fx:id="refreshButton" onAction="#refreshTable"
+                                    style="-fx-background-color: #FFA500; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;"/>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </Tab>
 
-</TabPane>
+            <!-- Onglet Modification de Réponse -->
+            <Tab text="Modification de Réponse">
+                <AnchorPane>
+                    <GridPane layoutX="30" layoutY="30" hgap="10" vgap="10">
+
+
+                        <Label text="Montant Demande:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="montantReponseFieldModif" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Durée Remboursement:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="dureeReponseFieldModif" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <Label text="Date Réponse:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <Label fx:id="dateReponseLabelModif" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                        <Label text="Taux d'Intérêt:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                        <Label fx:id="tauxInteretLabelModif" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                        <Label text="Revenus Bruts:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                        <Label fx:id="revenusBrutsLabelModif" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                        <Label text="Mensualité Crédit:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                        <Label fx:id="mensualiteLabelModif" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                        <Label text="Potentiel Crédit:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                        <Label fx:id="potentielCreditLabelModif" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                        <Label text="Montant Autorisé:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                        <Label fx:id="montantAutoriseLabelModif" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+                        <Label text="Assurance:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                        <Label fx:id="assuranceLabelModif" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+
+                        <Button text="Modifier Réponse" onAction="#handleEditReponse" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
+                    </GridPane>
+                </AnchorPane>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>

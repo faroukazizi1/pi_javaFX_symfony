@@ -7,7 +7,6 @@
 
     <TableView fx:id="tableConge" layoutX="50" layoutY="50" prefHeight="350" prefWidth="700">
         <columns>
-            <TableColumn fx:id="employeIdColumn" prefWidth="120" text="Employé ID" />
             <TableColumn fx:id="typeColumn" prefWidth="120" text="Type" />
             <TableColumn fx:id="debutColumn" prefWidth="120" text="Début" />
             <TableColumn fx:id="finColumn" prefWidth="120" text="Fin" />
