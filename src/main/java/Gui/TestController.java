@@ -1,7 +1,12 @@
 package Gui;
 
 import Service.BulletinPaieService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
@@ -10,12 +15,21 @@ import javafx.stage.Stage;
 import Model.BulletinPaie;
 import Model.TypeConge;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class TestController {
+
+    public Button Reclamation_Btn;
+    public Button Document_Btn;
+    public Button Event_Btn;
+    public Button Projects_Btn;
+    public Button User_Btn;
+    public Button Home_Btn;
+    public Button Logout_Btn;
 
     // Demande de Congé
     @FXML private ComboBox<TypeConge> typeCongeComboBox;
@@ -49,31 +63,27 @@ public class TestController {
 
     @FXML
     public void initialize() {
-        // Ensure that tabPane is not null
-        if (tabPane != null) {
-            // Get the user session and adjust the tab visibility based on role
-            UserSession session = UserSession.getInstance();
-            if (session != null) {
-                String role = session.getRole();
+        if (tabPane == null) {
+            System.err.println("Error: tabPane is null. Ensure the FXML is properly loaded.");
+            return; // Stop execution to avoid NullPointerException
+        }
 
-                if ("RHR".equals(role)) {
-                    // Show only Traitement de demandes & Création Bulletin de Paie
-                    tabPane.getTabs().remove(tabConge);
-                    tabPane.getTabs().remove(tabBulletinPaie);
-                } else if ("Employé".equals(role)) {
-                    // Show only Congé & Bulletin de Paie
-                    tabPane.getTabs().remove(tabTraitement);
-                    tabPane.getTabs().remove(tabCreationBulletin);
-                }
+        UserSession session = UserSession.getInstance();
+        if (session != null) {
+            String role = session.getRole();
+
+            if ("RHR".equals(role)) {
+                tabPane.getTabs().removeIf(tab -> tab == tabConge || tab == tabBulletinPaie);
+            } else if ("Employe".equals(role)) {
+                tabPane.getTabs().removeIf(tab -> tab == tabTraitement || tab == tabCreationBulletin);
             }
         } else {
-            // Handle the case where tabPane is null (perhaps log an error or handle gracefully)
-            System.err.println("Error: tabPane is null. Ensure the FXML is properly loaded.");
+            System.err.println("No active session found!");
         }
 
 
 
-    // Configure ComboBox for Type de Congé
+        // Configure ComboBox for Type de Congé
         if (typeCongeComboBox != null) {
             ObservableList<TypeConge> typesConges = FXCollections.observableArrayList(TypeConge.values());
             typeCongeComboBox.setItems(typesConges);
@@ -194,4 +204,49 @@ public class TestController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    public void onHomeButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void onUserButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void onReclamationButtonClick(ActionEvent actionEvent) {
+
+    }
+
+    public void onDocumentsButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void onEventButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void onLogoutButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void onProjectsButtonClick(ActionEvent actionEvent) {
+        try {
+            // Charger le fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/projects.fxml"));
+            Parent root = loader.load();
+
+            // Récupérer la fenêtre actuelle
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+            // Définir la nouvelle scène sur le stage
+            stage.setScene(new Scene(root));
+
+            // Définir le titre de la fenêtre
+            stage.setTitle("Gestion des Projets");
+
+            // Afficher la nouvelle scène
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Optionnel : Afficher une alerte en cas d'erreur
+        }
+    }
+
+
 }

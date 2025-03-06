@@ -30,7 +30,8 @@ public class BulletinPaieService {
             if (rs.next()) {
                 generatedId = rs.getInt(1);  // Get generated ID
 
-                String email = getEmailByUserCin(bulletin.getCin());  // Get email by cin
+                String email = getEmailByUserCin(bulletin.getCin());
+                System.out.print(bulletin.getCin());// Get email by cin
 
                 if (email != null) {
                     String subject = "Votre bulletin de paie - " + bulletin.getMois() + " " + bulletin.getAnnee();

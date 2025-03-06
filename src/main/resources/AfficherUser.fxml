@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
@@ -15,157 +16,204 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.layout.HBox?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Text?>
+<AnchorPane prefHeight="614.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="@css/user_promotion.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.AfficherUser">
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Gui.AfficherUser"
-            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <Label layoutX="515.0" layoutY="14.0" prefHeight="54.0" prefWidth="563.0" text="AFFICHER EMPLOYE" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="36.0" />
+            </font>
+        </Label>
 
-    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="/project.css">
-        <left>
-            <VBox prefHeight="731.0" prefWidth="282.0" styleClass="sidebar" stylesheets="/project.css">
-                <HBox alignment="TOP_CENTER" prefHeight="147.0" prefWidth="200.0" spacing="100.0">
-                    <ImageView fitHeight="149.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="/assets/Notre Logo.png" />
-                    </ImageView>
-                </HBox>
-                <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="10.0" prefWidth="10.0" VBox.vgrow="ALWAYS" />
-                <VBox spacing="20.0" VBox.vgrow="ALWAYS">
-                    <Button fx:id="Home_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onHomeButtonClick" prefHeight="48.0" prefWidth="236.0" styleClass="sidebar-link" text="Home" textFill="WHITE">
-                        <font>
-                            <Font name="System Bold" size="19.0" />
-                        </font>
-                        <graphic>
-                            <ImageView>
-                                <Image url="/assets/icons8-home-24.png" />
-                            </ImageView>
-                        </graphic>
-                    </Button>
-                    <Button alignment="TOP_LEFT" graphicTextGap="10.0" lineSpacing="15.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="237.0" styleClass="sidebar-link-active" text="Users" textFill="WHITE">
-                        <font>
-                            <Font name="System Bold" size="16.0" />
-                        </font>
-                        <graphic>
-                            <ImageView>
-                                <Image url="/assets/AiOutlineUser.png" />
-                            </ImageView>
-                        </graphic>
-                    </Button>
-                    <Button fx:id="Reclamation_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onReclamationButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Absence" textFill="WHITE">
-                        <font>
-                            <Font name="System Bold" size="19.0" />
-                        </font>
-                        <graphic>
-                            <ImageView>
-                                <Image url="/assets/AiOutlineReconciliation.png" />
-                            </ImageView>
-                        </graphic>
-                    </Button>
-                    <Button fx:id="Document_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onDocumentsButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Conges" textFill="WHITE">
-                        <font>
-                            <Font name="System Bold" size="19.0" />
-                        </font>
-                        <graphic>
-                            <ImageView>
-                                <Image url="/assets/IoDocumentTextOutline.png" />
-                            </ImageView>
-                        </graphic>
-                    </Button>
-                    <Button fx:id="Event_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onEventButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Formations" textFill="WHITE">
-                        <font>
-                            <Font name="System Bold" size="19.0" />
-                        </font>
-                        <graphic>
-                            <ImageView>
-                                <Image url="/assets/MdEventNote.png" />
-                            </ImageView>
-                        </graphic>
-                    </Button>
-                    <Button fx:id="Projects_Btn" alignment="TOP_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onProjectsButtonClick" prefHeight="47.0" prefWidth="232.0" styleClass="sidebar-link" text="Projects" textFill="WHITE">
-                        <font>
-                            <Font name="System Bold" size="19.0" />
-                        </font>
-                        <graphic>
-                            <ImageView>
-                                <Image url="/assets/AiOutlineProject.png"/>
-                            </ImageView>
-                        </graphic>
-                    </Button>
+        <TableView fx:id="tableView" layoutX="352.0" layoutY="147.0" prefHeight="403.0" prefWidth="837.0" style="-fx-background-color: #FFFFFF;" styleClass="table-view">
+            <columns>
+                <TableColumn fx:id="Colid" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="Colnom" prefWidth="75.0" text="Nom" />
+                <TableColumn fx:id="Colprenom" prefWidth="75.0" text="Prenom" />
+                <TableColumn fx:id="Colcin" prefWidth="75.0" text="CIN" />
+                <TableColumn fx:id="Colusername" prefWidth="75.0" text="Username" />
+                <TableColumn fx:id="Colpassword" prefWidth="75.0" text="Password" />
+                <TableColumn fx:id="Colemail" prefWidth="75.0" text="Email" />
+                <TableColumn fx:id="Colrole" prefWidth="75.0" text="Rôle" />
+                <TableColumn fx:id="Colsexe" prefWidth="75.0" text="Sexe" />
+                <TableColumn fx:id="Coladdresse" prefWidth="75.0" text="Adresse" />
+                <TableColumn fx:id="Colnumero" prefWidth="75.0" text="Numéro" />
+                <TableColumn fx:id="Coldelete" prefWidth="75.0" text="Supprimer" />
+                <TableColumn fx:id="Colupdate" prefWidth="75.0" text="Modifier" />
+            </columns>
+        </TableView>
+
+        <Button fx:id="button_ajouter" layoutX="352.0" layoutY="574.0" mnemonicParsing="false" onAction="#handleAddEmploye" prefHeight="38.0" prefWidth="154.0" style="-fx-background-color: #FFCC00;" text="Ajouter Employé" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="14.0" />
+            </font>
+            <effect>
+                <Lighting>
+                    <bumpInput>
+                        <Shadow />
+                    </bumpInput>
+                    <light>
+                        <Light.Distant />
+                    </light>
+                </Lighting>
+            </effect></Button>
+        <Button layoutX="526.0" layoutY="574.0" mnemonicParsing="false" onAction="#openPromotionForm" prefHeight="38.0" prefWidth="171.0" style="-fx-background-color: #2ECC71;" text="Liste Promotions" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="14.0" />
+            </font>
+            <effect>
+                <Lighting>
+                    <bumpInput>
+                        <Shadow />
+                    </bumpInput>
+                    <light>
+                        <Light.Distant />
+                    </light>
+                </Lighting>
+            </effect></Button>
+        <Pane layoutX="-1.0" prefHeight="640.0" prefWidth="331.0" style="-fx-background-color: #001F3F;">
+            <children>
+                <ImageView fitHeight="192.0" fitWidth="229.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@assets/flexihr.png" />
+                    </image></ImageView>
+                <VBox alignment="CENTER" layoutX="1.0" layoutY="163.0" prefHeight="477.0" prefWidth="332.0" spacing="20.0">
+                    <children>
+                        <Button lineSpacing="20.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="USER" textFill="#001f3f">
+                            <font>
+                                <Font name="Arial Black" size="24.0" />
+                            </font>
+                            <effect>
+                                <Lighting>
+                                    <bumpInput>
+                                        <Shadow />
+                                    </bumpInput>
+                                    <light>
+                                        <Light.Distant />
+                                    </light>
+                                </Lighting>
+                            </effect></Button>
+                        <Button mnemonicParsing="false" onAction="#openProjects" prefHeight="57.0" prefWidth="298.0" style="-fx-background-color: #001F3F;" text="FINANCE">
+                            <font>
+                                <Font name="Arial Black" size="24.0" />
+                            </font>
+                            <effect>
+                                <Lighting>
+                                    <bumpInput>
+                                        <Shadow />
+                                    </bumpInput>
+                                    <light>
+                                        <Light.Distant />
+                                    </light>
+                                </Lighting>
+                            </effect></Button>
+                        <Button mnemonicParsing="false" onAction="#openProjects" prefHeight="57.0" prefWidth="295.0" style="-fx-background-color: #001F3F;" text="PROJECT">
+                            <font>
+                                <Font name="Arial Black" size="24.0" />
+                            </font>
+                            <effect>
+                                <Lighting>
+                                    <bumpInput>
+                                        <Shadow />
+                                    </bumpInput>
+                                    <light>
+                                        <Light.Distant />
+                                    </light>
+                                </Lighting>
+                            </effect></Button>
+                        <Button mnemonicParsing="false" onAction="#openGestionAbsence" prefHeight="57.0" prefWidth="294.0" style="-fx-background-color: #001F3F;" text="ABSENCE">
+                            <font>
+                                <Font name="Arial Black" size="24.0" />
+                            </font>
+                            <effect>
+                                <Lighting>
+                                    <bumpInput>
+                                        <Shadow />
+                                    </bumpInput>
+                                    <light>
+                                        <Light.Distant />
+                                    </light>
+                                </Lighting>
+                            </effect></Button>
+                        <Button mnemonicParsing="false" onAction="#OuvrirFormation" prefHeight="57.0" prefWidth="293.0" style="-fx-background-color: #001F3F;" text="FORMATION">
+                            <font>
+                                <Font name="Arial Black" size="24.0" />
+                            </font>
+                            <effect>
+                                <Lighting>
+                                    <bumpInput>
+                                        <Shadow />
+                                    </bumpInput>
+                                    <light>
+                                        <Light.Distant />
+                                    </light>
+                                </Lighting>
+                            </effect></Button>
+                        <Button mnemonicParsing="false" onAction="#openGestionConges" prefHeight="57.0" prefWidth="293.0" style="-fx-background-color: #001F3F;" text="CONGES">
+                            <font>
+                                <Font name="Arial Black" size="24.0" />
+                            </font>
+                            <effect>
+                                <Lighting>
+                                    <bumpInput>
+                                        <Shadow />
+                                    </bumpInput>
+                                    <light>
+                                        <Light.Distant />
+                                    </light>
+                                </Lighting>
+                            </effect></Button>
+                    </children>
                 </VBox>
-                <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="10.0" prefWidth="10.0" VBox.vgrow="ALWAYS" />
-                <HBox alignment="TOP_CENTER" prefHeight="57.0" prefWidth="279.0">
-                    <Button fx:id="Logout_Btn" alignment="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" prefHeight="48.0" prefWidth="220.0" styleClass="sidebar-logout" text="Logout" textFill="WHITE">
-                        <font>
-                            <Font name="System Bold" size="21.0" />
-                        </font>
-                        <graphic>
-                            <ImageView>
-                                <Image url="/assets/AiOutlineLogout.png" />
-                            </ImageView>
-                        </graphic>
-                    </Button>
-                </HBox>
-            </VBox>
-        </left>
-        <center>
-            <VBox BorderPane.alignment="CENTER">
-                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;">
-                    <padding>
-                        <Insets bottom="10.0" left="30.0" right="30.0" top="10.0"/>
-                    </padding>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Back, User!">
-                        <font>
-                            <Font size="24.0"/>
-                        </font>
-                    </Text>
-                    <Pane minWidth="-Infinity" prefHeight="79.0" prefWidth="100.0" HBox.hgrow="ALWAYS"/>
-                    <HBox alignment="CENTER" prefHeight="79.0" prefWidth="82.0" spacing="20.0" HBox.hgrow="SOMETIMES">
-                        <ImageView>
-                            <Image url="/assets/Notif.png"/>
-                        </ImageView>
-                        <ImageView fitHeight="107" fitWidth="106.0">
-                            <Image url="/assets/PhotoUser.png"/>
-                        </ImageView>
-                    </HBox>
-                </HBox>
-                <Label prefHeight="54.0" prefWidth="418.0" text="AFFICHER EMPLOYE" textFill="WHITE" styleClass="page-title"/>
-
-                <!-- TableView for displaying employee data -->
-                <TableView fx:id="tableView" prefHeight="458.0" prefWidth="822.0">
-                    <columns>
-                        <TableColumn fx:id="Colid" text="ID"/>
-                        <TableColumn fx:id="Colnom" text="Nom"/>
-                        <TableColumn fx:id="Colprenom" text="Prenom"/>
-                        <TableColumn fx:id="Colcin" text="CIN"/>
-                        <TableColumn fx:id="Colusername" text="Username"/>
-                        <TableColumn fx:id="Colpassword" text="Password"/>
-                        <TableColumn fx:id="Colemail" text="Email"/>
-                        <TableColumn fx:id="Colrole" text="Rôle"/>
-                        <TableColumn fx:id="Colsexe" text="Sexe"/>
-                        <TableColumn fx:id="Coladdresse" text="Adresse"/>
-                        <TableColumn fx:id="Colnumero" text="Numéro"/>
-                        <TableColumn fx:id="Coldelete" text="Supprimer"/>
-                        <TableColumn fx:id="Colupdate" text="Modifier"/>
-                    </columns>
-                </TableView>
-
-                <!-- Buttons for Add Employee and List Promotions -->
-                <HBox alignment="CENTER" prefHeight="29.0" prefWidth="817.0" spacing="10.0" VBox.vgrow="ALWAYS">
-                    <Button fx:id="button_ajouter" onAction="#handleAddEmploye" styleClass="button-add" text="Ajouter Employé">
-                        <padding>
-                            <Insets bottom="10.0" left="30.0" right="30.0" top="10.0"/>
-                        </padding>
-                    </Button>
-                    <Button onAction="#openPromotionForm" styleClass="button-add-inline" text="Liste Promotions">
-                        <padding>
-                            <Insets bottom="10.0" left="30.0" right="30.0" top="10.0"/>
-                        </padding>
-                    </Button>
-                </HBox>
-            </VBox>
-        </center>
-    </BorderPane>
+            </children>
+        </Pane>
+        <Button layoutX="724.0" layoutY="574.0" mnemonicParsing="false" onAction="#DeepSeekAI" prefHeight="38.0" prefWidth="171.0" style="-fx-background-color: blue;" text="DeepSeek Chatbot" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="14.0" />
+            </font>
+            <effect>
+                <Lighting>
+                    <bumpInput>
+                        <Shadow />
+                    </bumpInput>
+                    <light>
+                        <Light.Distant />
+                    </light>
+                </Lighting>
+            </effect>
+        </Button>
+        <Button layoutX="1118.0" layoutY="569.0" mnemonicParsing="false" onAction="#Logout" prefHeight="48.0" prefWidth="41.0" style="-fx-background-color: white;">
+            <graphic>
+                <ImageView fitHeight="40.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@assets/logout.jpg" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <TextField fx:id="searchField" layoutX="386.0" layoutY="101.0" prefHeight="26.0" prefWidth="154.0" promptText="Filter Employees" />
+        <ImageView fitHeight="26.0" fitWidth="28.0" layoutX="352.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@assets/searchtool_icon.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="pdf_button" layoutX="1123.0" layoutY="95.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="18.0">
+            <graphic>
+                <ImageView fitHeight="29.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@assets/pdf_icon.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="stat_button" layoutX="1039.0" layoutY="95.0" mnemonicParsing="false" onAction="#OpenStatistic" prefHeight="38.0" prefWidth="42.0">
+            <graphic>
+                <ImageView fitHeight="34.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@assets/stats.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+    </children>
 </AnchorPane>
