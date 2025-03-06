@@ -251,3 +251,20 @@
 .done-status {
     -fx-fill: #2ecc71; /* Green for DONE */
 }
+
+
+
+/* user.css */
+
+
+.add-button {
+    -fx-background-color: #FFCC00;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+}
+
+.promotion-button {
+    -fx-background-color: #2ECC71;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+}

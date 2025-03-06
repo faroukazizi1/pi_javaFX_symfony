@@ -1,10 +1,10 @@
 package Controller;
 
-import Gui.UserSession;
 import Service.AbsencePenaliteService;
-import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -46,33 +46,6 @@ public class ChatBotController {
     // Méthode appelée automatiquement à l'initialisation de la scène (FXML)
     @FXML
     public void initialize() {
-        UserSession session = UserSession.getInstance();
-        String userRole = session.getRole();
-        if (!"RHR".equals(userRole)) {
-            Platform.runLater(() -> {
-                try {
-                    // Charger la vue du ChatBotController
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ChatBotInterface.fxml"));
-                    Parent chatbotView = loader.load();
-
-                    // Récupérer le contrôleur si nécessaire
-                    ChatBotController controller = loader.getController();
-
-                    // Afficher la vue (ajuster selon ton layout)
-                    Scene scene = new Scene(chatbotView);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.setTitle("ChatBot");
-                    stage.show();
-
-
-
-                } catch (IOException e) {
-                    e.printStackTrace(); // Gérer l'erreur proprement
-                }
-            });
-        }
-
         start();  // Appeler start() lors de l'initialisation
 
         // Ajouter un écouteur sur la touche "Entrée"
@@ -80,10 +53,8 @@ public class ChatBotController {
             if (event.getCode() == KeyCode.ENTER) {
                 handleSubmit(); // Appelle la méthode d'envoi
             }
-
         });
     }
-
 
     // Méthode pour gérer l'envoi de l'entrée (CIN ou choix)
     @FXML
@@ -99,6 +70,11 @@ public class ChatBotController {
                 // Première entrée - Cin de l'utilisateur
                 try {
                     cin = Integer.parseInt(input);
+                    if (service == null) {
+                        showErrorMessage("Le service n'est pas initialisé.");
+                        return;
+                    }
+
                     Map<String, Object> absencePenaliteInfo = service.getAbsenceAndPenaliteInfoByCin(cin);
 
                     if (absencePenaliteInfo.isEmpty()) {
@@ -122,6 +98,11 @@ public class ChatBotController {
                 }
             } else {
                 int choix = Integer.parseInt(input);
+                if (service == null) {
+                    showErrorMessage("Le service n'est pas initialisé.");
+                    return;
+                }
+
                 Map<String, Object> absencePenaliteInfo = service.getAbsenceAndPenaliteInfoByCin(cin);
                 String message = "";
 
@@ -192,6 +173,11 @@ public class ChatBotController {
                 return;
             }
 
+            if (service == null) {
+                chatArea.appendText("Le service n'est pas initialisé.\n");
+                return;
+            }
+
             String fraudMessages = service.detectFraudulentAbsences(cin);
             if (!fraudMessages.isEmpty()) {
                 chatArea.appendText(fraudMessages);
@@ -200,6 +186,29 @@ public class ChatBotController {
             }
         } catch (Exception e) {
             chatArea.appendText("Erreur lors de la détection de fraude.\n");
+            e.printStackTrace();
+        }
+    }
+
+    public void onUserButtonClick(ActionEvent actionEvent) {
+        try {
+            // Charger le fichier FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherUser.fxml"));
+            Parent root = loader.load();
+
+            // Récupérer la fenêtre actuelle
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+            // Définir la nouvelle scène sur le stage
+            stage.setScene(new Scene(root));
+
+            // Définir le titre de la fenêtre
+            stage.setTitle("Gestion des Absences");
+
+            // Afficher la nouvelle scène
+            stage.show();
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
